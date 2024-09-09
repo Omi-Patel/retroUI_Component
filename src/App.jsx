@@ -11,6 +11,7 @@ import SigninShowcase from "./pages/SigninShowcase";
 import About from "./pages/About";
 import { Footer } from "./components/AppUI/Footer";
 import SignupShowcase from "./pages/SignupShowcase";
+import LoaderShowcase from "./pages/LoaderShowcase";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/components/avtars" element={<AvatarShowcase />} />
         <Route path="/components/signin" element={<SigninShowcase />} />
         <Route path="/components/signup" element={<SignupShowcase />} />
+        <Route path="/components/loaders" element={<LoaderShowcase />} />
       </Routes>
       <Footer />
     </Router>

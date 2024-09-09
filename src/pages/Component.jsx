@@ -8,6 +8,7 @@ const componentsList = [
   { name: "Avtar", path: "avtars" },
   { name: "Signin", path: "signin" },
   { name: "Signup", path: "signup" },
+  { name: "Loader", path: "loaders" },
 ];
 
 const Component = () => {
