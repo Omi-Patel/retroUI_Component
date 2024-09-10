@@ -9,6 +9,7 @@ const componentsList = [
   { name: "Signin", path: "signin" },
   { name: "Signup", path: "signup" },
   { name: "Loader", path: "loaders" },
+  { name: "Navbar", path: "navbars" },
 ];
 
 const Component = () => {

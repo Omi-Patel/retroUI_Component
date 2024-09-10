@@ -13,6 +13,8 @@ import { Footer } from "./components/AppUI/Footer";
 import SignupShowcase from "./pages/SignupShowcase";
 import LoaderShowcase from "./pages/LoaderShowcase";
 
+import NavbarShowcase from "./pages/NavbarShowcase";
+
 function App() {
   return (
     <Router>
@@ -28,6 +30,7 @@ function App() {
         <Route path="/components/signin" element={<SigninShowcase />} />
         <Route path="/components/signup" element={<SignupShowcase />} />
         <Route path="/components/loaders" element={<LoaderShowcase />} />
+        <Route path="/components/navbars" element={<NavbarShowcase />} />
       </Routes>
       <Footer />
     </Router>
