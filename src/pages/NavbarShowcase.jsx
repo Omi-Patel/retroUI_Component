@@ -598,7 +598,7 @@ const NavbarShowcase = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-6 sm:p-10">
+    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100  p-1 sm:p-10">
       <h1 className="text-3xl sm:text-4xl font-bold mb-6">Navbar Components</h1>
 
       {Object.keys(navbarComponents).map((componentName) => (
@@ -637,7 +637,7 @@ const NavbarShowcase = () => {
             </button>
           </div>
 
-          <div className="p-6 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
+          <div className="p-2 sm:p-6 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
             {activeTab[componentName] === "preview" && (
               <div className="mb-4">
                 {componentName === "RetroNavbar" && <RetroNavbar />}
