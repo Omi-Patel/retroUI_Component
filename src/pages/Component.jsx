@@ -10,6 +10,7 @@ const componentsList = [
   { name: "Signup", path: "signup" },
   { name: "Loader", path: "loaders" },
   { name: "Navbar", path: "navbars" },
+  { name: "Footer", path: "footers" },
 ];
 
 const Component = () => {

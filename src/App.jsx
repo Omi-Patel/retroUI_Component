@@ -14,6 +14,7 @@ import SignupShowcase from "./pages/SignupShowcase";
 import LoaderShowcase from "./pages/LoaderShowcase";
 
 import NavbarShowcase from "./pages/NavbarShowcase";
+import FooterShowcase from "./pages/FooterShowcase";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/components/signup" element={<SignupShowcase />} />
         <Route path="/components/loaders" element={<LoaderShowcase />} />
         <Route path="/components/navbars" element={<NavbarShowcase />} />
+        <Route path="/components/footers" element={<FooterShowcase />} />
       </Routes>
       <Footer />
     </Router>
