@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RetroNavbar from "../components/Navbars/RetroNavbar";
 import RetroNavbar1 from "../components/Navbars/RetroNavbar1";
 import NeonNavbar from "../components/Navbars/NeonNavbar";
@@ -596,6 +596,11 @@ const NavbarShowcase = () => {
     setCopySuccess(true);
     setTimeout(() => setCopySuccess(false), 2000);
   };
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100  p-1 sm:p-10">

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import hero2 from "../../public/Images/hero2.jpg";
+import hero2 from "/Images/hero2.jpg";
 
 // List of components with images
 const componentsList = [
@@ -52,6 +52,10 @@ const componentsList = [
 ];
 
 const Component = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-10">
       <div className="flex flex-col lg:flex-row lg:space-x-12">
@@ -63,7 +67,7 @@ const Component = () => {
             className="w-full max-w-xs lg:max-w-md rounded-lg shadow-lg"
           />
 
-          <div className="  w-full max-w-4xl mx-auto rounded-lg shadow-md">
+          <div className="  w-full max-w-4xl mx-auto rounded-lg ">
             <div className="text-center lg:text-left">
               <h1 className="text-2xl sm:text-3xl font-bold mb-4">
                 Application UI Components

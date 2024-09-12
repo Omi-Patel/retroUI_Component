@@ -2,7 +2,7 @@ import React from "react";
 
 const BlogCard = () => {
   return (
-    <div className="font-mono border-4 border-black p-6 rounded-lg shadow-[6px_6px_0px_0px_black] hover:shadow-[12px_12px_0px_0px_black] transition-shadow duration-150 ease-in-out max-w-md mx-auto">
+    <div className="font-mono border-4 border-black p-6 rounded-lg shadow-[6px_6px_0px_0px_black] hover:shadow-[12px_12px_0px_0px_black] transition-shadow duration-150 ease-in-out max-w-md ">
       {/* Image */}
       <img
         src="https://via.placeholder.com/400x200"

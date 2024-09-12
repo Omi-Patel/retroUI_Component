@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BasicFooter from "../components/Footers/BasicFooter";
 import BorderedFooter from "../components/Footers/BorderedFooter";
 import ShadowFooter from "../components/Footers/ShadowFooter";
@@ -574,6 +574,10 @@ const FooterShowcase = () => {
     setCopySuccess(true);
     setTimeout(() => setCopySuccess(false), 2000);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-2 sm:p-10">

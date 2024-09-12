@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignInPage from "../components/SignIn/SignInPage"; // The SignIn Component
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -89,9 +89,15 @@ const SigninShowcase = () => {
     setTimeout(() => setCopySuccess(false), 2000);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100  sm:p-10">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-6">Sign-In Component Showcase</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold mb-6">
+        Sign-In Component Showcase
+      </h1>
 
       {/* Tabs for Preview and Code */}
       <div className="flex border-b border-gray-700 mb-6">
