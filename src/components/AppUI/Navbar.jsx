@@ -26,7 +26,7 @@ export default function ExampleNavbarOne() {
   };
 
   return (
-    <div className="relative w-full bg-white p-2 sm:p-4">
+    <div className="relative w-full bg-white p-2 sm:p-4 ">
       <div className="mx-auto flex  items-center justify-between p-4 sm:px-6 sm:py-0 lg:px-8">
         <div className="flex items-center space-x-2">
           <span>
