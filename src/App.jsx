@@ -27,7 +27,7 @@ function App() {
         <Route path="/components/buttons" element={<ComponentShowcase />} />
         <Route path="/components/cards" element={<CardShowcase />} />
         <Route path="/components/inputs" element={<InputShowcase />} />
-        <Route path="/components/avtars" element={<AvatarShowcase />} />
+        <Route path="/components/avatars" element={<AvatarShowcase />} />
         <Route path="/components/signin" element={<SigninShowcase />} />
         <Route path="/components/signup" element={<SignupShowcase />} />
         <Route path="/components/loaders" element={<LoaderShowcase />} />
