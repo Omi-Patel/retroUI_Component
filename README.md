@@ -31,8 +31,8 @@ To install RetroUI in your project, follow these steps:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/retro-ui-library.git
-    cd retro-ui-library
+    git clone https://github.com/Omi-Patel/retroUI_Component.git
+    cd retroUI_Component
     ```
 
 2. **Install the dependencies**:
