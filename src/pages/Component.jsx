@@ -49,6 +49,11 @@ const componentsList = [
     path: "footers",
     image: "https://via.placeholder.com/300x200?text=Footer",
   },
+  {
+    name: "Switch",
+    path: "switch",
+    image: "https://via.placeholder.com/300x200?text=Switch",
+  },
 ];
 
 const Component = () => {
