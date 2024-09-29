@@ -16,6 +16,7 @@ import LoaderShowcase from "./pages/LoaderShowcase";
 import NavbarShowcase from "./pages/NavbarShowcase";
 import FooterShowcase from "./pages/FooterShowcase";
 import SwitchShowcase from "./pages/SwitchShowcase";
+import TableShowcase from "./pages/TableShowcase";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/components/navbars" element={<NavbarShowcase />} />
         <Route path="/components/footers" element={<FooterShowcase />} />
         <Route path="/components/switch" element={<SwitchShowcase />} />
+        <Route path="/components/tables" element={<TableShowcase />} />
       </Routes>
       <Footer />
     </Router>

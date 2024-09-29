@@ -322,7 +322,7 @@ const SignupShowcase = () => {
             </button>
           </div>
 
-          <div className=" p-2 sm:p-6 bg-gray-800  border border-gray-700 shadow-lg">
+          <div className=" p-2 sm:p-6 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
             {activeTabs[componentName] === "preview" && (
               <div className="mb-4">
                 {componentName === "SignupVariant1" && <SignUpPageVariant1 />}
