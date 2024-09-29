@@ -2,6 +2,13 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // This enables smooth scrolling
+    });
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -220,9 +227,15 @@ const Home = () => {
               team will get back to you as soon as possible to assist with your
               needs or answer any questions you may have.
             </p>
-            <form className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
+            <form className="flex flex-col items-center w-full gap-4 md:px-16">
               <input
-                placeholder="Email"
+                placeholder="Your Email"
+                required
+                type="text"
+                className="flex-grow w-full h-12 px-4 mb-3 text-white transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
+              />
+              <input
+                placeholder="Request Component"
                 required
                 type="text"
                 className="flex-grow w-full h-12 px-4 mb-3 text-white transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
@@ -231,17 +244,20 @@ const Home = () => {
                 type="submit"
                 className="inline-flex items-center justify-center w-full h-12 px-6 font-bold tracking-wide text-teal-500 transition duration-200 rounded-full shadow-md md:w-auto bg-black dark:bg-zinc-800"
               >
-                Submit
+                Submit Query
               </button>
             </form>
-            <p className="max-w-md mb-10 text-xs font-thin tracking-wide text-gray-500 dark:text-gray-400 sm:text-sm sm:mx-auto md:mb-16">
+            <p className="max-w-md mt-4 mb-4 text-xs font-thin tracking-wide text-gray-400 dark:text-gray-400 sm:text-sm sm:mx-auto md:mb-8">
               Your request will be reviewed by our team, and we will get back to
               you as soon as possible. Thank you for reaching out!
             </p>
-            <a
-              href="/"
-              aria-label="Scroll down"
-              className="flex items-center justify-center w-10 h-10 mx-auto text-white duration-300 transform border border-gray-400 rounded-full hover:text-teal-accent-400 hover:border-teal-accent-400 hover:shadow hover:scale-110"
+            <div
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToTop();
+              }}
+              aria-label="Scroll top"
+              className="flex items-center justify-center w-10 h-10 mx-auto text-white duration-300 transform border border-gray-400 rounded-full hover:text-teal-accent-400 hover:border-teal-accent-400 hover:shadow hover:scale-110 rotate-180 cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -252,7 +268,7 @@ const Home = () => {
               >
                 <path d="M10.293,3.293,6,7.586,1.707,3.293A1,1,0,0,0,.293,4.707l5,5a1,1,0,0,0,1.414,0l5-5a1,1,0,1,0-1.414-1.414Z" />
               </svg>
-            </a>
+            </div>
           </div>
         </div>
       </div>
