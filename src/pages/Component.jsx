@@ -57,6 +57,11 @@ const componentsList = [
 ];
 
 const Component = () => {
+  // Sort componentsList alphabetically by name
+  const sortedComponents = componentsList.sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -88,7 +93,7 @@ const Component = () => {
         {/* Right Section - Components List */}
         <div className="flex-1 mt-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-            {componentsList.map((component) => (
+            {sortedComponents.map((component) => (
               <Link
                 key={component.path}
                 to={`/components/${component.path}`}
