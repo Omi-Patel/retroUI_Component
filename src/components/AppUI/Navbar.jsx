@@ -16,6 +16,10 @@ const menuItems = [
     name: "Components",
     href: "/components",
   },
+  {
+    name: "Pages Example",
+    href: "/pages",
+  },
 ];
 
 export default function ExampleNavbarOne() {
