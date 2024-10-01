@@ -24,6 +24,11 @@ const pagesList = [
     path: "contact",
     image: "https://via.placeholder.com/300x200?text=Contact",
   },
+  {
+    name: "Dashboard Page",
+    path: "dashboard",
+    image: "https://via.placeholder.com/300x200?text=Dashboard",
+  },
 ];
 
 const Pages = () => {

@@ -22,6 +22,7 @@ import HomePageShowcase from "./pagesComponents/PageShowcase/HomePageShowcase";
 import AboutPageShowcase from "./pagesComponents/PageShowcase/AboutPageShowcase";
 import ServicePageShowcase from "./pagesComponents/PageShowcase/ServicePageShowcase";
 import ContactPageShowcase from "./pagesComponents/PageShowcase/ContactPageShowcase";
+import DashboardPageShowcase from "./pagesComponents/PageShowcase/DashboardPageShowcase";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         <Route path="/pages/about" element={<AboutPageShowcase />} />
         <Route path="/pages/service" element={<ServicePageShowcase />} />
         <Route path="/pages/contact" element={<ContactPageShowcase />} />
+        <Route path="/pages/dashboard" element={<DashboardPageShowcase />} />
       </Routes>
       <Footer />
     </Router>
