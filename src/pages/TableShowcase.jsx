@@ -504,7 +504,7 @@ const TableShowcase = () => {
               </div>
             )}
             {activeTabs[componentName] === "code" && (
-              <div className="relative overflow-x-auto">
+              <div className="relative overflow-x-auto h-[600px]">
                 <SyntaxHighlighter
                   language="jsx"
                   style={atomDark}

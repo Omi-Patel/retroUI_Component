@@ -23,6 +23,7 @@ import AboutPageShowcase from "./pagesComponents/PageShowcase/AboutPageShowcase"
 import ServicePageShowcase from "./pagesComponents/PageShowcase/ServicePageShowcase";
 import ContactPageShowcase from "./pagesComponents/PageShowcase/ContactPageShowcase";
 import DashboardPageShowcase from "./pagesComponents/PageShowcase/DashboardPageShowcase";
+import PricingShowcase from "./pages/PricingShowcase";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/components/footers" element={<FooterShowcase />} />
         <Route path="/components/switch" element={<SwitchShowcase />} />
         <Route path="/components/tables" element={<TableShowcase />} />
+        <Route path="/components/pricing" element={<PricingShowcase />} />
 
         {/* Pages Component  */}
         <Route path="/pages" element={<Pages />} />
