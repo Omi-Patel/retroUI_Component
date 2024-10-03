@@ -1,13 +1,14 @@
 import React from "react";
 import { InstagramIcon, LinkedinIcon, TwitterIcon } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 export function Footer() {
   return (
-    <section className="relative overflow-hidden bg-slate-200 p-4 sm:px-6  lg:px-8">
+    <section className="relative overflow-hidden bg-slate-200 p-4 sm:p-0  sm:px-6 lg:px-12">
       <div className="container relative z-10 mx-auto ">
         <div className=" flex gap-4 flex-col sm:flex-row items-start sm:items-center justify-between">
           <div className="w-auto ">
-            <a href="#">
+            <NavLink to="/">
               <div className="flex items-center">
                 <svg
                   width="40"
@@ -23,7 +24,7 @@ export function Footer() {
                 </svg>
                 <span className="ml-4 text-xl font-bold">retroUI</span>
               </div>
-            </a>
+            </NavLink>
           </div>
           <div className="w-auto ">
             <ul className=" flex gap-2 flex-col sm:flex-row ">

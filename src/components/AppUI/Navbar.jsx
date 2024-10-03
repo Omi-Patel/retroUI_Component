@@ -31,8 +31,8 @@ export default function ExampleNavbarOne() {
 
   return (
     <div className="relative w-full bg-white p-2 sm:p-4 ">
-      <div className="mx-auto flex  items-center justify-between p-4 sm:px-6 sm:py-0 lg:px-8">
-        <div className="flex items-center space-x-2">
+      <div className="mx-auto flex  items-center justify-between p-4 sm:px-6 py-1 lg:px-8">
+        <NavLink to={"/"} className="flex items-center space-x-2">
           <span>
             <svg
               width="40"
@@ -48,7 +48,7 @@ export default function ExampleNavbarOne() {
             </svg>
           </span>
           <span className="font-bold text-xl sm:text-2xl">retroUI</span>
-        </div>
+        </NavLink>
         <div className="hidden grow items-start lg:block">
           <ul className="ml-12 inline-flex space-x-8">
             {menuItems.map((item) => (
@@ -67,8 +67,8 @@ export default function ExampleNavbarOne() {
           <ThemeToggle />
         </div>
         <div className="lg:hidden flex gap-4 items-center">
-          <Menu onClick={toggleMenu} className="h-8 w-8 cursor-pointer" />
           <ThemeToggle />
+          <Menu onClick={toggleMenu} className="h-8 w-8 cursor-pointer" />
         </div>
         {isMenuOpen && (
           <div className="absolute inset-x-0 top-0 z-50 origin-top-right transform p-2 transition lg:hidden">
