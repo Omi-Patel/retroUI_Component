@@ -180,11 +180,18 @@ const DashboardPageShowcase = () => {
     DashboardPage: "preview",
   });
   const [copySuccess, setCopySuccess] = useState(false);
+  const [installSuccess, setInstallSuccess] = useState(false);
 
   const copyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
     setCopySuccess(true);
     setTimeout(() => setCopySuccess(false), 2000);
+  };
+
+  const installationCopyToClipboard = (code) => {
+    navigator.clipboard.writeText(code);
+    setInstallSuccess(true);
+    setTimeout(() => setInstallSuccess(false), 2000);
   };
 
   useEffect(() => {
@@ -198,7 +205,9 @@ const DashboardPageShowcase = () => {
       </h1>
 
       {/* Installation Guide  */}
-      <h1 className="text-2xl my-2 font-medium tracking-wide"># Installation</h1>
+      <h1 className="text-2xl my-2 font-medium tracking-wide">
+        # Installation
+      </h1>
       <div className="flex justify-between p-2 mb-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
         <SyntaxHighlighter
           language="jsx"
@@ -209,11 +218,13 @@ const DashboardPageShowcase = () => {
         </SyntaxHighlighter>
         <button
           onClick={() =>
-            copyToClipboard("npm install framer-motion recharts lucide-react")
+            installationCopyToClipboard(
+              "npm install framer-motion recharts lucide-react"
+            )
           }
           className="text-white p-1 sm:p-4"
         >
-          {copySuccess ? (
+          {installSuccess ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
