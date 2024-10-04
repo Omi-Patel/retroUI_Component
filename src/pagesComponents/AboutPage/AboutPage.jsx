@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function AboutPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-[#fcf6e3] text-[#2b3a67] font-sans m-1 sm:m-8">
+    <div className="min-h-screen bg-[#fcf6e3] text-[#2b3a67] font-sans ">
       <div className="bg-[#f7b32b] h-2"></div>
       <div className="bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cg%20fill%3D%22%23f26419%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M0%200h20L0%2020z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')]">
         <main className="container mx-auto ">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import AboutPage from "../AboutPage/AboutPage";
+import RetroAbout from "../AboutPage/RetroAbout";
 
 const componentCode = {
   AboutPage: `
@@ -191,18 +192,169 @@ export default function AboutPage() {
 }
 
   `,
+  RetroAbout: `
+import React from "react";
+import { motion } from "framer-motion";
+import { Mail, Github, Linkedin } from "lucide-react";
+
+export default function RetroAbout() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
+  return (
+    <div className="min-h-screen bg-amber-50 text-amber-900 font-mono">
+      <header className="py-6 px-4 sm:px-6 lg:px-8 bg-amber-100">
+        <motion.h1
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          About Us
+        </motion.h1>
+      </header>
+
+      <main className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.section variants={itemVariants} className="mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Our Story</h2>
+            <p className="text-lg leading-relaxed">
+              Founded in the digital age with a love for the analog past, we
+              blend modern technology with vintage aesthetics. Our journey began
+              in a small garage, much like the tech giants of yesteryear, fueled
+              by a passion for creating experiences that resonate with both the
+              young and the young at heart.
+            </p>
+          </motion.section>
+
+          <motion.section variants={itemVariants} className="mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Our Mission</h2>
+            <p className="text-lg leading-relaxed">
+              We strive to bridge the gap between the nostalgia of the past and
+              the innovations of the future. Our goal is to create products and
+              experiences that not only function flawlessly but also tell a
+              story, evoking memories while pushing boundaries.
+            </p>
+          </motion.section>
+
+          <motion.section variants={itemVariants} className="mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+              Meet the Team
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {["Jane Retro", "John Vintage", "Alice Analog"].map(
+                (name, index) => (
+                  <motion.div
+                    key={name}
+                    className="bg-amber-100 p-4 rounded-lg text-center"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <img
+                      src={\`https://via.placeholder.com/300x200?text=\${name.charAt(
+                        0
+                      )}\`}
+                      alt={name}
+                      className="w-24 h-24 rounded-full mx-auto mb-4"
+                    />
+                    <h3 className="text-xl font-semibold">{name}</h3>
+                    <p className="text-amber-700">Retro Enthusiast</p>
+                  </motion.div>
+                )
+              )}
+            </div>
+          </motion.section>
+
+          <motion.section variants={itemVariants} className="text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+              Get in Touch
+            </h2>
+            <div className="flex justify-center space-x-6">
+              <motion.a
+                href="#"
+                className="text-amber-900 hover:text-amber-700"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Mail size={24} />
+              </motion.a>
+              <motion.a
+                href="#"
+                className="text-amber-900 hover:text-amber-700"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Github size={24} />
+              </motion.a>
+              <motion.a
+                href="#"
+                className="text-amber-900 hover:text-amber-700"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Linkedin size={24} />
+              </motion.a>
+            </div>
+          </motion.section>
+        </motion.div>
+      </main>
+
+      <motion.footer
+        className="py-6 px-4 sm:px-6 lg:px-8 bg-amber-100 text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+      >
+        <p>
+          &copy; {new Date().getFullYear()} Retro Innovations. All rights
+          reserved.
+        </p>
+      </motion.footer>
+    </div>
+  );
+}
+
+  `,
 };
 
 const AboutPageShowcase = () => {
   const [activeTabs, setActiveTabs] = useState({
     AboutPage: "preview",
+    RetroAbout: "preview",
   });
   const [copySuccess, setCopySuccess] = useState(false);
+  const [installSuccess, setInstallSuccess] = useState(false);
 
   const copyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
     setCopySuccess(true);
     setTimeout(() => setCopySuccess(false), 2000);
+  };
+
+  const installationCopyToClipboard = (code) => {
+    navigator.clipboard.writeText(code);
+    setInstallSuccess(true);
+    setTimeout(() => setInstallSuccess(false), 2000);
   };
 
   useEffect(() => {
@@ -214,6 +366,60 @@ const AboutPageShowcase = () => {
       <h1 className="text-3xl sm:text-4xl font-bold mb-6">
         About Page Components
       </h1>
+
+      {/* Installation Guide  */}
+      <h1 className="text-2xl my-2 font-medium tracking-wide">
+        # Installation
+      </h1>
+      <div className="flex justify-between p-2 mb-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
+        <SyntaxHighlighter
+          language="jsx"
+          style={atomDark}
+          className="rounded-md w-full"
+        >
+          npm install framer-motion lucide-react
+        </SyntaxHighlighter>
+        <button
+          onClick={() =>
+            installationCopyToClipboard(
+              "npm install framer-motion lucide-react"
+            )
+          }
+          className="text-white p-1 sm:p-4"
+        >
+          {installSuccess ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6 text-green-400"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
 
       {Object.keys(componentCode).map((componentName) => (
         <div key={componentName} className="mb-8">
@@ -251,10 +457,11 @@ const AboutPageShowcase = () => {
             </button>
           </div>
 
-          <div className="p-2 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
+          <div className="p-2 sm:p-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
             {activeTabs[componentName] === "preview" && (
-              <div className="mb-4">
+              <div className="">
                 {componentName === "AboutPage" && <AboutPage />}
+                {componentName === "RetroAbout" && <RetroAbout />}
               </div>
             )}
             {activeTabs[componentName] === "code" && (
