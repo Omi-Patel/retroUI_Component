@@ -30,7 +30,7 @@ export default function ExampleNavbarOne() {
   };
 
   return (
-    <div className="sticky w-full bg-white opacity-95 p-2 sm:p-4 z-50 top-0 ">
+    <div className="sticky w-full bg-white opacity-95 p-2 sm:px-4 z-50 top-0 ">
       <div className="mx-auto flex  items-center justify-between p-4 sm:px-6 py-0 lg:px-8">
         <NavLink to={"/"} className="flex items-center space-x-2">
           <span>
