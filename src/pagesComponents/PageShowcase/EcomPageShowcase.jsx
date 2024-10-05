@@ -789,11 +789,13 @@ const EcomPageShowcase = () => {
           style={atomDark}
           className="rounded-md w-full"
         >
-          npm lucide-react react-motion
+          npm install lucide-react framer-motion
         </SyntaxHighlighter>
         <button
           onClick={() =>
-            installationCopyToClipboard("npm install lucide-react react-motion")
+            installationCopyToClipboard(
+              "npm install lucide-react framer-motion"
+            )
           }
           className="text-white p-1 sm:p-4"
         >

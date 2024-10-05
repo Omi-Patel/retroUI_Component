@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Motion, spring } from "react-motion";
 import { Star, ShoppingCart, Heart } from "lucide-react";
 
 export default function BasicProductDesc() {
@@ -66,21 +65,21 @@ export default function BasicProductDesc() {
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Add to Cart
               </button>
-              <Motion style={{ scale: spring(isLiked ? 1.2 : 1) }}>
-                {({ scale }) => (
-                  <button
-                    onClick={() => setIsLiked(!isLiked)}
-                    className="bg-yellow-200 text-blue-800 p-2 rounded-full hover:bg-yellow-300 transition-colors"
-                    style={{ transform: `scale(${scale})` }}
-                  >
-                    <Heart
-                      className={`w-6 h-6 ${
-                        isLiked ? "fill-current text-red-500" : ""
-                      }`}
-                    />
-                  </button>
-                )}
-              </Motion>
+              <button
+                onClick={() => setIsLiked(!isLiked)}
+                className={`bg-yellow-200 text-blue-800 p-2 rounded-full hover:bg-yellow-300 transition-colors transform ${
+                  isLiked ? "scale-110" : "scale-100"
+                }`}
+                style={{
+                  transition: "transform 0.2s",
+                }}
+              >
+                <Heart
+                  className={`w-6 h-6 ${
+                    isLiked ? "fill-current text-blue-500" : ""
+                  }`}
+                />
+              </button>
             </div>
           </div>
         </div>
