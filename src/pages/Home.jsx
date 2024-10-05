@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import Form from "../components/AppUI/Form";
 
 const Home = () => {
   const scrollToTop = () => {
@@ -239,7 +240,7 @@ const Home = () => {
               team will get back to you as soon as possible to assist with your
               needs or answer any questions you may have.
             </p>
-            <form className="flex flex-col items-center w-full gap-4 md:px-16">
+            {/* <form className="flex flex-col items-center w-full gap-4 md:px-16">
               <input
                 placeholder="Your Email"
                 required
@@ -256,7 +257,9 @@ const Home = () => {
               <button className="px-4 py-2 bg-black dark:bg-zinc-800 text-teal-400 border-2 border-black font-bold shadow-[4px_4px_0px_0px_black] hover:shadow-[8px_8px_0px_0px_black] transform hover:-translate-y-1 transition-all w-full sm:w-auto">
                 Submit Query
               </button>
-            </form>
+            </form> */}
+
+            <Form />
             <p className="max-w-md mt-4 mb-4 text-xs font-thin tracking-wide text-gray-400 dark:text-gray-400 sm:text-sm sm:mx-auto md:mb-8">
               Your request will be reviewed by our team, and we will get back to
               you as soon as possible. Thank you for reaching out!
