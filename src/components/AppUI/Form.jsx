@@ -26,7 +26,6 @@ export default function Form() {
   }, [userName, setValue]);
 
   const onSubmit = async (data, e) => {
-    console.log(data);
     await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
@@ -61,7 +60,7 @@ export default function Form() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="hidden"
-              value={import.meta.env.SECRET_ACCESS_KEY}
+              value="ce6d1708-9f8b-4922-9d84-e829101e2664"
               {...register("access_key")}
             />
             <input type="hidden" {...register("subject")} />
