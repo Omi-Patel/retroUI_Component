@@ -22,7 +22,7 @@ export default function Form() {
   });
 
   useEffect(() => {
-    setValue("subject", `${userName} sent a message from Website`);
+    setValue("subject", `${userName} sent a message from retroUI`);
   }, [userName, setValue]);
 
   const onSubmit = async (data, e) => {
@@ -61,7 +61,7 @@ export default function Form() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="hidden"
-              value={import.meta.env.VITE_PUBLIC_ACCESS_KEY}
+              value={import.meta.env.SECRET_ACCESS_KEY}
               {...register("access_key")}
             />
             <input type="hidden" {...register("subject")} />

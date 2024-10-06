@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div className=" min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 ">
       {/* First Part */}
-      <div className="mb- ">
+      <div className="">
         <div className="bg-gray-100 dark:bg-zinc-900">
           <div className="px-4 py-12 mx-auto sm:max-w-xl md:max-w-full  md:px-24 lg:px-8 lg:py-10 ">
             <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl ">
@@ -151,7 +151,7 @@ const Home = () => {
       </div>
 
       {/* Second Part */}
-      <section className="py-24 bg-white dark:bg-black sm:pb-16 lg:pb-20 ">
+      <section className=" py-24 bg-white dark:bg-black sm:pb-16 lg:pb-20 ">
         <div className="px-4 mx-auto sm:px-6 lg:px-12">
           <div className="relative">
             <div className="lg:w-2/3">
