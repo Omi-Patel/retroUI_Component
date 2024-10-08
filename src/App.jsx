@@ -26,6 +26,7 @@ import DashboardPageShowcase from "./pagesComponents/PageShowcase/DashboardPageS
 import PricingShowcase from "./pages/PricingShowcase";
 import ErrorPageShowcase from "./pagesComponents/PageShowcase/ErrorPageShowcase";
 import EcomPageShowcase from "./pagesComponents/PageShowcase/EcomPageShowcase";
+import BlogPageShowcase from "./pagesComponents/PageShowcase/BlogPageShowcase";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
         <Route path="/pages/dashboard" element={<DashboardPageShowcase />} />
         <Route path="/pages/error" element={<ErrorPageShowcase />} />
         <Route path="/pages/ecommerce" element={<EcomPageShowcase />} />
+        <Route path="/pages/blog" element={<BlogPageShowcase />} />
       </Routes>
       <Footer />
     </Router>

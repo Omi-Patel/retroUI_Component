@@ -39,6 +39,11 @@ const pagesList = [
     path: "ecommerce",
     image: "https://via.placeholder.com/300x200?text=Ecommerce",
   },
+  {
+    name: "Blog Page",
+    path: "blog",
+    image: "https://via.placeholder.com/300x200?text=Blog",
+  },
 ];
 
 const Pages = () => {
