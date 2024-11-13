@@ -67,21 +67,27 @@ export function Footer() {
           <div className="w-auto ">
             <div className="-m-1.5 flex flex-wrap">
               <div className="w-auto p-1.5">
-                <a href="#">
+                <a
+                  href="https://www.instagram.com/omipatel_7113/"
+                  target="_blank"
+                >
                   <div className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 hover:border-gray-400">
                     <InstagramIcon />
                   </div>
                 </a>
               </div>
               <div className="w-auto p-1.5">
-                <a href="#">
+                <a href="https://x.com/om_patel07" target="_blank">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 hover:border-gray-400">
                     <TwitterIcon />
                   </div>
                 </a>
               </div>
               <div className="w-auto p-1.5">
-                <a href="#">
+                <a
+                  href="https://www.linkedin.com/in/ompatel7113/"
+                  target="_blank"
+                >
                   <div className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 hover:border-gray-400">
                     <LinkedinIcon />
                   </div>
