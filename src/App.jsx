@@ -27,6 +27,8 @@ import PricingShowcase from "./pages/PricingShowcase";
 import ErrorPageShowcase from "./pagesComponents/PageShowcase/ErrorPageShowcase";
 import EcomPageShowcase from "./pagesComponents/PageShowcase/EcomPageShowcase";
 import BlogPageShowcase from "./pagesComponents/PageShowcase/BlogPageShowcase";
+import PrivacyPolicy from "./components/AppUI/PrivacyPolicy";
+import Terms from "./components/AppUI/Terms";
 
 function App() {
   return (
@@ -59,6 +61,10 @@ function App() {
         <Route path="/pages/error" element={<ErrorPageShowcase />} />
         <Route path="/pages/ecommerce" element={<EcomPageShowcase />} />
         <Route path="/pages/blog" element={<BlogPageShowcase />} />
+
+
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<Terms />} />
       </Routes>
       <Footer />
     </Router>

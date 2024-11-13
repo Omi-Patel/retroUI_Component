@@ -29,29 +29,22 @@ export function Footer() {
           <div className="w-auto ">
             <ul className=" flex gap-2 flex-col sm:flex-row ">
               <li className="sm:p-5">
-                <a
+                <NavLink
                   className="font-medium text-gray-600 hover:text-gray-700"
-                  href="#"
+                  to={"/privacy-policy"}
                 >
                   Privacy Policy
-                </a>
+                </NavLink>
               </li>
               <li className="sm:p-5">
-                <a
+                <NavLink
                   className="font-medium text-gray-600 hover:text-gray-700"
-                  href="#"
+                  to={"/terms-conditions"}
                 >
-                  Terms of Service
-                </a>
+                  Terms & Conditions
+                </NavLink>
               </li>
-              <li className="sm:p-5">
-                <a
-                  className="font-medium text-gray-600 hover:text-gray-700"
-                  href="#"
-                >
-                  Return Policy
-                </a>
-              </li>
+
               <li className="sm:p-5">
                 <a
                   className="font-medium text-gray-600 hover:text-gray-700"
