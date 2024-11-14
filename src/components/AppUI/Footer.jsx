@@ -46,12 +46,12 @@ export function Footer() {
               </li>
 
               <li className="sm:p-5">
-                <a
+                <NavLink
                   className="font-medium text-gray-600 hover:text-gray-700"
-                  href="#"
+                  to={'/contact-us'}
                 >
                   Contact Us
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>

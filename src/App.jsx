@@ -29,6 +29,7 @@ import EcomPageShowcase from "./pagesComponents/PageShowcase/EcomPageShowcase";
 import BlogPageShowcase from "./pagesComponents/PageShowcase/BlogPageShowcase";
 import PrivacyPolicy from "./components/AppUI/PrivacyPolicy";
 import Terms from "./components/AppUI/Terms";
+import ContactUs from "./components/AppUI/ContactUs";
 
 function App() {
   return (
@@ -65,6 +66,7 @@ function App() {
 
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-conditions" element={<Terms />} />
+        <Route path="/contact-us" element={<ContactUs />} />
       </Routes>
       <Footer />
     </Router>

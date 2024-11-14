@@ -74,12 +74,12 @@ const PrivacyPolicy = () => {
           </section>
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-8 text-center">
           <NavLink
             to="/"
-            className="text-blue-600 hover:text-blue-800 transition-colors"
+            className="text-base font-medium text-indigo-600 hover:text-indigo-500"
           >
-            Return to Home
+            &larr; Back to Home
           </NavLink>
         </div>
       </div>
