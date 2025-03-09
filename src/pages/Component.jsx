@@ -109,15 +109,8 @@ const Component = () => {
                 to={`/components/${component.path}`}
                 className="block bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out border-2 border-black hover:border-gray-700 dark:hover:border-white transform hover:-translate-y-2"
               >
-                <div className="relative overflow-hidden rounded-t-lg">
-                  <img
-                    src={component.image}
-                    alt={`${component.name} preview`}
-                    className="w-full h-48 object-cover transition-transform duration-300 transform hover:scale-105"
-                  />
-                </div>
-                <div className="p-4 text-center">
-                  <h2 className="text-xl font-mono font-bold text-black dark:text-white">
+                <div className="p-14 text-center">
+                  <h2 className="text-2xl font-mono font-bold text-black dark:text-white">
                     {component.name}
                   </h2>
                 </div>
