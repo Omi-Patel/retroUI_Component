@@ -67,7 +67,6 @@ const About = () => {
           className="relative mb-24 overflow-hidden rounded-2xl"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-teal-500/10 dark:from-cyan-900/20 dark:to-teal-900/20 z-0"></div>
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iLjA1Ij48cGF0aCBkPSJNMzYgMzRoLTJWMGgydjM0em0tNCAwVjBoMnYzNGgtMnptLTQgMFYwaDJ2MzRoLTJ6bS00IDBoLTJWMGgydjM0em0tNCAwVjBoMnYzNGgtMnptLTQgMFYwaDJ2MzRoLTJ6bS00IDBoLTJWMGgydjM0em0tNCAwVjBoMnYzNGgtMnpNNiAzNFYwaDJ2MzRINnpNMiAzNFYwaDJ2MzRIMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30 dark:opacity-10 z-0"></div>
 
           <div className="relative z-10 py-16 px-6 sm:px-12 text-center">
             <motion.div

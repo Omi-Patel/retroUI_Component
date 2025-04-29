@@ -414,7 +414,7 @@ const Component = () => {
               We're constantly adding new components to our library. If you have
               a specific component in mind, let us know!
             </p>
-            <Link to="/contact">
+            <Link to="/contact-us">
               <button className="px-6 py-3 bg-black dark:bg-zinc-800 text-teal-400 border-2 border-black dark:border-zinc-700 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,0.8)] transform hover:-translate-y-1 transition-all duration-300 rounded-sm">
                 Request a Component
               </button>
