@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Form from "../components/AppUI/Form";
 import { motion } from "framer-motion";
+import { ChevronUp } from "lucide-react";
 
 const Home = () => {
   const scrollToTop = () => {
@@ -389,15 +390,7 @@ const Home = () => {
               aria-label="Scroll top"
               className="flex items-center justify-center w-12 h-12 mx-auto text-white duration-300 transform border border-gray-400 rounded-full hover:text-teal-400 hover:border-teal-400 hover:shadow hover:scale-110 rotate-180 cursor-pointer bg-black/20 backdrop-blur-sm"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 12 12"
-                fill="currentColor"
-              >
-                <path d="M10.293,3.293,6,7.586,1.707,3.293A1,1,0,0,0,.293,4.707l5,5a1,1,0,0,0,1.414,0l5-5a1,1,0,1,0-1.414-1.414Z" />
-              </svg>
+              <ChevronUp />
             </motion.div>
           </div>
         </div>
