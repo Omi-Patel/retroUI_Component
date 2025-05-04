@@ -4,7 +4,7 @@ const ProfileCard = () => {
   return (
     <div className="max-w-sm p-4 bg-cyan-100 border-4 border-black rounded-md shadow-[8px_8px_0px_0px_black] hover:shadow-[12px_12px_0px_0px_black] transition-shadow duration-150 ease-in-out">
       <img
-        src="https://via.placeholder.com/100"
+        src="https://picsum.photos/id/1025/150"
         alt="Profile Avatar"
         className="w-24 h-24 rounded-full mx-auto border-4 border-black mb-4"
       />

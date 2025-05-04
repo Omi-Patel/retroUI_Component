@@ -4,7 +4,7 @@ import React from "react";
 const BasicAvatar = () => (
   <div className="w-20 h-20 rounded-full bg-[#E0E4CC]  overflow-hidden">
     <img
-      src="https://via.placeholder.com/150"
+      src="https://picsum.photos/id/237/150"
       alt="avatar"
       className="w-full h-full"
     />
@@ -15,7 +15,7 @@ const BasicAvatar = () => (
 const BorderAvatar = () => (
   <div className="w-20 h-20 rounded-full border-4 border-yellow-500 bg-gray-300 overflow-hidden">
     <img
-      src="https://via.placeholder.com/150"
+      src="https://picsum.photos/id/1005/150"
       alt="avatar"
       className="w-full h-full"
     />
@@ -26,7 +26,7 @@ const BorderAvatar = () => (
 const ShadowAvatar = () => (
   <div className="w-20 h-20 rounded-full bg-gray-300 shadow-[4px_4px_0px_0px_black] overflow-hidden">
     <img
-      src="https://via.placeholder.com/150"
+      src="https://picsum.photos/id/1025/150"
       alt="avatar"
       className="w-full h-full"
     />
@@ -37,7 +37,7 @@ const ShadowAvatar = () => (
 const BadgeAvatar = () => (
   <div className="relative w-20 h-20 rounded-full bg-gray-300 overflow-hidden">
     <img
-      src="https://via.placeholder.com/150"
+      src="https://picsum.photos/id/1084/150"
       alt="avatar"
       className="w-full h-full"
     />
@@ -50,7 +50,7 @@ const FrameAvatar = () => (
   <div className="w-20 h-20 p-1 rounded-full border-4 border-black bg-gray-300 overflow-hidden">
     <div className="w-full h-full border-4 border-dotted border-gray-800 rounded-full overflow-hidden">
       <img
-        src="https://via.placeholder.com/150"
+        src="https://picsum.photos/id/660/150"
         alt="avatar"
         className="w-full h-full"
       />

@@ -10,6 +10,7 @@ import {
   Package,
   Layers,
   Grid3X3,
+  Sparkles,
 } from "lucide-react";
 
 // List of components with images and categories
@@ -396,6 +397,90 @@ const Component = () => {
               </button>
             </div>
           )}
+        </motion.section>
+
+        {/* Quick Tips Section */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeIn}
+          className="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 shadow-md mb-8"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
+              <Sparkles className="w-5 h-5 mr-2 text-emerald-500" />
+              Quick Implementation Guide
+            </h2>
+
+            <div className="hidden sm:block">
+              <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-medium rounded-full">
+                Easy Integration
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
+                  <span>1</span>
+                </div>
+                Copy Code
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
+                Click the "Copy Code" button to copy the component code to your
+                clipboard.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
+                  <span>2</span>
+                </div>
+                Create Component
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
+                Create a new file in your React project and paste the code as a
+                new component.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
+                  <span>3</span>
+                </div>
+                Customize
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
+                Modify the Tailwind classes to match your project's design
+                system and branding.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
+                  <span>4</span>
+                </div>
+                Import & Use
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
+                Import the component and use it in your application with your
+                custom props.
+              </p>
+            </div>
+          </div>
         </motion.section>
 
         {/* Bottom CTA */}

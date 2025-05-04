@@ -77,7 +77,7 @@ const UniqueNavbar = () => {
       <div
         className={`fixed top-0 left-0 w-full h-full bg-gradient-to-b from-[#34495e] to-[#2c3e50] p-8 transform ${
           isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        } transition-transform duration-500 ease-in-out z-50`}
+        } transition-transform duration-500 ease-in-out z-50 hidden`}
       >
         <div className="flex justify-end mb-6">
           <button

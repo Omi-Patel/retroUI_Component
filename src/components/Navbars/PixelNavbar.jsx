@@ -40,7 +40,7 @@ const PixelNavbar = () => {
               // Close button when menu is open
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 animate-spin"
+                className="h-8 w-8 "
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -68,7 +68,7 @@ const PixelNavbar = () => {
       <div
         className={`fixed top-0 left-0 w-full h-full bg-[#d9f99d] border-t-4 border-black p-8 transform ${
           isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-        } transition-transform duration-500 ease-in-out z-50`}
+        } transition-transform duration-500 ease-in-out z-50 hidden`}
       >
         <div className="flex justify-end mb-6">
           <button

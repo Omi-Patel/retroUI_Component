@@ -7,7 +7,7 @@ const NeonFooter = () => {
         {/* Logo Section */}
         <div className="flex items-center justify-center sm:justify-start">
           <img
-            src="https://via.placeholder.com/150"
+            src="https://picsum.photos/id/1025/150"
             alt="Retro Logo"
             className="w-14 h-14 sm:w-16 sm:h-16 rounded-full"
           />

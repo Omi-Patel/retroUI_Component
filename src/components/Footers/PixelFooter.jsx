@@ -7,7 +7,7 @@ const PixelFooter = () => {
         {/* Logo Section */}
         <div className="flex flex-col items-center sm:items-start">
           <img
-            src="https://via.placeholder.com/150"
+            src="https://picsum.photos/id/660/150"
             alt="Pixel Logo"
             className="w-16 h-16 pixelated rounded-lg"
           />

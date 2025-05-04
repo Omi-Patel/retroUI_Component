@@ -9,7 +9,7 @@ const ShadowFooter = () => {
           {/* Footer Logo */}
           <div className="flex items-center gap-2">
             <img
-              src="https://via.placeholder.com/150"
+              src="https://picsum.photos/id/237/150"
               alt="Logo"
               className="w-12 h-12 border-4 border-[#f3f4a1] rounded-full pixel-border"
             />

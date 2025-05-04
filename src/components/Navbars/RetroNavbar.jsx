@@ -72,7 +72,7 @@ const RetroNavbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 w-3/4 md:w-1/2 h-full bg-yellow-50 border-t-4 border-black shadow-[4px_4px_0px_0px_black] transform ${
+        className={`fixed top-0 right-0 w-3/4 md:w-1/2 hidden h-full  border-t-4 border-black shadow-[4px_4px_0px_0px_black] transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out z-50`}
       >

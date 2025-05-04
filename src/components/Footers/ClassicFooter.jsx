@@ -7,7 +7,7 @@ const ClassicFooter = () => {
         {/* Logo Section */}
         <div className="flex items-center justify-center sm:justify-start lg:col-span-1">
           <img
-            src="https://via.placeholder.com/150"
+            src="https://picsum.photos/id/1005/150"
             alt="Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg border-2 border-gray-800"
           />

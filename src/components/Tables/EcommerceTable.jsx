@@ -68,7 +68,7 @@ const EcommerceTable = () => {
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-black">
           {products.map((product) => (
             <tr
               key={product.id}

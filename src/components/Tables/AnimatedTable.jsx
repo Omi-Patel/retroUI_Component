@@ -12,7 +12,7 @@ const AnimatedTable = () => {
             <th className="p-4 border-2 border-black">Role</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-black">
           <tr className="bg-[#ffeeba] hover:bg-[#ffdd99] transition-all duration-300">
             <td className="p-4 border-2 border-black">1</td>
             <td className="p-4 border-2 border-black">John Doe</td>

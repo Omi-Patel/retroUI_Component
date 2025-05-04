@@ -1,4 +1,3 @@
-
 import React from "react";
 
 // Dummy data
@@ -56,7 +55,7 @@ const BasicTable = () => {
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-black">
           {data.map((employee) => (
             <tr
               key={employee.id}
