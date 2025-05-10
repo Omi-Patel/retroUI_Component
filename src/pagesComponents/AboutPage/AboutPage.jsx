@@ -93,7 +93,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="absolute inset-0 bg-[#f26419] transform -rotate-6 rounded-lg"></div>
                 <img
-                  src="https://via.placeholder.com/400x300"
+                  src="https://picsum.photos/id/294/950"
                   alt="Retro computer"
                   width={400}
                   height={400}

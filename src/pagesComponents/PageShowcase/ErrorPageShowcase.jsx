@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Code, Copy, Check, AlertTriangle, Zap, Layers, Palette } from "lucide-react";
 import BasicError from "../404Page/BasicError";
 import RetroError from "../404Page/RetroError";
 import TerminalError from "../404Page/TerminalError";
@@ -301,14 +303,45 @@ export default function MinimalError() {
 };
 
 const ErrorPageShowcase = () => {
+  const [activeComponent, setActiveComponent] = useState("BasicError");
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [installSuccess, setInstallSuccess] = useState(false);
   const [activeTabs, setActiveTabs] = useState({
     BasicError: "preview",
     RetroError: "preview",
     TerminalError: "preview",
     MinimalError: "preview",
   });
-  const [copySuccess, setCopySuccess] = useState(false);
-  const [installSuccess, setInstallSuccess] = useState(false);
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const pageIcons = {
+    BasicError: <AlertTriangle className="w-5 h-5" />,
+    RetroError: <Zap className="w-5 h-5" />,
+    TerminalError: <Layers className="w-5 h-5" />,
+    MinimalError: <Palette className="w-5 h-5" />,
+  };
+
+  const pageColors = {
+    BasicError: "from-red-400 to-orange-500",
+    RetroError: "from-fuchsia-500 to-pink-600",
+    TerminalError: "from-violet-500 to-purple-600",
+    MinimalError: "from-amber-500 to-yellow-600",
+  };
+
+  const pageBgs = {
+    BasicError: "bg-gradient-to-br from-red-50 to-orange-100 dark:from-red-900/20 dark:to-orange-900/30",
+    RetroError: "bg-gradient-to-br from-fuchsia-50 to-pink-100 dark:from-fuchsia-900/20 dark:to-pink-900/30",
+    TerminalError: "bg-gradient-to-br from-violet-50 to-purple-100 dark:from-violet-900/20 dark:to-purple-900/30",
+    MinimalError: "bg-gradient-to-br from-amber-50 to-yellow-100 dark:from-amber-900/20 dark:to-yellow-900/30",
+  };
 
   const copyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
@@ -326,129 +359,221 @@ const ErrorPageShowcase = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const renderComponent = (name) => {
+    switch (name) {
+      case "BasicError":
+        return <BasicError />;
+      case "RetroError":
+        return <RetroError />;
+      case "TerminalError":
+        return <TerminalError />;
+      case "MinimalError":
+        return <MinimalError />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 p-2 sm:p-10">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-6">
-        Error Page Components
-      </h1>
-
-      {/* Installation Guide  */}
-      <h1 className="text-2xl my-2 font-medium tracking-wide">
-        # Installation
-      </h1>
-      <div className="flex justify-between p-2 mb-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
-        <SyntaxHighlighter
-          language="jsx"
-          style={atomDark}
-          className="rounded-md w-full"
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 transition-colors duration-300 bg-[url('/grid-pattern.svg')] bg-fixed">
+      <div className="container mx-auto px-4 py-12">
+        {/* Hero Section */}
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="relative mb-16 overflow-hidden"
         >
-          npm lucide-react
-        </SyntaxHighlighter>
-        <button
-          onClick={() =>
-            installationCopyToClipboard("npm install lucide-react")
-          }
-          className="text-white p-1 sm:p-4"
-        >
-          {installSuccess ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6 text-green-400"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
-              />
-            </svg>
-          )}
-        </button>
-      </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-orange-500/10 dark:from-red-900/20 dark:to-orange-900/20 z-0 rounded-2xl"></div>
+          <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-r from-red-500/20 to-orange-500/20 dark:from-red-900/30 dark:to-orange-900/30 rounded-full blur-3xl"></div>
 
-      {Object.keys(componentCode).map((componentName) => (
-        <div key={componentName} className="mb-8">
-          <h2 className="text-2xl sm:text-3xl mb-4">
-            {componentName.replace(/([A-Z])/g, " $1").trim()}
-          </h2>
+          <div className="relative z-10 py-12 px-8 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8 rounded-2xl border border-red-200/50 dark:border-red-800/30">
+            <div className="text-center md:text-left max-w-2xl">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs font-medium mb-4">
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                <span>Retro UI Collection</span>
+              </div>
 
-          <div className="flex border-b border-gray-700 mb-6">
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({
-                  ...prev,
-                  [componentName]: "preview",
-                }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "preview"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({ ...prev, [componentName]: "code" }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "code"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Code
-            </button>
+              <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-600">
+                  Retro
+                </span>
+                <span className="relative">
+                  <span className="relative z-10">Error</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-red-200 dark:bg-red-800/50 -z-10 skew-x-3"></span>
+                </span>
+                <span> Pages</span>
+              </h1>
+
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                Explore our collection of retro-themed error page templates, designed
+                for crafting dynamic web applications with a unique vintage
+                aesthetic. Each page is fully customizable and ready to use.
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Component List - Left Side */}
+          <div className="lg:col-span-3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100">
+                  Error Pages
+                </h2>
+              </div>
+
+              <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                {Object.keys(componentCode).map((componentName) => (
+                  <motion.button
+                    key={componentName}
+                    whileHover={{ x: 5 }}
+                    onClick={() => setActiveComponent(componentName)}
+                    className={`w-full text-left p-4 flex items-center gap-3 transition-colors ${
+                      activeComponent === componentName
+                        ? `${pageBgs[componentName]} border-l-4 border-red-500`
+                        : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                    }`}
+                  >
+                    <div
+                      className={`p-2 rounded-lg bg-gradient-to-r ${pageColors[componentName]} text-white`}
+                    >
+                      {pageIcons[componentName]}
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-800 dark:text-gray-200 block">
+                        {componentName.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="p-2 sm:p-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
-            {activeTabs[componentName] === "preview" && (
-              <div className="">
-                {componentName === "BasicError" && <BasicError />}
-                {componentName === "RetroError" && <RetroError />}
-                {componentName === "TerminalError" && <TerminalError />}
-                {componentName === "MinimalError" && <MinimalError />}
-              </div>
-            )}
-            {activeTabs[componentName] === "code" && (
-              <div className="relative overflow-x-auto h-[600px]">
-                <SyntaxHighlighter
-                  language="jsx"
-                  style={atomDark}
-                  className="rounded-md"
+          {/* Component Display - Right Side */}
+          <div className="lg:col-span-9">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeComponent}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden"
+              >
+                {/* Component Header */}
+                <div
+                  className={`p-4 border-b border-gray-200 dark:border-gray-700 ${pageBgs[activeComponent]}`}
                 >
-                  {componentCode[componentName]}
-                </SyntaxHighlighter>
-                <button
-                  onClick={() => copyToClipboard(componentCode[componentName])}
-                  className="absolute top-4 right-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                >
-                  {copySuccess ? "Copied!" : "Copy Code"}
-                </button>
-              </div>
-            )}
+                  <div className="flex justify-between items-center">
+                    <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex items-center">
+                      <div
+                        className={`p-1.5 rounded-md bg-gradient-to-r ${pageColors[activeComponent]} text-white mr-2`}
+                      >
+                        {pageIcons[activeComponent]}
+                      </div>
+                      <span>
+                        {activeComponent.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </h2>
+
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => setActiveTabs((prev) => ({
+                          ...prev,
+                          [activeComponent]: "preview",
+                        }))}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          activeTabs[activeComponent] === "preview"
+                            ? "bg-emerald-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        Preview
+                      </button>
+                      <button
+                        onClick={() => setActiveTabs((prev) => ({
+                          ...prev,
+                          [activeComponent]: "code",
+                        }))}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          activeTabs[activeComponent] === "code"
+                            ? "bg-emerald-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        Code
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Component Content */}
+                <div className="p-6">
+                  {activeTabs[activeComponent] === "preview" ? (
+                    <div className="flex flex-col">
+                      {/* Interactive Preview */}
+                      <div
+                        className={`flex flex-col items-center justify-center p-10 ${pageBgs[activeComponent]} rounded-lg border border-gray-200 dark:border-gray-700 mb-6`}
+                      >
+                        <motion.div
+                          initial={{ scale: 0.9, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {renderComponent(activeComponent)}
+                        </motion.div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <div className="absolute top-0 left-0 w-full h-10 bg-gray-800 dark:bg-gray-700 rounded-t-md flex items-center px-4">
+                        <div className="flex space-x-2">
+                          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span className="text-xs text-gray-400 ml-4">
+                          pages/Error/{activeComponent}.jsx
+                        </span>
+                      </div>
+                      <div className="pt-10 overflow-hidden rounded-md border border-gray-600">
+                        <SyntaxHighlighter
+                          language="jsx"
+                          style={atomDark}
+                          showLineNumbers={true}
+                          wrapLines={true}
+                        >
+                          {componentCode[activeComponent]}
+                        </SyntaxHighlighter>
+                      </div>
+                      <button
+                        onClick={() => copyToClipboard(componentCode[activeComponent])}
+                        className="absolute top-14 right-4 px-3 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-md transition-all duration-150 flex items-center gap-2 text-sm font-medium"
+                      >
+                        {copySuccess ? (
+                          <>
+                            <Check className="w-4 h-4" />
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            Copy Code
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

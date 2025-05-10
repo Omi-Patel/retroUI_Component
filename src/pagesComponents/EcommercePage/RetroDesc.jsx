@@ -23,7 +23,7 @@ export default function RetroDesc() {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             ></motion.div>
             <motion.img
-              src="https://images.unsplash.com/photo-1558537348-c0f8e733989d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+              src="https://picsum.photos/id/701/600/600"
               alt="Retro Radio"
               className="relative z-10 w-full h-auto rounded-lg shadow-lg "
               whileHover={{ rotate: 5, scale: 1.05 }}

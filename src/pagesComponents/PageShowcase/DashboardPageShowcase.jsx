@@ -1,6 +1,27 @@
+"use client";
+
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  Code,
+  Copy,
+  Check,
+  ChevronDown,
+  Zap,
+  Layers,
+  Palette,
+  Monitor,
+  Grid,
+  ArrowRight,
+  Star,
+  Download,
+  Eye,
+  Sparkles,
+  Cpu,
+} from "lucide-react";
+
 import DashboardPage from "../DashboardPage/DashboardPage";
 
 const componentCode = {
@@ -21,8 +42,8 @@ const SidebarItem = ({ icon, label, isActive, onClick }) => (
   <motion.div
     className={\`flex items-center space-x-2 p-3 rounded-lg cursor-pointer \${
       isActive
-        ? "bg-amber-200 text-amber-900"
-        : "text-amber-700 hover:bg-amber-100"
+        ? "bg-emerald-200 text-emerald-900"
+        : "text-emerald-700 hover:bg-emerald-100"
     }\`}
     onClick={onClick}
     whileHover={{ scale: 1.05 }}
@@ -40,9 +61,9 @@ const TaskCard = ({ title, description, dueDate }) => (
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.3 }}
   >
-    <h3 className="text-lg font-bold mb-2 text-amber-900">{title}</h3>
-    <p className="text-amber-700 mb-2">{description}</p>
-    <p className="text-sm text-amber-500">Due: {dueDate}</p>
+    <h3 className="text-lg font-bold mb-2 text-emerald-900">{title}</h3>
+    <p className="text-emerald-700 mb-2">{description}</p>
+    <p className="text-sm text-emerald-500">Due: {dueDate}</p>
   </motion.div>
 );
 
@@ -61,54 +82,57 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="flex h-screen bg-amber-50 text-amber-900 font-mono ">
-      {/* Toggle button for small screens */}
-      <div className="absolute top-2 left-2 sm:p-1  z-30 bg-amber-200 flex justify-center items-center rounded-md">
-        <button
-          className="text-amber-700 focus:outline-none"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-        >
-          {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
+    <div className="min-h-screen bg-emerald-50">
       {/* Sidebar */}
       <motion.div
-        className={\`absolute bg-amber-100 inset-y-0 left-0 z-20 transform transition-transform duration-300 ease-in-out \${
-          sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full"
-        } p-4 space-y-4\`}
-        initial={{ x: -100, opacity: 0 }}
-        animate={sidebarOpen ? { x: 0, opacity: 1 } : { x: -100, opacity: 0 }}
-        transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }} // Custom easing function
+        className={\`fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 transform \${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0 transition-transform duration-300\`}
+        initial={{ x: -300 }}
+        animate={{ x: sidebarOpen ? 0 : -300 }}
       >
-        <h1 className="text-2xl font-bold mb-6 text-center text-amber-900">
-          RetroTask
-        </h1>
-        <SidebarItem
-          icon={<List size={20} />}
-          label="Tasks"
-          isActive={activeTab === "Tasks"}
-          onClick={() => setActiveTab("Tasks")}
-        />
-        <SidebarItem
-          icon={<Calendar size={20} />}
-          label="Calendar"
-          isActive={activeTab === "Calendar"}
-          onClick={() => setActiveTab("Calendar")}
-        />
-        <SidebarItem
-          icon={<Clock size={20} />}
-          label="Time Tracking"
-          isActive={activeTab === "TimeTracking"}
-          onClick={() => setActiveTab("TimeTracking")}
-        />
-        <SidebarItem
-          icon={<Settings size={20} />}
-          label="Settings"
-          isActive={activeTab === "Settings"}
-          onClick={() => setActiveTab("Settings")}
-        />
+        <div className="p-6">
+          <h1 className="text-2xl font-bold text-emerald-900 mb-8">RetroSaaS</h1>
+          <nav className="space-y-2">
+            <SidebarItem
+              icon={<List className="w-5 h-5" />}
+              label="Tasks"
+              isActive={activeTab === "Tasks"}
+              onClick={() => setActiveTab("Tasks")}
+            />
+            <SidebarItem
+              icon={<Calendar className="w-5 h-5" />}
+              label="Calendar"
+              isActive={activeTab === "Calendar"}
+              onClick={() => setActiveTab("Calendar")}
+            />
+            <SidebarItem
+              icon={<Clock className="w-5 h-5" />}
+              label="Timeline"
+              isActive={activeTab === "Timeline"}
+              onClick={() => setActiveTab("Timeline")}
+            />
+            <SidebarItem
+              icon={<Settings className="w-5 h-5" />}
+              label="Settings"
+              isActive={activeTab === "Settings"}
+              onClick={() => setActiveTab("Settings")}
+            />
+          </nav>
+        </div>
       </motion.div>
+
+      {/* Mobile Menu Button */}
+      <button
+        className="fixed top-4 left-4 z-50 lg:hidden"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        {sidebarOpen ? (
+          <X className="w-6 h-6 text-emerald-900" />
+        ) : (
+          <Menu className="w-6 h-6 text-emerald-900" />
+        )}
+      </button>
 
       {/* Main Content */}
       <div
@@ -117,7 +141,7 @@ export default function DashboardPage() {
         }\`}
       >
         <motion.h2
-          className="text-3xl font-bold mb-6"
+          className="text-3xl font-bold mb-6 text-emerald-900"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -151,19 +175,19 @@ export default function DashboardPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h3 className="text-xl font-bold mb-4">Weekly Activity</h3>
+          <h3 className="text-xl font-bold mb-4 text-emerald-900">Weekly Activity</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={chartData}>
-              <XAxis dataKey="name" stroke="#92400e" />
-              <YAxis stroke="#92400e" />
+              <XAxis dataKey="name" stroke="#047857" />
+              <YAxis stroke="#047857" />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#fef3c7",
-                  border: "1px solid #92400e",
+                  backgroundColor: "#d1fae5",
+                  border: "1px solid #047857",
                   borderRadius: "4px",
                 }}
               />
-              <Bar dataKey="tasks" fill="#92400e" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="tasks" fill="#047857" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
@@ -176,150 +200,316 @@ export default function DashboardPage() {
 };
 
 const DashboardPageShowcase = () => {
-  const [activeTabs, setActiveTabs] = useState({
-    DashboardPage: "preview",
-  });
+  const [activeComponent, setActiveComponent] = useState("DashboardPage");
+  const [activeTab, setActiveTab] = useState("preview");
   const [copySuccess, setCopySuccess] = useState(false);
-  const [installSuccess, setInstallSuccess] = useState(false);
+  const [expandedInfo, setExpandedInfo] = useState(false);
+  const [isGridView, setIsGridView] = useState(false);
 
   const copyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
     setCopySuccess(true);
-    setTimeout(() => setCopySuccess(false), 2000);
-  };
-
-  const installationCopyToClipboard = (code) => {
-    navigator.clipboard.writeText(code);
-    setInstallSuccess(true);
-    setTimeout(() => setInstallSuccess(false), 2000);
+    setTimeout(() => {
+      setCopySuccess(false);
+    }, 2000);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const pageIcons = {
+    DashboardPage: <Cpu className="w-5 h-5" />,
+  };
+
+  const pageColors = {
+    DashboardPage: "from-emerald-400 to-teal-500",
+  };
+
+  const pageBgs = {
+    DashboardPage:
+      "bg-gradient-to-br from-emerald-50 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/30",
+  };
+
+  const renderComponent = (name) => {
+    switch (name) {
+      case "DashboardPage":
+        return <DashboardPage />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 p-2 sm:p-10">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-6">
-        Dashboard Page Components
-      </h1>
-
-      {/* Installation Guide  */}
-      <h1 className="text-2xl my-2 font-medium tracking-wide">
-        # Installation
-      </h1>
-      <div className="flex justify-between p-2 mb-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
-        <SyntaxHighlighter
-          language="jsx"
-          style={atomDark}
-          className="rounded-md w-full"
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 transition-colors duration-300 bg-[url('/grid-pattern.svg')] bg-fixed">
+      <div className="container mx-auto px-4 py-12">
+        {/* Hero Section */}
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="relative mb-16 overflow-hidden"
         >
-          npm install framer-motion recharts lucide-react
-        </SyntaxHighlighter>
-        <button
-          onClick={() =>
-            installationCopyToClipboard(
-              "npm install framer-motion recharts lucide-react"
-            )
-          }
-          className="text-white p-1 sm:p-4"
-        >
-          {installSuccess ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6 text-green-400"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
-              />
-            </svg>
-          )}
-        </button>
-      </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 dark:from-emerald-900/20 dark:to-teal-900/20 z-0 rounded-2xl"></div>
+          <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-full blur-3xl"></div>
 
-      {Object.keys(componentCode).map((componentName) => (
-        <div key={componentName} className="mb-8">
-          <h2 className="text-2xl sm:text-3xl mb-4">
-            {componentName.replace(/([A-Z])/g, " $1").trim()}
-          </h2>
-
-          <div className="flex border-b border-gray-700 mb-6">
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({
-                  ...prev,
-                  [componentName]: "preview",
-                }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "preview"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({ ...prev, [componentName]: "code" }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "code"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Code
-            </button>
-          </div>
-
-          <div className="p-2 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
-            {activeTabs[componentName] === "preview" && (
-              <div className=" relative max-w-full h-auto rounded-lg shadow-lg">
-                {componentName === "DashboardPage" && <DashboardPage />}
+          <div className="relative z-10 py-12 px-8 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30">
+            <div className="text-center md:text-left max-w-2xl">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-medium mb-4">
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                <span>Retro UI Collection</span>
               </div>
-            )}
-            {activeTabs[componentName] === "code" && (
-              <div className="relative overflow-x-auto h-[600px]">
-                <SyntaxHighlighter
-                  language="jsx"
-                  style={atomDark}
-                  className="rounded-md"
-                >
-                  {componentCode[componentName]}
-                </SyntaxHighlighter>
+
+              <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">
+                  Retro
+                </span>
+                <span className="relative">
+                  <span className="relative z-10">Dashboard</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-emerald-200 dark:bg-emerald-800/50 -z-10 skew-x-3"></span>
+                </span>
+                <span> Pages</span>
+              </h1>
+
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                Explore our collection of retro-themed dashboard templates, designed
+                for crafting dynamic web applications with a unique vintage
+                aesthetic. Each page is fully customizable and ready to use.
+              </p>
+
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 <button
-                  onClick={() => copyToClipboard(componentCode[componentName])}
-                  className="absolute top-4 right-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  onClick={() => setIsGridView(!isGridView)}
+                  className="inline-flex items-center px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white transition-colors"
                 >
-                  {copySuccess ? "Copied!" : "Copy Code"}
+                  <Grid className="w-4 h-4 mr-2" />
+                  {isGridView ? "List View" : "Grid View"}
                 </button>
               </div>
-            )}
+            </div>
+
+            <div className="relative w-full max-w-md aspect-square">
+              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-4">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <div className="h-4 w-16 bg-teal-200 dark:bg-teal-700 rounded mb-2"></div>
+                  <div className="h-8 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-4 w-3/4 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+                  <div className="h-12 w-12 bg-cyan-200 dark:bg-cyan-700 rounded-full mx-auto mb-2"></div>
+                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-4 w-1/2 bg-gray-100 dark:bg-gray-700 rounded mx-auto"></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-8 w-3/4 bg-purple-200 dark:bg-purple-700 rounded mb-2"></div>
+                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded"></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                  <div className="flex justify-between mb-2">
+                    <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                    <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </div>
+                  <div className="h-12 w-full bg-yellow-200 dark:bg-yellow-700 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Component List - Left Side */}
+          <div className="lg:col-span-3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100">
+                  Dashboard Pages
+                </h2>
+              </div>
+
+              <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                {Object.keys(componentCode).map((componentName) => (
+                  <motion.button
+                    key={componentName}
+                    whileHover={{ x: 5 }}
+                    onClick={() => setActiveComponent(componentName)}
+                    className={`w-full text-left p-4 flex items-center gap-3 transition-colors ${
+                      activeComponent === componentName
+                        ? `${pageBgs[componentName]} border-l-4 border-emerald-500`
+                        : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                    }`}
+                  >
+                    <div
+                      className={`p-2 rounded-lg bg-gradient-to-r ${pageColors[componentName]} text-white`}
+                    >
+                      {pageIcons[componentName]}
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-800 dark:text-gray-200 block">
+                        {componentName.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Component Display - Right Side */}
+          <div className="lg:col-span-9">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeComponent}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden"
+              >
+                {/* Component Header */}
+                <div
+                  className={`p-4 border-b border-gray-200 dark:border-gray-700 ${pageBgs[activeComponent]}`}
+                >
+                  <div className="flex justify-between items-center">
+                    <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex items-center">
+                      <div
+                        className={`p-1.5 rounded-md bg-gradient-to-r ${pageColors[activeComponent]} text-white mr-2`}
+                      >
+                        {pageIcons[activeComponent]}
+                      </div>
+                      <span>
+                        {activeComponent.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </h2>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setActiveTab("preview")}
+                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                          activeTab === "preview"
+                            ? "bg-emerald-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => setActiveTab("code")}
+                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                          activeTab === "code"
+                            ? "bg-emerald-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        <Code className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Component Content */}
+                <div className="p-6">
+                  {activeTab === "preview" ? (
+                    <div className="flex flex-col">
+                      {/* Interactive Preview */}
+                      <div
+                        className={`flex flex-col items-center justify-center p-10 ${pageBgs[activeComponent]} rounded-lg border border-gray-200 dark:border-gray-700 mb-6`}
+                      >
+                        <motion.div
+                          initial={{ scale: 0.9, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {renderComponent(activeComponent)}
+                        </motion.div>
+                      </div>
+
+                      {/* Component Info */}
+                      <div className="bg-gradient-to-r from-emerald-500/5 to-teal-500/5 dark:from-emerald-900/10 dark:to-teal-900/10 rounded-lg border border-emerald-200 dark:border-emerald-800/30 overflow-hidden">
+                        <button
+                          onClick={() => setExpandedInfo(!expandedInfo)}
+                          className="w-full p-4 flex justify-between items-center text-left"
+                        >
+                          <h3 className="text-base font-semibold text-gray-800 dark:text-gray-100 flex items-center">
+                            <Zap className="w-4 h-4 text-emerald-500 mr-2" />
+                            Page Details & Usage Tips
+                          </h3>
+                          <ChevronDown
+                            className={`w-5 h-5 text-gray-500 transition-transform ${
+                              expandedInfo ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+
+                        {expandedInfo && (
+                          <div className="p-4 pt-0 border-t border-emerald-200 dark:border-emerald-800/30">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                              <div>
+                                <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                                  Features
+                                </h4>
+                                <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
+                                  <li>
+                                    Retro-inspired design with pixel-perfect
+                                    details
+                                  </li>
+                                  <li>Fully responsive layout</li>
+                                  <li>Dark mode support</li>
+                                  <li>Customizable components</li>
+                                </ul>
+                              </div>
+                              <div>
+                                <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                                  Customization
+                                </h4>
+                                <p className="text-gray-600 dark:text-gray-400">
+                                  This page can be easily customized by
+                                  modifying the Tailwind classes. Try changing
+                                  colors, layouts, or adding additional sections
+                                  to match your project's design.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <SyntaxHighlighter
+                        language="jsx"
+                        style={atomDark}
+                        className="rounded-lg"
+                      >
+                        {componentCode[activeComponent]}
+                      </SyntaxHighlighter>
+                      <button
+                        onClick={() => copyToClipboard(componentCode[activeComponent])}
+                        className="absolute top-4 right-4 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
+                      >
+                        {copySuccess ? (
+                          <Check className="w-5 h-5" />
+                        ) : (
+                          <Copy className="w-5 h-5" />
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

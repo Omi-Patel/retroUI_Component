@@ -1,66 +1,115 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import hero2 from "/Images/hero2.jpg";
 import { motion } from "framer-motion";
-import { Layers, ArrowRight, ChevronRight, Package } from "lucide-react";
+import {
+  Search,
+  Filter,
+  ArrowRight,
+  Package,
+  Layers,
+  Grid3X3,
+  Sparkles,
+} from "lucide-react";
 
-// List of components with images
+// List of pages with images and categories
 const pagesList = [
   {
     name: "Home Page",
     path: "home",
     image: "https://via.placeholder.com/300x200?text=Home",
+    category: "Landing",
+    description: "Main landing page for your application",
   },
   {
     name: "About Page",
     path: "about",
     image: "https://via.placeholder.com/300x200?text=About",
+    category: "Content",
+    description: "Company or project information page",
   },
   {
     name: "Service Page",
     path: "service",
     image: "https://via.placeholder.com/300x200?text=Service",
+    category: "Content",
+    description: "Services or features showcase",
   },
   {
     name: "Contact Page",
     path: "contact",
     image: "https://via.placeholder.com/300x200?text=Contact",
+    category: "Contact",
+    description: "Contact information and form",
   },
   {
     name: "Dashboard Page",
     path: "dashboard",
     image: "https://via.placeholder.com/300x200?text=Dashboard",
+    category: "Admin",
+    description: "User dashboard and analytics",
   },
   {
     name: "Error Page",
     path: "error",
     image: "https://via.placeholder.com/300x200?text=404",
+    category: "System",
+    description: "Error and 404 page templates",
   },
   {
     name: "Ecommerce Page",
     path: "ecommerce",
     image: "https://via.placeholder.com/300x200?text=Ecommerce",
+    category: "Shop",
+    description: "Product listings and details",
   },
   {
     name: "Blog Page",
     path: "blog",
     image: "https://via.placeholder.com/300x200?text=Blog",
+    category: "Content",
+    description: "Blog post listings and details",
   },
 ];
 
+// Get unique categories
+const categories = [
+  "All",
+  ...new Set(pagesList.map((page) => page.category)),
+];
+
 const Pages = () => {
-  // Sort componentsList alphabetically by name
-  const sortedComponents = pagesList.sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [filteredPages, setFilteredPages] = useState(pagesList);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Animation variants
+  useEffect(() => {
+    let result = pagesList;
+
+    if (searchTerm) {
+      result = result.filter(
+        (page) =>
+          page.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          page.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (selectedCategory !== "All") {
+      result = result.filter(
+        (page) => page.category === selectedCategory
+      );
+    }
+
+    result = result.sort((a, b) => a.name.localeCompare(b.name));
+
+    setFilteredPages(result);
+  }, [searchTerm, selectedCategory]);
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -87,13 +136,22 @@ const Pages = () => {
       y: 0,
       transition: { duration: 0.5 },
     },
-    hover: {
-      y: -12,
-      boxShadow:
-        "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-      borderColor: "#4fd1c5",
-      transition: { duration: 0.3 },
-    },
+  };
+
+  // Get category color
+  const getCategoryColor = (category) => {
+    const colors = {
+      Landing: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+      Content: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
+      Contact: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+      Admin: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+      System: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
+      Shop: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
+    };
+    return (
+      colors[category] ||
+      "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"
+    );
   };
 
   return (
@@ -132,9 +190,9 @@ const Pages = () => {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="text-4xl sm:text-5xl font-bold mb-6 text-gray-900 dark:text-white"
                 >
-                  Application{" "}
+                  RetroUI{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-teal-500">
-                    UI Pages
+                    Pages
                   </span>
                 </motion.h1>
 
@@ -144,11 +202,28 @@ const Pages = () => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg"
                 >
-                  Explore our collection of Application UI pages, designed for
-                  crafting dynamic web applications with versatile interface
-                  elements. Each page template is fully responsive and ready to
-                  use in your projects.
+                  Explore our collection of retro-themed page templates, designed
+                  for crafting dynamic web applications with a unique vintage
+                  aesthetic. Each page is fully customizable and ready to use.
                 </motion.p>
+
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="flex flex-wrap gap-4"
+                >
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" />
+                    <input
+                      type="text"
+                      placeholder="Search pages..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10 pr-4 py-2 w-full sm:w-64 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400"
+                    />
+                  </div>
+                </motion.div>
               </div>
 
               <motion.div
@@ -188,85 +263,203 @@ const Pages = () => {
           </div>
         </motion.section>
 
-        {/* Pages Grid Section */}
+        {/* Category Filter */}
         <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
         >
-          <div className="flex items-center mb-8">
-            <Layers
-              className="mr-3 text-teal-500 dark:text-teal-400"
-              size={24}
-            />
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
-              Browse Page Templates
+          <div className="flex items-center mb-6">
+            <Filter className="mr-2 text-gray-700 dark:text-gray-300" />
+            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">
+              Filter by Category
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {sortedComponents.map((component, index) => (
-              <motion.div
-                key={component.path}
-                variants={cardVariants}
-                whileHover="hover"
-                custom={index}
+          <div className="flex flex-wrap gap-3">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  selectedCategory === category
+                    ? "bg-teal-500 text-white dark:bg-teal-600 shadow-md transform -translate-y-1"
+                    : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                }`}
               >
-                <Link to={`/pages/${component.path}`} className="block h-full">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg h-full border-2 border-black hover:border-teal-500 dark:border-gray-700 dark:hover:border-teal-400 transition-all duration-300">
-                    <div className="relative overflow-hidden group">
-                      <div className="h-32 bg-gradient-to-r from-cyan-500/20 to-teal-500/20 dark:from-cyan-900/30 dark:to-teal-900/30 flex items-center justify-center">
-                        <span className="text-3xl font-bold font-mono text-gray-800 dark:text-gray-200">
-                          {component.name.charAt(0)}
-                        </span>
-                      </div>
-                      <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-white flex items-center">
-                          View Template{" "}
-                          <ArrowRight className="ml-2" size={16} />
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="p-5">
-                      <h3 className="text-xl font-bold font-mono text-gray-900 dark:text-white mb-2">
-                        {component.name}
-                      </h3>
-                      <div className="flex justify-between items-center">
-                        <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 rounded group-hover:w-24 transition-all duration-300"></div>
-                        <ChevronRight className="text-gray-400 group-hover:text-teal-500 dark:group-hover:text-teal-400 transform group-hover:translate-x-1 transition-all" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
+                {category}
+              </button>
             ))}
           </div>
         </motion.section>
 
-        {/* Bottom CTA Section */}
+        {/* Pages Grid */}
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+          className="mb-16"
+        >
+          {filteredPages.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPages.map((page) => (
+                <motion.div key={page.path} variants={cardVariants}>
+                  <Link
+                    to={`/pages/${page.path}`}
+                    className="group block h-full"
+                  >
+                    <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-black dark:border-gray-700 h-full transform hover:-translate-y-2 hover:border-teal-500 dark:hover:border-teal-400">
+                      <div className="p-6">
+                        <div className="flex justify-between items-start mb-4">
+                          <h3 className="text-2xl font-bold font-mono text-gray-900 dark:text-white">
+                            {page.name}
+                          </h3>
+                          <span
+                            className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(
+                              page.category
+                            )}`}
+                          >
+                            {page.category}
+                          </span>
+                        </div>
+
+                        <p className="text-gray-600 dark:text-gray-400 mb-6">
+                          {page.description}
+                        </p>
+
+                        <div className="flex justify-between items-center">
+                          <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 rounded group-hover:w-24 transition-all duration-300"></div>
+                          <ArrowRight className="text-gray-400 group-hover:text-teal-500 dark:group-hover:text-teal-400 transform group-hover:translate-x-1 transition-all" />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <Layers className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" />
+              <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300 mb-2">
+                No pages found
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400">
+                Try adjusting your search or filter to find what you're looking
+                for.
+              </p>
+              <button
+                onClick={() => {
+                  setSearchTerm("");
+                  setSelectedCategory("All");
+                }}
+                className="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
+              >
+                Reset Filters
+              </button>
+            </div>
+          )}
+        </motion.section>
+
+        {/* Quick Tips Section */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeIn}
+          className="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 shadow-md mb-8"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
+              <Sparkles className="w-5 h-5 mr-2 text-emerald-500" />
+              Quick Implementation Guide
+            </h2>
+
+            <div className="hidden sm:block">
+              <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-medium rounded-full">
+                Easy Integration
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
+                  <span>1</span>
+                </div>
+                Choose Template
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
+                Browse our collection and select the page template that best fits your needs.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
+                  <span>2</span>
+                </div>
+                Customize Content
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
+                Replace placeholder content with your own text, images, and branding.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
+                  <span>3</span>
+                </div>
+                Add Components
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
+                Enhance your page by adding our pre-built components and widgets.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
+                  <span>4</span>
+                </div>
+                Deploy & Share
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
+                Deploy your customized page and share it with your audience.
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Bottom CTA */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center"
         >
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
-            <Package className="w-12 h-12 mx-auto text-teal-500 mb-4" />
+            <Grid3X3 className="w-12 h-12 mx-auto text-teal-500 mb-4" />
             <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-              Ready to build your next project?
+              Can't find what you're looking for?
             </h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto mb-6">
-              Our page templates provide a solid foundation for your web
-              applications. Combine them with our components for a complete UI
-              solution.
+              We're constantly adding new page templates to our library. If you have
+              a specific page in mind, let us know!
             </p>
-            <Link to="/components">
+            <Link to="/contact-us">
               <button className="px-6 py-3 bg-black dark:bg-zinc-800 text-teal-400 border-2 border-black dark:border-zinc-700 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,0.8)] transform hover:-translate-y-1 transition-all duration-300 rounded-sm">
-                Explore Components
+                Request a Page
               </button>
             </Link>
           </div>

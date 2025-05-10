@@ -1,6 +1,30 @@
+"use client";
+
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  Code,
+  Copy,
+  Check,
+  ChevronDown,
+  Zap,
+  Layers,
+  Palette,
+  Monitor,
+  Grid,
+  ArrowRight,
+  Star,
+  Download,
+  Eye,
+  Sparkles,
+  ShoppingBag,
+  ShoppingCart,
+  Package,
+  Tag,
+} from "lucide-react";
+
 import ProductsPage from "../EcommercePage/ProducsPage";
 import ModernProduct from "../EcommercePage/ModernProduct";
 import BasicProductDesc from "../EcommercePage/BasicProductDesc";
@@ -16,7 +40,7 @@ const products = [
     id: 1,
     name: "Vintage Polaroid Camera",
     price: 129.99,
-    image: "https://via.placeholder.com/300x200?text=Camera",
+    image: "https://picsum.photos/id/301/300/200",
     description:
       "Capture moments in classic style with this refurbished Polaroid camera from the 1970s.",
   },
@@ -24,7 +48,7 @@ const products = [
     id: 2,
     name: "Retro Vinyl Record Player",
     price: 189.99,
-    image: "https://via.placeholder.com/300x200?text=Player",
+    image: "https://picsum.photos/id/302/300/200",
     description:
       "Experience the warm sound of vinyl with this beautifully crafted record player, featuring modern connectivity.",
   },
@@ -32,7 +56,7 @@ const products = [
     id: 3,
     name: "Antique Brass Telescope",
     price: 79.99,
-    image: "https://via.placeholder.com/300x200?text=Telescope",
+    image: "https://picsum.photos/id/303/300/200",
     description:
       "Gaze at the stars or use as a stunning decorative piece. This brass telescope is a true conversation starter.",
   },
@@ -40,7 +64,7 @@ const products = [
     id: 4,
     name: "Classic Leather-bound Journal",
     price: 39.99,
-    image: "https://via.placeholder.com/300x200?text=Journal",
+    image: "https://picsum.photos/id/304/300/200",
     description:
       "Write your thoughts in style with this handcrafted leather journal, featuring high-quality paper and a timeless design.",
   },
@@ -48,7 +72,7 @@ const products = [
     id: 5,
     name: "Vintage Typewriter",
     price: 249.99,
-    image: "https://via.placeholder.com/300x200?text=Typewriter",
+    image: "https://picsum.photos/id/305/300/200",
     description:
       "Create with a touch of nostalgia using this fully restored vintage typewriter. Perfect for writers and collectors alike.",
   },
@@ -56,7 +80,7 @@ const products = [
     id: 6,
     name: "Antique World Globe",
     price: 89.99,
-    image: "https://via.placeholder.com/300x200?text=Globe",
+    image: "https://picsum.photos/id/306/300/200",
     description:
       "Explore the world from your study with this beautifully detailed antique-style world globe on a wooden stand.",
   },
@@ -263,640 +287,341 @@ export default function ProductsPage() {
 
   `,
   ModernProduct: `
-import React, { useState, useEffect } from "react";
-import { ShoppingBag, Heart, X, Plus, Minus, Trash2 } from "lucide-react";
-
-const products = [
-  {
-    id: 1,
-    name: "Vintage Polaroid Camera",
-    price: 129.99,
-    image: "https://via.placeholder.com/300x200?text=Camera",
-    description:
-      "Capture moments in classic style with this refurbished Polaroid camera from the 1970s.",
-  },
-  {
-    id: 2,
-    name: "Retro Vinyl Record Player",
-    price: 189.99,
-    image: "https://via.placeholder.com/300x200?text=Player",
-    description:
-      "Experience the warm sound of vinyl with this beautifully crafted record player, featuring modern connectivity.",
-  },
-  {
-    id: 3,
-    name: "Antique Brass Telescope",
-    price: 79.99,
-    image: "https://via.placeholder.com/300x200?text=Telescope",
-    description:
-      "Gaze at the stars or use as a stunning decorative piece. This brass telescope is a true conversation starter.",
-  },
-  {
-    id: 4,
-    name: "Classic Leather-bound Journal",
-    price: 39.99,
-    image: "https://via.placeholder.com/300x200?text=Journal",
-    description:
-      "Write your thoughts in style with this handcrafted leather journal, featuring high-quality paper and a timeless design.",
-  },
-  {
-    id: 5,
-    name: "Vintage Typewriter",
-    price: 249.99,
-    image: "https://via.placeholder.com/300x200?text=Typewriter",
-    description:
-      "Create with a touch of nostalgia using this fully restored vintage typewriter. Perfect for writers and collectors alike.",
-  },
-  {
-    id: 6,
-    name: "Antique World Globe",
-    price: 89.99,
-    image: "https://via.placeholder.com/300x200?text=Globe",
-    description:
-      "Explore the world from your study with this beautifully detailed antique-style world globe on a wooden stand.",
-  },
-];
-
-export default function ModernProduct() {
-  const [cart, setCart] = useState([]);
-  const [likes, setLikes] = useState({});
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartTotal, setCartTotal] = useState(0);
-
-  useEffect(() => {
-    const newTotal = cart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-    setCartTotal(newTotal);
-  }, [cart]);
-
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prevCart, { ...product, quantity: 1 }];
-    });
-  };
-
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
-  };
-
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity === 0) {
-      removeFromCart(productId);
-    } else {
-      setCart((prevCart) =>
-        prevCart.map((item) =>
-          item.id === productId ? { ...item, quantity: newQuantity } : item
-        )
-      );
-    }
-  };
-
-  const toggleLike = (productId) => {
-    setLikes((prevLikes) => ({
-      ...prevLikes,
-      [productId]: !prevLikes[productId],
-    }));
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 font-sans">
-      <header className="bg-white shadow-md py-4 px-6  top-0 z-10">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-indigo-600">ModernRetro</h1>
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className="relative p-2 text-gray-600 hover:text-indigo-600 transition-colors duration-300"
-          >
-            <ShoppingBag size={24} />
-            {cart.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {cart.length}
-              </span>
-            )}
-          </button>
-        </div>
-      </header>
-
-      <main className="container mx-auto py-8 px-2 sm:px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-gray-800">
-          Our Curated Collection
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-            >
-              <div className="relative">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-64 object-cover"
-                />
-                <button
-                  onClick={() => toggleLike(product.id)}
-                  className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-indigo-100 transition-colors duration-300"
-                >
-                  <Heart
-                    size={20}
-                    className={\`\${
-                      likes[product.id]
-                        ? "text-red-500 fill-red-500"
-                        : "text-gray-400"
-                    }\`}
-                  />
-                </button>
-              </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4">{product.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-xl sm:text-2xl font-bold text-indigo-600">
-                    \${product.price.toFixed(2)}
-                  </span>
-                  <button
-                    onClick={() => addToCart(product)}
-                    className="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition-colors duration-300"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      {isCartOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end z-50">
-          <div className="bg-white w-full max-w-md p-6 overflow-y-auto">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Your Cart</h2>
-              <button
-                onClick={() => setIsCartOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X size={24} />
-              </button>
-            </div>
-            {cart.length === 0 ? (
-              <p className="text-gray-500 text-center">Your cart is empty.</p>
-            ) : (
-              <>
-                {cart.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center mb-4 pb-4 border-b border-gray-200"
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-20 h-20 object-cover rounded-md mr-4"
-                    />
-                    <div className="flex-grow">
-                      <h3 className="font-semibold text-gray-800">
-                        {item.name}
-                      </h3>
-                      <p className="text-gray-600">\${item.price.toFixed(2)}</p>
-                      <div className="flex items-center mt-2">
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
-                          className="text-gray-500 hover:text-indigo-600"
-                        >
-                          <Minus size={16} />
-                        </button>
-                        <span className="mx-2 text-gray-800">
-                          {item.quantity}
-                        </span>
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
-                          }
-                          className="text-gray-500 hover:text-indigo-600"
-                        >
-                          <Plus size={16} />
-                        </button>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="text-red-500 hover:text-red-700 ml-4"
-                    >
-                      <Trash2 size={20} />
-                    </button>
-                  </div>
-                ))}
-                <div className="mt-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-xl font-semibold text-gray-800">
-                      Total:
-                    </span>
-                    <span className="text-2xl font-bold text-indigo-600">
-                      \${cartTotal.toFixed(2)}
-                    </span>
-                  </div>
-                  <button className="w-full bg-indigo-600 text-white py-3 rounded-full text-lg font-semibold hover:bg-indigo-700 transition-colors duration-300">
-                    Proceed to Checkout
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
-      <footer className="bg-gray-800 text-white py-8 px-6 mt-12">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2023 ModernRetro. All rights reserved.</p>
-          <p className="mt-2 text-gray-400">
-            Bringing the past into the future, one product at a time.
-          </p>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-  `,
+// ... existing code ...
+`,
   BasicProductDesc: `
-import React, { useState } from "react";
-import { Star, ShoppingCart, Heart } from "lucide-react";
-
-export default function BasicProductDesc() {
-  const [isLiked, setIsLiked] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-
-  return (
-    <div className="min-h-[500px] bg-yellow-50 flex items-center justify-center p-2 sm:p-4 font-mono">
-      <div className="max-w-4xl w-full bg-white rounded-3xl overflow-hidden shadow-xl">
-        <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/2 p-4 sm:p-8 bg-blue-100 flex items-center justify-center">
-            <div className="relative w-64 h-64">
-              <div className="absolute inset-0 bg-yellow-200 rounded-full transform -rotate-6"></div>
-              <img
-                src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                alt="Retro Radio"
-                className="absolute inset-0 w-full h-full object-cover rounded-2xl transform rotate-3 transition-transform hover:rotate-0 duration-300"
-              />
-            </div>
-          </div>
-          <div className="md:w-1/2 p-3 sm:p-8">
-            <h1 className="text-3xl font-bold text-blue-800 mb-4">
-              Vintage Melody Maker
-            </h1>
-            <div className="flex items-center mb-4">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-5 h-5 text-yellow-400 fill-current"
-                />
-              ))}
-              <span className="ml-2 text-blue-600">(42 reviews)</span>
-            </div>
-            <p className="text-blue-700 mb-6">
-              Transport yourself to the golden age of radio with our Vintage
-              Melody Maker. This beautifully crafted radio combines classic
-              aesthetics with modern technology, delivering crystal-clear sound
-              in a nostalgic package.
-            </p>
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-3xl font-bold text-blue-800">
-                \${(129.99 * quantity).toFixed(2)}
-              </span>
-              <div className="flex items-center">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="bg-yellow-200 text-blue-800 px-3 py-1 rounded-l-full hover:bg-yellow-300 transition-colors"
-                >
-                  -
-                </button>
-                <span className="bg-yellow-100 text-blue-800 px-4 py-1">
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="bg-yellow-200 text-blue-800 px-3 py-1 rounded-r-full hover:bg-yellow-300 transition-colors"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-            <div className="flex space-x-4">
-              <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-700 transition-colors flex items-center justify-center">
-                <ShoppingCart className="w-5 h-5 mr-2" />
-                Add to Cart
-              </button>
-              <button
-                onClick={() => setIsLiked(!isLiked)}
-                className={\`bg-yellow-200 text-blue-800 p-2 rounded-full hover:bg-yellow-300 transition-colors transform \${
-                  isLiked ? "scale-110" : "scale-100"
-                }\`}
-                style={{
-                  transition: "transform 0.2s",
-                }}
-              >
-                <Heart
-                  className={\`w-6 h-6 \${
-                    isLiked ? "fill-current text-blue-500" : ""
-                  }\`}
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-  `,
+// ... existing code ...
+`,
   RetroDesc: `
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Radio, Volume2, Zap, ShoppingCart } from "lucide-react";
-
-export default function RetroDesc() {
-  const [activeTab, setActiveTab] = useState("description");
-  const [isHovering, setIsHovering] = useState(false);
-
-  const features = [
-    { icon: Radio, text: "AM/FM radio" },
-    { icon: Volume2, text: "High-fidelity sound" },
-    { icon: Zap, text: "Bluetooth connectivity" },
-  ];
-
-  return (
-    <div className="min-h-[500px] bg-blue-50 flex items-center justify-center p-2 sm:p-4 font-sans">
-      <div className="max-w-4xl w-full bg-yellow-100 rounded-lg overflow-hidden shadow-2xl">
-        <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/2 p-8 relative overflow-hidden flex justify-center items-center">
-            <motion.div
-              className="absolute inset-0 bg-blue-200 rounded-full "
-              animate={{ scale: isHovering ? 1.2 : 1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            ></motion.div>
-            <motion.img
-              src="https://images.unsplash.com/photo-1558537348-c0f8e733989d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-              alt="Retro Radio"
-              className="relative z-10 w-full h-auto rounded-lg shadow-lg "
-              whileHover={{ rotate: 5, scale: 1.05 }}
-              onHoverStart={() => setIsHovering(true)}
-              onHoverEnd={() => setIsHovering(false)}
-            />
-            <div className="absolute bottom-4 right-4 bg-yellow-300 text-blue-800 px-4 py-2 rounded-full font-bold shadow-lg z-10">
-              $129.99
-            </div>
-          </div>
-          <div className="lg:w-1/2 p-2 sm:p-8 bg-white">
-            <h1 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">
-              RetroWave Radio
-            </h1>
-            <div className="flex space-x-2 mb-6">
-              {["description", "features", "reviews"].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={\`px-2 sm:px-4 py-1 sm:py-2 rounded-full text-sm font-medium transition-colors \${
-                    activeTab === tab
-                      ? "bg-blue-600 text-white"
-                      : "bg-yellow-200 text-blue-800 hover:bg-yellow-300"
-                  }\`}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
-            </div>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-              >
-                {activeTab === "description" && (
-                  <p className="text-blue-700 mb-6">
-                    Step back in time with our RetroWave Radio, a perfect blend
-                    of vintage aesthetics and modern technology. This stunning
-                    piece not only looks like it's straight out of the 1960s but
-                    also packs all the features you need for today's listening
-                    experience.
-                  </p>
-                )}
-                {activeTab === "features" && (
-                  <ul className="space-y-4">
-                    {features.map((feature, index) => (
-                      <motion.li
-                        key={index}
-                        className="flex items-center text-blue-700"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <feature.icon className="w-6 h-6 mr-2 text-yellow-500" />
-                        {feature.text}
-                      </motion.li>
-                    ))}
-                  </ul>
-                )}
-                {activeTab === "reviews" && (
-                  <div className="space-y-4">
-                    <div className="flex items-center">
-                      <div className="flex-1 h-2 bg-yellow-200 rounded-full overflow-hidden">
-                        <div className="w-4/5 h-full bg-blue-600"></div>
-                      </div>
-                      <span className="ml-2 text-blue-700">4.5/5</span>
-                    </div>
-                    <p className="text-blue-700 italic">
-                      "This radio is a fantastic addition to my vintage-inspired
-                      living room. The sound quality is superb!" - Happy
-                      Customer
-                    </p>
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-10 w-full bg-blue-600 text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
-            >
-              <ShoppingCart className="w-6 h-6 mr-2" />
-              Add to Cart
-            </motion.button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-  `,
+// ... existing code ...
+`,
 };
 
 const EcomPageShowcase = () => {
-  const [activeTabs, setActiveTabs] = useState({
-    ProductsPage: "preview",
-    ModernProduct: "preview",
-    BasicProductDesc: "preview",
-    RetroDesc: "preview",
-  });
+  const [activeComponent, setActiveComponent] = useState("ProductsPage");
+  const [activeTab, setActiveTab] = useState("preview");
   const [copySuccess, setCopySuccess] = useState(false);
-  const [installSuccess, setInstallSuccess] = useState(false);
+  const [expandedInfo, setExpandedInfo] = useState(false);
+  const [isGridView, setIsGridView] = useState(false);
 
   const copyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
     setCopySuccess(true);
-    setTimeout(() => setCopySuccess(false), 2000);
-  };
-
-  const installationCopyToClipboard = (code) => {
-    navigator.clipboard.writeText(code);
-    setInstallSuccess(true);
-    setTimeout(() => setInstallSuccess(false), 2000);
+    setTimeout(() => {
+      setCopySuccess(false);
+    }, 2000);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const pageIcons = {
+    ProductsPage: <ShoppingBag className="w-5 h-5" />,
+    ModernProduct: <ShoppingCart className="w-5 h-5" />,
+    BasicProductDesc: <Package className="w-5 h-5" />,
+    RetroDesc: <Tag className="w-5 h-5" />,
+  };
+
+  const pageColors = {
+    ProductsPage: "from-purple-400 to-indigo-500",
+    ModernProduct: "from-indigo-400 to-blue-500",
+    BasicProductDesc: "from-blue-400 to-cyan-500",
+    RetroDesc: "from-cyan-400 to-teal-500",
+  };
+
+  const pageBgs = {
+    ProductsPage: "bg-gradient-to-br from-purple-50 to-indigo-100 dark:from-purple-900/20 dark:to-indigo-900/30",
+    ModernProduct: "bg-gradient-to-br from-indigo-50 to-blue-100 dark:from-indigo-900/20 dark:to-blue-900/30",
+    BasicProductDesc: "bg-gradient-to-br from-blue-50 to-cyan-100 dark:from-blue-900/20 dark:to-cyan-900/30",
+    RetroDesc: "bg-gradient-to-br from-cyan-50 to-teal-100 dark:from-cyan-900/20 dark:to-teal-900/30",
+  };
+
+  const renderComponent = (name) => {
+    switch (name) {
+      case "ProductsPage":
+        return <ProductsPage />;
+      case "ModernProduct":
+        return <ModernProduct />;
+      case "BasicProductDesc":
+        return <BasicProductDesc />;
+      case "RetroDesc":
+        return <RetroDesc />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 p-2 sm:p-10">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-6">
-        Ecommerce Page Components
-      </h1>
-
-      {/* Installation Guide  */}
-      <h1 className="text-2xl my-2 font-medium tracking-wide">
-        # Installation
-      </h1>
-      <div className="flex justify-between p-2 mb-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
-        <SyntaxHighlighter
-          language="jsx"
-          style={atomDark}
-          className="rounded-md w-full"
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 transition-colors duration-300 bg-[url('/grid-pattern.svg')] bg-fixed">
+      <div className="container mx-auto px-4 py-12">
+        {/* Hero Section */}
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="relative mb-16 overflow-hidden"
         >
-          npm install lucide-react framer-motion
-        </SyntaxHighlighter>
-        <button
-          onClick={() =>
-            installationCopyToClipboard(
-              "npm install lucide-react framer-motion"
-            )
-          }
-          className="text-white p-1 sm:p-4"
-        >
-          {installSuccess ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6 text-green-400"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
-              />
-            </svg>
-          )}
-        </button>
-      </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 dark:from-purple-900/20 dark:to-indigo-900/20 z-0 rounded-2xl"></div>
+          <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 dark:from-purple-900/30 dark:to-indigo-900/30 rounded-full blur-3xl"></div>
 
-      {Object.keys(componentCode).map((componentName) => (
-        <div key={componentName} className="mb-8">
-          <h2 className="text-2xl sm:text-3xl mb-4">
-            {componentName.replace(/([A-Z])/g, " $1").trim()}
-          </h2>
-
-          <div className="flex border-b border-gray-700 mb-6">
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({
-                  ...prev,
-                  [componentName]: "preview",
-                }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "preview"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({ ...prev, [componentName]: "code" }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "code"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Code
-            </button>
-          </div>
-
-          <div className="p-2 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
-            {activeTabs[componentName] === "preview" && (
-              <div className="">
-                {componentName === "ProductsPage" && <ProductsPage />}
-                {componentName === "ModernProduct" && <ModernProduct />}
-                {componentName === "BasicProductDesc" && <BasicProductDesc />}
-                {componentName === "RetroDesc" && <RetroDesc />}
+          <div className="relative z-10 py-12 px-8 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8 rounded-2xl border border-purple-200/50 dark:border-purple-800/30">
+            <div className="text-center md:text-left max-w-2xl">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-medium mb-4">
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                <span>Retro UI Collection</span>
               </div>
-            )}
-            {activeTabs[componentName] === "code" && (
-              <div className="relative overflow-x-auto h-[600px]">
-                <SyntaxHighlighter
-                  language="jsx"
-                  style={atomDark}
-                  className="rounded-md"
-                >
-                  {componentCode[componentName]}
-                </SyntaxHighlighter>
+
+              <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-indigo-600">
+                  Retro
+                </span>
+                <span className="relative">
+                  <span className="relative z-10">Ecommerce</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-purple-200 dark:bg-purple-800/50 -z-10 skew-x-3"></span>
+                </span>
+                <span> Pages</span>
+              </h1>
+
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                Explore our collection of retro-themed ecommerce templates, designed
+                for crafting dynamic online stores with a unique vintage
+                aesthetic. Each page is fully customizable and ready to use.
+              </p>
+
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 <button
-                  onClick={() => copyToClipboard(componentCode[componentName])}
-                  className="absolute top-4 right-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  onClick={() => setIsGridView(!isGridView)}
+                  className="inline-flex items-center px-4 py-2 rounded-lg bg-purple-500 hover:bg-purple-600 text-white transition-colors"
                 >
-                  {copySuccess ? "Copied!" : "Copy Code"}
+                  <Grid className="w-4 h-4 mr-2" />
+                  {isGridView ? "List View" : "Grid View"}
                 </button>
               </div>
-            )}
+            </div>
+
+            <div className="relative w-full max-w-md aspect-square">
+              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-4">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <div className="h-4 w-16 bg-indigo-200 dark:bg-indigo-700 rounded mb-2"></div>
+                  <div className="h-8 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-4 w-3/4 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+                  <div className="h-12 w-12 bg-purple-200 dark:bg-purple-700 rounded-full mx-auto mb-2"></div>
+                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-4 w-1/2 bg-gray-100 dark:bg-gray-700 rounded mx-auto"></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-8 w-3/4 bg-indigo-200 dark:bg-indigo-700 rounded mb-2"></div>
+                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded"></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                  <div className="flex justify-between mb-2">
+                    <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                    <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </div>
+                  <div className="h-12 w-full bg-purple-200 dark:bg-purple-700 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Component List - Left Side */}
+          <div className="lg:col-span-3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100">
+                  Ecommerce Pages
+                </h2>
+              </div>
+
+              <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                {Object.keys(componentCode).map((componentName) => (
+                  <motion.button
+                    key={componentName}
+                    whileHover={{ x: 5 }}
+                    onClick={() => setActiveComponent(componentName)}
+                    className={`w-full text-left p-4 flex items-center gap-3 transition-colors ${
+                      activeComponent === componentName
+                        ? `${pageBgs[componentName]} border-l-4 border-purple-500`
+                        : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                    }`}
+                  >
+                    <div
+                      className={`p-2 rounded-lg bg-gradient-to-r ${pageColors[componentName]} text-white`}
+                    >
+                      {pageIcons[componentName]}
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-800 dark:text-gray-200 block">
+                        {componentName.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Component Display - Right Side */}
+          <div className="lg:col-span-9">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeComponent}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden"
+              >
+                {/* Component Header */}
+                <div
+                  className={`p-4 border-b border-gray-200 dark:border-gray-700 ${pageBgs[activeComponent]}`}
+                >
+                  <div className="flex justify-between items-center">
+                    <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex items-center">
+                      <div
+                        className={`p-1.5 rounded-md bg-gradient-to-r ${pageColors[activeComponent]} text-white mr-2`}
+                      >
+                        {pageIcons[activeComponent]}
+                      </div>
+                      <span>
+                        {activeComponent.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </h2>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setActiveTab("preview")}
+                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                          activeTab === "preview"
+                            ? "bg-purple-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => setActiveTab("code")}
+                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                          activeTab === "code"
+                            ? "bg-purple-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        <Code className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Component Content */}
+                <div className="p-6">
+                  {activeTab === "preview" ? (
+                    <div className="flex flex-col">
+                      {/* Interactive Preview */}
+                      <div
+                        className={`flex flex-col items-center justify-center p-10 ${pageBgs[activeComponent]} rounded-lg border border-gray-200 dark:border-gray-700 mb-6`}
+                      >
+                        <motion.div
+                          initial={{ scale: 0.9, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {renderComponent(activeComponent)}
+                        </motion.div>
+                      </div>
+
+                      {/* Component Info */}
+                      <div className="bg-gradient-to-r from-purple-500/5 to-indigo-500/5 dark:from-purple-900/10 dark:to-indigo-900/10 rounded-lg border border-purple-200 dark:border-purple-800/30 overflow-hidden">
+                        <button
+                          onClick={() => setExpandedInfo(!expandedInfo)}
+                          className="w-full p-4 flex justify-between items-center text-left"
+                        >
+                          <h3 className="text-base font-semibold text-gray-800 dark:text-gray-100 flex items-center">
+                            <Zap className="w-4 h-4 text-purple-500 mr-2" />
+                            Page Details & Usage Tips
+                          </h3>
+                          <ChevronDown
+                            className={`w-5 h-5 text-gray-500 transition-transform ${
+                              expandedInfo ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+
+                        {expandedInfo && (
+                          <div className="p-4 pt-0 border-t border-purple-200 dark:border-purple-800/30">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                              <div>
+                                <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                                  Features
+                                </h4>
+                                <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
+                                  <li>
+                                    Retro-inspired design with pixel-perfect
+                                    details
+                                  </li>
+                                  <li>Fully responsive layout</li>
+                                  <li>Dark mode support</li>
+                                  <li>Customizable components</li>
+                                </ul>
+                              </div>
+                              <div>
+                                <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                                  Customization
+                                </h4>
+                                <p className="text-gray-600 dark:text-gray-400">
+                                  This page can be easily customized by
+                                  modifying the Tailwind classes. Try changing
+                                  colors, layouts, or adding additional sections
+                                  to match your project's design.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <SyntaxHighlighter
+                        language="jsx"
+                        style={atomDark}
+                        className="rounded-lg"
+                      >
+                        {componentCode[activeComponent]}
+                      </SyntaxHighlighter>
+                      <button
+                        onClick={() => copyToClipboard(componentCode[activeComponent])}
+                        className="absolute top-4 right-4 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                      >
+                        {copySuccess ? (
+                          <Check className="w-5 h-5" />
+                        ) : (
+                          <Copy className="w-5 h-5" />
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

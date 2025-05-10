@@ -139,7 +139,7 @@ export default function HomePage() {
                 <div className="flex flex-col md:flex-row items-center justify-between">
                   <div className="md:w-1/2 mb-6 md:mb-0">
                     <img
-                      src="https://via.placeholder.com/400x300"
+                      src="https://picsum.photos/id/300/950"
                       alt="Retro component preview"
                       width={400}
                       height={300}

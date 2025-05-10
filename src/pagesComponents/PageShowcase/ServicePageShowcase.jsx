@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Code, Copy, Check, AlertTriangle, Zap, Layers, Palette } from "lucide-react";
 import ServicePage from "../ServicePage/ServicePage";
 
 const componentCode = {
@@ -245,10 +247,33 @@ export default function ServicePage() {
 };
 
 const ServicePageShowcase = () => {
+  const [activeComponent, setActiveComponent] = useState("ServicePage");
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [installSuccess, setInstallSuccess] = useState(false);
   const [activeTabs, setActiveTabs] = useState({
     ServicePage: "preview",
   });
-  const [copySuccess, setCopySuccess] = useState(false);
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const pageIcons = {
+    ServicePage: <Layers className="w-5 h-5" />,
+  };
+
+  const pageColors = {
+    ServicePage: "from-blue-400 to-indigo-500",
+  };
+
+  const pageBgs = {
+    ServicePage: "bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/30",
+  };
 
   const copyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
@@ -256,78 +281,225 @@ const ServicePageShowcase = () => {
     setTimeout(() => setCopySuccess(false), 2000);
   };
 
+  const installationCopyToClipboard = (code) => {
+    navigator.clipboard.writeText(code);
+    setInstallSuccess(true);
+    setTimeout(() => setInstallSuccess(false), 2000);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const renderComponent = (name) => {
+    switch (name) {
+      case "ServicePage":
+        return <ServicePage />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 p-2 sm:p-10">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-6">
-        Service Page Components
-      </h1>
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 transition-colors duration-300 bg-[url('/grid-pattern.svg')] bg-fixed">
+      <div className="container mx-auto px-4 py-12">
+        {/* Hero Section */}
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="relative mb-16 overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 dark:from-blue-900/20 dark:to-indigo-900/20 z-0 rounded-2xl"></div>
+          <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-full blur-3xl"></div>
 
-      {Object.keys(componentCode).map((componentName) => (
-        <div key={componentName} className="mb-8">
-          <h2 className="text-2xl sm:text-3xl mb-4">
-            {componentName.replace(/([A-Z])/g, " $1").trim()}
-          </h2>
+          <div className="relative z-10 py-12 px-8 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8 rounded-2xl border border-blue-200/50 dark:border-blue-800/30">
+            <div className="text-center md:text-left max-w-2xl">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium mb-4">
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                <span>Service Components</span>
+              </div>
 
-          <div className="flex border-b border-gray-700 mb-6">
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({
-                  ...prev,
-                  [componentName]: "preview",
-                }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "preview"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({ ...prev, [componentName]: "code" }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "code"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Code
-            </button>
+              <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">
+                  Service
+                </span>
+                <span className="relative">
+                  <span className="relative z-10">Page</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-blue-200 dark:bg-blue-800/50 -z-10 skew-x-3"></span>
+                </span>
+                <span> Components</span>
+              </h1>
+
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                Explore our collection of service page templates, designed for showcasing
+                your services with a modern and professional look. Each component is
+                fully customizable and ready to use.
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Component List - Left Side */}
+          <div className="lg:col-span-3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100">
+                  Service Pages
+                </h2>
+              </div>
+
+              <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                {Object.keys(componentCode).map((componentName) => (
+                  <motion.button
+                    key={componentName}
+                    whileHover={{ x: 5 }}
+                    onClick={() => setActiveComponent(componentName)}
+                    className={`w-full text-left p-4 flex items-center gap-3 transition-colors ${
+                      activeComponent === componentName
+                        ? `${pageBgs[componentName]} border-l-4 border-blue-500`
+                        : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                    }`}
+                  >
+                    <div
+                      className={`p-2 rounded-lg bg-gradient-to-r ${pageColors[componentName]} text-white`}
+                    >
+                      {pageIcons[componentName]}
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-800 dark:text-gray-200 block">
+                        {componentName.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="p-2 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
-            {activeTabs[componentName] === "preview" && (
-              <div className="mb-4">
-                {componentName === "ServicePage" && <ServicePage />}
-              </div>
-            )}
-            {activeTabs[componentName] === "code" && (
-              <div className="relative overflow-x-auto h-[600px]">
-                <SyntaxHighlighter
-                  language="jsx"
-                  style={atomDark}
-                  className="rounded-md"
+          {/* Component Display - Right Side */}
+          <div className="lg:col-span-9">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeComponent}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden"
+              >
+                {/* Component Header */}
+                <div
+                  className={`p-4 border-b border-gray-200 dark:border-gray-700 ${pageBgs[activeComponent]}`}
                 >
-                  {componentCode[componentName]}
-                </SyntaxHighlighter>
-                <button
-                  onClick={() => copyToClipboard(componentCode[componentName])}
-                  className="absolute top-4 right-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                >
-                  {copySuccess ? "Copied!" : "Copy Code"}
-                </button>
-              </div>
-            )}
+                  <div className="flex justify-between items-center">
+                    <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex items-center">
+                      <div
+                        className={`p-1.5 rounded-md bg-gradient-to-r ${pageColors[activeComponent]} text-white mr-2`}
+                      >
+                        {pageIcons[activeComponent]}
+                      </div>
+                      <span>
+                        {activeComponent.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </h2>
+
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => setActiveTabs((prev) => ({
+                          ...prev,
+                          [activeComponent]: "preview",
+                        }))}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          activeTabs[activeComponent] === "preview"
+                            ? "bg-emerald-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        Preview
+                      </button>
+                      <button
+                        onClick={() => setActiveTabs((prev) => ({
+                          ...prev,
+                          [activeComponent]: "code",
+                        }))}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          activeTabs[activeComponent] === "code"
+                            ? "bg-emerald-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        Code
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Component Content */}
+                <div className="p-6">
+                  {activeTabs[activeComponent] === "preview" ? (
+                    <div className="flex flex-col">
+                      {/* Interactive Preview */}
+                      <div
+                        className={`flex flex-col items-center justify-center p-10 ${pageBgs[activeComponent]} rounded-lg border border-gray-200 dark:border-gray-700 mb-6`}
+                      >
+                        <motion.div
+                          initial={{ scale: 0.9, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {renderComponent(activeComponent)}
+                        </motion.div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <div className="absolute top-0 left-0 w-full h-10 bg-gray-800 dark:bg-gray-700 rounded-t-md flex items-center px-4">
+                        <div className="flex space-x-2">
+                          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span className="text-xs text-gray-400 ml-4">
+                          pages/Service/{activeComponent}.jsx
+                        </span>
+                      </div>
+                      <div className="pt-10 overflow-hidden rounded-md border border-gray-600">
+                        <SyntaxHighlighter
+                          language="jsx"
+                          style={atomDark}
+                          showLineNumbers={true}
+                          wrapLines={true}
+                        >
+                          {componentCode[activeComponent]}
+                        </SyntaxHighlighter>
+                      </div>
+                      <button
+                        onClick={() => copyToClipboard(componentCode[activeComponent])}
+                        className="absolute top-14 right-4 px-3 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-md transition-all duration-150 flex items-center gap-2 text-sm font-medium"
+                      >
+                        {copySuccess ? (
+                          <>
+                            <Check className="w-4 h-4" />
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            Copy Code
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

@@ -1,10 +1,33 @@
+"use client";
+
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import AboutPage from "../AboutPage/AboutPage";
-import RetroAbout from "../AboutPage/RetroAbout";
+import {
+  Code,
+  Copy,
+  Check,
+  ChevronDown,
+  Zap,
+  Layers,
+  Palette,
+  Monitor,
+  Grid,
+  ArrowRight,
+  Star,
+  Download,
+  Eye,
+  Sparkles,
+  Users,
+  Heart,
+  Award,
+} from "lucide-react";
 
-const componentCode = {
+import AboutPage from "../AboutPage/AboutPage";
+import RetroAboutPage from "../AboutPage/RetroAbout";
+
+const pageComponents = {
   AboutPage: `
 import { useState } from "react";
 
@@ -101,7 +124,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="absolute inset-0 bg-[#f26419] transform -rotate-6 rounded-lg"></div>
                 <img
-                  src="https://via.placeholder.com/400x300"
+                  src="https://picsum.photos/id/294/950"
                   alt="Retro computer"
                   width={400}
                   height={400}
@@ -190,300 +213,361 @@ export default function AboutPage() {
     </div>
   );
 }
-
   `,
-  RetroAbout: `
-import React from "react";
-import { motion } from "framer-motion";
-import { Mail, Github, Linkedin } from "lucide-react";
+  RetroAboutPage: `
+import { useState } from "react";
 
-export default function RetroAbout() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
+export default function RetroAboutPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-amber-50 text-amber-900 font-mono">
-      <header className="py-6 px-4 sm:px-6 lg:px-8 bg-amber-100">
-        <motion.h1
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center"
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          About Us
-        </motion.h1>
-      </header>
-
-      <main className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.section variants={itemVariants} className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Our Story</h2>
-            <p className="text-lg leading-relaxed">
-              Founded in the digital age with a love for the analog past, we
-              blend modern technology with vintage aesthetics. Our journey began
-              in a small garage, much like the tech giants of yesteryear, fueled
-              by a passion for creating experiences that resonate with both the
-              young and the young at heart.
-            </p>
-          </motion.section>
-
-          <motion.section variants={itemVariants} className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Our Mission</h2>
-            <p className="text-lg leading-relaxed">
-              We strive to bridge the gap between the nostalgia of the past and
-              the innovations of the future. Our goal is to create products and
-              experiences that not only function flawlessly but also tell a
-              story, evoking memories while pushing boundaries.
-            </p>
-          </motion.section>
-
-          <motion.section variants={itemVariants} className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-              Meet the Team
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {["Jane Retro", "John Vintage", "Alice Analog"].map(
-                (name, index) => (
-                  <motion.div
-                    key={name}
-                    className="bg-amber-100 p-4 rounded-lg text-center"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <img
-                      src={\`https://via.placeholder.com/300x200?text=\${name.charAt(
-                        0
-                      )}\`}
-                      alt={name}
-                      className="w-24 h-24 rounded-full mx-auto mb-4"
-                    />
-                    <h3 className="text-xl font-semibold">{name}</h3>
-                    <p className="text-amber-700">Retro Enthusiast</p>
-                  </motion.div>
-                )
-              )}
-            </div>
-          </motion.section>
-
-          <motion.section variants={itemVariants} className="text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-              Get in Touch
-            </h2>
-            <div className="flex justify-center space-x-6">
-              <motion.a
-                href="#"
-                className="text-amber-900 hover:text-amber-700"
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Mail size={24} />
-              </motion.a>
-              <motion.a
-                href="#"
-                className="text-amber-900 hover:text-amber-700"
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Github size={24} />
-              </motion.a>
-              <motion.a
-                href="#"
-                className="text-amber-900 hover:text-amber-700"
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Linkedin size={24} />
-              </motion.a>
-            </div>
-          </motion.section>
-        </motion.div>
-      </main>
-
-      <motion.footer
-        className="py-6 px-4 sm:px-6 lg:px-8 bg-amber-100 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        <p>
-          &copy; {new Date().getFullYear()} Retro Innovations. All rights
-          reserved.
-        </p>
-      </motion.footer>
+    <div className="min-h-screen bg-[#fcf6e3] text-[#2b3a67] font-sans m-1 sm:m-8">
+      {/* Your existing RetroAboutPage code */}
     </div>
   );
 }
-
   `,
 };
 
 const AboutPageShowcase = () => {
-  const [activeTabs, setActiveTabs] = useState({
-    AboutPage: "preview",
-    RetroAbout: "preview",
-  });
+  const [activeComponent, setActiveComponent] = useState("AboutPage");
+  const [activeTab, setActiveTab] = useState("preview");
   const [copySuccess, setCopySuccess] = useState(false);
-  const [installSuccess, setInstallSuccess] = useState(false);
+  const [expandedInfo, setExpandedInfo] = useState(false);
+  const [isGridView, setIsGridView] = useState(false);
 
   const copyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
     setCopySuccess(true);
-    setTimeout(() => setCopySuccess(false), 2000);
-  };
-
-  const installationCopyToClipboard = (code) => {
-    navigator.clipboard.writeText(code);
-    setInstallSuccess(true);
-    setTimeout(() => setInstallSuccess(false), 2000);
+    setTimeout(() => {
+      setCopySuccess(false);
+    }, 2000);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const pageIcons = {
+    AboutPage: <Users className="w-5 h-5" />,
+    RetroAboutPage: <Heart className="w-5 h-5" />,
+  };
+
+  const pageColors = {
+    AboutPage: "from-violet-400 to-purple-500",
+    RetroAboutPage: "from-fuchsia-400 to-pink-500",
+    SimpleAboutPage: "from-indigo-400 to-blue-500",
+  };
+
+  const pageBgs = {
+    AboutPage:
+      "bg-gradient-to-br from-violet-50 to-purple-100 dark:from-violet-900/20 dark:to-purple-900/30",
+    RetroAboutPage:
+      "bg-gradient-to-br from-fuchsia-50 to-pink-100 dark:from-fuchsia-900/20 dark:to-pink-900/30",
+  };
+
+  const renderComponent = (name) => {
+    switch (name) {
+      case "AboutPage":
+        return <AboutPage />;
+      case "RetroAboutPage":
+        return <RetroAboutPage />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 p-2 sm:p-10">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-6">
-        About Page Components
-      </h1>
-
-      {/* Installation Guide  */}
-      <h1 className="text-2xl my-2 font-medium tracking-wide">
-        # Installation
-      </h1>
-      <div className="flex justify-between p-2 mb-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
-        <SyntaxHighlighter
-          language="jsx"
-          style={atomDark}
-          className="rounded-md w-full"
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 transition-colors duration-300 bg-[url('/grid-pattern.svg')] bg-fixed">
+      <div className="container mx-auto px-4 py-12">
+        {/* Hero Section */}
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="relative mb-16 overflow-hidden"
         >
-          npm install framer-motion lucide-react
-        </SyntaxHighlighter>
-        <button
-          onClick={() =>
-            installationCopyToClipboard(
-              "npm install framer-motion lucide-react"
-            )
-          }
-          className="text-white p-1 sm:p-4"
-        >
-          {installSuccess ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6 text-green-400"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
-              />
-            </svg>
-          )}
-        </button>
-      </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-purple-500/10 dark:from-violet-900/20 dark:to-purple-900/20 z-0 rounded-2xl"></div>
+          <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-r from-violet-500/20 to-purple-500/20 dark:from-violet-900/30 dark:to-purple-900/30 rounded-full blur-3xl"></div>
 
-      {Object.keys(componentCode).map((componentName) => (
-        <div key={componentName} className="mb-8">
-          <h2 className="text-2xl sm:text-3xl mb-4">
-            {componentName.replace(/([A-Z])/g, " $1").trim()}
-          </h2>
-
-          <div className="flex border-b border-gray-700 mb-6">
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({
-                  ...prev,
-                  [componentName]: "preview",
-                }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "preview"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() =>
-                setActiveTabs((prev) => ({ ...prev, [componentName]: "code" }))
-              }
-              className={`py-2 px-4 text-lg font-semibold ${
-                activeTabs[componentName] === "code"
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "text-gray-400"
-              }`}
-            >
-              Code
-            </button>
-          </div>
-
-          <div className="p-2 sm:p-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg">
-            {activeTabs[componentName] === "preview" && (
-              <div className="">
-                {componentName === "AboutPage" && <AboutPage />}
-                {componentName === "RetroAbout" && <RetroAbout />}
+          <div className="relative z-10 py-12 px-8 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8 rounded-2xl border border-violet-200/50 dark:border-violet-800/30">
+            <div className="text-center md:text-left max-w-2xl">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 text-xs font-medium mb-4">
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                <span>Retro UI Collection</span>
               </div>
-            )}
-            {activeTabs[componentName] === "code" && (
-              <div className="relative overflow-x-auto h-[600px]">
-                <SyntaxHighlighter
-                  language="jsx"
-                  style={atomDark}
-                  className="rounded-md"
-                >
-                  {componentCode[componentName]}
-                </SyntaxHighlighter>
+
+              <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-purple-600">
+                  Retro
+                </span>
+                <span className="relative">
+                  <span className="relative z-10">About</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-violet-200 dark:bg-violet-800/50 -z-10 skew-x-3"></span>
+                </span>
+                <span> Pages</span>
+              </h1>
+
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                Discover our collection of retro-themed about page templates,
+                crafted to showcase your story with a unique vintage aesthetic.
+                Each page is fully customizable and ready to use.
+              </p>
+
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 <button
-                  onClick={() => copyToClipboard(componentCode[componentName])}
-                  className="absolute top-4 right-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  onClick={() => setIsGridView(!isGridView)}
+                  className="inline-flex items-center px-4 py-2 rounded-lg bg-violet-500 hover:bg-violet-600 text-white transition-colors"
                 >
-                  {copySuccess ? "Copied!" : "Copy Code"}
+                  <Grid className="w-4 h-4 mr-2" />
+                  {isGridView ? "List View" : "Grid View"}
                 </button>
               </div>
-            )}
+            </div>
+
+            <div className="relative w-full max-w-md aspect-square">
+              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-4">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <div className="h-4 w-16 bg-violet-200 dark:bg-violet-700 rounded mb-2"></div>
+                  <div className="h-8 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-4 w-3/4 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+                  <div className="h-12 w-12 bg-purple-200 dark:bg-purple-700 rounded-full mx-auto mb-2"></div>
+                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-4 w-1/2 bg-gray-100 dark:bg-gray-700 rounded mx-auto"></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
+                  <div className="h-8 w-3/4 bg-indigo-200 dark:bg-indigo-700 rounded mb-2"></div>
+                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded"></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                  <div className="flex justify-between mb-2">
+                    <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                    <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </div>
+                  <div className="h-12 w-full bg-fuchsia-200 dark:bg-fuchsia-700 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Component List - Left Side */}
+          <div className="lg:col-span-3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100">
+                  About Pages
+                </h2>
+              </div>
+
+              <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                {Object.keys(pageComponents).map((componentName) => (
+                  <motion.button
+                    key={componentName}
+                    whileHover={{ x: 5 }}
+                    onClick={() => setActiveComponent(componentName)}
+                    className={`w-full text-left p-4 flex items-center gap-3 transition-colors ${
+                      activeComponent === componentName
+                        ? `${pageBgs[componentName]} border-l-4 border-violet-500`
+                        : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                    }`}
+                  >
+                    <div
+                      className={`p-2 rounded-lg bg-gradient-to-r ${pageColors[componentName]} text-white`}
+                    >
+                      {pageIcons[componentName]}
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-800 dark:text-gray-200 block">
+                        {componentName.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Component Display - Right Side */}
+          <div className="lg:col-span-9">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeComponent}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden"
+              >
+                {/* Component Header */}
+                <div
+                  className={`p-4 border-b border-gray-200 dark:border-gray-700 ${pageBgs[activeComponent]}`}
+                >
+                  <div className="flex justify-between items-center">
+                    <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex items-center">
+                      <div
+                        className={`p-1.5 rounded-md bg-gradient-to-r ${pageColors[activeComponent]} text-white mr-2`}
+                      >
+                        {pageIcons[activeComponent]}
+                      </div>
+                      <span>
+                        {activeComponent.replace(/([A-Z])/g, " $1").trim()}
+                      </span>
+                    </h2>
+
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => setActiveTab("preview")}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          activeTab === "preview"
+                            ? "bg-violet-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        Preview
+                      </button>
+                      <button
+                        onClick={() => setActiveTab("code")}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          activeTab === "code"
+                            ? "bg-violet-500 text-white"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        Code
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Component Content */}
+                <div className="p-6">
+                  {activeTab === "preview" ? (
+                    <div className="flex flex-col">
+                      {/* Interactive Preview */}
+                      <div
+                        className={`flex flex-col items-center justify-center p-10 ${pageBgs[activeComponent]} rounded-lg border border-gray-200 dark:border-gray-700 mb-6`}
+                      >
+                        <motion.div
+                          initial={{ scale: 0.9, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {renderComponent(activeComponent)}
+                        </motion.div>
+                      </div>
+
+                      {/* Component Info */}
+                      <div className="bg-gradient-to-r from-violet-500/5 to-purple-500/5 dark:from-violet-900/10 dark:to-purple-900/10 rounded-lg border border-violet-200 dark:border-violet-800/30 overflow-hidden">
+                        <button
+                          onClick={() => setExpandedInfo(!expandedInfo)}
+                          className="w-full p-4 flex justify-between items-center text-left"
+                        >
+                          <h3 className="text-base font-semibold text-gray-800 dark:text-gray-100 flex items-center">
+                            <Zap className="w-4 h-4 text-violet-500 mr-2" />
+                            Page Details & Usage Tips
+                          </h3>
+                          <ChevronDown
+                            className={`w-5 h-5 text-gray-500 transition-transform ${
+                              expandedInfo ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+
+                        {expandedInfo && (
+                          <div className="p-4 pt-0 border-t border-violet-200 dark:border-violet-800/30">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                              <div>
+                                <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                                  Features
+                                </h4>
+                                <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
+                                  <li>
+                                    Retro-inspired design with pixel-perfect
+                                    details
+                                  </li>
+                                  <li>Fully responsive layout</li>
+                                  <li>Dark mode support</li>
+                                  <li>Customizable components</li>
+                                </ul>
+                              </div>
+                              <div>
+                                <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                                  Customization
+                                </h4>
+                                <p className="text-gray-600 dark:text-gray-400">
+                                  This page can be easily customized by
+                                  modifying the Tailwind classes. Try changing
+                                  colors, layouts, or adding additional sections
+                                  to match your project's design.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <div className="absolute top-0 left-0 w-full h-10 bg-gray-800 dark:bg-gray-700 rounded-t-md flex items-center px-4">
+                        <div className="flex space-x-2">
+                          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span className="text-xs text-gray-400 ml-4">
+                          pages/About/{activeComponent}.jsx
+                        </span>
+                      </div>
+                      <div className="pt-10 overflow-hidden rounded-md border border-gray-600">
+                        <SyntaxHighlighter
+                          language="jsx"
+                          style={atomDark}
+                          showLineNumbers={true}
+                          wrapLines={true}
+                        >
+                          {pageComponents[activeComponent]}
+                        </SyntaxHighlighter>
+                      </div>
+                      <button
+                        onClick={() =>
+                          copyToClipboard(pageComponents[activeComponent])
+                        }
+                        className="absolute top-14 right-4 px-3 py-2 bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white rounded-md transition-all duration-150 flex items-center gap-2 text-sm font-medium"
+                      >
+                        {copySuccess ? (
+                          <>
+                            <Check className="w-4 h-4" />
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            Copy Code
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

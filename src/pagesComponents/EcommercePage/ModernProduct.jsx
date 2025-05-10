@@ -6,7 +6,7 @@ const products = [
     id: 1,
     name: "Vintage Polaroid Camera",
     price: 129.99,
-    image: "https://via.placeholder.com/300x200?text=Camera",
+    image: "https://picsum.photos/id/501/300/200",
     description:
       "Capture moments in classic style with this refurbished Polaroid camera from the 1970s.",
   },
@@ -14,7 +14,7 @@ const products = [
     id: 2,
     name: "Retro Vinyl Record Player",
     price: 189.99,
-    image: "https://via.placeholder.com/300x200?text=Player",
+    image: "https://picsum.photos/id/502/300/200",
     description:
       "Experience the warm sound of vinyl with this beautifully crafted record player, featuring modern connectivity.",
   },
@@ -22,7 +22,7 @@ const products = [
     id: 3,
     name: "Antique Brass Telescope",
     price: 79.99,
-    image: "https://via.placeholder.com/300x200?text=Telescope",
+    image: "https://picsum.photos/id/503/300/200",
     description:
       "Gaze at the stars or use as a stunning decorative piece. This brass telescope is a true conversation starter.",
   },
@@ -30,7 +30,7 @@ const products = [
     id: 4,
     name: "Classic Leather-bound Journal",
     price: 39.99,
-    image: "https://via.placeholder.com/300x200?text=Journal",
+    image: "https://picsum.photos/id/504/300/200",
     description:
       "Write your thoughts in style with this handcrafted leather journal, featuring high-quality paper and a timeless design.",
   },
@@ -38,7 +38,7 @@ const products = [
     id: 5,
     name: "Vintage Typewriter",
     price: 249.99,
-    image: "https://via.placeholder.com/300x200?text=Typewriter",
+    image: "https://picsum.photos/id/505/300/200",
     description:
       "Create with a touch of nostalgia using this fully restored vintage typewriter. Perfect for writers and collectors alike.",
   },
@@ -46,7 +46,7 @@ const products = [
     id: 6,
     name: "Antique World Globe",
     price: 89.99,
-    image: "https://via.placeholder.com/300x200?text=Globe",
+    image: "https://picsum.photos/id/506/300/200",
     description:
       "Explore the world from your study with this beautifully detailed antique-style world globe on a wooden stand.",
   },
