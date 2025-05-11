@@ -2,304 +2,17 @@ import { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Code, Copy, Check, AlertTriangle, Zap, Layers, Palette } from "lucide-react";
+import { Sparkles, Code, Copy, Check, AlertTriangle, Zap, Layers, Palette, Eye } from "lucide-react";
 import BasicError from "../404Page/BasicError";
 import RetroError from "../404Page/RetroError";
 import TerminalError from "../404Page/TerminalError";
 import MinimalError from "../404Page/MinimalError";
 
 const componentCode = {
-  BasicError: `
-import React, { useState, useEffect } from "react";
-import { Home } from "lucide-react";
-
-const BasicError = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [tvEffect, setTvEffect] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-    const effectInterval = setInterval(() => {
-      setTvEffect(true);
-      setTimeout(() => setTvEffect(false), 100);
-    }, 5000);
-
-    return () => clearInterval(effectInterval);
-  }, []);
-
-  return (
-    <div className=" bg-gray-900 flex items-center justify-center p-2 sm:p-4">
-      <div
-        className={\`max-w-3xl w-full bg-gray-800 rounded-lg shadow-lg p-8 border-4 border-yellow-500 transform transition-all duration-1000 \${
-          isLoaded ? "scale-100 opacity-100" : "scale-95 opacity-0"
-        }\`}
-      >
-        <div className="text-center">
-          <h1
-            className={\`text-7xl md:text-9xl font-bold text-yellow-500 mb-4 font-mono \${
-              tvEffect ? "animate-tv-effect" : ""
-            }\`}
-          >
-            404
-          </h1>
-          <div className="w-full h-2 bg-yellow-500 mb-8"></div>
-          <p className="text-2xl md:text-3xl text-yellow-300 mb-6 font-serif">
-            TECHNICAL DIFFICULTIES
-          </p>
-          <p className="text-lg text-yellow-100 mb-8 font-mono">
-            We apologize, but the page you're looking for is currently off the
-            air. Please stand by.
-          </p>
-          <div className="flex justify-center mb-8">
-            <div className="w-16 h-16 border-4 border-yellow-500 rounded-full flex items-center justify-center animate-spin-slow">
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-            </div>
-          </div>
-          <a
-            href="#"
-            className="inline-flex items-center px-6 py-3 text-lg font-medium text-gray-900 bg-yellow-500 rounded-md hover:bg-yellow-400 transition-colors duration-300"
-          >
-            <Home className="mr-2" />
-            Return to Broadcast
-          </a>
-        </div>
-      </div>
-      <style jsx>{\`
-        @keyframes tv-effect {
-          0% {
-            transform: translate(0);
-          }
-          25% {
-            transform: translate(-2px, 2px);
-          }
-          50% {
-            transform: translate(2px, -2px);
-          }
-          75% {
-            transform: translate(-2px, -2px);
-          }
-          100% {
-            transform: translate(0);
-          }
-        }
-        .animate-tv-effect {
-          animation: tv-effect 0.1s linear infinite;
-        }
-        @keyframes spin-slow {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 10s linear infinite;
-        }
-      \`}</style>
-    </div>
-  );
-};
-
-export default BasicError;
-
-  `,
-  RetroError: `
-import React, { useState, useEffect } from "react";
-import { ArrowLeft } from "lucide-react";
-
-const RetroError = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [glitchEffect, setGlitchEffect] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-    const glitchInterval = setInterval(() => {
-      setGlitchEffect(true);
-      setTimeout(() => setGlitchEffect(false), 200);
-    }, 3000);
-
-    return () => clearInterval(glitchInterval);
-  }, []);
-
-  return (
-    <div className=" bg-amber-100 flex items-center justify-center p-2 sm:p-4">
-      <div
-        className={\`max-w-2xl w-full bg-orange-200 rounded-lg shadow-lg p-8 transform transition-all duration-500 \${
-          isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-        }\`}
-      >
-        <h1
-          className={\`text-6xl md:text-8xl font-bold text-orange-800 mb-4 \${
-            glitchEffect ? "animate-glitch" : ""
-          }\`}
-        >
-          404
-        </h1>
-        <p className="text-2xl md:text-3xl text-orange-700 mb-8 font-serif">
-          Oops! This page is lost in time.
-        </p>
-        <p className="text-lg text-orange-600 mb-8 font-mono">
-          It seems you've stumbled upon a page that doesn't exist in this era.
-          Let's get you back to the present!
-        </p>
-        <a
-          href="#"
-          className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-orange-500 rounded-md hover:bg-orange-600 transition-colors duration-300"
-        >
-          <ArrowLeft className="mr-2" />
-          Go Back Home
-        </a>
-      </div>
-      <style jsx>{\`
-        @keyframes glitch {
-          0% {
-            transform: translate(0);
-          }
-          20% {
-            transform: translate(-5px, 5px);
-          }
-          40% {
-            transform: translate(-5px, -5px);
-          }
-          60% {
-            transform: translate(5px, 5px);
-          }
-          80% {
-            transform: translate(5px, -5px);
-          }
-          100% {
-            transform: translate(0);
-          }
-        }
-        .animate-glitch {
-          animation: glitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both
-            infinite;
-        }
-      \`}</style>
-    </div>
-  );
-};
-
-export default RetroError;
-
-  `,
-  TerminalError: `
-import React, { useState, useEffect } from "react";
-
-export default function TerminalError() {
-  const [text, setText] = useState("");
-  const fullText =
-    ">ERROR 404: FILE NOT FOUND\n>SYSTEM MALFUNCTION\n>INITIATING RECOVERY SEQUENCE...\n>PLEASE STAND BY...";
-
-  useEffect(() => {
-    let i = 0;
-    const typingEffect = setInterval(() => {
-      if (i < fullText.length) {
-        setText(fullText.slice(0, i + 1));
-        i++;
-      } else {
-        clearInterval(typingEffect);
-      }
-    }, 50);
-
-    return () => clearInterval(typingEffect);
-  }, []);
-
-  return (
-    <div className="min-h-96 bg-black flex items-center justify-center p-2 sm:p-4">
-      <div className="w-full max-w-3xl bg-black border-2 border-green-500 rounded-lg p-4 sm:p-8">
-        <div className="bg-green-950 p-2 sm:p-4 rounded">
-          <pre className="font-mono text-green-400 whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base">
-            {text}
-          </pre>
-        </div>
-        <div className="mt-8 text-center">
-          <a
-            href="#"
-            className="inline-block px-4 py-2 bg-green-500 text-black font-mono text-sm sm:text-base rounded hover:bg-green-400 transition-colors duration-300"
-          >
-            RETURN TO MAIN SYSTEM
-          </a>
-        </div>
-      </div>
-      <style jsx>{\`
-        @keyframes blink {
-          0%,
-          100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0;
-          }
-        }
-        pre::after {
-          content: "█";
-          animation: blink 1s step-end infinite;
-        }
-      \`}</style>
-    </div>
-  );
-}
-
-  `,
-  MinimalError: `
-import React from "react";
-import { ArrowLeft } from "lucide-react";
-
-export default function MinimalError() {
-  return (
-    <div className=" bg-yellow-50 flex flex-col items-center justify-center p-2 sm:p-4 font-mono">
-      <div className="max-w-md w-full text-center">
-        <h1 className="text-8xl font-bold text-yellow-800 mb-8 animate-pulse">
-          404
-        </h1>
-        <p className="text-2xl text-yellow-700 mb-8">Page not found</p>
-        <div className="w-16 h-1 bg-yellow-400 mx-auto mb-8"></div>
-        <p className="text-lg text-yellow-600 mb-12">
-          Oops! The page you're looking for doesn't exist.
-        </p>
-        <a
-          href="/"
-          className="inline-flex items-center px-6 py-3 text-lg font-medium text-yellow-800 bg-yellow-200 rounded-md hover:bg-yellow-300 transition-colors duration-300"
-        >
-          <ArrowLeft className="mr-2 h-5 w-5" />
-          Go back home
-        </a>
-      </div>
-      <footer className="mt-16 text-yellow-600 text-sm">
-        © {new Date().getFullYear()} Your Company Name
-      </footer>
-      <style jsx>{\`
-        @keyframes typewriter {
-          from {
-            width: 0;
-          }
-          to {
-            width: 100%;
-          }
-        }
-        .animate-typewriter {
-          overflow: hidden;
-          border-right: 2px solid #92400e;
-          white-space: nowrap;
-          animation: typewriter 3s steps(40) 1s 1 normal both,
-            blinkCursor 0.7s steps(40) infinite normal;
-        }
-        @keyframes blinkCursor {
-          from {
-            border-right-color: #92400e;
-          }
-          to {
-            border-right-color: transparent;
-          }
-        }
-      \`}</style>
-    </div>
-  );
-}
-
-  `,
+  BasicError: `https://github.com/Omi-Patel/retroUI_Component/tree/main/src/pagesComponents`,
+  RetroError: `https://github.com/Omi-Patel/retroUI_Component/tree/main/src/pagesComponents`,
+  TerminalError: `https://github.com/Omi-Patel/retroUI_Component/tree/main/src/pagesComponents`,
+  MinimalError: `https://github.com/Omi-Patel/retroUI_Component/tree/main/src/pagesComponents`,
 };
 
 const ErrorPageShowcase = () => {
@@ -481,32 +194,36 @@ const ErrorPageShowcase = () => {
                     </h2>
 
                     <div className="flex items-center space-x-2">
-                      <button
-                        onClick={() => setActiveTabs((prev) => ({
-                          ...prev,
-                          [activeComponent]: "preview",
-                        }))}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                          activeTabs[activeComponent] === "preview"
-                            ? "bg-emerald-500 text-white"
-                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        }`}
-                      >
-                        Preview
-                      </button>
-                      <button
-                        onClick={() => setActiveTabs((prev) => ({
-                          ...prev,
-                          [activeComponent]: "code",
-                        }))}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                          activeTabs[activeComponent] === "code"
-                            ? "bg-emerald-500 text-white"
-                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        }`}
-                      >
-                        Code
-                      </button>
+                      <div className="flex border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+                        <button
+                          onClick={() => setActiveTabs((prev) => ({
+                            ...prev,
+                            [activeComponent]: "preview",
+                          }))}
+                          className={`py-1.5 px-3 text-sm font-medium flex items-center gap-1.5 transition-colors ${
+                            activeTabs[activeComponent] === "preview"
+                              ? `bg-gradient-to-r ${pageColors[activeComponent]} text-white`
+                              : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                          }`}
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Preview</span>
+                        </button>
+                        <button
+                          onClick={() => setActiveTabs((prev) => ({
+                            ...prev,
+                            [activeComponent]: "code",
+                          }))}
+                          className={`py-1.5 px-3 text-sm font-medium flex items-center gap-1.5 transition-colors ${
+                            activeTabs[activeComponent] === "code"
+                              ? `bg-gradient-to-r ${pageColors[activeComponent]} text-white`
+                              : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                          }`}
+                        >
+                          <Code className="w-3.5 h-3.5" />
+                          <span>Code</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -530,42 +247,35 @@ const ErrorPageShowcase = () => {
                     </div>
                   ) : (
                     <div className="relative">
-                      <div className="absolute top-0 left-0 w-full h-10 bg-gray-800 dark:bg-gray-700 rounded-t-md flex items-center px-4">
-                        <div className="flex space-x-2">
-                          <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      <div className="bg-[#1e1e1e] rounded-lg p-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                          </div>
+                          <div className="text-gray-400 text-sm">GitHub Repository</div>
                         </div>
-                        <span className="text-xs text-gray-400 ml-4">
-                          pages/Error/{activeComponent}.jsx
-                        </span>
+                        <div className="bg-[#2d2d2d] rounded-lg p-4">
+                          <a 
+                            href={componentCode[activeComponent]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 group"
+                          >
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                            </svg>
+                            <span className="text-lg font-medium">Visit GitHub Repository</span>
+                            <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </a>
+                        </div>
+                        <div className="mt-4 text-sm text-gray-400 text-center">
+                          Click to view the complete source code and documentation
+                        </div>
                       </div>
-                      <div className="pt-10 overflow-hidden rounded-md border border-gray-600">
-                        <SyntaxHighlighter
-                          language="jsx"
-                          style={atomDark}
-                          showLineNumbers={true}
-                          wrapLines={true}
-                        >
-                          {componentCode[activeComponent]}
-                        </SyntaxHighlighter>
-                      </div>
-                      <button
-                        onClick={() => copyToClipboard(componentCode[activeComponent])}
-                        className="absolute top-14 right-4 px-3 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-md transition-all duration-150 flex items-center gap-2 text-sm font-medium"
-                      >
-                        {copySuccess ? (
-                          <>
-                            <Check className="w-4 h-4" />
-                            Copied!
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-4 h-4" />
-                            Copy Code
-                          </>
-                        )}
-                      </button>
                     </div>
                   )}
                 </div>

@@ -31,275 +31,20 @@ import BasicProductDesc from "../EcommercePage/BasicProductDesc";
 import RetroDesc from "../EcommercePage/RetroDesc";
 
 const componentCode = {
-  ProductsPage: `
-import React, { useState, useEffect } from "react";
-import { ShoppingBag, Heart, X, Plus, Minus, Trash2 } from "lucide-react";
-
-const products = [
-  {
-    id: 1,
-    name: "Vintage Polaroid Camera",
-    price: 129.99,
-    image: "https://picsum.photos/id/301/300/200",
-    description:
-      "Capture moments in classic style with this refurbished Polaroid camera from the 1970s.",
-  },
-  {
-    id: 2,
-    name: "Retro Vinyl Record Player",
-    price: 189.99,
-    image: "https://picsum.photos/id/302/300/200",
-    description:
-      "Experience the warm sound of vinyl with this beautifully crafted record player, featuring modern connectivity.",
-  },
-  {
-    id: 3,
-    name: "Antique Brass Telescope",
-    price: 79.99,
-    image: "https://picsum.photos/id/303/300/200",
-    description:
-      "Gaze at the stars or use as a stunning decorative piece. This brass telescope is a true conversation starter.",
-  },
-  {
-    id: 4,
-    name: "Classic Leather-bound Journal",
-    price: 39.99,
-    image: "https://picsum.photos/id/304/300/200",
-    description:
-      "Write your thoughts in style with this handcrafted leather journal, featuring high-quality paper and a timeless design.",
-  },
-  {
-    id: 5,
-    name: "Vintage Typewriter",
-    price: 249.99,
-    image: "https://picsum.photos/id/305/300/200",
-    description:
-      "Create with a touch of nostalgia using this fully restored vintage typewriter. Perfect for writers and collectors alike.",
-  },
-  {
-    id: 6,
-    name: "Antique World Globe",
-    price: 89.99,
-    image: "https://picsum.photos/id/306/300/200",
-    description:
-      "Explore the world from your study with this beautifully detailed antique-style world globe on a wooden stand.",
-  },
-];
-
-export default function ProductsPage() {
-  const [cart, setCart] = useState([]);
-  const [likes, setLikes] = useState({});
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartTotal, setCartTotal] = useState(0);
-
-  useEffect(() => {
-    const newTotal = cart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-    setCartTotal(newTotal);
-  }, [cart]);
-
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prevCart, { ...product, quantity: 1 }];
-    });
-  };
-
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
-  };
-
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity === 0) {
-      removeFromCart(productId);
-    } else {
-      setCart((prevCart) =>
-        prevCart.map((item) =>
-          item.id === productId ? { ...item, quantity: newQuantity } : item
-        )
-      );
-    }
-  };
-
-  const toggleLike = (productId) => {
-    setLikes((prevLikes) => ({
-      ...prevLikes,
-      [productId]: !prevLikes[productId],
-    }));
-  };
-
-  return (
-    <div className="min-h-screen bg-[#f3e5ab] text-[#4a4e69] font-mono">
-      <header className="bg-[#4a3f35] py-4 px-6  top-0 z-10">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-[#c99700] tracking-wide">
-            RetroShop
-          </h1>
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className="relative p-2 text-[#f3e5ab] hover:text-[#c99700] transition-colors duration-300"
-          >
-            <ShoppingBag size={24} />
-            {cart.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-[#ef8354] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {cart.length}
-              </span>
-            )}
-          </button>
-        </div>
-      </header>
-
-      <main className="container mx-auto py-8 px-2 sm:px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-[#4a4e69]">
-          Timeless Retro Collection
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-[#fff6e1] rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
-            >
-              <div className="relative">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-64 object-cover"
-                />
-                <button
-                  onClick={() => toggleLike(product.id)}
-                  className="absolute top-4 right-4 p-2 bg-[#f3e5ab] rounded-full shadow-md hover:bg-[#ef8354] transition-colors duration-300"
-                >
-                  <Heart
-                    size={20}
-                    className={\`\${
-                      likes[product.id]
-                        ? "text-red-500 fill-red-500"
-                        : "text-gray-400"
-                    }\`}
-                  />
-                </button>
-              </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-xl font-semibold mb-2 text-[#4a4e69]">
-                  {product.name}
-                </h3>
-                <p className="text-[#6d6875] mb-4">{product.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-xl sm:text-2xl font-bold text-[#ef8354]">
-                    \${product.price.toFixed(2)}
-                  </span>
-                  <button
-                    onClick={() => addToCart(product)}
-                    className="bg-[#c99700] text-white px-4 py-2 rounded-full hover:bg-[#e8ac2f] transition-colors duration-300"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      {isCartOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end z-50">
-          <div className="bg-white w-full max-w-md p-6 overflow-y-auto">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-[#4a4e69]">Your Cart</h2>
-              <button
-                onClick={() => setIsCartOpen(false)}
-                className="text-[#6d6875] hover:text-[#ef8354]"
-              >
-                <X size={24} />
-              </button>
-            </div>
-            {cart.length === 0 ? (
-              <p className="text-[#6d6875] text-center">Your cart is empty.</p>
-            ) : (
-              <>
-                {cart.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center mb-4 pb-4 border-b border-[#e0e0e0]"
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-20 h-20 object-cover rounded-md mr-4"
-                    />
-                    <div className="flex-grow">
-                      <h3 className="font-semibold text-[#4a4e69]">
-                        {item.name}
-                      </h3>
-                      <p className="text-[#6d6875]">\${item.price.toFixed(2)}</p>
-                      <div className="flex items-center mt-2">
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
-                          className="text-[#6d6875] hover:text-[#c99700]"
-                        >
-                          <Minus size={16} />
-                        </button>
-                        <span className="mx-2 text-[#4a4e69]">
-                          {item.quantity}
-                        </span>
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
-                          }
-                          className="text-[#6d6875] hover:text-[#c99700]"
-                        >
-                          <Plus size={16} />
-                        </button>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="ml-4 text-[#6d6875] hover:text-red-500"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-                ))}
-                <div className="mt-6 text-right">
-                  <span className="text-xl font-bold text-[#ef8354]">
-                    Total: \${cartTotal.toFixed(2)}
-                  </span>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-  `,
-  ModernProduct: `
-// ... existing code ...
-`,
-  BasicProductDesc: `
-// ... existing code ...
-`,
-  RetroDesc: `
-// ... existing code ...
-`,
+  ProductsPage: `https://github.com/Omi-Patel`,
+  ModernProduct: `https://github.com/Omi-Patel`,
+  BasicProductDesc: `https://github.com/Omi-Patel`,
+  RetroDesc: `https://github.com/Omi-Patel`,
 };
 
 const EcomPageShowcase = () => {
   const [activeComponent, setActiveComponent] = useState("ProductsPage");
-  const [activeTab, setActiveTab] = useState("preview");
+  const [activeTabs, setActiveTabs] = useState({
+    ProductsPage: "preview",
+    ModernProduct: "preview",
+    BasicProductDesc: "preview",
+    RetroDesc: "preview"
+  });
   const [copySuccess, setCopySuccess] = useState(false);
   const [expandedInfo, setExpandedInfo] = useState(false);
   const [isGridView, setIsGridView] = useState(false);
@@ -340,10 +85,14 @@ const EcomPageShowcase = () => {
   };
 
   const pageBgs = {
-    ProductsPage: "bg-gradient-to-br from-purple-50 to-indigo-100 dark:from-purple-900/20 dark:to-indigo-900/30",
-    ModernProduct: "bg-gradient-to-br from-indigo-50 to-blue-100 dark:from-indigo-900/20 dark:to-blue-900/30",
-    BasicProductDesc: "bg-gradient-to-br from-blue-50 to-cyan-100 dark:from-blue-900/20 dark:to-cyan-900/30",
-    RetroDesc: "bg-gradient-to-br from-cyan-50 to-teal-100 dark:from-cyan-900/20 dark:to-teal-900/30",
+    ProductsPage:
+      "bg-gradient-to-br from-purple-50 to-indigo-100 dark:from-purple-900/20 dark:to-indigo-900/30",
+    ModernProduct:
+      "bg-gradient-to-br from-indigo-50 to-blue-100 dark:from-indigo-900/20 dark:to-blue-900/30",
+    BasicProductDesc:
+      "bg-gradient-to-br from-blue-50 to-cyan-100 dark:from-blue-900/20 dark:to-cyan-900/30",
+    RetroDesc:
+      "bg-gradient-to-br from-cyan-50 to-teal-100 dark:from-cyan-900/20 dark:to-teal-900/30",
   };
 
   const renderComponent = (name) => {
@@ -393,9 +142,10 @@ const EcomPageShowcase = () => {
               </h1>
 
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                Explore our collection of retro-themed ecommerce templates, designed
-                for crafting dynamic online stores with a unique vintage
-                aesthetic. Each page is fully customizable and ready to use.
+                Explore our collection of retro-themed ecommerce templates,
+                designed for crafting dynamic online stores with a unique
+                vintage aesthetic. Each page is fully customizable and ready to
+                use.
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
@@ -504,33 +254,45 @@ const EcomPageShowcase = () => {
                       </span>
                     </h2>
                     <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setActiveTab("preview")}
-                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                          activeTab === "preview"
-                            ? "bg-purple-500 text-white"
-                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        }`}
-                      >
-                        <Eye className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => setActiveTab("code")}
-                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                          activeTab === "code"
-                            ? "bg-purple-500 text-white"
-                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        }`}
-                      >
-                        <Code className="w-4 h-4" />
-                      </button>
+                      <div className="flex items-center space-x-2">
+                        <div className="flex border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+                          <button
+                            onClick={() => setActiveTabs((prev) => ({
+                              ...prev,
+                              [activeComponent]: "preview",
+                            }))}
+                            className={`py-1.5 px-3 text-sm font-medium flex items-center gap-1.5 transition-colors ${
+                              activeTabs[activeComponent] === "preview"
+                                ? `bg-gradient-to-r ${pageColors[activeComponent]} text-white`
+                                : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                            }`}
+                          >
+                            <Eye className="w-3.5 h-3.5" />
+                            <span>Preview</span>
+                          </button>
+                          <button
+                            onClick={() => setActiveTabs((prev) => ({
+                              ...prev,
+                              [activeComponent]: "code",
+                            }))}
+                            className={`py-1.5 px-3 text-sm font-medium flex items-center gap-1.5 transition-colors ${
+                              activeTabs[activeComponent] === "code"
+                                ? `bg-gradient-to-r ${pageColors[activeComponent]} text-white`
+                                : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                            }`}
+                          >
+                            <Code className="w-3.5 h-3.5" />
+                            <span>Code</span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Component Content */}
                 <div className="p-6">
-                  {activeTab === "preview" ? (
+                  {activeTabs[activeComponent] === "preview" ? (
                     <div className="flex flex-col">
                       {/* Interactive Preview */}
                       <div
@@ -597,23 +359,35 @@ const EcomPageShowcase = () => {
                     </div>
                   ) : (
                     <div className="relative">
-                      <SyntaxHighlighter
-                        language="jsx"
-                        style={atomDark}
-                        className="rounded-lg"
-                      >
-                        {componentCode[activeComponent]}
-                      </SyntaxHighlighter>
-                      <button
-                        onClick={() => copyToClipboard(componentCode[activeComponent])}
-                        className="absolute top-4 right-4 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
-                      >
-                        {copySuccess ? (
-                          <Check className="w-5 h-5" />
-                        ) : (
-                          <Copy className="w-5 h-5" />
-                        )}
-                      </button>
+                      <div className="bg-[#1e1e1e] rounded-lg p-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                          </div>
+                          <div className="text-gray-400 text-sm">GitHub Repository</div>
+                        </div>
+                        <div className="bg-[#2d2d2d] rounded-lg p-4">
+                          <a 
+                            href={componentCode[activeComponent]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 group"
+                          >
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                            </svg>
+                            <span className="text-lg font-medium">Visit GitHub Repository</span>
+                            <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </a>
+                        </div>
+                        <div className="mt-4 text-sm text-gray-400 text-center">
+                          Click to view the complete source code and documentation
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
