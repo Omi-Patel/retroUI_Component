@@ -1,0 +1,52 @@
+/* Application Styles */
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Loading Spinner */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
+}
+
+.loading-spinner {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #4f46e5;
+  border: 3px solid #4f46e5;
+  border-radius: 0.5rem;
+  background: white;
+  box-shadow: 4px 4px 0 0 rgba(79, 70, 229, 0.2),
+    8px 8px 0 0 rgba(79, 70, 229, 0.1);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Dark mode support */
+.dark .loading-spinner {
+  background: #1f2937;
+  color: #818cf8;
+  border-color: #818cf8;
+}

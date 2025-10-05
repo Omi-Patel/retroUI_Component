@@ -1,13 +1,29 @@
 {
   "name": "retro-component",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "A modern React component library with retro aesthetics",
+  "author": "Om Patel",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Omi-Patel/retroUI_Component.git"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui-library",
+    "retro",
+    "tailwind"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "format": "prettier --write \"src/**/*.{js,jsx,json,css,md}\""
   },
   "dependencies": {
     "@vercel/analytics": "^1.3.1",

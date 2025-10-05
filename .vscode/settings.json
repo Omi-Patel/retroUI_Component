@@ -1,0 +1,24 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "javascript.suggest.paths": false,
+  "typescript.suggest.paths": false,
+  "path-intellisense.mappings": {
+    "@": "${workspaceFolder}/src",
+    "@/components": "${workspaceFolder}/src/components",
+    "@/lib": "${workspaceFolder}/src/lib",
+    "@/config": "${workspaceFolder}/src/config",
+    "@/features": "${workspaceFolder}/src/features",
+    "@/styles": "${workspaceFolder}/src/styles",
+    "@/assets": "${workspaceFolder}/src/assets"
+  }
+}
