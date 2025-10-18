@@ -5,99 +5,124 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Search,
-  Filter,
   ArrowRight,
   Package,
   Layers,
   Grid3X3,
   Sparkles,
+  MousePointer,
+  Type,
+  User,
+  LogIn,
+  UserPlus,
+  Loader,
+  Menu as MenuIcon,
+  ToggleLeft,
+  Table,
+  DollarSign,
+  Layout as LayoutIcon,
+  PanelBottom,
 } from "lucide-react";
+import { DocsContent, DocsSection } from "@/components/layout";
 
-// List of components with images and categories
+// List of components with enhanced metadata
 const componentsList = [
   {
-    name: "Button",
+    name: "Buttons",
     path: "buttons",
-    image: "https://via.placeholder.com/300x200?text=Button",
-    category: "Basic",
-    description: "Interactive elements for user actions",
+    category: "UI Elements",
+    description:
+      "Interactive button components with retro styling and hover effects",
+    icon: MousePointer,
+    color: "from-blue-500 to-cyan-500",
   },
   {
-    name: "Card",
+    name: "Cards",
     path: "cards",
-    image: "https://via.placeholder.com/300x200?text=Card",
-    category: "Layout",
-    description: "Containers for organizing content",
+    category: "UI Elements",
+    description: "Content container components for organizing information",
+    icon: Layers,
+    color: "from-purple-500 to-pink-500",
   },
   {
-    name: "Input",
+    name: "Inputs",
     path: "inputs",
-    image: "https://via.placeholder.com/300x200?text=Input",
-    category: "Form",
-    description: "Fields for user data entry",
+    category: "Forms",
+    description: "Text input fields with various styles and states",
+    icon: Type,
+    color: "from-green-500 to-emerald-500",
   },
   {
-    name: "Avatar",
+    name: "Avatars",
     path: "avatars",
-    image: "https://via.placeholder.com/300x200?text=Avatar",
     category: "Display",
-    description: "User profile representations",
+    description: "User profile image components with different sizes",
+    icon: User,
+    color: "from-yellow-500 to-orange-500",
   },
   {
-    name: "Signin",
+    name: "Sign In",
     path: "signin",
-    image: "https://via.placeholder.com/300x200?text=SignIn",
-    category: "Auth",
-    description: "Authentication entry points",
+    category: "Forms",
+    description: "User authentication sign-in form templates",
+    icon: LogIn,
+    color: "from-red-500 to-pink-500",
   },
   {
-    name: "Signup",
+    name: "Sign Up",
     path: "signup",
-    image: "https://via.placeholder.com/300x200?text=SignUp",
-    category: "Auth",
-    description: "User registration interfaces",
+    category: "Forms",
+    description: "User registration and sign-up form variations",
+    icon: UserPlus,
+    color: "from-indigo-500 to-purple-500",
   },
   {
-    name: "Loader",
+    name: "Loaders",
     path: "loaders",
-    image: "https://via.placeholder.com/300x200?text=Loader",
     category: "Feedback",
-    description: "Loading state indicators",
+    description: "Loading states and spinner components",
+    icon: Loader,
+    color: "from-orange-500 to-red-500",
   },
   {
-    name: "Navbar",
+    name: "Navbars",
     path: "navbars",
-    image: "https://via.placeholder.com/300x200?text=Navbar",
-    category: "Navigation",
-    description: "Site navigation headers",
-  },
-  {
-    name: "Footer",
-    path: "footers",
-    image: "https://via.placeholder.com/300x200?text=Footer",
     category: "Layout",
-    description: "Page footer sections",
+    description: "Navigation header components for your application",
+    icon: MenuIcon,
+    color: "from-teal-500 to-cyan-500",
   },
   {
-    name: "Switch",
+    name: "Footers",
+    path: "footers",
+    category: "Layout",
+    description: "Page footer components with various styles",
+    icon: PanelBottom,
+    color: "from-violet-500 to-purple-500",
+  },
+  {
+    name: "Switches",
     path: "switch",
-    image: "https://via.placeholder.com/300x200?text=Switch",
-    category: "Form",
-    description: "Toggle controls for binary options",
+    category: "Forms",
+    description: "Toggle switch components for binary choices",
+    icon: ToggleLeft,
+    color: "from-emerald-500 to-teal-500",
   },
   {
-    name: "Table",
+    name: "Tables",
     path: "tables",
-    image: "https://via.placeholder.com/300x200?text=Table",
-    category: "Data",
-    description: "Structured data displays",
+    category: "Display",
+    description: "Data table components for structured information",
+    icon: Table,
+    color: "from-cyan-500 to-blue-500",
   },
   {
     name: "Pricing",
     path: "pricing",
-    image: "https://via.placeholder.com/300x200?text=Pricing",
     category: "Display",
-    description: "Product pricing displays",
+    description: "Pricing table components for product displays",
+    icon: DollarSign,
+    color: "from-amber-500 to-yellow-500",
   },
 ];
 
@@ -111,10 +136,6 @@ const Component = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filteredComponents, setFilteredComponents] = useState(componentsList);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   useEffect(() => {
     let result = componentsList;
@@ -135,379 +156,253 @@ const Component = () => {
       );
     }
 
-    // Sort alphabetically
-    result = result.sort((a, b) => a.name.localeCompare(b.name));
-
     setFilteredComponents(result);
   }, [searchTerm, selectedCategory]);
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  // Get category color
-  const getCategoryColor = (category) => {
-    const colors = {
-      Basic: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
-      Layout:
-        "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
-      Form: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-      Display:
-        "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
-      Auth: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
-      Feedback:
-        "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
-      Navigation:
-        "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300",
-      Data: "bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300",
-    };
-    return (
-      colors[category] ||
-      "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"
-    );
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      <div className="container mx-auto px-4 py-16">
-        {/* Hero Section */}
-        <motion.section
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          className="mb-16"
-        >
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-500/10 to-teal-500/10 dark:from-cyan-900/20 dark:to-teal-900/20 p-8 sm:p-12">
-            <div className="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 -mb-16 -ml-16 w-64 h-64 bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-3xl"></div>
-
-            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-              <div className="lg:w-1/2">
-                <motion.div
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-block mb-6 px-4 py-1 bg-white/80 dark:bg-black/30 backdrop-blur-sm rounded-full shadow-sm"
-                >
-                  <div className="flex items-center space-x-2">
-                    <Package className="w-4 h-4 text-teal-600 dark:text-teal-400" />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      {componentsList.length} Components Available
-                    </span>
-                  </div>
-                </motion.div>
-
-                <motion.h1
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-4xl sm:text-5xl font-bold mb-6 text-gray-900 dark:text-white"
-                >
-                  RetroUI{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-teal-500">
-                    Components
-                  </span>
-                </motion.h1>
-
-                <motion.p
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg"
-                >
-                  Explore our collection of retro-themed UI components, designed
-                  for crafting dynamic web applications with a unique vintage
-                  aesthetic. Each component is fully customizable and ready to
-                  use.
-                </motion.p>
-
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="flex flex-wrap gap-4"
-                >
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" />
-                    <input
-                      type="text"
-                      placeholder="Search components..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 pr-4 py-2 w-full sm:w-64 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400"
-                    />
-                  </div>
-                </motion.div>
-              </div>
-
-              <motion.div
-                initial={{ x: 50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="lg:w-1/2 flex justify-center"
-              >
-                <div className="relative w-full max-w-md aspect-square">
-                  <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-4">
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-3 hover:rotate-0 transition-transform duration-300">
-                      <div className="h-4 w-16 bg-teal-200 dark:bg-teal-700 rounded mb-2"></div>
-                      <div className="h-8 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
-                      <div className="h-4 w-3/4 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                    </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
-                      <div className="h-12 w-12 bg-cyan-200 dark:bg-cyan-700 rounded-full mx-auto mb-2"></div>
-                      <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
-                      <div className="h-4 w-1/2 bg-gray-100 dark:bg-gray-700 rounded mx-auto"></div>
-                    </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
-                      <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
-                      <div className="h-8 w-3/4 bg-purple-200 dark:bg-purple-700 rounded mb-2"></div>
-                      <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded"></div>
-                    </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                      <div className="flex justify-between mb-2">
-                        <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                        <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                      </div>
-                      <div className="h-12 w-full bg-yellow-200 dark:bg-yellow-700 rounded"></div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+    <DocsContent
+      title="Components"
+      description="Explore our collection of retro-themed UI components. Each component is fully customizable and ready to integrate into your project."
+      badge="Component Library"
+    >
+      {/* Quick Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+        <div className="bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-lg p-6 border border-teal-200 dark:border-teal-800/50">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                Total Components
+              </p>
+              <p className="text-3xl font-bold text-teal-600 dark:text-teal-400">
+                {componentsList.length}
+              </p>
             </div>
+            <Package className="w-10 h-10 text-teal-500 opacity-50" />
           </div>
-        </motion.section>
+        </div>
 
-        {/* Category Filter */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
-        >
-          <div className="flex items-center mb-6">
-            <Filter className="mr-2 text-gray-700 dark:text-gray-300" />
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">
-              Filter by Category
-            </h2>
+        <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-6 border border-purple-200 dark:border-purple-800/50">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                Categories
+              </p>
+              <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">
+                {categories.length - 1}
+              </p>
+            </div>
+            <Layers className="w-10 h-10 text-purple-500 opacity-50" />
           </div>
+        </div>
 
-          <div className="flex flex-wrap gap-3">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  selectedCategory === category
-                    ? "bg-teal-500 text-white dark:bg-teal-600 shadow-md transform -translate-y-1"
-                    : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800/50">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                Variants
+              </p>
+              <p className="text-3xl font-bold text-green-600 dark:text-green-400">
+                50+
+              </p>
+            </div>
+            <Grid3X3 className="w-10 h-10 text-green-500 opacity-50" />
           </div>
-        </motion.section>
+        </div>
+      </div>
 
-        {/* Components Grid */}
-        <motion.section
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="mb-16"
-        >
-          {filteredComponents.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredComponents.map((component) => (
-                <motion.div key={component.path} variants={cardVariants}>
+      {/* Search and Filter Section */}
+      <DocsSection id="search-filter">
+        <div className="flex flex-col sm:flex-row gap-4 mb-6">
+          {/* Search Bar */}
+          <div className="flex-1 relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Search components..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 text-gray-900 dark:text-gray-100"
+            />
+          </div>
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex flex-wrap gap-2">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                selectedCategory === category
+                  ? "bg-teal-500 text-white dark:bg-teal-600 shadow-md"
+                  : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </DocsSection>
+
+      {/* Components Grid */}
+      <DocsSection
+        title="Available Components"
+        description={`Showing ${filteredComponents.length} component${
+          filteredComponents.length !== 1 ? "s" : ""
+        }`}
+        id="components-grid"
+      >
+        {filteredComponents.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredComponents.map((component, index) => {
+              const Icon = component.icon;
+              return (
+                <motion.div
+                  key={component.path}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                >
                   <Link
                     to={`/components/${component.path}`}
                     className="group block h-full"
                   >
-                    <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-black dark:border-gray-700 h-full transform hover:-translate-y-2 hover:border-teal-500 dark:hover:border-teal-400">
+                    <div className="h-full bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-400 hover:shadow-lg transition-all duration-300 overflow-hidden">
+                      {/* Icon Header */}
+                      <div
+                        className={`p-6 bg-gradient-to-r ${component.color} relative overflow-hidden`}
+                      >
+                        <div className="absolute inset-0 bg-black/10"></div>
+                        <Icon className="w-12 h-12 text-white relative z-10" />
+                      </div>
+
+                      {/* Content */}
                       <div className="p-6">
-                        <div className="flex justify-between items-start mb-4">
-                          <h3 className="text-2xl font-bold font-mono text-gray-900 dark:text-white">
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
                             {component.name}
                           </h3>
-                          <span
-                            className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(
-                              component.category
-                            )}`}
-                          >
+                          <span className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
                             {component.category}
                           </span>
                         </div>
 
-                        <p className="text-gray-600 dark:text-gray-400 mb-6">
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                           {component.description}
                         </p>
 
-                        <div className="flex justify-between items-center">
-                          <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 rounded group-hover:w-24 transition-all duration-300"></div>
-                          <ArrowRight className="text-gray-400 group-hover:text-teal-500 dark:group-hover:text-teal-400 transform group-hover:translate-x-1 transition-all" />
+                        <div className="flex items-center text-teal-600 dark:text-teal-400 text-sm font-medium group-hover:gap-2 transition-all">
+                          <span>View Details</span>
+                          <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                         </div>
                       </div>
                     </div>
                   </Link>
                 </motion.div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <Layers className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300 mb-2">
-                No components found
-              </h3>
-              <p className="text-gray-500 dark:text-gray-400">
-                Try adjusting your search or filter to find what you're looking
-                for.
-              </p>
-              <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setSelectedCategory("All");
-                }}
-                className="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
-              >
-                Reset Filters
-              </button>
-            </div>
-          )}
-        </motion.section>
-
-        {/* Quick Tips Section */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          className="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 shadow-md mb-8"
-        >
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
-              <Sparkles className="w-5 h-5 mr-2 text-emerald-500" />
-              Quick Implementation Guide
-            </h2>
-
-            <div className="hidden sm:block">
-              <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-medium rounded-full">
-                Easy Integration
-              </span>
-            </div>
+              );
+            })}
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
-                  <span>1</span>
-                </div>
-                Copy Code
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
-                Click the "Copy Code" button to copy the component code to your
-                clipboard.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
-                  <span>2</span>
-                </div>
-                Create Component
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
-                Create a new file in your React project and paste the code as a
-                new component.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
-                  <span>3</span>
-                </div>
-                Customize
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
-                Modify the Tailwind classes to match your project's design
-                system and branding.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
-                  <span>4</span>
-                </div>
-                Import & Use
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
-                Import the component and use it in your application with your
-                custom props.
-              </p>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Bottom CTA */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center"
-        >
-          <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
-            <Grid3X3 className="w-12 h-12 mx-auto text-teal-500 mb-4" />
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-              Can't find what you're looking for?
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto mb-6">
-              We're constantly adding new components to our library. If you have
-              a specific component in mind, let us know!
+        ) : (
+          <div className="text-center py-16 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700">
+            <Layers className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+            <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300 mb-2">
+              No components found
+            </h3>
+            <p className="text-gray-500 dark:text-gray-400 mb-4">
+              Try adjusting your search or filter to find what you're looking
+              for.
             </p>
-            <Link to="/contact-us">
-              <button className="px-6 py-3 bg-black dark:bg-zinc-800 text-teal-400 border-2 border-black dark:border-zinc-700 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,0.8)] transform hover:-translate-y-1 transition-all duration-300 rounded-sm">
-                Request a Component
-              </button>
-            </Link>
+            <button
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedCategory("All");
+              }}
+              className="px-6 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
+            >
+              Reset Filters
+            </button>
           </div>
-        </motion.section>
+        )}
+      </DocsSection>
+
+      {/* Implementation Guide */}
+      <DocsSection
+        title="Quick Start Guide"
+        description="Get started with retroUI components in four simple steps"
+        id="quick-start"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              step: "1",
+              title: "Browse & Select",
+              description:
+                "Explore components and find the perfect one for your project",
+              icon: Search,
+            },
+            {
+              step: "2",
+              title: "Copy Code",
+              description: "Click the copy button to grab the component code",
+              icon: Package,
+            },
+            {
+              step: "3",
+              title: "Customize",
+              description: "Modify styles and props to match your design",
+              icon: Sparkles,
+            },
+            {
+              step: "4",
+              title: "Integrate",
+              description: "Import and use in your React application",
+              icon: Grid3X3,
+            },
+          ].map((item) => {
+            const StepIcon = item.icon;
+            return (
+              <div
+                key={item.step}
+                className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-800/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 font-bold text-sm">
+                    {item.step}
+                  </div>
+                  <StepIcon className="w-5 h-5 text-teal-500" />
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {item.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </DocsSection>
+
+      {/* Help Section */}
+      <div className="mt-12 bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-xl p-8 border border-teal-200 dark:border-teal-800/50">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex-1">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+              Need a Custom Component?
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Can't find what you're looking for? Request a custom component and
+              we'll add it to our library.
+            </p>
+          </div>
+          <Link to="/contact-us">
+            <button className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg">
+              Request Component
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </DocsContent>
   );
 };
 

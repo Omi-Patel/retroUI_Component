@@ -1,29 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import {
   Code,
   Copy,
   Check,
-  ChevronDown,
-  Zap,
-  Layers,
-  Palette,
-  Monitor,
-  Grid,
-  ArrowRight,
-  Star,
-  Download,
   Eye,
   Sparkles,
-  ShoppingBag,
   ShoppingCart,
   Package,
-  Tag,
+  Star,
+  CreditCard,
+  ExternalLink,
 } from "lucide-react";
+
+import { DocsContent, DocsSection, InfoBox } from "@/components/layout";
 
 import {
   ProductsPage,
@@ -32,401 +24,279 @@ import {
   RetroDesc,
 } from "@/features/templates/ecommerce-pages";
 
-const componentCode = {
-  ProductsPage: `https://github.com/Omi-Patel`,
-  ModernProduct: `https://github.com/Omi-Patel`,
-  BasicProductDesc: `https://github.com/Omi-Patel`,
-  RetroDesc: `https://github.com/Omi-Patel`,
+const ecomTemplates = {
+  Products: {
+    component: ProductsPage,
+    title: "Products Page",
+    description: "Grid layout for product listings",
+    github:
+      "https://github.com/Omi-Patel/retroUI_Component/tree/main/src/features/templates/ecommerce-pages",
+  },
+  Modern: {
+    component: ModernProduct,
+    title: "Modern Product",
+    description: "Contemporary product page design",
+    github:
+      "https://github.com/Omi-Patel/retroUI_Component/tree/main/src/features/templates/ecommerce-pages",
+  },
+  Basic: {
+    component: BasicProductDesc,
+    title: "Basic Product",
+    description: "Simple product details page",
+    github:
+      "https://github.com/Omi-Patel/retroUI_Component/tree/main/src/features/templates/ecommerce-pages",
+  },
+  Retro: {
+    component: RetroDesc,
+    title: "Retro Product",
+    description: "Nostalgic product page with retro vibes",
+    github:
+      "https://github.com/Omi-Patel/retroUI_Component/tree/main/src/features/templates/ecommerce-pages",
+  },
 };
 
 const EcomPageShowcase = () => {
-  const [activeComponent, setActiveComponent] = useState("ProductsPage");
-  const [activeTabs, setActiveTabs] = useState({
-    ProductsPage: "preview",
-    ModernProduct: "preview",
-    BasicProductDesc: "preview",
-    RetroDesc: "preview",
-  });
+  const [activeTemplate, setActiveTemplate] = useState("Products");
+  const [activeTab, setActiveTab] = useState("preview");
   const [copySuccess, setCopySuccess] = useState(false);
-  const [expandedInfo, setExpandedInfo] = useState(false);
-  const [isGridView, setIsGridView] = useState(false);
 
-  const copyToClipboard = (code) => {
-    navigator.clipboard.writeText(code);
+  const copyGitHubLink = () => {
+    const link = ecomTemplates[activeTemplate].github;
+    navigator.clipboard.writeText(link);
     setCopySuccess(true);
     setTimeout(() => {
       setCopySuccess(false);
     }, 2000);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const activeData = ecomTemplates[activeTemplate];
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
+  const features = [
+    {
+      icon: ShoppingCart,
+      title: "Product Display",
+      description: "Beautiful product cards with images and details",
     },
-  };
-
-  const pageIcons = {
-    ProductsPage: <ShoppingBag className="w-5 h-5" />,
-    ModernProduct: <ShoppingCart className="w-5 h-5" />,
-    BasicProductDesc: <Package className="w-5 h-5" />,
-    RetroDesc: <Tag className="w-5 h-5" />,
-  };
-
-  const pageColors = {
-    ProductsPage: "from-purple-400 to-indigo-500",
-    ModernProduct: "from-indigo-400 to-blue-500",
-    BasicProductDesc: "from-blue-400 to-cyan-500",
-    RetroDesc: "from-cyan-400 to-teal-500",
-  };
-
-  const pageBgs = {
-    ProductsPage:
-      "bg-gradient-to-br from-purple-50 to-indigo-100 dark:from-purple-900/20 dark:to-indigo-900/30",
-    ModernProduct:
-      "bg-gradient-to-br from-indigo-50 to-blue-100 dark:from-indigo-900/20 dark:to-blue-900/30",
-    BasicProductDesc:
-      "bg-gradient-to-br from-blue-50 to-cyan-100 dark:from-blue-900/20 dark:to-cyan-900/30",
-    RetroDesc:
-      "bg-gradient-to-br from-cyan-50 to-teal-100 dark:from-cyan-900/20 dark:to-teal-900/30",
-  };
-
-  const renderComponent = (name) => {
-    switch (name) {
-      case "ProductsPage":
-        return <ProductsPage />;
-      case "ModernProduct":
-        return <ModernProduct />;
-      case "BasicProductDesc":
-        return <BasicProductDesc />;
-      case "RetroDesc":
-        return <RetroDesc />;
-      default:
-        return null;
-    }
-  };
+    {
+      icon: Package,
+      title: "Product Grid",
+      description: "Responsive grid layouts for multiple products",
+    },
+    {
+      icon: Star,
+      title: "Reviews & Ratings",
+      description: "Display customer ratings and reviews",
+    },
+    {
+      icon: CreditCard,
+      title: "Add to Cart",
+      description: "Shopping cart integration ready",
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 transition-colors duration-300 bg-[url('/grid-pattern.svg')] bg-fixed">
-      <div className="container mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <motion.section
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          className="relative mb-16 overflow-hidden"
+    <DocsContent
+      title="E-commerce Templates"
+      description="Complete e-commerce page templates for online stores"
+      badge="Page Templates"
+    >
+      {/* Installation */}
+      <InfoBox type="info" title="Installation">
+        <p className="text-sm mb-3">
+          These are full page templates. Copy the entire component from GitHub
+          and connect it to your e-commerce backend.
+        </p>
+        <a
+          href={activeData.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm text-teal-600 dark:text-teal-400 hover:underline"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 dark:from-purple-900/20 dark:to-indigo-900/20 z-0 rounded-2xl"></div>
-          <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 dark:from-purple-900/30 dark:to-indigo-900/30 rounded-full blur-3xl"></div>
+          <ExternalLink className="w-4 h-4" />
+          View on GitHub
+        </a>
+      </InfoBox>
 
-          <div className="relative z-10 py-12 px-8 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8 rounded-2xl border border-purple-200/50 dark:border-purple-800/30">
-            <div className="text-center md:text-left max-w-2xl">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-medium mb-4">
-                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
-                <span>Retro UI Collection</span>
-              </div>
+      {/* Template Selector */}
+      <DocsSection title="Available Templates" id="templates">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+          {Object.keys(ecomTemplates).map((key) => (
+            <button
+              key={key}
+              onClick={() => setActiveTemplate(key)}
+              className={`px-4 py-3 rounded-lg border-2 text-sm font-medium transition-all ${
+                activeTemplate === key
+                  ? "border-teal-500 bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300"
+                  : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 text-gray-700 dark:text-gray-300"
+              }`}
+            >
+              {ecomTemplates[key].title}
+            </button>
+          ))}
+        </div>
+      </DocsSection>
 
-              <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-indigo-600">
-                  Retro
-                </span>
-                <span className="relative">
-                  <span className="relative z-10">Ecommerce</span>
-                  <span className="absolute bottom-1 left-0 w-full h-3 bg-purple-200 dark:bg-purple-800/50 -z-10 skew-x-3"></span>
-                </span>
-                <span> Pages</span>
-              </h1>
-
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                Explore our collection of retro-themed ecommerce templates,
-                designed for crafting dynamic online stores with a unique
-                vintage aesthetic. Each page is fully customizable and ready to
-                use.
+      {/* Preview Section */}
+      <DocsSection id="preview">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTemplate}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Template Info */}
+            <div className="mb-6">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                {activeData.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                {activeData.description}
               </p>
-
-              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                <button
-                  onClick={() => setIsGridView(!isGridView)}
-                  className="inline-flex items-center px-4 py-2 rounded-lg bg-purple-500 hover:bg-purple-600 text-white transition-colors"
-                >
-                  <Grid className="w-4 h-4 mr-2" />
-                  {isGridView ? "List View" : "Grid View"}
-                </button>
-              </div>
             </div>
 
-            <div className="relative w-full max-w-md aspect-square">
-              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-4">
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-3 hover:rotate-0 transition-transform duration-300">
-                  <div className="h-4 w-16 bg-indigo-200 dark:bg-indigo-700 rounded mb-2"></div>
-                  <div className="h-8 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
-                  <div className="h-4 w-3/4 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                </div>
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
-                  <div className="h-12 w-12 bg-purple-200 dark:bg-purple-700 rounded-full mx-auto mb-2"></div>
-                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
-                  <div className="h-4 w-1/2 bg-gray-100 dark:bg-gray-700 rounded mx-auto"></div>
-                </div>
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
-                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
-                  <div className="h-8 w-3/4 bg-indigo-200 dark:bg-indigo-700 rounded mb-2"></div>
-                  <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded"></div>
-                </div>
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                  <div className="flex justify-between mb-2">
-                    <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                    <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                  </div>
-                  <div className="h-12 w-full bg-purple-200 dark:bg-purple-700 rounded"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Component List - Left Side */}
-          <div className="lg:col-span-3">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-                <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100">
-                  Ecommerce Pages
-                </h2>
-              </div>
-
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                {Object.keys(componentCode).map((componentName) => (
-                  <motion.button
-                    key={componentName}
-                    whileHover={{ x: 5 }}
-                    onClick={() => setActiveComponent(componentName)}
-                    className={`w-full text-left p-4 flex items-center gap-3 transition-colors ${
-                      activeComponent === componentName
-                        ? `${pageBgs[componentName]} border-l-4 border-purple-500`
-                        : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
-                    }`}
-                  >
-                    <div
-                      className={`p-2 rounded-lg bg-gradient-to-r ${pageColors[componentName]} text-white`}
-                    >
-                      {pageIcons[componentName]}
-                    </div>
-                    <div>
-                      <span className="font-medium text-gray-800 dark:text-gray-200 block">
-                        {componentName.replace(/([A-Z])/g, " $1").trim()}
-                      </span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Component Display - Right Side */}
-          <div className="lg:col-span-9">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeComponent}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden"
+            {/* Tabs */}
+            <div className="flex gap-2 mb-6 border-b border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => setActiveTab("preview")}
+                className={`relative px-4 py-2 font-medium text-sm transition-colors ${
+                  activeTab === "preview"
+                    ? "text-teal-600 dark:text-teal-400"
+                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                }`}
               >
-                {/* Component Header */}
-                <div
-                  className={`p-4 border-b border-gray-200 dark:border-gray-700 ${pageBgs[activeComponent]}`}
-                >
-                  <div className="flex justify-between items-center">
-                    <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex items-center">
-                      <div
-                        className={`p-1.5 rounded-md bg-gradient-to-r ${pageColors[activeComponent]} text-white mr-2`}
-                      >
-                        {pageIcons[activeComponent]}
-                      </div>
-                      <span>
-                        {activeComponent.replace(/([A-Z])/g, " $1").trim()}
-                      </span>
-                    </h2>
-                    <div className="flex items-center gap-2">
-                      <div className="flex items-center space-x-2">
-                        <div className="flex border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
-                          <button
-                            onClick={() =>
-                              setActiveTabs((prev) => ({
-                                ...prev,
-                                [activeComponent]: "preview",
-                              }))
-                            }
-                            className={`py-1.5 px-3 text-sm font-medium flex items-center gap-1.5 transition-colors ${
-                              activeTabs[activeComponent] === "preview"
-                                ? `bg-gradient-to-r ${pageColors[activeComponent]} text-white`
-                                : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
-                            }`}
-                          >
-                            <Eye className="w-3.5 h-3.5" />
-                            <span>Preview</span>
-                          </button>
-                          <button
-                            onClick={() =>
-                              setActiveTabs((prev) => ({
-                                ...prev,
-                                [activeComponent]: "code",
-                              }))
-                            }
-                            className={`py-1.5 px-3 text-sm font-medium flex items-center gap-1.5 transition-colors ${
-                              activeTabs[activeComponent] === "code"
-                                ? `bg-gradient-to-r ${pageColors[activeComponent]} text-white`
-                                : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
-                            }`}
-                          >
-                            <Code className="w-3.5 h-3.5" />
-                            <span>Code</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                <div className="flex items-center gap-2">
+                  <Eye className="w-4 h-4" />
+                  Preview
+                </div>
+                {activeTab === "preview" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-500"
+                  />
+                )}
+              </button>
+              <button
+                onClick={() => setActiveTab("code")}
+                className={`relative px-4 py-2 font-medium text-sm transition-colors ${
+                  activeTab === "code"
+                    ? "text-teal-600 dark:text-teal-400"
+                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Code className="w-4 h-4" />
+                  Code
+                </div>
+                {activeTab === "code" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-500"
+                  />
+                )}
+              </button>
+            </div>
+
+            {/* Content */}
+            {activeTab === "preview" ? (
+              <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800">
+                <div className="bg-white dark:bg-gray-900">
+                  <activeData.component />
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-900 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <Code className="w-5 h-5 text-gray-400" />
+                    <span className="text-sm text-gray-400">
+                      View full source code on GitHub
+                    </span>
                   </div>
+                  <button
+                    onClick={copyGitHubLink}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-white text-xs rounded-md transition-colors"
+                  >
+                    {copySuccess ? (
+                      <>
+                        <Check className="w-3.5 h-3.5" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        Copy Link
+                      </>
+                    )}
+                  </button>
                 </div>
+                <a
+                  href={activeData.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-md transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  View on GitHub
+                </a>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </DocsSection>
 
-                {/* Component Content */}
-                <div className="p-6">
-                  {activeTabs[activeComponent] === "preview" ? (
-                    <div className="flex flex-col">
-                      {/* Interactive Preview */}
-                      <div
-                        className={`flex flex-col items-center justify-center p-10 ${pageBgs[activeComponent]} rounded-lg border border-gray-200 dark:border-gray-700 mb-6`}
-                      >
-                        <motion.div
-                          initial={{ scale: 0.9, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          {renderComponent(activeComponent)}
-                        </motion.div>
-                      </div>
-
-                      {/* Component Info */}
-                      <div className="bg-gradient-to-r from-purple-500/5 to-indigo-500/5 dark:from-purple-900/10 dark:to-indigo-900/10 rounded-lg border border-purple-200 dark:border-purple-800/30 overflow-hidden">
-                        <button
-                          onClick={() => setExpandedInfo(!expandedInfo)}
-                          className="w-full p-4 flex justify-between items-center text-left"
-                        >
-                          <h3 className="text-base font-semibold text-gray-800 dark:text-gray-100 flex items-center">
-                            <Zap className="w-4 h-4 text-purple-500 mr-2" />
-                            Page Details & Usage Tips
-                          </h3>
-                          <ChevronDown
-                            className={`w-5 h-5 text-gray-500 transition-transform ${
-                              expandedInfo ? "rotate-180" : ""
-                            }`}
-                          />
-                        </button>
-
-                        {expandedInfo && (
-                          <div className="p-4 pt-0 border-t border-purple-200 dark:border-purple-800/30">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                              <div>
-                                <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
-                                  Features
-                                </h4>
-                                <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
-                                  <li>
-                                    Retro-inspired design with pixel-perfect
-                                    details
-                                  </li>
-                                  <li>Fully responsive layout</li>
-                                  <li>Dark mode support</li>
-                                  <li>Customizable components</li>
-                                </ul>
-                              </div>
-                              <div>
-                                <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
-                                  Customization
-                                </h4>
-                                <p className="text-gray-600 dark:text-gray-400">
-                                  This page can be easily customized by
-                                  modifying the Tailwind classes. Try changing
-                                  colors, layouts, or adding additional sections
-                                  to match your project's design.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="relative">
-                      <div className="bg-[#1e1e1e] rounded-lg p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center space-x-2">
-                            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                          </div>
-                          <div className="text-gray-400 text-sm">
-                            GitHub Repository
-                          </div>
-                        </div>
-                        <div className="bg-[#2d2d2d] rounded-lg p-4">
-                          <a
-                            href={componentCode[activeComponent]}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 group"
-                          >
-                            <svg
-                              className="w-6 h-6"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span className="text-lg font-medium">
-                              Visit GitHub Repository
-                            </span>
-                            <svg
-                              className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-200"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                              />
-                            </svg>
-                          </a>
-                        </div>
-                        <div className="mt-4 text-sm text-gray-400 text-center">
-                          Click to view the complete source code and
-                          documentation
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+      {/* Usage */}
+      <DocsSection title="Usage" id="usage">
+        <div className="prose prose-gray dark:prose-invert max-w-none">
+          <p>
+            Copy the template from GitHub and integrate it with your e-commerce
+            platform:
+          </p>
+          <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 font-mono text-sm mt-4">
+            <code className="text-teal-600 dark:text-teal-400">
+              import {activeData.title.replace(/\s+/g, "")} from
+              "@/features/templates/ecommerce-pages/
+              {activeData.title.replace(/\s+/g, "")}";
+            </code>
           </div>
         </div>
-      </div>
-    </div>
+      </DocsSection>
+
+      {/* Features */}
+      <DocsSection title="Features" id="features">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="flex gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700"
+            >
+              <div className="flex-shrink-0">
+                <feature.icon className="w-6 h-6 text-teal-500" />
+              </div>
+              <div>
+                <h5 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                  {feature.title}
+                </h5>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </DocsSection>
+
+      {/* Customization Tips */}
+      <InfoBox type="success" title="Customization Tips">
+        <ul className="list-disc list-inside space-y-1 text-sm">
+          <li>Connect to your product database or API</li>
+          <li>Add shopping cart state management</li>
+          <li>Implement filtering and sorting options</li>
+          <li>Integrate payment gateway for checkout</li>
+        </ul>
+      </InfoBox>
+    </DocsContent>
   );
 };
 

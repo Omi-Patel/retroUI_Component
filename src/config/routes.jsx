@@ -81,15 +81,21 @@ const Terms = React.lazy(() => import("@/features/docs/pages/Terms"));
 const ContactUs = React.lazy(() => import("@/features/docs/pages/ContactUs"));
 
 /**
- * Application Routes Configuration
- * Centralized route definitions for better maintainability
+ * Home Routes Configuration (without docs layout)
  */
-export const appRoutes = [
+export const homeRoutes = [
   {
     path: ROUTES.HOME,
     element: Home,
     title: "Home",
   },
+];
+
+/**
+ * Application Routes Configuration (with docs layout)
+ * Centralized route definitions for better maintainability
+ */
+export const appRoutes = [
   {
     path: ROUTES.ABOUT,
     element: About,

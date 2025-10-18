@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -8,19 +8,18 @@ import {
   Code,
   Copy,
   Check,
-  ChevronDown,
-  Zap,
-  Layers,
-  Grid,
-  ArrowRight,
-  Star,
   Eye,
   Sparkles,
+  Info,
   ToggleLeft,
-  ToggleRight,
-  Palette,
-  Lightbulb,
 } from "lucide-react";
+
+import {
+  DocsContent,
+  DocsSection,
+  ComponentPreview,
+  InfoBox,
+} from "@/components/layout";
 
 // Import switch components
 import BasicSwitch from "@/components/ui/switches/BasicSwitch";
@@ -30,25 +29,51 @@ import IconSwitch from "@/components/ui/switches/IconSwitch";
 import LabeledSwitch from "@/components/ui/switches/LabeledSwitch";
 
 const switchComponents = {
-  BasicSwitch: `
-import React, { useState } from "react";
+  BasicSwitch: {
+    component: BasicSwitch,
+    title: "Basic Switch",
+    description: "Simple toggle switch with smooth animation",
+    code: `import React, { useState } from "react";
 
 const BasicSwitch = () => {
   const [isOn, setIsOn] = useState(false);
 
-  const toggleSwitch = () => {
-    setIsOn(!isOn);
-  };
-
   return (
     <div
-      onClick={toggleSwitch}
+      onClick={() => setIsOn(!isOn)}
       className={\`relative w-16 h-8 flex items-center rounded-full cursor-pointer transition-all duration-300 \${
-        isOn ? "bg-[#D08C60]" : "bg-[#f2c364]"
+        isOn ? "bg-teal-500" : "bg-gray-300"
       }\`}
     >
       <div
-        className={\`w-7 h-7 bg-[#3B3228] rounded-full shadow-[2px_2px_4px_#3B3228] transform transition-transform duration-300 \${
+        className={\`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300 \${
+          isOn ? "translate-x-9" : "translate-x-1"
+        }\`}
+      />
+    </div>
+  );
+};
+
+export default BasicSwitch;`,
+  },
+  BorderedSwitch: {
+    component: BorderedSwitch,
+    title: "Bordered Switch",
+    description: "Switch with bold retro border styling",
+    code: `import React, { useState } from "react";
+
+const BorderedSwitch = () => {
+  const [isOn, setIsOn] = useState(false);
+
+  return (
+    <div
+      onClick={() => setIsOn(!isOn)}
+      className={\`relative w-16 h-8 flex items-center rounded-full cursor-pointer border-4 border-black transition-all duration-300 \${
+        isOn ? "bg-yellow-400" : "bg-gray-200"
+      }\`}
+    >
+      <div
+        className={\`w-5 h-5 bg-black rounded-full shadow-md transform transition-transform duration-300 \${
           isOn ? "translate-x-8" : "translate-x-1"
         }\`}
       />
@@ -56,599 +81,342 @@ const BasicSwitch = () => {
   );
 };
 
-export default BasicSwitch;
-  `,
-  BorderedSwitch: `
-import React, { useState } from "react";
-
-const BorderedSwitch = () => {
-  const [isOn, setIsOn] = useState(false);
-
-  const toggleSwitch = () => {
-    setIsOn(!isOn);
-  };
-
-  return (
-    <div
-      onClick={toggleSwitch}
-      className={\`relative w-16 h-8 flex items-center cursor-pointer rounded-full 
-      transition-all duration-300 
-      \${
-        isOn
-          ? "bg-opacity-50 border-[#f1887e]"
-          : "bg-opacity-30 border-[#f4eb9b]"
-      }
-      border-2 shadow-lg backdrop-filter backdrop-blur-lg\`}
-      style={{
-        background: isOn
-          ? "rgba(255, 111, 97, 0.5)"
-          : "rgba(240, 230, 140, 0.5)",
-      }}
-    >
-      <div
-        className={\`w-6 h-6 bg-[#4A4A4A] rounded-full shadow-lg transition-transform duration-300 
-        \${isOn ? "translate-x-8" : "translate-x-1"} 
-        border-2 border-white\`}
-      />
-    </div>
-  );
-};
-
-export default BorderedSwitch;
-  `,
-  GlowSwitch: `
-import React, { useState } from "react";
+export default BorderedSwitch;`,
+  },
+  GlowSwitch: {
+    component: GlowSwitch,
+    title: "Glow Switch",
+    description: "Switch with neon glow effect when active",
+    code: `import React, { useState } from "react";
 
 const GlowSwitch = () => {
   const [isOn, setIsOn] = useState(false);
 
-  const toggleSwitch = () => {
-    setIsOn(!isOn);
-  };
-
   return (
     <div
-      onClick={toggleSwitch}
-      className={\`relative w-14 h-8 flex items-center rounded-full cursor-pointer transition-all duration-300 \${
-        isOn ? "bg-[#2846ee] shadow-[0_0_10px_4px_#1d37cb]" : "bg-[#B4CFB0]"
+      onClick={() => setIsOn(!isOn)}
+      className={\`relative w-16 h-8 flex items-center rounded-full cursor-pointer transition-all duration-300 \${
+        isOn ? "bg-purple-600 shadow-[0_0_10px_rgba(168,85,247,0.5)]" : "bg-gray-700"
       }\`}
     >
       <div
-        className={\`w-6 h-6 bg-[#333] rounded-full transform transition-transform duration-300 \${
-          isOn ? "translate-x-7" : "translate-x-1"
+        className={\`w-6 h-6 bg-white rounded-full transform transition-transform duration-300 \${
+          isOn ? "translate-x-9" : "translate-x-1"
         }\`}
       />
     </div>
   );
 };
 
-export default GlowSwitch;
-  `,
-  IconSwitch: `
-import React, { useState } from "react";
-import { Sun, Moon } from 'lucide-react';
+export default GlowSwitch;`,
+  },
+  IconSwitch: {
+    component: IconSwitch,
+    title: "Icon Switch",
+    description: "Switch with icon indicators for on/off states",
+    code: `import React, { useState } from "react";
 
 const IconSwitch = () => {
   const [isOn, setIsOn] = useState(false);
 
-  const toggleSwitch = () => {
-    setIsOn(!isOn);
-  };
-
   return (
     <div
-      onClick={toggleSwitch}
-      className={\`relative w-20 h-10 flex items-center rounded-full cursor-pointer transition-all duration-300 border-4 border-black shadow-[4px_4px_0px_0px_black] \${
-        isOn ? "bg-[#5B4B8A]" : "bg-[#F7D44C]"
+      onClick={() => setIsOn(!isOn)}
+      className={\`relative w-20 h-10 flex items-center justify-between px-2 rounded-full cursor-pointer transition-all duration-300 \${
+        isOn ? "bg-green-500" : "bg-red-500"
       }\`}
     >
+      <span className="text-white text-xs font-bold">
+        {isOn ? "ON" : "OFF"}
+      </span>
       <div
-        className={\`absolute left-1 text-white transition-opacity duration-300 \${
-          isOn ? "opacity-0" : "opacity-100"
-        }\`}
-      >
-        <Sun size={16} className="text-black" />
-      </div>
-      <div
-        className={\`absolute right-1 text-white transition-opacity duration-300 \${
-          isOn ? "opacity-100" : "opacity-0"
-        }\`}
-      >
-        <Moon size={16} className="text-white" />
-      </div>
-      <div
-        className={\`w-8 h-8 bg-white rounded-full shadow-[2px_2px_4px_rgba(0,0,0,0.3)] transform transition-transform duration-300 border-2 border-black \${
-          isOn ? "translate-x-10" : "translate-x-0"
+        className={\`w-6 h-6 bg-white rounded-full shadow-md absolute transition-all duration-300 \${
+          isOn ? "right-2" : "left-2"
         }\`}
       />
     </div>
   );
 };
 
-export default IconSwitch;
-  `,
-  LabeledSwitch: `
-import React, { useState } from "react";
+export default IconSwitch;`,
+  },
+  LabeledSwitch: {
+    component: LabeledSwitch,
+    title: "Labeled Switch",
+    description: "Switch with accompanying label text",
+    code: `import React, { useState } from "react";
 
 const LabeledSwitch = () => {
   const [isOn, setIsOn] = useState(false);
 
-  const toggleSwitch = () => {
-    setIsOn(!isOn);
-  };
-
   return (
     <div className="flex items-center gap-3">
-      <span className="font-mono font-bold text-sm">OFF</span>
+      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        Notifications
+      </span>
       <div
-        onClick={toggleSwitch}
-        className={\`relative w-16 h-8 flex items-center rounded-md cursor-pointer transition-all duration-300 border-2 border-black shadow-[3px_3px_0px_0px_black] \${
-          isOn ? "bg-[#7CB9E8]" : "bg-gray-200"
+        onClick={() => setIsOn(!isOn)}
+        className={\`relative w-14 h-7 flex items-center rounded-full cursor-pointer transition-all duration-300 \${
+          isOn ? "bg-blue-500" : "bg-gray-300"
         }\`}
       >
         <div
-          className={\`w-6 h-6 bg-white rounded-sm shadow-md transform transition-transform duration-300 border border-black \${
-            isOn ? "translate-x-9" : "translate-x-0.5"
+          className={\`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 \${
+            isOn ? "translate-x-8" : "translate-x-1"
           }\`}
         />
       </div>
-      <span className="font-mono font-bold text-sm">ON</span>
     </div>
   );
 };
 
-export default LabeledSwitch;
-  `,
+export default LabeledSwitch;`,
+  },
 };
 
 const SwitchShowcase = () => {
   const [activeComponent, setActiveComponent] = useState("BasicSwitch");
   const [activeTab, setActiveTab] = useState("preview");
   const [copySuccess, setCopySuccess] = useState(false);
-  const [expandedInfo, setExpandedInfo] = useState(false);
-  const [isGridView, setIsGridView] = useState(false);
 
   const copyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
     setCopySuccess(true);
-    setTimeout(() => {
-      setCopySuccess(false);
-    }, 2000);
+    setTimeout(() => setCopySuccess(false), 2000);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  const switchIcons = {
-    BasicSwitch: <ToggleLeft className="w-5 h-5" />,
-    BorderedSwitch: <ToggleRight className="w-5 h-5" />,
-    GlowSwitch: <Lightbulb className="w-5 h-5" />,
-    IconSwitch: <Palette className="w-5 h-5" />,
-    LabeledSwitch: <Layers className="w-5 h-5" />,
-  };
-
-  const switchColors = {
-    BasicSwitch: "from-amber-400 to-orange-500",
-    BorderedSwitch: "from-rose-400 to-red-500",
-    GlowSwitch: "from-blue-400 to-indigo-500",
-    IconSwitch: "from-purple-400 to-violet-500",
-    LabeledSwitch: "from-cyan-400 to-blue-500",
-  };
-
-  const switchBgs = {
-    BasicSwitch:
-      "bg-gradient-to-br from-amber-50 to-orange-100 dark:from-amber-900/20 dark:to-orange-900/30",
-    BorderedSwitch:
-      "bg-gradient-to-br from-rose-50 to-red-100 dark:from-rose-900/20 dark:to-red-900/30",
-    GlowSwitch:
-      "bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/30",
-    IconSwitch:
-      "bg-gradient-to-br from-purple-50 to-violet-100 dark:from-purple-900/20 dark:to-violet-900/30",
-    LabeledSwitch:
-      "bg-gradient-to-br from-cyan-50 to-blue-100 dark:from-cyan-900/20 dark:to-blue-900/30",
-  };
-
-  const renderComponent = (name) => {
-    switch (name) {
-      case "BasicSwitch":
-        return <BasicSwitch />;
-      case "BorderedSwitch":
-        return <BorderedSwitch />;
-      case "GlowSwitch":
-        return <GlowSwitch />;
-      case "IconSwitch":
-        return <IconSwitch />;
-      case "LabeledSwitch":
-        return <LabeledSwitch />;
-      default:
-        return null;
-    }
-  };
+  const activeData = switchComponents[activeComponent];
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 transition-colors duration-300 bg-[url('/grid-pattern.svg')] bg-fixed">
-      <div className="container mx-auto px-4 py-12">
-        {/* Hero Section - More Unique */}
-        <motion.section
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          className="relative mb-16 overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-orange-500/10 dark:from-amber-900/20 dark:to-orange-900/20 z-0 rounded-2xl"></div>
-          <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-r from-amber-500/20 to-orange-500/20 dark:from-amber-900/30 dark:to-orange-900/30 rounded-full blur-3xl"></div>
+    <DocsContent
+      title="Switch Components"
+      description="Toggle switch components for binary on/off states. Perfect for settings, preferences, and feature toggles with smooth animations."
+      badge="UI Components"
+    >
+      <InfoBox type="info" title="Usage">
+        <p className="mb-2">
+          Switch components provide a visual way to toggle between two states.
+          All switches include onClick handlers and state management examples.
+        </p>
+        <code className="text-xs bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">
+          npm install tailwindcss
+        </code>
+      </InfoBox>
 
-          <div className="relative z-10 py-12 px-8 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8 rounded-2xl border border-amber-200/50 dark:border-amber-800/30">
-            <div className="text-center md:text-left max-w-2xl">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-xs font-medium mb-4">
-                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
-                <span>Retro UI Collection</span>
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">
-                  Retro
-                </span>
-                <span className="relative">
-                  <span className="relative z-10">Switch</span>
-                  <span className="absolute bottom-1 left-0 w-full h-3 bg-amber-200 dark:bg-amber-800/50 -z-10 skew-x-3"></span>
-                </span>
-                <span> Components</span>
-              </h1>
-
-              <p className="text-lg text-gray-700 dark:text-gray-300 max-w-xl leading-relaxed mb-6">
-                Pixel-perfect, nostalgic toggle switches for your modern web
-                applications. Bring the charm of retro aesthetics to your
-                interactive UI elements.
-              </p>
-
-              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold rounded-md shadow-lg hover:shadow-amber-500/25 hover:shadow-xl transition-all duration-300 flex items-center gap-2"
-                >
-                  <span>Explore Collection</span>
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
-
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 font-bold rounded-md border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  Documentation
-                </motion.button>
-              </div>
-            </div>
-
-            <div className="hidden lg:block relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-orange-500/20 dark:from-amber-900/30 dark:to-orange-900/30 rounded-xl blur-xl -z-10"></div>
-              <div className="grid grid-cols-1 gap-4 p-6 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl border border-amber-200/50 dark:border-amber-800/30 shadow-xl">
-                <div className="flex items-center">
-                  <span className="mr-2 text-sm font-mono text-gray-700 dark:text-gray-300">
-                    Option Name
-                  </span>
-                  <button className="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 bg-gray-200 dark:bg-gray-700">
-                    <span className="sr-only">Toggle switch</span>
-                    <span
-                      className="pointer-events-none inline-block h-5 w-5 rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200 translate-x-0"
-                      aria-hidden="true"
-                    ></span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* View Toggle */}
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
-            <Layers className="w-5 h-5 mr-2 text-amber-500" />
-            Switch Collection
-          </h2>
+      <DocsSection title="Available Variants" id="variants">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
+          {Object.keys(switchComponents).map((key) => (
+            <button
+              key={key}
+              onClick={() => setActiveComponent(key)}
+              className={`px-4 py-3 rounded-lg border-2 text-sm font-medium transition-all ${
+                activeComponent === key
+                  ? "border-teal-500 bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300"
+                  : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 text-gray-700 dark:text-gray-300"
+              }`}
+            >
+              {switchComponents[key].title.replace(" Switch", "")}
+            </button>
+          ))}
         </div>
+      </DocsSection>
 
-        {isGridView ? (
-          // Grid View
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {Object.keys(switchComponents).map((componentName) => (
-              <motion.div
-                key={componentName}
-                whileHover={{ y: -5 }}
-                className={`${switchBgs[componentName]} rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-md transition-all duration-300 hover:shadow-lg`}
+      <DocsSection id="preview">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeComponent}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                {activeData.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                {activeData.description}
+              </p>
+            </div>
+
+            <div className="flex gap-2 mb-6 border-b border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => setActiveTab("preview")}
+                className={`px-4 py-2 font-medium text-sm transition-colors relative ${
+                  activeTab === "preview"
+                    ? "text-teal-600 dark:text-teal-400"
+                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                }`}
               >
-                <div className="p-6 flex flex-col items-center justify-center min-h-[200px]">
-                  <div className="scale-100">
-                    {renderComponent(componentName)}
-                  </div>
+                <div className="flex items-center gap-2">
+                  <Eye className="w-4 h-4" />
+                  Preview
                 </div>
-
-                <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-100 flex items-center">
-                      <div
-                        className={`p-1.5 rounded-md bg-gradient-to-r ${switchColors[componentName]} text-white mr-2`}
-                      >
-                        {switchIcons[componentName]}
-                      </div>
-                      {componentName.replace(/([A-Z])/g, " $1").trim()}
-                    </h3>
-
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
-                        4.8
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-between items-center">
-                    <button
-                      onClick={() => {
-                        setActiveComponent(componentName);
-                        setIsGridView(false);
-                      }}
-                      className="text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors"
-                    >
-                      View Details
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        copyToClipboard(switchComponents[componentName])
-                      }
-                      className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors flex items-center gap-1"
-                    >
-                      <Copy className="w-3.5 h-3.5" />
-                      Copy
-                    </button>
-                  </div>
+                {activeTab === "preview" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-500"
+                  />
+                )}
+              </button>
+              <button
+                onClick={() => setActiveTab("code")}
+                className={`px-4 py-2 font-medium text-sm transition-colors relative ${
+                  activeTab === "code"
+                    ? "text-teal-600 dark:text-teal-400"
+                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Code className="w-4 h-4" />
+                  Code
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        ) : (
-          // Detail View
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16">
-            {/* Component Selector - Left Side */}
-            <div className="lg:col-span-3 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-amber-500/10 to-orange-500/10 dark:from-amber-900/20 dark:to-orange-900/20">
-                <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex items-center">
-                  <Layers className="w-5 h-5 mr-2 text-amber-500" />
-                  Components
-                </h2>
-              </div>
-
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                {Object.keys(switchComponents).map((componentName) => (
-                  <motion.button
-                    key={componentName}
-                    whileHover={{ x: 5 }}
-                    onClick={() => setActiveComponent(componentName)}
-                    className={`w-full text-left p-4 flex items-center gap-3 transition-colors ${
-                      activeComponent === componentName
-                        ? `${switchBgs[componentName]} border-l-4 border-amber-500`
-                        : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
-                    }`}
-                  >
-                    <div
-                      className={`p-2 rounded-lg bg-gradient-to-r ${switchColors[componentName]} text-white`}
-                    >
-                      {switchIcons[componentName]}
-                    </div>
-                    <div>
-                      <span className="font-medium text-gray-800 dark:text-gray-200 block">
-                        {componentName.replace(/([A-Z])/g, " $1").trim()}
-                      </span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
+                {activeTab === "code" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-500"
+                  />
+                )}
+              </button>
             </div>
 
-            {/* Component Display - Right Side */}
-            <div className="lg:col-span-9">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeComponent}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden"
-                >
-                  {/* Component Header */}
-                  <div
-                    className={`p-4 border-b border-gray-200 dark:border-gray-700 ${switchBgs[activeComponent]}`}
-                  >
-                    <div className="flex justify-between items-center">
-                      <h2 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex items-center">
-                        <div
-                          className={`p-1.5 rounded-md bg-gradient-to-r ${switchColors[activeComponent]} text-white mr-2`}
-                        >
-                          {switchIcons[activeComponent]}
-                        </div>
-                        <span>
-                          {activeComponent.replace(/([A-Z])/g, " $1").trim()}
-                        </span>
-                      </h2>
-
-                      {/* Tabs */}
-                      <div className="flex border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
-                        <button
-                          onClick={() => setActiveTab("preview")}
-                          className={`py-1.5 px-3 text-sm font-medium flex items-center gap-1.5 transition-colors ${
-                            activeTab === "preview"
-                              ? `bg-gradient-to-r ${switchBgs[activeComponent]} text-amber-700 dark:text-amber-300`
-                              : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
-                          }`}
-                        >
-                          <Eye className="w-3.5 h-3.5" />
-                          <span>Preview</span>
-                        </button>
-                        <button
-                          onClick={() => setActiveTab("code")}
-                          className={`py-1.5 px-3 text-sm font-medium flex items-center gap-1.5 transition-colors ${
-                            activeTab === "code"
-                              ? `bg-gradient-to-r ${switchBgs[activeComponent]} text-amber-700 dark:text-amber-300`
-                              : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
-                          }`}
-                        >
-                          <Code className="w-3.5 h-3.5" />
-                          <span>Code</span>
-                        </button>
+            {activeTab === "preview" ? (
+              <ComponentPreview>
+                <activeData.component />
+              </ComponentPreview>
+            ) : (
+              <div className="relative">
+                <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800">
+                  <div className="bg-gray-800 dark:bg-gray-900 px-4 py-3 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="flex gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
                       </div>
+                      <span className="text-xs text-gray-400 ml-2">
+                        {activeComponent}.jsx
+                      </span>
                     </div>
+                    <button
+                      onClick={() => copyToClipboard(activeData.code)}
+                      className="flex items-center gap-2 px-3 py-1.5 bg-teal-600 hover:bg-teal-700 text-white text-sm rounded-md transition-colors"
+                    >
+                      {copySuccess ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          Copy Code
+                        </>
+                      )}
+                    </button>
                   </div>
+                  <SyntaxHighlighter
+                    language="jsx"
+                    style={atomDark}
+                    showLineNumbers={true}
+                    customStyle={{ margin: 0, borderRadius: 0 }}
+                  >
+                    {activeData.code}
+                  </SyntaxHighlighter>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </DocsSection>
 
-                  {/* Component Content */}
-                  <div className="p-6">
-                    {activeTab === "preview" ? (
-                      <div className="flex flex-col">
-                        {/* Interactive Preview */}
-                        <div
-                          className={`flex flex-col items-center justify-center p-10 ${switchBgs[activeComponent]} rounded-lg border border-gray-200 dark:border-gray-700 mb-6`}
-                        >
-                          <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            {renderComponent(activeComponent)}
-                          </motion.div>
-                        </div>
+      <DocsSection title="Usage" id="usage">
+        <div className="space-y-6">
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">
+              Basic Implementation
+            </h4>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              Use switches for settings and preferences that can be toggled:
+            </p>
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-800">
+              <code className="text-sm text-gray-800 dark:text-gray-200">
+                {`import ${activeComponent} from './components/${activeComponent}';
+import { useState } from 'react';
 
-                        {/* Component Info */}
-                        <div className="bg-gradient-to-r from-amber-500/5 to-orange-500/5 dark:from-amber-900/10 dark:to-orange-900/10 rounded-lg border border-amber-200 dark:border-amber-800/30 overflow-hidden">
-                          <button
-                            onClick={() => setExpandedInfo(!expandedInfo)}
-                            className="w-full p-4 flex justify-between items-center text-left"
-                          >
-                            <h3 className="text-base font-semibold text-gray-800 dark:text-gray-100 flex items-center">
-                              <Zap className="w-4 h-4 text-amber-500 mr-2" />
-                              Component Details & Usage Tips
-                            </h3>
-                            <ChevronDown
-                              className={`w-5 h-5 text-gray-500 transition-transform ${
-                                expandedInfo ? "rotate-180" : ""
-                              }`}
-                            />
-                          </button>
-
-                          {expandedInfo && (
-                            <div className="p-4 pt-0 border-t border-amber-200 dark:border-amber-800/30">
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                  <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
-                                    Features
-                                  </h4>
-                                  <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
-                                    <li>
-                                      Retro-inspired design with smooth
-                                      transitions
-                                    </li>
-                                    <li>Interactive toggle functionality</li>
-                                    <li>
-                                      Fully customizable colors and styles
-                                    </li>
-                                    <li>Accessible with keyboard support</li>
-                                  </ul>
-                                </div>
-                                <div>
-                                  <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
-                                    Customization
-                                  </h4>
-                                  <p className="text-gray-600 dark:text-gray-400">
-                                    This component can be easily customized by
-                                    modifying the Tailwind classes. Try changing
-                                    colors, sizes, or adding additional effects
-                                    to match your project's design.
-                                  </p>
-                                </div>
-                              </div>
-
-                              <div className="mt-4 pt-4 border-t border-amber-200/50 dark:border-amber-800/20">
-                                <h4 className="font-semibold mb-2 text-gray-700 dark:text-gray-300">
-                                  Installation
-                                </h4>
-                                <div className="flex items-center gap-3">
-                                  <button
-                                    onClick={() => {
-                                      setActiveTab("code");
-                                    }}
-                                    className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md text-sm font-medium flex items-center gap-1.5 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                                  >
-                                    <Code className="w-4 h-4" />
-                                    View Code
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="relative">
-                        <div className="absolute top-0 left-0 w-full h-10 bg-gray-800 dark:bg-gray-700 rounded-t-md flex items-center px-4">
-                          <div className="flex space-x-2">
-                            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                          </div>
-                          <span className="text-xs text-gray-400 ml-4">
-                            components/Switch/{activeComponent}.jsx
-                          </span>
-                        </div>
-                        <div className="pt-10 overflow-hidden rounded-md border border-gray-600">
-                          <SyntaxHighlighter
-                            language="jsx"
-                            style={atomDark}
-                            showLineNumbers={true}
-                            wrapLines={true}
-                          >
-                            {switchComponents[activeComponent]}
-                          </SyntaxHighlighter>
-                        </div>
-                        <button
-                          onClick={() =>
-                            copyToClipboard(switchComponents[activeComponent])
-                          }
-                          className="absolute top-14 right-4 px-3 py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white rounded-md transition-all duration-150 flex items-center gap-2 text-sm font-medium"
-                        >
-                          {copySuccess ? (
-                            <>
-                              <Check className="w-4 h-4" />
-                              <span>Copied!</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-4 h-4" />
-                              <span>Copy Code</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        )}
-      </div>
+function Settings() {
+  const [isEnabled, setIsEnabled] = useState(false);
+  
+  return (
+    <div>
+      <${activeComponent} 
+        checked={isEnabled} 
+        onChange={setIsEnabled} 
+      />
     </div>
+  );
+}`}
+              </code>
+            </div>
+          </div>
+
+          <InfoBox type="success" title="Best Practices">
+            <ul className="list-disc list-inside space-y-1 text-sm">
+              <li>
+                Always provide clear labels describing what the switch controls
+              </li>
+              <li>Provide immediate visual feedback when toggled</li>
+              <li>Consider adding confirmation for critical settings</li>
+              <li>Ensure switches are large enough to tap on mobile devices</li>
+            </ul>
+          </InfoBox>
+        </div>
+      </DocsSection>
+
+      <DocsSection title="Features" id="features">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            {
+              icon: Sparkles,
+              title: "Smooth Animations",
+              description: "Fluid transitions between on/off states",
+            },
+            {
+              icon: Code,
+              title: "State Management",
+              description: "Built-in examples with React hooks",
+            },
+            {
+              icon: Info,
+              title: "Customizable",
+              description: "Easy to modify colors and sizes",
+            },
+            {
+              icon: Eye,
+              title: "Accessible",
+              description: "Keyboard and screen reader friendly",
+            },
+          ].map((feature) => (
+            <div
+              key={feature.title}
+              className="flex gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700"
+            >
+              <div className="flex-shrink-0">
+                <feature.icon className="w-6 h-6 text-teal-500" />
+              </div>
+              <div>
+                <h5 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                  {feature.title}
+                </h5>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </DocsSection>
+    </DocsContent>
   );
 };
 
