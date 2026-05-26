@@ -3,4 +3,10 @@ export { cardComponents } from './cards';
 export { inputComponents } from './inputs';
 export { loaderComponents } from './loaders';
 export { switchComponents } from './switches';
-
+export { navbarComponents } from './navbars';
+export { footerComponents } from './footers';
+export { tableComponents } from './tables';
+export { avatarComponents } from './avatars';
+export { signinComponents } from './signin';
+export { signupComponents } from './signup';
+export { pricingComponents } from './pricing';

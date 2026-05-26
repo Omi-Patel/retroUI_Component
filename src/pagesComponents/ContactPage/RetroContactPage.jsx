@@ -1,4 +1,3 @@
-"use client";
 
 import { useState } from "react";
 
@@ -9,7 +8,7 @@ export default function RetroContactPage() {
       {/* Retro Pattern Background */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23f26419%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
       
-      <main className="container mx-auto px-4 py-8 relative">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 relative">
         {/* Navbar */}
         <div>
           <header className="bg-[#2b2b2b] text-[#fcf6e3] p-4 rounded-lg mb-8 border-2 border-[#f26419] shadow-[8px_8px_0px_0px_rgba(242,100,25,0.3)] relative">
@@ -87,16 +86,16 @@ export default function RetroContactPage() {
           )}
         </div>
 
-        <div className="px-2 sm:px-4">
-          <h1 className="text-6xl font-bold mb-12 text-center text-[#fcf6e3] tracking-tight relative font-display">
+        <div className="px-0 sm:px-2">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 md:mb-12 text-center text-[#fcf6e3] tracking-tight relative font-display">
             <span className="relative z-10">Get in Touch</span>
-            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-48 h-2 bg-[#f26419]"></span>
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 sm:w-48 h-2 bg-[#f26419]"></span>
           </h1>
           
           {/* Contact Grid - New Layout */}
           <div className="max-w-6xl mx-auto">
             {/* Contact Info Cards - Horizontal Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 md:mb-12">
               <div className="bg-[#2b2b2b] p-6 rounded-lg border-2 border-[#f26419] shadow-[8px_8px_0px_0px_rgba(242,100,25,0.3)] relative group hover:shadow-[12px_12px_0px_0px_rgba(242,100,25,0.4)] transition-all duration-300">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cg%20fill%3D%22%23f26419%22%20fill-opacity%3D%220.1%22%3E%3Cpath%20d%3D%22M0%200h20L0%2020z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
                 <div className="relative z-10">
@@ -139,9 +138,9 @@ export default function RetroContactPage() {
             </div>
 
             {/* Main Content Area */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
               {/* Contact Form */}
-              <div className="lg:col-span-2 bg-[#2b2b2b] p-8 rounded-lg border-2 border-[#f26419] shadow-[12px_12px_0px_0px_rgba(242,100,25,0.3)] relative overflow-hidden">
+              <div className="lg:col-span-2 bg-[#2b2b2b] p-5 sm:p-8 rounded-lg border-2 border-[#f26419] shadow-[8px_8px_0px_0px_rgba(242,100,25,0.3)] lg:shadow-[12px_12px_0px_0px_rgba(242,100,25,0.3)] relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cg%20fill%3D%22%23f26419%22%20fill-opacity%3D%220.1%22%3E%3Cpath%20d%3D%22M0%200h20L0%2020z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
                 <form className="relative z-10">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -184,7 +183,7 @@ export default function RetroContactPage() {
                   </div>
                   <button
                     type="submit"
-                    className="bg-gradient-to-r from-[#f26419] to-[#f7b32b] text-[#fcf6e3] px-8 py-4 rounded-lg text-xl font-bold hover:from-[#f7b32b] hover:to-[#f26419] shadow-[6px_6px_0px_0px_rgba(242,100,25,0.4)] w-full transform hover:scale-105 transition-all duration-200 font-display relative group"
+                    className="bg-gradient-to-r from-[#f26419] to-[#f7b32b] text-[#fcf6e3] px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-xl font-bold hover:from-[#f7b32b] hover:to-[#f26419] shadow-[6px_6px_0px_0px_rgba(242,100,25,0.4)] w-full transform hover:scale-105 transition-all duration-200 font-display relative group"
                   >
                     <span className="relative z-10">Send Message</span>
                     <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.1%22%3E%3Cpath%20d%3D%22M0%200h20L0%2020z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -193,7 +192,7 @@ export default function RetroContactPage() {
               </div>
 
               {/* Business Hours */}
-              <div className="bg-[#2b2b2b] p-8 rounded-lg border-2 border-[#f26419] shadow-[12px_12px_0px_0px_rgba(242,100,25,0.3)] relative">
+              <div className="bg-[#2b2b2b] p-5 sm:p-8 rounded-lg border-2 border-[#f26419] shadow-[8px_8px_0px_0px_rgba(242,100,25,0.3)] lg:shadow-[12px_12px_0px_0px_rgba(242,100,25,0.3)] relative">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cg%20fill%3D%22%23f26419%22%20fill-opacity%3D%220.1%22%3E%3Cpath%20d%3D%22M0%200h20L0%2020z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
                 <div className="relative z-10">
                   <h2 className="text-2xl font-bold mb-6 text-[#fcf6e3] relative inline-block font-display">
@@ -201,15 +200,15 @@ export default function RetroContactPage() {
                     <span className="absolute -bottom-2 left-0 w-full h-1 bg-[#f26419]"></span>
                   </h2>
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center p-3 bg-[#1a1a1a]/50 rounded-lg border border-[#f26419]/30">
+                    <div className="flex flex-wrap justify-between items-center gap-2 p-3 bg-[#1a1a1a]/50 rounded-lg border border-[#f26419]/30">
                       <span className="text-[#fcf6e3]/80 font-display">Monday - Friday</span>
                       <span className="text-[#f7b32b] font-bold font-display">9:00 AM - 5:00 PM</span>
                     </div>
-                    <div className="flex justify-between items-center p-3 bg-[#1a1a1a]/50 rounded-lg border border-[#f26419]/30">
+                    <div className="flex flex-wrap justify-between items-center gap-2 p-3 bg-[#1a1a1a]/50 rounded-lg border border-[#f26419]/30">
                       <span className="text-[#fcf6e3]/80 font-display">Saturday</span>
                       <span className="text-[#f7b32b] font-bold font-display">10:00 AM - 2:00 PM</span>
                     </div>
-                    <div className="flex justify-between items-center p-3 bg-[#1a1a1a]/50 rounded-lg border border-[#f26419]/30">
+                    <div className="flex flex-wrap justify-between items-center gap-2 p-3 bg-[#1a1a1a]/50 rounded-lg border border-[#f26419]/30">
                       <span className="text-[#fcf6e3]/80 font-display">Sunday</span>
                       <span className="text-[#f7b32b] font-bold font-display">Closed</span>
                     </div>

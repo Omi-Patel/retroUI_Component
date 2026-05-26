@@ -105,9 +105,9 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-[#f3e5ab] text-[#4a4e69] font-mono">
-      <header className="bg-[#4a3f35] py-4 px-6  top-0 z-10">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-[#c99700] tracking-wide">
+      <header className="bg-[#4a3f35] py-4 px-4 sm:px-6 lg:px-8 top-0 z-10">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#c99700] tracking-wide">
             RetroShop
           </h1>
           <button
@@ -124,11 +124,11 @@ export default function ProductsPage() {
         </div>
       </header>
 
-      <main className="container mx-auto py-8 px-2 sm:px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-[#4a4e69]">
+      <main className="max-w-7xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center text-[#4a4e69]">
           Timeless Retro Collection
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {products.map((product) => (
             <div
               key={product.id}
@@ -155,17 +155,17 @@ export default function ProductsPage() {
                 </button>
               </div>
               <div className="p-4 sm:p-6">
-                <h3 className="text-xl font-semibold mb-2 text-[#4a4e69]">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#4a4e69]">
                   {product.name}
                 </h3>
-                <p className="text-[#6d6875] mb-4">{product.description}</p>
-                <div className="flex justify-between items-center">
+                <p className="text-[#6d6875] mb-4 text-sm sm:text-base">{product.description}</p>
+                <div className="flex flex-wrap justify-between items-center gap-3">
                   <span className="text-xl sm:text-2xl font-bold text-[#ef8354]">
                     ${product.price.toFixed(2)}
                   </span>
                   <button
                     onClick={() => addToCart(product)}
-                    className="bg-[#c99700] text-white px-4 py-2 rounded-full hover:bg-[#e8ac2f] transition-colors duration-300"
+                    className="bg-[#c99700] text-white px-4 py-2 rounded-full hover:bg-[#e8ac2f] transition-colors duration-300 whitespace-nowrap"
                   >
                     Add to Cart
                   </button>
@@ -178,7 +178,7 @@ export default function ProductsPage() {
 
       {isCartOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end z-50">
-          <div className="bg-white w-full max-w-md p-6 overflow-y-auto">
+          <div className="bg-white w-full max-w-md p-4 sm:p-6 overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-[#4a4e69]">Your Cart</h2>
               <button

@@ -3,7 +3,7 @@ import { CreditCard, User, Briefcase, MessageSquare, FileText } from 'lucide-rea
 // Component imports
 import ProductCard from '../../components/Cards/ProductCard';
 import ProfileCard from '../../components/Cards/ProfileCard';
-import SeviceCard from '../../components/Cards/SeviceCard';
+import ServiceCard from '../../components/Cards/ServiceCard';
 import TestimonialCard from '../../components/Cards/TestimonialCard';
 import BlogCard from '../../components/Cards/BlogCard';
 
@@ -84,7 +84,7 @@ export default ProfileCard;`,
   },
   {
     name: 'ServiceCard',
-    component: SeviceCard,
+    component: ServiceCard,
     icon: Briefcase,
     colors: {
       gradient: 'from-yellow-400 to-amber-500',
@@ -92,7 +92,7 @@ export default ProfileCard;`,
     },
     code: `import React from "react";
 
-const SeviceCard = () => {
+const ServiceCard = () => {
   return (
     <div className="bg-yellow-200 border-4 border-black p-6 rounded-md shadow-[8px_8px_0px_0px_black] max-w-xs transform hover:shadow-[12px_12px_0px_0px_black] transition-shadow duration-200 ease-in-out">
       <h3 className="text-3xl font-mono font-bold mb-4 text-black">
@@ -108,7 +108,7 @@ const SeviceCard = () => {
   );
 };
 
-export default SeviceCard;`,
+export default ServiceCard;`,
   },
   {
     name: 'TestimonialCard',

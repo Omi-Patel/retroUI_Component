@@ -37,12 +37,12 @@ export default function SimpleHomePage() {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <section className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+      <main className="max-w-5xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+        <section className="text-center mb-10 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Simplicity is Timeless
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-xl mb-8 max-w-2xl mx-auto">
             Rediscover the beauty of minimalism with our curated collection of
             retro-inspired essentials.
           </p>
@@ -54,7 +54,7 @@ export default function SimpleHomePage() {
           </a>
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-10 md:mb-16">
           <div className="border border-gray-300 p-6">
             <Sun className="w-12 h-12 mb-4" />
             <h3 className="text-xl font-bold mb-2">Daytime Essentials</h3>
@@ -85,20 +85,20 @@ export default function SimpleHomePage() {
           </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-4 text-center">
+        <section className="mb-10 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-center">
             Featured Product
           </h2>
-          <div className="md:flex items-center border border-gray-300">
-            <div className="md:w-1/2">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center border border-gray-300">
+            <div className="w-full md:w-1/2">
               <img
                 src="https://images.unsplash.com/photo-1595769816263-9b910be24d5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
                 alt="Minimalist Clock"
                 className="w-full"
               />
             </div>
-            <div className="md:w-1/2 p-6">
-              <h3 className="text-2xl font-bold mb-2">
+            <div className="w-full md:w-1/2 p-6">
+              <h3 className="text-xl sm:text-2xl font-bold mb-2">
                 The Timeless Timekeeper
               </h3>
               <p className="mb-4">
@@ -117,7 +117,7 @@ export default function SimpleHomePage() {
         </section>
 
         <section className="text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Stay Updated</h2>
           <p className="mb-4">
             Join our newsletter for minimalist living tips and exclusive offers.
           </p>

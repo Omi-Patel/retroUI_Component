@@ -67,33 +67,31 @@ export default function ModernBlog() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8">
         {blogPosts.map((post, index) => (
           <article
             key={post.id}
-            className={`flex flex-col md:flex-row items-center mb-12 ${
+            className={`flex flex-col md:flex-row items-center mb-10 md:mb-12 gap-6 ${
               index % 2 === 0 ? "md:flex-row-reverse" : ""
             }`}
           >
-            <div className="md:w-1/2 mb-6 md:mb-0">
+            <div className="w-full md:w-1/2 mb-2 md:mb-0">
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-full h-64 object-cover rounded-lg shadow-md"
+                className="w-full h-48 sm:h-64 object-cover rounded-lg shadow-md"
               />
             </div>
             <div
-              className={`md:w-1/2 ${
+              className={`w-full md:w-1/2 ${
                 index % 2 === 0 ? "md:pr-12" : "md:pl-12"
               }`}
             >
-              <h2 className="text-2xl font-bold mb-4">{post.title}</h2>
-              <p className="text-blue-700 mb-4">{post.excerpt}</p>
-              <div className="flex items-center text-sm text-blue-600 mb-4">
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>{post.date}</span>
-                <User className="w-4 h-4 ml-4 mr-2" />
-                <span>{post.author}</span>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4">{post.title}</h2>
+              <p className="text-blue-700 mb-4 text-sm sm:text-base">{post.excerpt}</p>
+              <div className="flex flex-wrap items-center text-sm text-blue-600 mb-4 gap-x-4 gap-y-1">
+                <span className="flex items-center"><Calendar className="w-4 h-4 mr-2" />{post.date}</span>
+                <span className="flex items-center"><User className="w-4 h-4 mr-2" />{post.author}</span>
               </div>
               <a
                 href="#"

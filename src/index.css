@@ -3,255 +3,347 @@
 @tailwind utilities;
 
 /* ===========================================
-   RETRO UI - CSS Variables & Design Tokens
+   RETRO UI — Design tokens (90's zine / newsprint)
    =========================================== */
 
-@layer base {
-  :root {
-    /* Brand Colors */
-    --color-primary: 20 184 166; /* teal-500 */
-    --color-primary-light: 45 212 191; /* teal-400 */
-    --color-primary-dark: 13 148 136; /* teal-600 */
-    
-    /* Accent Colors */
-    --color-accent-cyan: 6 182 212; /* cyan-500 */
-    --color-accent-purple: 168 85 247; /* purple-500 */
-    --color-accent-amber: 245 158 11; /* amber-500 */
-    
-    /* Semantic Colors */
-    --color-success: 34 197 94; /* green-500 */
-    --color-warning: 234 179 8; /* yellow-500 */
-    --color-error: 239 68 68; /* red-500 */
-    
-    /* Neutral Colors (Light Mode) */
-    --color-background: 248 250 252; /* slate-50 */
-    --color-surface: 255 255 255; /* white */
-    --color-text-primary: 15 23 42; /* slate-900 */
-    --color-text-secondary: 71 85 105; /* slate-600 */
-    --color-text-muted: 148 163 184; /* slate-400 */
-    --color-border: 226 232 240; /* slate-200 */
-    
-    /* Retro Shadows */
-    --shadow-retro-sm: 2px 2px 0px 0px rgba(0, 0, 0, 1);
-    --shadow-retro-md: 4px 4px 0px 0px rgba(0, 0, 0, 1);
-    --shadow-retro-lg: 6px 6px 0px 0px rgba(0, 0, 0, 1);
-    --shadow-retro-xl: 8px 8px 0px 0px rgba(0, 0, 0, 1);
-    
-    /* Spacing Scale */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    
-    /* Border Radius */
-    --radius-sm: 0.25rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-full: 9999px;
-    
-    /* Transitions */
-    --transition-fast: 150ms ease-out;
-    --transition-normal: 300ms ease-out;
-    --transition-slow: 500ms ease-out;
-  }
-  
-  .dark {
-    /* Dark Mode Neutral Colors */
-    --color-background: 15 23 42; /* slate-900 */
-    --color-surface: 30 41 59; /* slate-800 */
-    --color-text-primary: 241 245 249; /* slate-100 */
-    --color-text-secondary: 203 213 225; /* slate-300 */
-    --color-text-muted: 100 116 139; /* slate-500 */
-    --color-border: 51 65 85; /* slate-700 */
-    
-    /* Dark Retro Shadows */
-    --shadow-retro-sm: 2px 2px 0px 0px rgba(255, 255, 255, 0.2);
-    --shadow-retro-md: 4px 4px 0px 0px rgba(255, 255, 255, 0.2);
-    --shadow-retro-lg: 6px 6px 0px 0px rgba(255, 255, 255, 0.2);
-    --shadow-retro-xl: 8px 8px 0px 0px rgba(255, 255, 255, 0.2);
-  }
+:root {
+  --bg: #ede7d6;
+  --surface: #e2dcc9;
+  --surface-2: #d3cab2;
+  --fg: #1c1814;
+  --muted: #6e6553;
+  --border: #c0b69a;
+  --border-strong: #948869;
+  --accent: #1c1814;
+  --accent-fg: #ede7d6;
+  --brand: #1c1814;
+  --paper-tint: rgba(0, 0, 0, 0.01);
+  --warning: #b45309;
+  --ok: #65a30d;
+  --sticker: #e07b67;
+  --sticker-2: #5b8a7a;
 }
 
-/* ===========================================
-   RETRO UI - Component Utilities
-   =========================================== */
-
-@layer components {
-  /* Retro Button Base */
-  .retro-btn {
-    @apply font-mono font-bold border-4 border-black cursor-pointer select-none
-           transition-all duration-150 ease-out;
-    box-shadow: var(--shadow-retro-md);
-  }
-  
-  .retro-btn:hover {
-    box-shadow: var(--shadow-retro-lg);
-  }
-  
-  .retro-btn:active {
-    box-shadow: var(--shadow-retro-sm);
-    transform: translate(2px, 2px);
-  }
-  
-  /* Retro Card Base */
-  .retro-card {
-    @apply border-4 border-black rounded-md;
-    box-shadow: var(--shadow-retro-lg);
-    transition: box-shadow var(--transition-fast);
-  }
-  
-  .retro-card:hover {
-    box-shadow: var(--shadow-retro-xl);
-  }
-  
-  /* Retro Input Base */
-  .retro-input {
-    @apply font-mono px-4 py-2 border-4 border-black focus:outline-none;
-    box-shadow: var(--shadow-retro-md);
-    transition: box-shadow var(--transition-fast);
-  }
-  
-  .retro-input:focus {
-    box-shadow: var(--shadow-retro-lg);
-  }
-  
-  /* Neon Glow Effect */
-  .neon-glow {
-    box-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 20px currentColor;
-  }
-  
-  .neon-text {
-    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
-  }
-  
-  /* Pixel Border Effect */
-  .pixel-border {
-    image-rendering: pixelated;
-    border-style: solid;
-  }
-  
-  /* Glass Morphism */
-  .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
-  }
-  
-  .dark .glass {
-    @apply bg-black/10 border-white/10;
-  }
+.dark {
+  --bg: #15130e;
+  --surface: #1c1913;
+  --surface-2: #24201a;
+  --fg: #ede7d6;
+  --muted: #948869;
+  --border: #2e2920;
+  --border-strong: #4a4232;
+  --accent: #ede7d6;
+  --accent-fg: #15130e;
+  --brand: #ede7d6;
+  --paper-tint: rgba(255, 255, 255, 0.01);
+  --warning: #f59e0b;
+  --ok: #a3e635;
+  --sticker: #c46455;
+  --sticker-2: #6a9686;
 }
 
-/* ===========================================
-   RETRO UI - Animation Utilities
-   =========================================== */
-
-@layer utilities {
-  /* Hover lift animation */
-  .hover-lift {
-    @apply transition-transform duration-200;
-  }
-  
-  .hover-lift:hover {
-    @apply -translate-y-1;
-  }
-  
-  /* Pulse glow animation */
-  .pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-  }
-  
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 5px currentColor;
-    }
-    50% {
-      box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
-    }
-  }
-  
-  /* Retro shake animation */
-  .retro-shake:hover {
-    animation: retro-shake 0.5s ease-in-out;
-  }
-  
-  @keyframes retro-shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-2px) rotate(-1deg); }
-    50% { transform: translateX(2px) rotate(1deg); }
-    75% { transform: translateX(-2px) rotate(-1deg); }
-  }
-  
-  /* Pixelated rendering */
-  .pixelated {
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-  }
-  
-  /* Scanline effect */
-  .scanlines::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 0, 0, 0.03) 2px,
-      rgba(0, 0, 0, 0.03) 4px
-    );
-    pointer-events: none;
-  }
-}
-
-/* ===========================================
-   RETRO UI - Global Styles
-   =========================================== */
-
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
 }
 
 body {
-  @apply antialiased;
-  font-feature-settings: 'kern' 1, 'liga' 1;
+  font-family: "Space Grotesk", ui-sans-serif, system-ui;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01" on, "cv11" on;
+  position: relative;
 }
 
-/* Custom Scrollbar */
+/* CRT scanlines + paper grain — very subtle */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.025) 2px,
+      rgba(0, 0, 0, 0.025) 3px
+    ),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 0 0.16 0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.dark body::before {
+  mix-blend-mode: screen;
+  opacity: 0.12;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.04) 2px,
+    rgba(255, 255, 255, 0.04) 3px
+  );
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+/* ===========================================
+   Layout patterns
+   =========================================== */
+
+.bg-grid {
+  background-image: linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 30%, transparent 100%);
+}
+
+.bg-dots {
+  background-image: radial-gradient(circle, var(--border-strong) 1px, transparent 1.2px);
+  background-size: 18px 18px;
+  background-position: 0 0;
+  opacity: 0.45;
+}
+
+.bg-halftone {
+  background-image:
+    radial-gradient(circle, var(--fg) 1.4px, transparent 1.6px),
+    radial-gradient(circle, var(--fg) 1px, transparent 1.2px);
+  background-size: 14px 14px, 7px 7px;
+  background-position: 0 0, 7px 7px;
+  opacity: 0.06;
+}
+
+/* ===========================================
+   Typography helpers
+   =========================================== */
+
+.display {
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+.display-italic {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.label {
+  font-family: "JetBrains Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.chapter-num {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ===========================================
+   Sticker / stamp / link / ornament
+   =========================================== */
+
+.sticker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1.5px solid var(--fg);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+  box-shadow: 3px 3px 0 0 var(--sticker);
+  transform: rotate(-1.5deg);
+}
+
+.sticker-flat {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  background: var(--fg);
+  color: var(--bg);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 2px;
+}
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border: 1.5px solid currentColor;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 3px;
+  position: relative;
+}
+
+.stamp::before,
+.stamp::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 4px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.stamp::before {
+  left: -8px;
+  transform: translateY(-50%);
+}
+
+.stamp::after {
+  right: -8px;
+  transform: translateY(-50%);
+}
+
+.retro-link {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--border-strong);
+}
+
+.retro-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.ornament-hr {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--muted);
+}
+
+.ornament-hr::before,
+.ornament-hr::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-image: linear-gradient(to right, currentColor 50%, transparent 50%);
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+  opacity: 0.4;
+}
+
+/* ===========================================
+   Marquee
+   =========================================== */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 3rem;
+  padding-right: 3rem;
+  animation: marquee 40s linear infinite;
+}
+
+/* ===========================================
+   kbd / scroll / preview
+   =========================================== */
+
+kbd {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  line-height: 1;
+  font-weight: 500;
+}
+
+.nice-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nice-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.nice-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.placeholder-tile {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--surface-2),
+    var(--surface-2) 8px,
+    var(--bg) 8px,
+    var(--bg) 16px
+  );
+}
+
+/* Global scrollbar fallback */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-900;
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+  background: var(--border);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500 dark:bg-gray-500;
+  background: var(--border-strong);
 }
 
-/* Selection Colors */
-::selection {
-  @apply bg-teal-500 text-white;
-}
-
-/* Focus Visible Styles */
+/* Focus visible */
 :focus-visible {
-  @apply outline-2 outline-offset-2 outline-teal-500;
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
 }
 
-/* Reduced Motion */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -1,92 +1,229 @@
-import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight } from 'lucide-react';
-import { fadeIn } from '../../lib/animations';
+import { Suspense } from "react";
+import {
+  Link,
+  Outlet,
+  useRouterState,
+} from "@tanstack/react-router";
+import { ChevronRight, Book, Mail, Box, ArrowUpRight, Bug } from "lucide-react";
+import { COMPONENT_REGISTRY } from "../../lib/registries";
+
+function PaneLoader() {
+  return (
+    <div className="min-h-[50vh] flex items-center justify-center">
+      <div className="flex space-x-2">
+        <span
+          className="w-2 h-2 rounded-full animate-bounce"
+          style={{ background: "var(--fg)", animationDelay: "0s" }}
+        />
+        <span
+          className="w-2 h-2 rounded-full animate-bounce"
+          style={{ background: "var(--fg)", animationDelay: "0.15s" }}
+        />
+        <span
+          className="w-2 h-2 rounded-full animate-bounce"
+          style={{ background: "var(--fg)", animationDelay: "0.3s" }}
+        />
+      </div>
+    </div>
+  );
+}
 
 /**
- * Reusable showcase page layout with hero section
+ * Docs-style chrome shared by every individual component showcase.
+ * Rendered via a pathless layout route so it stays mounted while
+ * the user navigates between component categories.
  */
-export const ShowcaseLayout = ({ 
-  children, 
-  theme,
-  title,
-  description,
-  previewComponents = [],
-}) => {
+export const ShowcaseLayout = () => {
+  const pathname = useRouterState({
+    select: (s) => s.location.pathname,
+  });
+  const slug = pathname.split("/")[2] || "";
+  const current = COMPONENT_REGISTRY.find((c) => c.path === slug);
+  const idx = COMPONENT_REGISTRY.findIndex((c) => c.path === slug);
+  const prev = COMPONENT_REGISTRY[idx - 1];
+  const next = COMPONENT_REGISTRY[idx + 1];
+
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 transition-colors duration-300 bg-[url('/grid-pattern.svg')] bg-fixed">
-      <div className="container mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <motion.section
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          className="relative mb-16 overflow-hidden"
+    <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-8">
+      {/* Breadcrumb + Edit on GitHub */}
+      <div className="flex items-center justify-between gap-4 mb-6">
+        <div
+          className="flex items-center gap-2 text-[12px] mono"
+          style={{ color: "var(--muted)" }}
         >
-          <div className={`absolute inset-0 bg-gradient-to-r ${theme.hero.bg} ${theme.hero.bgDark} z-0 rounded-2xl`}></div>
-          <div className={`absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-r ${theme.hero.blur} rounded-full blur-3xl`}></div>
+          <Link to="/" className="hover:!text-[var(--fg)] transition-colors">
+            Home
+          </Link>
+          <ChevronRight className="w-[11px] h-[11px]" />
+          <Link
+            to="/components"
+            className="hover:!text-[var(--fg)] transition-colors"
+          >
+            Components
+          </Link>
+          {current && (
+            <>
+              <ChevronRight className="w-[11px] h-[11px]" />
+              <span style={{ color: "var(--fg)" }}>{current.name}</span>
+            </>
+          )}
+        </div>
+        <a
+          href="https://github.com/Omi-Patel/retroUI_Component"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1.5 text-[12px] mono hover:!text-[var(--fg)] transition-colors"
+          style={{ color: "var(--muted)" }}
+        >
+          <Bug className="w-3 h-3" />
+          <span className="hidden sm:inline">Edit on GitHub</span>
+          <ArrowUpRight className="w-[11px] h-[11px]" />
+        </a>
+      </div>
 
-          <div className={`relative z-10 py-12 px-8 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8 rounded-2xl ${theme.hero.border}`}>
-            <div className="text-center md:text-left max-w-2xl">
-              <div className={`inline-flex items-center px-3 py-1 rounded-full bg-${theme.primary.light}-100 dark:bg-${theme.primary.light}-900/30 text-${theme.primary.light}-700 dark:text-${theme.primary.light}-300 text-xs font-medium mb-4`}>
-                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
-                <span>Retro UI Collection</span>
+      <div className="grid grid-cols-12 gap-8">
+        {/* SIDEBAR — stays mounted across navigations */}
+        <aside className="hidden lg:block col-span-3 xl:col-span-2">
+          <div className="sticky top-[72px] max-h-[calc(100vh-88px)] overflow-y-auto nice-scroll pr-2">
+            <div className="mb-4">
+              <div
+                className="text-[11px] font-semibold uppercase tracking-wider mb-2 px-2"
+                style={{ color: "var(--muted)" }}
+              >
+                Library
               </div>
-
-              <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight">
-                <span className={`text-transparent bg-clip-text bg-gradient-to-r ${theme.primary.gradient}`}>
-                  Retro
-                </span>
-                <span className="relative">
-                  <span className="relative z-10">{title}</span>
-                  <span className={`absolute bottom-1 left-0 w-full h-3 bg-${theme.primary.light}-200 dark:bg-${theme.primary.light}-800/50 -z-10 skew-x-3`}></span>
-                </span>
-                <span> Components</span>
-              </h1>
-
-              <p className="text-lg text-gray-700 dark:text-gray-300 max-w-xl leading-relaxed mb-6">
-                {description}
-              </p>
-
-              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`px-6 py-3 bg-gradient-to-r ${theme.primary.gradient} text-white font-bold rounded-md shadow-lg hover:shadow-${theme.primary.light}-500/25 hover:shadow-xl transition-all duration-300 flex items-center gap-2`}
-                >
-                  <span>Explore Collection</span>
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
-
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 font-bold rounded-md border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  Documentation
-                </motion.button>
-              </div>
+              <ul className="space-y-0.5">
+                {COMPONENT_REGISTRY.map((c) => {
+                  const isActive = c.path === slug;
+                  return (
+                    <li key={c.path}>
+                      <Link
+                        to={`/components/${c.path}`}
+                        className="w-full text-left px-2 py-1.5 rounded-md text-[13px] flex items-center gap-2 transition-colors hover:!text-[var(--fg)]"
+                        style={{
+                          background: isActive
+                            ? "var(--surface-2)"
+                            : "transparent",
+                          color: isActive ? "var(--fg)" : "var(--muted)",
+                          fontWeight: isActive ? 500 : 400,
+                        }}
+                      >
+                        <c.Icon className="w-3.5 h-3.5 opacity-70" />
+                        <span className="truncate">{c.name}</span>
+                        <span
+                          className="ml-auto text-[10px] mono opacity-50"
+                          style={{ color: "var(--muted)" }}
+                        >
+                          {c.count}
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
 
-            {previewComponents.length > 0 && (
-              <div className="hidden lg:block relative">
-                <div className={`absolute inset-0 bg-gradient-to-r ${theme.hero.blur} rounded-xl blur-xl -z-10`}></div>
-                <div className={`grid grid-cols-2 gap-4 p-6 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl ${theme.hero.border} shadow-xl`}>
-                  {previewComponents.slice(0, 2).map((Preview, index) => (
-                    <div key={index} className={`flex justify-center items-center p-4 bg-${index === 0 ? theme.primary.light : 'fuchsia'}-50 dark:bg-${index === 0 ? theme.primary.light : 'fuchsia'}-900/20 rounded-lg`}>
-                      <Preview />
-                    </div>
-                  ))}
-                </div>
+            <div className="mt-6 px-2">
+              <div
+                className="text-[11px] font-semibold uppercase tracking-wider mb-2"
+                style={{ color: "var(--muted)" }}
+              >
+                Resources
               </div>
-            )}
+              <ul className="space-y-0.5">
+                {[
+                  { name: "Page Templates", to: "/pages", Icon: Box },
+                  { name: "Documentation", to: "/about", Icon: Book },
+                  { name: "Contact", to: "/contact-us", Icon: Mail },
+                ].map((r) => (
+                  <li key={r.name}>
+                    <Link
+                      to={r.to}
+                      className="w-full text-left px-2 py-1.5 rounded-md text-[13px] flex items-center gap-2 transition-colors hover:!text-[var(--fg)]"
+                      style={{ color: "var(--muted)" }}
+                    >
+                      <r.Icon className="w-3.5 h-3.5 opacity-70" />
+                      <span>{r.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </motion.section>
+        </aside>
 
-        {children}
+        {/* MAIN — only this part re-renders when the child changes */}
+        <main className="col-span-12 lg:col-span-9 xl:col-span-10 min-w-0">
+          <Suspense fallback={<PaneLoader />}>
+            <Outlet />
+          </Suspense>
+        </main>
+      </div>
+
+      {/* Prev / Next pager */}
+      <div
+        className="mt-16 pt-8 grid grid-cols-2 gap-4"
+        style={{ borderTop: "1px solid var(--border)" }}
+      >
+        {prev ? (
+          <Link
+            to={`/components/${prev.path}`}
+            className="rounded-lg p-4 text-left transition-colors block"
+            style={{ border: "1px solid var(--border)" }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.background = "var(--surface)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.background = "transparent")
+            }
+          >
+            <div
+              className="text-[11px] uppercase tracking-wider mb-1 inline-flex items-center gap-1"
+              style={{ color: "var(--muted)" }}
+            >
+              <ChevronRight className="w-3 h-3 rotate-180" /> Previous
+            </div>
+            <div
+              className="text-[14px] font-semibold"
+              style={{ color: "var(--fg)" }}
+            >
+              {prev.name}
+            </div>
+          </Link>
+        ) : (
+          <div />
+        )}
+        {next ? (
+          <Link
+            to={`/components/${next.path}`}
+            className="rounded-lg p-4 text-right transition-colors block"
+            style={{ border: "1px solid var(--border)" }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.background = "var(--surface)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.background = "transparent")
+            }
+          >
+            <div
+              className="text-[11px] uppercase tracking-wider mb-1 inline-flex items-center gap-1 justify-end w-full"
+              style={{ color: "var(--muted)" }}
+            >
+              Next <ChevronRight className="w-3 h-3" />
+            </div>
+            <div
+              className="text-[14px] font-semibold"
+              style={{ color: "var(--fg)" }}
+            >
+              {next.name}
+            </div>
+          </Link>
+        ) : (
+          <div />
+        )}
       </div>
     </div>
   );
 };
 
 export default ShowcaseLayout;
-

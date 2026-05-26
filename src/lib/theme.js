@@ -1,6 +1,7 @@
 /**
  * Centralized theme configuration for component showcases
  * Each category has its own color scheme and accent colors
+ * All class strings are pre-computed to avoid Tailwind purging issues
  */
 
 export const showcaseThemes = {
@@ -20,6 +21,18 @@ export const showcaseThemes = {
       border: 'border-emerald-200/50 dark:border-emerald-800/30',
       blur: 'from-emerald-500/20 to-teal-500/20 dark:from-emerald-900/30 dark:to-teal-900/30',
     },
+    badge: {
+      bg: 'bg-emerald-100 dark:bg-emerald-900/30',
+      text: 'text-emerald-700 dark:text-emerald-300',
+    },
+    highlight: 'bg-emerald-200 dark:bg-emerald-800/50',
+    iconColor: 'text-emerald-500',
+    activeBorder: 'border-emerald-500',
+    linkText: 'text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300',
+    infoBorder: 'border-emerald-200 dark:border-emerald-800/30',
+    infoBorderLight: 'border-emerald-200/50 dark:border-emerald-800/20',
+    previewBg: 'bg-emerald-50 dark:bg-emerald-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   cards: {
     name: 'Card',
@@ -37,6 +50,18 @@ export const showcaseThemes = {
       border: 'border-blue-200/50 dark:border-blue-800/30',
       blur: 'from-blue-500/20 to-blue-500/20 dark:from-blue-900/30 dark:to-blue-900/30',
     },
+    badge: {
+      bg: 'bg-blue-100 dark:bg-blue-900/30',
+      text: 'text-blue-700 dark:text-blue-300',
+    },
+    highlight: 'bg-blue-200 dark:bg-blue-800/50',
+    iconColor: 'text-blue-500',
+    activeBorder: 'border-blue-500',
+    linkText: 'text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300',
+    infoBorder: 'border-blue-200 dark:border-blue-800/30',
+    infoBorderLight: 'border-blue-200/50 dark:border-blue-800/20',
+    previewBg: 'bg-blue-50 dark:bg-blue-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   inputs: {
     name: 'Input',
@@ -54,6 +79,18 @@ export const showcaseThemes = {
       border: 'border-emerald-200/50 dark:border-emerald-800/30',
       blur: 'from-emerald-500/20 to-teal-500/20 dark:from-emerald-900/30 dark:to-teal-900/30',
     },
+    badge: {
+      bg: 'bg-emerald-100 dark:bg-emerald-900/30',
+      text: 'text-emerald-700 dark:text-emerald-300',
+    },
+    highlight: 'bg-emerald-200 dark:bg-emerald-800/50',
+    iconColor: 'text-emerald-500',
+    activeBorder: 'border-emerald-500',
+    linkText: 'text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300',
+    infoBorder: 'border-emerald-200 dark:border-emerald-800/30',
+    infoBorderLight: 'border-emerald-200/50 dark:border-emerald-800/20',
+    previewBg: 'bg-emerald-50 dark:bg-emerald-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   loaders: {
     name: 'Loader',
@@ -71,6 +108,18 @@ export const showcaseThemes = {
       border: 'border-purple-200/50 dark:border-purple-800/30',
       blur: 'from-purple-500/20 to-indigo-500/20 dark:from-purple-900/30 dark:to-indigo-900/30',
     },
+    badge: {
+      bg: 'bg-purple-100 dark:bg-purple-900/30',
+      text: 'text-purple-700 dark:text-purple-300',
+    },
+    highlight: 'bg-purple-200 dark:bg-purple-800/50',
+    iconColor: 'text-purple-500',
+    activeBorder: 'border-purple-500',
+    linkText: 'text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300',
+    infoBorder: 'border-purple-200 dark:border-purple-800/30',
+    infoBorderLight: 'border-purple-200/50 dark:border-purple-800/20',
+    previewBg: 'bg-purple-50 dark:bg-purple-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   switches: {
     name: 'Switch',
@@ -88,6 +137,18 @@ export const showcaseThemes = {
       border: 'border-amber-200/50 dark:border-amber-800/30',
       blur: 'from-amber-500/20 to-orange-500/20 dark:from-amber-900/30 dark:to-orange-900/30',
     },
+    badge: {
+      bg: 'bg-amber-100 dark:bg-amber-900/30',
+      text: 'text-amber-700 dark:text-amber-300',
+    },
+    highlight: 'bg-amber-200 dark:bg-amber-800/50',
+    iconColor: 'text-amber-500',
+    activeBorder: 'border-amber-500',
+    linkText: 'text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300',
+    infoBorder: 'border-amber-200 dark:border-amber-800/30',
+    infoBorderLight: 'border-amber-200/50 dark:border-amber-800/20',
+    previewBg: 'bg-amber-50 dark:bg-amber-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   tables: {
     name: 'Table',
@@ -105,6 +166,18 @@ export const showcaseThemes = {
       border: 'border-rose-200/50 dark:border-rose-800/30',
       blur: 'from-rose-500/20 to-pink-500/20 dark:from-rose-900/30 dark:to-pink-900/30',
     },
+    badge: {
+      bg: 'bg-rose-100 dark:bg-rose-900/30',
+      text: 'text-rose-700 dark:text-rose-300',
+    },
+    highlight: 'bg-rose-200 dark:bg-rose-800/50',
+    iconColor: 'text-rose-500',
+    activeBorder: 'border-rose-500',
+    linkText: 'text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300',
+    infoBorder: 'border-rose-200 dark:border-rose-800/30',
+    infoBorderLight: 'border-rose-200/50 dark:border-rose-800/20',
+    previewBg: 'bg-rose-50 dark:bg-rose-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   navbars: {
     name: 'Navbar',
@@ -122,6 +195,18 @@ export const showcaseThemes = {
       border: 'border-cyan-200/50 dark:border-cyan-800/30',
       blur: 'from-cyan-500/20 to-blue-500/20 dark:from-cyan-900/30 dark:to-blue-900/30',
     },
+    badge: {
+      bg: 'bg-cyan-100 dark:bg-cyan-900/30',
+      text: 'text-cyan-700 dark:text-cyan-300',
+    },
+    highlight: 'bg-cyan-200 dark:bg-cyan-800/50',
+    iconColor: 'text-cyan-500',
+    activeBorder: 'border-cyan-500',
+    linkText: 'text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300',
+    infoBorder: 'border-cyan-200 dark:border-cyan-800/30',
+    infoBorderLight: 'border-cyan-200/50 dark:border-cyan-800/20',
+    previewBg: 'bg-cyan-50 dark:bg-cyan-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   footers: {
     name: 'Footer',
@@ -139,12 +224,24 @@ export const showcaseThemes = {
       border: 'border-slate-200/50 dark:border-slate-800/30',
       blur: 'from-slate-500/20 to-gray-500/20 dark:from-slate-900/30 dark:to-gray-900/30',
     },
+    badge: {
+      bg: 'bg-slate-100 dark:bg-slate-900/30',
+      text: 'text-slate-700 dark:text-slate-300',
+    },
+    highlight: 'bg-slate-200 dark:bg-slate-800/50',
+    iconColor: 'text-slate-500',
+    activeBorder: 'border-slate-500',
+    linkText: 'text-slate-600 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300',
+    infoBorder: 'border-slate-200 dark:border-slate-800/30',
+    infoBorderLight: 'border-slate-200/50 dark:border-slate-800/20',
+    previewBg: 'bg-slate-50 dark:bg-slate-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   avatars: {
     name: 'Avatar',
     namePlural: 'Avatars',
     description: 'Pixel-perfect, nostalgic avatar designs for your modern web applications.',
-    folder: 'Avtars',
+    folder: 'Avatars',
     primary: {
       gradient: 'from-violet-500 to-purple-600',
       light: 'violet',
@@ -156,6 +253,18 @@ export const showcaseThemes = {
       border: 'border-violet-200/50 dark:border-violet-800/30',
       blur: 'from-violet-500/20 to-purple-500/20 dark:from-violet-900/30 dark:to-purple-900/30',
     },
+    badge: {
+      bg: 'bg-violet-100 dark:bg-violet-900/30',
+      text: 'text-violet-700 dark:text-violet-300',
+    },
+    highlight: 'bg-violet-200 dark:bg-violet-800/50',
+    iconColor: 'text-violet-500',
+    activeBorder: 'border-violet-500',
+    linkText: 'text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300',
+    infoBorder: 'border-violet-200 dark:border-violet-800/30',
+    infoBorderLight: 'border-violet-200/50 dark:border-violet-800/20',
+    previewBg: 'bg-violet-50 dark:bg-violet-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   signin: {
     name: 'Sign In',
@@ -173,6 +282,18 @@ export const showcaseThemes = {
       border: 'border-teal-200/50 dark:border-teal-800/30',
       blur: 'from-teal-500/20 to-cyan-500/20 dark:from-teal-900/30 dark:to-cyan-900/30',
     },
+    badge: {
+      bg: 'bg-teal-100 dark:bg-teal-900/30',
+      text: 'text-teal-700 dark:text-teal-300',
+    },
+    highlight: 'bg-teal-200 dark:bg-teal-800/50',
+    iconColor: 'text-teal-500',
+    activeBorder: 'border-teal-500',
+    linkText: 'text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300',
+    infoBorder: 'border-teal-200 dark:border-teal-800/30',
+    infoBorderLight: 'border-teal-200/50 dark:border-teal-800/20',
+    previewBg: 'bg-teal-50 dark:bg-teal-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   signup: {
     name: 'Sign Up',
@@ -190,6 +311,18 @@ export const showcaseThemes = {
       border: 'border-indigo-200/50 dark:border-indigo-800/30',
       blur: 'from-indigo-500/20 to-blue-500/20 dark:from-indigo-900/30 dark:to-blue-900/30',
     },
+    badge: {
+      bg: 'bg-indigo-100 dark:bg-indigo-900/30',
+      text: 'text-indigo-700 dark:text-indigo-300',
+    },
+    highlight: 'bg-indigo-200 dark:bg-indigo-800/50',
+    iconColor: 'text-indigo-500',
+    activeBorder: 'border-indigo-500',
+    linkText: 'text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300',
+    infoBorder: 'border-indigo-200 dark:border-indigo-800/30',
+    infoBorderLight: 'border-indigo-200/50 dark:border-indigo-800/20',
+    previewBg: 'bg-indigo-50 dark:bg-indigo-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
   pricing: {
     name: 'Pricing',
@@ -207,15 +340,17 @@ export const showcaseThemes = {
       border: 'border-green-200/50 dark:border-green-800/30',
       blur: 'from-green-500/20 to-emerald-500/20 dark:from-green-900/30 dark:to-emerald-900/30',
     },
+    badge: {
+      bg: 'bg-green-100 dark:bg-green-900/30',
+      text: 'text-green-700 dark:text-green-300',
+    },
+    highlight: 'bg-green-200 dark:bg-green-800/50',
+    iconColor: 'text-green-500',
+    activeBorder: 'border-green-500',
+    linkText: 'text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300',
+    infoBorder: 'border-green-200 dark:border-green-800/30',
+    infoBorderLight: 'border-green-200/50 dark:border-green-800/20',
+    previewBg: 'bg-green-50 dark:bg-green-900/20',
+    previewBgAlt: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
   },
 };
-
-/**
- * Generate component-specific background classes
- */
-export const getComponentBg = (colorFrom, colorTo) => ({
-  light: `bg-gradient-to-br from-${colorFrom}-50 to-${colorTo}-100`,
-  dark: `dark:from-${colorFrom}-900/20 dark:to-${colorTo}-900/30`,
-  full: `bg-gradient-to-br from-${colorFrom}-50 to-${colorTo}-100 dark:from-${colorFrom}-900/20 dark:to-${colorTo}-900/30`,
-});
-

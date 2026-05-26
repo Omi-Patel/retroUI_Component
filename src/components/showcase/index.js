@@ -1,6 +1,5 @@
 export { ShowcaseLayout } from './ShowcaseLayout';
-export { ComponentSelector } from './ComponentSelector';
-export { ComponentPreview } from './ComponentPreview';
-export { ComponentGrid } from './ComponentGrid';
 export { ComponentShowcasePage } from './ComponentShowcasePage';
-
+export { PageShowcaseLayout } from './PageShowcaseLayout';
+export { PageShowcasePage } from './PageShowcasePage';
+export { DevicePreviewDialog } from './DevicePreviewDialog';

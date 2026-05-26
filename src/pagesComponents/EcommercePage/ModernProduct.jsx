@@ -105,9 +105,9 @@ export default function ModernProduct() {
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 font-sans">
-      <header className="bg-white shadow-md py-4 px-6  top-0 z-10">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-indigo-600">ModernRetro</h1>
+      <header className="bg-white shadow-md py-4 px-4 sm:px-6 lg:px-8 top-0 z-10">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <h1 className="text-2xl sm:text-3xl font-bold text-indigo-600">ModernRetro</h1>
           <button
             onClick={() => setIsCartOpen(true)}
             className="relative p-2 text-gray-600 hover:text-indigo-600 transition-colors duration-300"
@@ -122,11 +122,11 @@ export default function ModernProduct() {
         </div>
       </header>
 
-      <main className="container mx-auto py-8 px-2 sm:px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-gray-800">
+      <main className="max-w-7xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800">
           Our Curated Collection
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {products.map((product) => (
             <div
               key={product.id}
@@ -153,15 +153,15 @@ export default function ModernProduct() {
                 </button>
               </div>
               <div className="p-4 sm:p-6">
-                <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4">{product.description}</p>
-                <div className="flex justify-between items-center">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">{product.name}</h3>
+                <p className="text-gray-600 mb-4 text-sm sm:text-base">{product.description}</p>
+                <div className="flex flex-wrap justify-between items-center gap-3">
                   <span className="text-xl sm:text-2xl font-bold text-indigo-600">
                     ${product.price.toFixed(2)}
                   </span>
                   <button
                     onClick={() => addToCart(product)}
-                    className="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition-colors duration-300"
+                    className="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition-colors duration-300 whitespace-nowrap"
                   >
                     Add to Cart
                   </button>
@@ -174,7 +174,7 @@ export default function ModernProduct() {
 
       {isCartOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end z-50">
-          <div className="bg-white w-full max-w-md p-6 overflow-y-auto">
+          <div className="bg-white w-full max-w-md p-4 sm:p-6 overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">Your Cart</h2>
               <button
@@ -252,8 +252,8 @@ export default function ModernProduct() {
         </div>
       )}
 
-      <footer className="bg-gray-800 text-white py-8 px-6 mt-12">
-        <div className="container mx-auto text-center">
+      <footer className="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8 mt-12">
+        <div className="max-w-7xl mx-auto text-center">
           <p>&copy; 2023 ModernRetro. All rights reserved.</p>
           <p className="mt-2 text-gray-400">
             Bringing the past into the future, one product at a time.

@@ -1,6 +1,6 @@
 import React from "react";
 
-const SeviceCard = () => {
+const ServiceCard = () => {
   return (
     <div className="bg-yellow-200 border-4 border-black p-6 rounded-md shadow-[8px_8px_0px_0px_black] max-w-xs transform hover:shadow-[12px_12px_0px_0px_black] transition-shadow duration-200 ease-in-out">
       <h3 className="text-3xl font-mono font-bold mb-4 text-black">
@@ -16,4 +16,4 @@ const SeviceCard = () => {
   );
 };
 
-export default SeviceCard;
+export default ServiceCard;

@@ -67,8 +67,8 @@ export default function BasicBlog() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+      <main className="max-w-7xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-8 md:gap-12 sm:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (
             <article
               key={post.id}
@@ -79,14 +79,12 @@ export default function BasicBlog() {
                 alt={post.title}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-6">
-                <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-                <p className="text-amber-700 mb-4">{post.excerpt}</p>
-                <div className="flex items-center text-sm text-amber-600 mb-4">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  <span>{post.date}</span>
-                  <User className="w-4 h-4 ml-4 mr-2" />
-                  <span>{post.author}</span>
+              <div className="p-5 sm:p-6">
+                <h2 className="text-lg sm:text-xl font-bold mb-2">{post.title}</h2>
+                <p className="text-amber-700 mb-4 text-sm sm:text-base">{post.excerpt}</p>
+                <div className="flex flex-wrap items-center text-sm text-amber-600 mb-4 gap-x-4 gap-y-1">
+                  <span className="flex items-center"><Calendar className="w-4 h-4 mr-2" />{post.date}</span>
+                  <span className="flex items-center"><User className="w-4 h-4 mr-2" />{post.author}</span>
                 </div>
                 <a
                   href="#"

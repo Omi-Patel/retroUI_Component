@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function ContactPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-[#fcf6e3] text-[#2b3a67] font-sans m-1 sm:m-8">
+    <div className="min-h-screen bg-[#fcf6e3] text-[#2b3a67] font-sans m-0 sm:m-4 lg:m-8">
       <div className="bg-[#f7b32b] h-2"></div>
       <div className="bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cg%20fill%3D%22%23f26419%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M0%200h20L0%2020z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')]">
         <main className="container mx-auto ">
@@ -85,11 +85,11 @@ export default function ContactPage() {
             )}
           </div>
 
-          <div className=" px-2 sm:px-4">
-            <h1 className="text-5xl font-bold mb-12 text-center text-[#2b3a67] tracking-tight">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-[#2b3a67] tracking-tight">
               Contact Us
             </h1>
-            <div className="max-w-2xl mx-auto bg-[#fcf6e3] p-8 rounded-lg shadow-lg border-4 border-[#f26419] relative overflow-hidden">
+            <div className="max-w-2xl mx-auto bg-[#fcf6e3] p-5 sm:p-8 rounded-lg shadow-lg border-4 border-[#f26419] relative overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[#f7b32b] transform rotate-45 translate-x-8 -translate-y-8"></div>
               <form className="relative z-10">
                 <div className="mb-6">
@@ -139,22 +139,22 @@ export default function ContactPage() {
                 </div>
                 <button
                   type="submit"
-                  className="bg-[#f26419] text-[#fcf6e3] px-8 py-4 rounded-full text-xl font-bold hover:bg-[#f7b32b] hover:text-[#2b3a67] shadow-lg w-full transform hover:scale-105 transition-transform duration-200"
+                  className="bg-[#f26419] text-[#fcf6e3] px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-xl font-bold hover:bg-[#f7b32b] hover:text-[#2b3a67] shadow-lg w-full transform hover:scale-105 transition-transform duration-200"
                 >
                   Send Message
                 </button>
               </form>
             </div>
-            <div className="mt-12 text-center bg-[#2b3a67] text-[#fcf6e3] p-8 rounded-lg shadow-lg relative overflow-hidden">
+            <div className="mt-10 md:mt-12 max-w-2xl mx-auto text-center bg-[#2b3a67] text-[#fcf6e3] p-5 sm:p-8 rounded-lg shadow-lg relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2252%22%20height%3D%2226%22%20viewBox%3D%220%200%2052%2026%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23f7b32b%22%20fill-opacity%3D%220.1%22%3E%3Cpath%20d%3D%22M10%2010c0-2.21-1.79-4-4-4-3.314%200-6-2.686-6-6h2c0%202.21%201.79%204%204%204%203.314%200%206%202.686%206%206%200%202.21%201.79%204%204%204%203.314%200%206%202.686%206%206%200%202.21%201.79%204%204%204v2c-3.314%200-6-2.686-6-6%200-2.21-1.79-4-4-4-3.314%200-6-2.686-6-6zm25.464-1.95l8.486%208.486-1.414%201.414-8.486-8.486%201.414-1.414z%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
               <div className="relative z-10">
-                <h2 className="text-3xl font-bold mb-4 text-[#f7b32b]">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-[#f7b32b]">
                   Visit Us
                 </h2>
-                <p className="text-lg mb-2">
+                <p className="text-base sm:text-lg mb-2">
                   123 Retro Street, Vintage City, RC 12345
                 </p>
-                <p className="text-lg">Monday - Friday: 9am - 5pm</p>
+                <p className="text-base sm:text-lg">Monday - Friday: 9am - 5pm</p>
               </div>
             </div>
           </div>

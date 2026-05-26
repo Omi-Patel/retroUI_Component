@@ -45,10 +45,10 @@ export default function RetroHomePage() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <section className="text-center mb-16">
+      <main className="max-w-7xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+        <section className="text-center mb-10 md:mb-16">
           <h2
-            className="text-5xl sm:text-6xl font-bold mb-4 text-pink-500"
+            className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 text-pink-500 break-words"
             style={{
               fontFamily: "'Press Start 2P', cursive",
               textShadow: "3px 3px 0px #4A148C",
@@ -56,7 +56,7 @@ export default function RetroHomePage() {
           >
             Welcome to the 80s
           </h2>
-          <p className="text-xl mb-8">
+          <p className="text-base sm:text-xl mb-8">
             Experience the neon-soaked nostalgia of the 1980s
           </p>
           <a
@@ -67,7 +67,7 @@ export default function RetroHomePage() {
           </a>
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-16">
           {[
             {
               icon: Music,
@@ -99,7 +99,7 @@ export default function RetroHomePage() {
           ))}
         </section>
 
-        <section className="bg-gradient-to-r from-blue-800 to-purple-900 p-8 rounded mb-16 relative overflow-hidden">
+        <section className="bg-gradient-to-r from-blue-800 to-purple-900 p-5 sm:p-8 rounded mb-10 md:mb-16 relative overflow-hidden">
           <div className="absolute inset-0 opacity-50">
             {[...Array(20)].map((_, i) => (
               <Star
@@ -114,19 +114,19 @@ export default function RetroHomePage() {
             ))}
           </div>
           <div className="relative z-10">
-            <h2 className="text-3xl font-bold mb-4 text-center text-yellow-400">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-center text-yellow-400">
               Featured Collection
             </h2>
-            <div className="md:flex items-center">
-              <div className="md:w-1/2 mb-4 md:mb-0">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="w-full md:w-1/2 mb-4 md:mb-0">
                 <img
                   src="https://images.unsplash.com/photo-1595769816263-9b910be24d5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
                   alt="Retro Boombox"
                   className="w-full rounded shadow-lg"
                 />
               </div>
-              <div className="md:w-1/2 md:pl-8">
-                <h3 className="text-2xl font-bold mb-2 text-pink-500">
+              <div className="w-full md:w-1/2 md:pl-8">
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 text-pink-500">
                   80s Boombox Collection
                 </h3>
                 <p className="mb-4">
@@ -146,7 +146,7 @@ export default function RetroHomePage() {
         </section>
 
         <section className="text-center">
-          <h2 className="text-3xl font-bold mb-4 text-pink-500">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-pink-500">
             Join the Retro Revolution
           </h2>
           <p className="mb-4">

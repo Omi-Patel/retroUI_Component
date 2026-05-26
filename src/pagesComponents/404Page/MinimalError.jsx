@@ -5,12 +5,12 @@ export default function MinimalError() {
   return (
     <div className=" bg-yellow-50 flex flex-col items-center justify-center p-2 sm:p-4 font-mono">
       <div className="max-w-md w-full text-center">
-        <h1 className="text-8xl font-bold text-yellow-800 mb-8 animate-pulse">
+        <h1 className="text-6xl sm:text-7xl md:text-8xl font-bold text-yellow-800 mb-8 animate-pulse">
           404
         </h1>
-        <p className="text-2xl text-yellow-700 mb-8">Page not found</p>
+        <p className="text-xl sm:text-2xl text-yellow-700 mb-8">Page not found</p>
         <div className="w-16 h-1 bg-yellow-400 mx-auto mb-8"></div>
-        <p className="text-lg text-yellow-600 mb-12">
+        <p className="text-base sm:text-lg text-yellow-600 mb-10 md:mb-12">
           Oops! The page you're looking for doesn't exist.
         </p>
         <a

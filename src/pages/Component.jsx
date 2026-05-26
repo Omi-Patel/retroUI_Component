@@ -1,514 +1,266 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useEffect, useState, useMemo } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   Search,
-  Filter,
-  ArrowRight,
-  Package,
   Layers,
-  Grid3X3,
-  Sparkles,
+  ChevronRight,
+  ArrowRight,
+  Square,
+  LayoutGrid,
+  Type,
+  User,
+  LogIn,
+  UserPlus,
+  Loader,
+  PanelLeft,
+  ToggleRight,
+  Table as TableIcon,
+  Tag,
 } from "lucide-react";
+import { COMPONENT_CATEGORIES } from "../lib/constants";
 
-// List of components with images and categories
-const componentsList = [
-  {
-    name: "Button",
-    path: "buttons",
-    image: "https://via.placeholder.com/300x200?text=Button",
-    category: "Basic",
-    description: "Interactive elements for user actions",
-  },
-  {
-    name: "Card",
-    path: "cards",
-    image: "https://via.placeholder.com/300x200?text=Card",
-    category: "Layout",
-    description: "Containers for organizing content",
-  },
-  {
-    name: "Input",
-    path: "inputs",
-    image: "https://via.placeholder.com/300x200?text=Input",
-    category: "Form",
-    description: "Fields for user data entry",
-  },
-  {
-    name: "Avatar",
-    path: "avatars",
-    image: "https://via.placeholder.com/300x200?text=Avatar",
-    category: "Display",
-    description: "User profile representations",
-  },
-  {
-    name: "Signin",
-    path: "signin",
-    image: "https://via.placeholder.com/300x200?text=SignIn",
-    category: "Auth",
-    description: "Authentication entry points",
-  },
-  {
-    name: "Signup",
-    path: "signup",
-    image: "https://via.placeholder.com/300x200?text=SignUp",
-    category: "Auth",
-    description: "User registration interfaces",
-  },
-  {
-    name: "Loader",
-    path: "loaders",
-    image: "https://via.placeholder.com/300x200?text=Loader",
-    category: "Feedback",
-    description: "Loading state indicators",
-  },
-  {
-    name: "Navbar",
-    path: "navbars",
-    image: "https://via.placeholder.com/300x200?text=Navbar",
-    category: "Navigation",
-    description: "Site navigation headers",
-  },
-  {
-    name: "Footer",
-    path: "footers",
-    image: "https://via.placeholder.com/300x200?text=Footer",
-    category: "Layout",
-    description: "Page footer sections",
-  },
-  {
-    name: "Switch",
-    path: "switch",
-    image: "https://via.placeholder.com/300x200?text=Switch",
-    category: "Form",
-    description: "Toggle controls for binary options",
-  },
-  {
-    name: "Table",
-    path: "tables",
-    image: "https://via.placeholder.com/300x200?text=Table",
-    category: "Data",
-    description: "Structured data displays",
-  },
-  {
-    name: "Pricing",
-    path: "pricing",
-    image: "https://via.placeholder.com/300x200?text=Pricing",
-    category: "Display",
-    description: "Product pricing displays",
-  },
-];
+const ICON_MAP = {
+  Button: Square,
+  Card: LayoutGrid,
+  Input: Type,
+  Avatar: User,
+  Signin: LogIn,
+  Signup: UserPlus,
+  Loader: Loader,
+  Navbar: PanelLeft,
+  Footer: Layers,
+  Switch: ToggleRight,
+  Table: TableIcon,
+  Pricing: Tag,
+};
 
-// Get unique categories
-const categories = [
+const COUNT_MAP = {
+  Button: 5,
+  Card: 5,
+  Input: 5,
+  Avatar: 4,
+  Signin: 3,
+  Signup: 7,
+  Loader: 8,
+  Navbar: 5,
+  Footer: 6,
+  Switch: 5,
+  Table: 5,
+  Pricing: 3,
+};
+
+const CATEGORY_LIST = [
   "All",
-  ...new Set(componentsList.map((component) => component.category)),
+  ...new Set(COMPONENT_CATEGORIES.map((c) => c.category)),
 ];
 
-const Component = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [filteredComponents, setFilteredComponents] = useState(componentsList);
+export default function Component() {
+  const [q, setQ] = useState("");
+  const [cat, setCat] = useState("All");
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    let result = componentsList;
-
-    // Filter by search term
-    if (searchTerm) {
-      result = result.filter(
-        (component) =>
-          component.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          component.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    // Filter by category
-    if (selectedCategory !== "All") {
-      result = result.filter(
-        (component) => component.category === selectedCategory
-      );
-    }
-
-    // Sort alphabetically
-    result = result.sort((a, b) => a.name.localeCompare(b.name));
-
-    setFilteredComponents(result);
-  }, [searchTerm, selectedCategory]);
-
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  // Get category color
-  const getCategoryColor = (category) => {
-    const colors = {
-      Basic: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
-      Layout:
-        "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
-      Form: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-      Display:
-        "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
-      Auth: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
-      Feedback:
-        "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
-      Navigation:
-        "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300",
-      Data: "bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300",
-    };
-    return (
-      colors[category] ||
-      "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"
+  const filtered = useMemo(() => {
+    return COMPONENT_CATEGORIES.filter(
+      (c) => cat === "All" || c.category === cat
+    ).filter(
+      (c) =>
+        !q ||
+        c.name.toLowerCase().includes(q.toLowerCase()) ||
+        c.description.toLowerCase().includes(q.toLowerCase())
     );
-  };
+  }, [q, cat]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      <div className="container mx-auto px-4 py-16">
-        {/* Hero Section */}
-        <motion.section
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          className="mb-16"
-        >
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-500/10 to-teal-500/10 dark:from-cyan-900/20 dark:to-teal-900/20 p-8 sm:p-12">
-            <div className="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 -mb-16 -ml-16 w-64 h-64 bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-3xl"></div>
-
-            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-              <div className="lg:w-1/2">
-                <motion.div
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-block mb-6 px-4 py-1 bg-white/80 dark:bg-black/30 backdrop-blur-sm rounded-full shadow-sm"
-                >
-                  <div className="flex items-center space-x-2">
-                    <Package className="w-4 h-4 text-teal-600 dark:text-teal-400" />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      {componentsList.length} Components Available
-                    </span>
-                  </div>
-                </motion.div>
-
-                <motion.h1
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-4xl sm:text-5xl font-bold mb-6 text-gray-900 dark:text-white"
-                >
-                  RetroUI{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-teal-500">
-                    Components
-                  </span>
-                </motion.h1>
-
-                <motion.p
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg"
-                >
-                  Explore our collection of retro-themed UI components, designed
-                  for crafting dynamic web applications with a unique vintage
-                  aesthetic. Each component is fully customizable and ready to
-                  use.
-                </motion.p>
-
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="flex flex-wrap gap-4"
-                >
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" />
-                    <input
-                      type="text"
-                      placeholder="Search components..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 pr-4 py-2 w-full sm:w-64 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400"
-                    />
-                  </div>
-                </motion.div>
-              </div>
-
-              <motion.div
-                initial={{ x: 50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="lg:w-1/2 flex justify-center"
-              >
-                <div className="relative w-full max-w-md aspect-square">
-                  <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-4">
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-3 hover:rotate-0 transition-transform duration-300">
-                      <div className="h-4 w-16 bg-teal-200 dark:bg-teal-700 rounded mb-2"></div>
-                      <div className="h-8 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
-                      <div className="h-4 w-3/4 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                    </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
-                      <div className="h-12 w-12 bg-cyan-200 dark:bg-cyan-700 rounded-full mx-auto mb-2"></div>
-                      <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
-                      <div className="h-4 w-1/2 bg-gray-100 dark:bg-gray-700 rounded mx-auto"></div>
-                    </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
-                      <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded mb-2"></div>
-                      <div className="h-8 w-3/4 bg-purple-200 dark:bg-purple-700 rounded mb-2"></div>
-                      <div className="h-4 w-full bg-gray-100 dark:bg-gray-700 rounded"></div>
-                    </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border-2 border-black dark:border-gray-700 transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                      <div className="flex justify-between mb-2">
-                        <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                        <div className="h-4 w-8 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                      </div>
-                      <div className="h-12 w-full bg-yellow-200 dark:bg-yellow-700 rounded"></div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
+    <div>
+      {/* Header */}
+      <section style={{ borderBottom: "1px solid var(--border)" }}>
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+          <div
+            className="flex items-center gap-2 text-[12px] mono mb-4"
+            style={{ color: "var(--muted)" }}
+          >
+            <Link to="/" className="hover:!text-[var(--fg)] transition-colors">
+              Home
+            </Link>
+            <ChevronRight className="w-[11px] h-[11px]" />
+            <span style={{ color: "var(--fg)" }}>Components</span>
           </div>
-        </motion.section>
+          <h1
+            className="display text-[44px] sm:text-[64px] leading-[1.0]"
+            style={{ color: "var(--fg)", letterSpacing: "-0.035em" }}
+          >
+            <span className="display-italic" style={{ color: "var(--muted)" }}>
+              The
+            </span>{" "}
+            Components
+          </h1>
+          <p
+            className="mt-4 text-[15.5px] max-w-2xl leading-relaxed"
+            style={{ color: "var(--muted)" }}
+          >
+            A growing collection of retro-styled, accessible React components.
+            Each comes with a live preview, source code, and copy-paste
+            integration.
+          </p>
 
-        {/* Category Filter */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
-        >
-          <div className="flex items-center mb-6">
-            <Filter className="mr-2 text-gray-700 dark:text-gray-300" />
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">
-              Filter by Category
-            </h2>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  selectedCategory === category
-                    ? "bg-teal-500 text-white dark:bg-teal-600 shadow-md transform -translate-y-1"
-                    : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Components Grid */}
-        <motion.section
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="mb-16"
-        >
-          {filteredComponents.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredComponents.map((component) => (
-                <motion.div key={component.path} variants={cardVariants}>
-                  <Link
-                    to={`/components/${component.path}`}
-                    className="group block h-full"
-                  >
-                    <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-black dark:border-gray-700 h-full transform hover:-translate-y-2 hover:border-teal-500 dark:hover:border-teal-400">
-                      <div className="p-6">
-                        <div className="flex justify-between items-start mb-4">
-                          <h3 className="text-2xl font-bold font-mono text-gray-900 dark:text-white">
-                            {component.name}
-                          </h3>
-                          <span
-                            className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(
-                              component.category
-                            )}`}
-                          >
-                            {component.category}
-                          </span>
-                        </div>
-
-                        <p className="text-gray-600 dark:text-gray-400 mb-6">
-                          {component.description}
-                        </p>
-
-                        <div className="flex justify-between items-center">
-                          <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 rounded group-hover:w-24 transition-all duration-300"></div>
-                          <ArrowRight className="text-gray-400 group-hover:text-teal-500 dark:group-hover:text-teal-400 transform group-hover:translate-x-1 transition-all" />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <Layers className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300 mb-2">
-                No components found
-              </h3>
-              <p className="text-gray-500 dark:text-gray-400">
-                Try adjusting your search or filter to find what you're looking
-                for.
-              </p>
-              <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setSelectedCategory("All");
+          <div className="mt-8 flex flex-wrap gap-3 items-center">
+            <div className="relative flex-1 min-w-[260px] max-w-md">
+              <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="Search components by name or category…"
+                className="w-full h-10 pl-9 pr-3 rounded-md text-[13.5px] outline-none focus:ring-2"
+                style={{
+                  background: "var(--bg)",
+                  border: "1px solid var(--border)",
+                  color: "var(--fg)",
                 }}
-                className="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
-              >
-                Reset Filters
-              </button>
+              />
             </div>
-          )}
-        </motion.section>
-
-        {/* Quick Tips Section */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          className="bg-white dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 shadow-md mb-8"
-        >
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
-              <Sparkles className="w-5 h-5 mr-2 text-emerald-500" />
-              Quick Implementation Guide
-            </h2>
-
-            <div className="hidden sm:block">
-              <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-medium rounded-full">
-                Easy Integration
+            <div
+              className="flex items-center gap-2 text-[12px]"
+              style={{ color: "var(--muted)" }}
+            >
+              <Layers className="w-3 h-3" />
+              <span className="mono">
+                {filtered.length} of {COMPONENT_CATEGORIES.length} components
               </span>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
-                  <span>1</span>
-                </div>
-                Copy Code
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
-                Click the "Copy Code" button to copy the component code to your
-                clipboard.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
-                  <span>2</span>
-                </div>
-                Create Component
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
-                Create a new file in your React project and paste the code as a
-                new component.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
-                  <span>3</span>
-                </div>
-                Customize
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
-                Modify the Tailwind classes to match your project's design
-                system and branding.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 relative overflow-hidden group hover:shadow-md transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center relative z-10">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 mr-3">
-                  <span>4</span>
-                </div>
-                Import & Use
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 relative z-10">
-                Import the component and use it in your application with your
-                custom props.
-              </p>
-            </div>
+      {/* Filter chips */}
+      <section style={{ borderBottom: "1px solid var(--border)" }}>
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center gap-1.5 overflow-x-auto nice-scroll">
+            {CATEGORY_LIST.map((c) => {
+              const active = cat === c;
+              return (
+                <button
+                  key={c}
+                  onClick={() => setCat(c)}
+                  className="px-3 h-8 rounded-md text-[13px] font-medium whitespace-nowrap transition-colors"
+                  style={{
+                    background: active ? "var(--fg)" : "transparent",
+                    color: active ? "var(--bg)" : "var(--muted)",
+                    border: "1px solid var(--border)",
+                  }}
+                >
+                  {c}
+                </button>
+              );
+            })}
           </div>
-        </motion.section>
+        </div>
+      </section>
 
-        {/* Bottom CTA */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center"
-        >
-          <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
-            <Grid3X3 className="w-12 h-12 mx-auto text-teal-500 mb-4" />
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-              Can't find what you're looking for?
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto mb-6">
-              We're constantly adding new components to our library. If you have
-              a specific component in mind, let us know!
-            </p>
-            <Link to="/contact-us">
-              <button className="px-6 py-3 bg-black dark:bg-zinc-800 text-teal-400 border-2 border-black dark:border-zinc-700 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,0.8)] transform hover:-translate-y-1 transition-all duration-300 rounded-sm">
-                Request a Component
+      {/* Grid */}
+      <section>
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-12">
+          {filtered.length === 0 ? (
+            <div className="text-center py-20" style={{ color: "var(--muted)" }}>
+              <Search className="w-7 h-7 mx-auto mb-3 opacity-40" />
+              <p className="text-[14px]">No components match your search.</p>
+              <button
+                onClick={() => {
+                  setQ("");
+                  setCat("All");
+                }}
+                className="mt-3 text-[13px] underline"
+                style={{ color: "var(--fg)" }}
+              >
+                Reset filters
               </button>
-            </Link>
-          </div>
-        </motion.section>
-      </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filtered.map((c) => {
+                const Icon = ICON_MAP[c.name] || Square;
+                const count = COUNT_MAP[c.name] || 4;
+                return (
+                  <Link
+                    key={c.path}
+                    to={`/components/${c.path}`}
+                    className="group text-left rounded-lg overflow-hidden transition-colors block"
+                    style={{
+                      background: "var(--bg)",
+                      border: "1px solid var(--border)",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.background = "var(--surface)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.background = "var(--bg)")
+                    }
+                  >
+                    <div
+                      className="aspect-[16/9] relative placeholder-tile"
+                      style={{ borderBottom: "1px solid var(--border)" }}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div
+                          className="inline-flex h-12 w-12 items-center justify-center rounded-lg"
+                          style={{
+                            background: "var(--bg)",
+                            border: "1px solid var(--border)",
+                            color: "var(--fg)",
+                          }}
+                        >
+                          <Icon className="w-5 h-5" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <div className="flex items-start justify-between gap-3 mb-1.5">
+                        <h3
+                          className="text-[15px] font-semibold tracking-tight"
+                          style={{ color: "var(--fg)" }}
+                        >
+                          {c.name}
+                        </h3>
+                        <span
+                          className="inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-[4px] border"
+                          style={{
+                            background: "transparent",
+                            color: "var(--muted)",
+                            borderColor: "var(--border)",
+                          }}
+                        >
+                          {c.category}
+                        </span>
+                      </div>
+                      <p
+                        className="text-[13px] mb-3"
+                        style={{ color: "var(--muted)" }}
+                      >
+                        {c.description}
+                      </p>
+                      <div
+                        className="flex items-center justify-between text-[12px]"
+                        style={{ color: "var(--muted)" }}
+                      >
+                        <span className="mono">{count} variants</span>
+                        <span
+                          className="inline-flex items-center gap-1 transition-transform group-hover:translate-x-0.5"
+                          style={{ color: "var(--fg)" }}
+                        >
+                          View
+                          <ArrowRight className="w-[11px] h-[11px]" />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
-};
-
-export default Component;
+}

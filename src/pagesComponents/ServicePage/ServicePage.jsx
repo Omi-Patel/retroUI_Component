@@ -83,7 +83,7 @@ export default function ServicePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#fcf6e3] text-[#2b3a67] font-sans m-1 sm:m-8">
+    <div className="min-h-screen bg-[#fcf6e3] text-[#2b3a67] font-sans m-0 sm:m-4 lg:m-8">
       <div className="bg-[#f7b32b] h-2"></div>
       <div className="bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cg%20fill%3D%22%23f26419%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M0%200h20L0%2020z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')]">
         <main className="container mx-auto ">
@@ -165,11 +165,11 @@ export default function ServicePage() {
             )}
           </div>
 
-          <div className=" px-2 sm:px-4">
-            <h1 className="text-5xl font-bold mb-12 text-center text-[#2b3a67] tracking-tight">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-[#2b3a67] tracking-tight">
               Our Services
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-10 md:mb-16">
               {services.map((service, index) => (
                 <div
                   key={index}
@@ -177,9 +177,9 @@ export default function ServicePage() {
                 >
                   <div className="absolute top-0 left-0 w-16 h-16 bg-[#f7b32b] transform -rotate-45 -translate-x-8 -translate-y-8"></div>
                   <div className="relative z-10">
-                    <div className="flex items-center mb-4">
+                    <div className="flex items-center mb-4 flex-wrap gap-y-2">
                       <div className="mr-4 text-[#f26419]">{service.icon}</div>
-                      <h2 className="text-2xl font-bold text-[#2b3a67]">
+                      <h2 className="text-xl sm:text-2xl font-bold text-[#2b3a67]">
                         {service.title}
                       </h2>
                     </div>
@@ -188,18 +188,18 @@ export default function ServicePage() {
                 </div>
               ))}
             </div>
-            <div className="bg-[#2b3a67] p-8 rounded-lg shadow-lg text-[#fcf6e3] text-center relative overflow-hidden">
+            <div className="bg-[#2b3a67] p-5 sm:p-8 rounded-lg shadow-lg text-[#fcf6e3] text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2260%22%20height%3D%2296%22%20viewBox%3D%220%200%2060%2096%22%3E%3Cpath%20d%3D%22M36%2010a6%206%200%200%201%206-6c1.33%200%202.57.34%203.66.94l7.34-7.34a30%2030%200%200%201%2042.28%200l-7.34%207.34c1.1-.6%202.36-.94%203.66-.94a6%206%200%201%201%200%2012c-1.34%200-2.57-.35-3.66-.94l-7.34%207.34a30%2030%200%200%201-42.28%200l7.34-7.34C42.93%2015.65%2041.7%2016%2040.4%2016A6%206%200%200%201%2036%2010zm24%2078a6%206%200%200%201-6-6c0-1.34.35-2.57.94-3.66l-7.34-7.34a30%2030%200%200%201%200-42.28l7.34-7.34C53.65%2022.93%2053%2024.16%2053%2025.4a6%206%200%201%201%2012%200c0%201.34-.35%202.57-.94%203.66l7.34%207.34a30%2030%200%200%201%200%2042.28l-7.34%207.34c.59-1.1.94-2.32.94-3.66a6%206%200%200%201-6%206z%22%20fill%3D%22%23f7b32b%22%20fill-opacity%3D%220.1%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')] opacity-30"></div>
               <div className="relative z-10">
-                <h2 className="text-3xl font-bold mb-6 text-[#f7b32b]">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-[#f7b32b]">
                   Ready to Get Started?
                 </h2>
-                <p className="text-lg mb-8">
+                <p className="text-base sm:text-lg mb-8">
                   Let us help you bring your retro-inspired vision to life!
                 </p>
                 <a
                   href="#"
-                  className="inline-block bg-[#f26419] text-[#fcf6e3] px-8 py-4 rounded-full text-xl font-bold hover:bg-[#f7b32b] hover:text-[#2b3a67] shadow-lg transform hover:scale-105 transition-transform duration-200"
+                  className="inline-block bg-[#f26419] text-[#fcf6e3] px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-xl font-bold hover:bg-[#f7b32b] hover:text-[#2b3a67] shadow-lg transform hover:scale-105 transition-transform duration-200"
                 >
                   Contact Us Today
                 </a>

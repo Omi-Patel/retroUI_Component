@@ -85,11 +85,11 @@ export default function AboutPage() {
             )}
           </div>
 
-          <div className=" px-2 sm:px-4">
-            <h1 className="text-5xl font-bold mb-12 text-center text-[#2b3a67] tracking-tight">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-[#2b3a67] tracking-tight">
               About RetroSaaS
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-16">
               <div className="relative">
                 <div className="absolute inset-0 bg-[#f26419] transform -rotate-6 rounded-lg"></div>
                 <img
@@ -97,17 +97,17 @@ export default function AboutPage() {
                   alt="Retro computer"
                   width={400}
                   height={400}
-                  className="rounded-lg shadow-lg relative z-10"
+                  className="rounded-lg shadow-lg relative z-10 w-full h-auto"
                 />
               </div>
               <div>
-                <p className="text-lg mb-6 text-[#2b3a67] leading-relaxed">
+                <p className="text-base sm:text-lg mb-6 text-[#2b3a67] leading-relaxed">
                   RetroSaaS is a passion project born out of our love for
                   vintage aesthetics and modern web technologies. We believe
                   that the charm of yesteryear can be seamlessly blended with
                   the functionality of today's web applications.
                 </p>
-                <p className="text-lg mb-6 text-[#2b3a67] leading-relaxed">
+                <p className="text-base sm:text-lg mb-6 text-[#2b3a67] leading-relaxed">
                   Our mission is to provide developers and designers with a
                   comprehensive library of retro-themed components that are easy
                   to use, fully responsive, and built with the latest web
@@ -120,13 +120,13 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="bg-[#2b3a67] p-8 rounded-lg shadow-lg text-[#fcf6e3] relative overflow-hidden">
+            <div className="bg-[#2b3a67] p-5 sm:p-8 rounded-lg shadow-lg text-[#fcf6e3] relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2280%22%20height%3D%2280%22%20viewBox%3D%220%200%2080%2080%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23f7b32b%22%20fill-opacity%3D%220.1%22%3E%3Cpath%20d%3D%22M0%200h40v40H0V0zm40%2040h40v40H40V40zm0-40h2l-2%202V0zm0%204l4-4h2l-6%206V4zm0%204l8-8h2L40%2010V8zm0%204L52%200h2L40%2014v-2zm0%204L56%200h2L40%2018v-2zm0%204L60%200h2L40%2022v-2zm0%204L64%200h2L40%2026v-2zm0%204L68%200h2L40%2030v-2zm0%204L72%200h2L40%2034v-2zm0%204L76%200h2L40%2038v-2zm0%204L80%200v2L42%2040h-2zm4%200L80%204v2L46%2040h-2zm4%200L80%208v2L50%2040h-2zm4%200l28-28v2L54%2040h-2zm4%200l24-24v2L58%2040h-2zm4%200l20-20v2L62%2040h-2zm4%200l16-16v2L66%2040h-2zm4%200l12-12v2L70%2040h-2zm4%200l8-8v2l-6%206h-2zm4%200l4-4v2l-2%202h-2z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
               <div className="relative z-10">
-                <h2 className="text-3xl font-bold mb-6 text-center text-[#f7b32b]">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-[#f7b32b]">
                   Our Values
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                   {[
                     {
                       title: "Nostalgia",

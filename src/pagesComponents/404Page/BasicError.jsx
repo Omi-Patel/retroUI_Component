@@ -18,23 +18,23 @@ const BasicError = () => {
   return (
     <div className=" bg-gray-900 flex items-center justify-center p-2 sm:p-4">
       <div
-        className={`max-w-3xl w-full bg-gray-800 rounded-lg shadow-lg p-8 border-4 border-yellow-500 transform transition-all duration-1000 ${
+        className={`max-w-3xl w-full bg-gray-800 rounded-lg shadow-lg p-5 sm:p-8 border-4 border-yellow-500 transform transition-all duration-1000 ${
           isLoaded ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
       >
         <div className="text-center">
           <h1
-            className={`text-7xl md:text-9xl font-bold text-yellow-500 mb-4 font-mono ${
+            className={`text-6xl sm:text-7xl md:text-9xl font-bold text-yellow-500 mb-4 font-mono ${
               tvEffect ? "animate-tv-effect" : ""
             }`}
           >
             404
           </h1>
           <div className="w-full h-2 bg-yellow-500 mb-8"></div>
-          <p className="text-2xl md:text-3xl text-yellow-300 mb-6 font-serif">
+          <p className="text-xl sm:text-2xl md:text-3xl text-yellow-300 mb-6 font-serif">
             TECHNICAL DIFFICULTIES
           </p>
-          <p className="text-lg text-yellow-100 mb-8 font-mono">
+          <p className="text-base sm:text-lg text-yellow-100 mb-8 font-mono">
             We apologize, but the page you're looking for is currently off the
             air. Please stand by.
           </p>
