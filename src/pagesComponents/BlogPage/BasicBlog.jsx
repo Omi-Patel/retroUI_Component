@@ -1,113 +1,145 @@
 import React from "react";
 import { Calendar, User, ChevronRight } from "lucide-react";
 
-const blogPosts = [
+const posts = [
   {
     id: 1,
+    cat: "MUSIC",
     title: "The Revival of Vinyl: Why Records Are Making a Comeback",
     excerpt:
       "Explore the resurgence of vinyl records in the digital age and why music enthusiasts are returning to this classic format.",
     date: "June 15, 2023",
     author: "Alex Johnson",
-    image:
-      "https://images.unsplash.com/photo-1603048588665-791ca8aea617?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 2,
+    cat: "GAMES",
     title: "Retro Gaming: Nostalgia or Genuine Appreciation?",
     excerpt:
       "Dive into the world of retro gaming and discover why old-school video games continue to captivate players of all ages.",
     date: "June 22, 2023",
     author: "Sam Lee",
-    image:
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 3,
+    cat: "PHOTO",
     title: "The Art of Analog Photography in a Digital World",
     excerpt:
-      "Uncover the charm and craftsmanship behind analog photography and why it's still relevant in today's digital landscape.",
+      "Uncover the charm and craftsmanship behind analog photography and why it's still relevant in today's landscape.",
     date: "June 29, 2023",
-    author: "Emily Chen",
-    image:
-      "https://images.unsplash.com/photo-1495121553079-4c61bcce1894?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+    author: "Mia Chen",
+  },
+  {
+    id: 4,
+    cat: "DESIGN",
+    title: "Hand-Drawn Type: The Wobble that Won the Web",
+    excerpt:
+      "How imperfect, hand-drawn letterforms became the antidote to algorithmic perfection on the modern internet.",
+    date: "July 02, 2023",
+    author: "Jules Park",
   },
 ];
 
 export default function BasicBlog() {
   return (
-    <div className="min-h-screen bg-amber-50 text-amber-900 font-serif">
-      <header className="bg-amber-100 py-6 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1
-            className="text-3xl sm:text-4xl font-bold"
-            style={{ fontFamily: "'Brush Script MT', cursive" }}
-          >
-            Retro Reflections
-          </h1>
-          <nav>
-            <ul className="flex space-x-4 sm:space-x-6">
-              <li>
-                <a href="#" className="hover:text-amber-700 transition-colors">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-amber-700 transition-colors">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-amber-700 transition-colors">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+    <div className="min-h-screen bg-[#ede7d6] text-black font-mono">
+      {/* Masthead */}
+      <header className="border-b-4 border-double border-black bg-[#f5f1e6] py-6 text-center">
+        <p className="text-[10px] tracking-[0.4em] uppercase opacity-60">
+          ESTABLISHED 1997 · PUBLISHED FRIDAYS
+        </p>
+        <h1 className="text-5xl sm:text-6xl font-black uppercase tracking-tighter leading-none mt-1">
+          The Daily Zine
+        </h1>
+        <p className="text-[10px] tracking-[0.4em] uppercase opacity-60 mt-1">
+          ✱ ALL THE NEWS THAT&apos;S OLD AGAIN ✱
+        </p>
       </header>
 
-      <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.map((post) => (
+      <main className="max-w-5xl mx-auto px-6 py-10">
+        {/* Lead column */}
+        <article className="mb-10 border-b-4 border-dashed border-black pb-8">
+          <div className="flex items-baseline gap-3 mb-2 flex-wrap">
+            <span className="bg-black text-yellow-300 text-[10px] font-black uppercase tracking-widest px-2 py-0.5">
+              LEAD STORY
+            </span>
+            <span className="text-[10px] tracking-widest uppercase opacity-60">
+              {posts[0].date}
+            </span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-[0.95] mb-3">
+            {posts[0].title}
+          </h2>
+          <p
+            className="text-base leading-relaxed columns-1 md:columns-2 gap-8 mb-4"
+            style={{ columnRule: "1px dashed rgba(0,0,0,0.3)" }}
+          >
+            {posts[0].excerpt} The needles, once shelved beside dusty boxes of
+            forgotten 78s, are back in rotation. Independent pressing plants
+            are pressing again. And the LP, that great vinyl revival, has
+            quietly become a fixture of the modern bedroom.
+          </p>
+          <div className="flex items-center gap-3 text-[10px] tracking-widest uppercase opacity-60">
+            <span className="inline-flex items-center gap-1">
+              <User className="w-3 h-3" /> {posts[0].author}
+            </span>
+            <span>·</span>
+            <a href="#" className="font-bold underline">
+              CONTINUED ON PAGE 4
+            </a>
+          </div>
+        </article>
+
+        {/* 3-column issue list */}
+        <p className="text-[10px] tracking-[0.4em] uppercase opacity-60 mb-4">
+          ALSO ON THE WIRE
+        </p>
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {posts.slice(1).map((p, i) => (
             <article
-              key={post.id}
-              className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:scale-105"
+              key={p.id}
+              className="relative pt-2"
+              style={
+                i < 2
+                  ? { borderRight: "1px dashed rgba(0,0,0,0.3)", paddingRight: "1.5rem" }
+                  : undefined
+              }
             >
-              <img
-                src={post.image}
-                alt={post.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-                <p className="text-amber-700 mb-4">{post.excerpt}</p>
-                <div className="flex items-center text-sm text-amber-600 mb-4">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  <span>{post.date}</span>
-                  <User className="w-4 h-4 ml-4 mr-2" />
-                  <span>{post.author}</span>
-                </div>
-                <a
-                  href="#"
-                  className="inline-flex items-center text-amber-800 hover:text-amber-600 transition-colors"
-                >
-                  Read more
-                  <ChevronRight className="w-4 h-4 ml-1" />
-                </a>
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className="bg-black text-yellow-300 text-[10px] font-black uppercase tracking-widest px-1.5 py-0.5">
+                  {p.cat}
+                </span>
+                <span className="text-[10px] tracking-widest uppercase opacity-50">
+                  {p.date}
+                </span>
               </div>
+              <h3 className="text-xl font-black uppercase tracking-tight leading-tight mb-2">
+                {p.title}
+              </h3>
+              <p className="text-xs opacity-80 mb-3">{p.excerpt}</p>
+              <a
+                href="#"
+                className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest underline-offset-4 hover:underline"
+              >
+                Read on <ChevronRight className="w-3 h-3" />
+              </a>
             </article>
           ))}
+        </section>
+
+        {/* Bottom band */}
+        <div className="ornament-hr mt-12">
+          <span className="text-[10px] tracking-[0.4em] uppercase opacity-60">
+            END · COLUMN 03
+          </span>
         </div>
       </main>
 
-      <footer className="bg-amber-100 py-6 px-4 sm:px-6 lg:px-8 mt-12">
-        <div className="max-w-7xl mx-auto text-center">
-          <p>&copy; 2023 Retro Reflections. All rights reserved.</p>
-          <p className="mt-2 text-amber-700">
-            Celebrating the timeless charm of yesteryears.
-          </p>
-        </div>
+      <footer className="border-t-4 border-black bg-black text-[#ede7d6] py-4 text-center">
+        <p className="text-[10px] tracking-[0.3em] uppercase opacity-60">
+          <Calendar className="w-3 h-3 inline mr-1" />
+          THE DAILY ZINE · NO REFUNDS · NO REGRETS
+        </p>
       </footer>
     </div>
   );

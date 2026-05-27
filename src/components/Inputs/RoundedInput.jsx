@@ -1,22 +1,25 @@
 import React from "react";
+import { Send } from "lucide-react";
 
+// Sticky note input — yellow paper, slight tilt, send action
 const RoundedInput = () => {
   return (
-    <>
-      {/* Rounded Retro Input */}
-      <div className="w-full max-w-md">
-        <label className="block text-xl font-bold mb-2 text-gray-700">
-          Rounded Input
-        </label>
+    <div className="w-full max-w-md font-mono">
+      <label className="block text-[10px] font-bold uppercase tracking-[0.25em] mb-2 text-black/70">
+        ✉ Message
+      </label>
+      <div className="relative bg-yellow-200 border-2 border-black shadow-[5px_5px_0px_0px_black] rotate-[-1deg]">
         <input
           type="text"
-          placeholder="Enter text"
-          className="w-full font-mono px-4 py-2 text-lg bg-blue-100 border-4 border-black rounded-full 
-          shadow-[4px_4px_0px_0px_black] hover:bg-blue-200 hover:shadow-[8px_8px_0px_0px_black] 
-          transition-all duration-150 ease-out focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Write a sticky note…"
+          className="w-full px-4 py-3 pr-12 bg-transparent text-black focus:outline-none placeholder:opacity-40 text-base"
+          style={{ fontFamily: "'Caveat', 'Comic Sans MS', cursive", fontSize: "1.2rem" }}
         />
+        <button className="absolute top-1/2 -translate-y-1/2 right-2 inline-flex items-center justify-center w-8 h-8 bg-black text-yellow-200 hover:bg-yellow-200 hover:text-black border-2 border-black transition-colors">
+          <Send className="w-3.5 h-3.5" />
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

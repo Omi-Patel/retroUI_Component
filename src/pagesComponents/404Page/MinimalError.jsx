@@ -1,54 +1,71 @@
 import React from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Mail } from "lucide-react";
 
 export default function MinimalError() {
   return (
-    <div className=" bg-yellow-50 flex flex-col items-center justify-center p-2 sm:p-4 font-mono">
-      <div className="max-w-md w-full text-center">
-        <h1 className="text-8xl font-bold text-yellow-800 mb-8 animate-pulse">
-          404
-        </h1>
-        <p className="text-2xl text-yellow-700 mb-8">Page not found</p>
-        <div className="w-16 h-1 bg-yellow-400 mx-auto mb-8"></div>
-        <p className="text-lg text-yellow-600 mb-12">
-          Oops! The page you're looking for doesn't exist.
+    <div className="min-h-screen bg-[#ede7d6] text-black font-mono flex items-center justify-center p-6 relative overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-25 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(0,0,0,0.4) 1px, transparent 1.4px)",
+          backgroundSize: "20px 20px",
+        }}
+      />
+
+      <div className="relative max-w-2xl w-full">
+        <div className="absolute -top-3 right-4 z-10 inline-block px-3 py-1 bg-[#ede7d6] border-[3px] border-red-600 text-red-600 rotate-[-6deg] text-[10px] font-black uppercase tracking-widest">
+          RETURN TO SENDER
+        </div>
+
+        <div className="bg-[#f5f1e6] border-4 border-black shadow-[10px_10px_0px_0px_black] p-8 text-center">
+          <p className="text-[10px] tracking-[0.4em] uppercase opacity-60 mb-2">
+            ERROR · CODE 404 · ROUTE NOT FOUND
+          </p>
+          <h1 className="text-[120px] sm:text-[160px] font-black tracking-tighter leading-none">
+            404
+          </h1>
+          <div className="ornament-hr mt-2 mb-4">
+            <span className="text-[10px] tracking-[0.3em] uppercase opacity-60">
+              END OF LINE
+            </span>
+          </div>
+
+          <p className="text-base sm:text-lg max-w-md mx-auto mb-2">
+            Oops! The page you&apos;re looking for isn&apos;t here.
+          </p>
+          <p className="text-xs opacity-60 max-w-md mx-auto mb-6">
+            It may have been moved, renamed, or lost in the mail. Sorry about that.
+          </p>
+
+          <div className="inline-flex items-center gap-1 text-sm mb-6">
+            <span>$ navigate</span>
+            <span
+              className="inline-block w-2 h-4 bg-black animate-pulse"
+              style={{ animationDuration: "1s" }}
+            />
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="/"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-300 text-black border-4 border-black shadow-[4px_4px_0px_0px_black] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_black] transition-all text-xs font-black uppercase tracking-wider"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" /> Go back home
+            </a>
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#f5f1e6] text-black border-4 border-black hover:bg-black hover:text-yellow-300 transition-colors text-xs font-black uppercase tracking-wider"
+            >
+              <Mail className="w-3.5 h-3.5" /> Send a postcard
+            </a>
+          </div>
+        </div>
+
+        <p className="mt-6 text-center text-[10px] tracking-[0.3em] uppercase opacity-50">
+          © {new Date().getFullYear()} · IF LOST PLEASE RETURN
         </p>
-        <a
-          href="/"
-          className="inline-flex items-center px-6 py-3 text-lg font-medium text-yellow-800 bg-yellow-200 rounded-md hover:bg-yellow-300 transition-colors duration-300"
-        >
-          <ArrowLeft className="mr-2 h-5 w-5" />
-          Go back home
-        </a>
       </div>
-      <footer className="mt-16 text-yellow-600 text-sm">
-        © {new Date().getFullYear()} Your Company Name
-      </footer>
-      <style jsx="true">{`
-        @keyframes typewriter {
-          from {
-            width: 0;
-          }
-          to {
-            width: 100%;
-          }
-        }
-        .animate-typewriter {
-          overflow: hidden;
-          border-right: 2px solid #92400e;
-          white-space: nowrap;
-          animation: typewriter 3s steps(40) 1s 1 normal both,
-            blinkCursor 0.7s steps(40) infinite normal;
-        }
-        @keyframes blinkCursor {
-          from {
-            border-right-color: #92400e;
-          }
-          to {
-            border-right-color: transparent;
-          }
-        }
-      `}</style>
     </div>
   );
 }

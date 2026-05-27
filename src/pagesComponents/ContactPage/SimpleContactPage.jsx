@@ -1,4 +1,3 @@
-"use client";
 
 import { useState } from "react";
 
@@ -7,7 +6,7 @@ export default function SimpleContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#fcf6e3] to-[#f7e9d7] text-[#2b3a67] font-sans">
       <div className="bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cg%20fill%3D%22%23f26419%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M0%200h20L0%2020z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')]">
-        <main className="container mx-auto px-4 py-8">
+        <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
           {/* Navbar */}
           <div>
             <header className="bg-white/80 backdrop-blur-sm text-[#2b3a67] p-4 rounded-lg mb-8 border-2 border-[#f26419]/20 shadow-[4px_4px_0px_0px_rgba(242,100,25,0.2)]">
@@ -84,16 +83,16 @@ export default function SimpleContactPage() {
             )}
           </div>
 
-          <div className="px-2 sm:px-4">
-            <h1 className="text-5xl font-bold mb-12 text-center text-[#2b3a67] tracking-tight relative">
+          <div className="px-0 sm:px-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-[#2b3a67] tracking-tight relative">
               <span className="relative z-10">Get in Touch</span>
-              <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-[#f26419]"></span>
+              <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 sm:w-32 h-1 bg-[#f26419]"></span>
             </h1>
-            
+
             {/* Contact Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
               {/* Contact Form */}
-              <div className="bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-[8px_8px_0px_0px_rgba(242,100,25,0.2)] border-2 border-[#f26419]/20 relative overflow-hidden">
+              <div className="bg-white/80 backdrop-blur-sm p-5 sm:p-8 rounded-lg shadow-[8px_8px_0px_0px_rgba(242,100,25,0.2)] border-2 border-[#f26419]/20 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#f7b32b]/10 transform rotate-45 translate-x-16 -translate-y-16"></div>
                 <form className="relative z-10">
                   <div className="mb-6">
@@ -146,7 +145,7 @@ export default function SimpleContactPage() {
                   </div>
                   <button
                     type="submit"
-                    className="bg-gradient-to-r from-[#f26419] to-[#f7b32b] text-white px-8 py-4 rounded-lg text-xl font-bold hover:from-[#f7b32b] hover:to-[#f26419] shadow-[4px_4px_0px_0px_rgba(242,100,25,0.4)] w-full transform hover:scale-105 transition-all duration-200"
+                    className="bg-gradient-to-r from-[#f26419] to-[#f7b32b] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-xl font-bold hover:from-[#f7b32b] hover:to-[#f26419] shadow-[4px_4px_0px_0px_rgba(242,100,25,0.4)] w-full transform hover:scale-105 transition-all duration-200"
                   >
                     Send Message
                   </button>
@@ -155,10 +154,10 @@ export default function SimpleContactPage() {
 
               {/* Contact Info */}
               <div className="space-y-8">
-                <div className="bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-[8px_8px_0px_0px_rgba(242,100,25,0.2)] border-2 border-[#f26419]/20 relative overflow-hidden">
+                <div className="bg-white/80 backdrop-blur-sm p-5 sm:p-8 rounded-lg shadow-[8px_8px_0px_0px_rgba(242,100,25,0.2)] border-2 border-[#f26419]/20 relative overflow-hidden">
                   <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2252%22%20height%3D%2226%22%20viewBox%3D%220%200%2052%2026%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23f7b32b%22%20fill-opacity%3D%220.1%22%3E%3Cpath%20d%3D%22M10%2010c0-2.21-1.79-4-4-4-3.314%200-6-2.686-6-6h2c0%202.21%201.79%204%204%204%203.314%200%206%202.686%206%206%200%202.21%201.79%204%204%204%203.314%200%206%202.686%206%206%200%202.21%201.79%204%204%204v2c-3.314%200-6-2.686-6-6%200-2.21-1.79-4-4-4-3.314%200-6-2.686-6-6zm25.464-1.95l8.486%208.486-1.414%201.414-8.486-8.486%201.414-1.414z%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
                   <div className="relative z-10">
-                    <h2 className="text-3xl font-bold mb-6 text-[#f7b32b] relative inline-block">
+                    <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-[#f7b32b] relative inline-block">
                       Contact Info
                       <span className="absolute -bottom-2 left-0 w-full h-1 bg-[#f26419]"></span>
                     </h2>
@@ -201,21 +200,21 @@ export default function SimpleContactPage() {
                   </div>
                 </div>
 
-                <div className="bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-[8px_8px_0px_0px_rgba(242,100,25,0.2)] border-2 border-[#f26419]/20">
+                <div className="bg-white/80 backdrop-blur-sm p-5 sm:p-8 rounded-lg shadow-[8px_8px_0px_0px_rgba(242,100,25,0.2)] border-2 border-[#f26419]/20">
                   <h2 className="text-2xl font-bold mb-4 text-[#2b3a67] relative inline-block">
                     Business Hours
                     <span className="absolute -bottom-2 left-0 w-full h-1 bg-[#f26419]"></span>
                   </h2>
                   <div className="space-y-2">
-                    <div className="flex justify-between">
+                    <div className="flex flex-wrap justify-between gap-2">
                       <span className="text-[#2b3a67]/80">Monday - Friday</span>
                       <span className="text-[#f7b32b] font-bold">9:00 AM - 5:00 PM</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-wrap justify-between gap-2">
                       <span className="text-[#2b3a67]/80">Saturday</span>
                       <span className="text-[#f7b32b] font-bold">10:00 AM - 2:00 PM</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-wrap justify-between gap-2">
                       <span className="text-[#2b3a67]/80">Sunday</span>
                       <span className="text-[#f7b32b] font-bold">Closed</span>
                     </div>

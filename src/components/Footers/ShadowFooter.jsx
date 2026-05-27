@@ -8,11 +8,9 @@ const ShadowFooter = () => {
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
           {/* Footer Logo */}
           <div className="flex items-center gap-2">
-            <img
-              src="https://picsum.photos/id/237/150"
-              alt="Logo"
-              className="w-12 h-12 border-4 border-[#f3f4a1] rounded-full pixel-border"
-            />
+            <span className="inline-flex items-center justify-center w-12 h-12 bg-[#f9c84d] text-black font-black text-2xl border-4 border-[#f3f4a1]">
+              R
+            </span>
             <span className="text-2xl font-extrabold text-[#f9c84d] retro-text-shadow">
               RetroBrand
             </span>

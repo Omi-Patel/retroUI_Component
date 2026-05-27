@@ -85,25 +85,25 @@ export default function HomePage() {
             )}
           </div>
 
-          <div className=" px-2 sm:px-4">
-            <section className="text-center mb-16 relative">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <section className="text-center mb-10 md:mb-16 relative">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2252%22%20height%3D%2226%22%20viewBox%3D%220%200%2052%2026%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23f7b32b%22%20fill-opacity%3D%220.1%22%3E%3Cpath%20d%3D%22M10%2010c0-2.21-1.79-4-4-4-3.314%200-6-2.686-6-6h2c0%202.21%201.79%204%204%204%203.314%200%206%202.686%206%206%200%202.21%201.79%204%204%204%203.314%200%206%202.686%206%206%200%202.21%201.79%204%204%204v2c-3.314%200-6-2.686-6-6%200-2.21-1.79-4-4-4-3.314%200-6-2.686-6-6zm25.464-1.95l8.486%208.486-1.414%201.414-8.486-8.486%201.414-1.414z%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-50 z-0"></div>
               <div className="relative z-10">
-                <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 text-[#2b3a67] tracking-tight leading-none">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-[#2b3a67] tracking-tight leading-tight md:leading-none break-words">
                   Welcome to <span className="text-[#f26419]">RetroSaaS</span>
                 </h1>
-                <p className="text-xl md:text-2xl text-[#2b3a67] max-w-3xl mx-auto mb-8">
+                <p className="text-base sm:text-lg md:text-2xl text-[#2b3a67] max-w-3xl mx-auto mb-8 px-2">
                   Experience the charm of yesteryear with modern functionality
                 </p>
                 <a
                   href="/#"
-                  className="inline-block bg-[#f26419] text-[#fcf6e3] px-8 py-4 rounded-full text-xl font-bold hover:bg-[#f7b32b] transition- shadow-lg transform hover:scale-105 transition-transform duration-200"
+                  className="inline-block bg-[#f26419] text-[#fcf6e3] px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-xl font-bold hover:bg-[#f7b32b] transition- shadow-lg transform hover:scale-105 transition-transform duration-200"
                 >
                   Explore Our Services
                 </a>
               </div>
             </section>
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-16">
               {[
                 {
                   title: "Vintage Design",
@@ -130,24 +130,24 @@ export default function HomePage() {
                 </div>
               ))}
             </section>
-            <section className="bg-[#2b3a67] text-[#fcf6e3] p-8 rounded-lg shadow-lg mb-16 relative overflow-hidden">
+            <section className="bg-[#2b3a67] text-[#fcf6e3] p-5 sm:p-8 rounded-lg shadow-lg mb-10 md:mb-16 relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2244%22%20height%3D%2212%22%20viewBox%3D%220%200%2044%2012%22%3E%3Cpath%20fill%3D%22%23f7b32b%22%20fill-opacity%3D%220.1%22%20d%3D%22M20%2012v-2L0%200v10l4%202h16zm18%200l4-2V0L22%2010v2h16zM20%200v8L4%200h16zm18%200L22%208V0h16z%22%2F%3E%3C%2Fsvg%3E')] opacity-30"></div>
               <div className="relative z-10">
-                <h2 className="text-3xl font-bold mb-6 text-center">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
                   Featured Component
                 </h2>
-                <div className="flex flex-col md:flex-row items-center justify-between">
-                  <div className="md:w-1/2 mb-6 md:mb-0">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="w-full md:w-1/2 mb-6 md:mb-0">
                     <img
                       src="https://picsum.photos/id/300/950"
                       alt="Retro component preview"
                       width={400}
                       height={300}
-                      className="rounded-lg shadow-md border-4 border-[#f7b32b]"
+                      className="rounded-lg shadow-md border-4 border-[#f7b32b] w-full h-auto"
                     />
                   </div>
-                  <div className="md:w-1/2 md:pl-8">
-                    <h3 className="text-2xl font-bold mb-4 text-[#f7b32b]">
+                  <div className="w-full md:w-1/2 md:pl-8">
+                    <h3 className="text-xl sm:text-2xl font-bold mb-4 text-[#f7b32b]">
                       Retro Button Component
                     </h3>
                     <p className="mb-4">

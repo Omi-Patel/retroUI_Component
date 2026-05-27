@@ -18,21 +18,21 @@ const RetroError = () => {
   return (
     <div className=" bg-amber-100 flex items-center justify-center p-2 sm:p-4">
       <div
-        className={`max-w-2xl w-full bg-orange-200 rounded-lg shadow-lg p-8 transform transition-all duration-500 ${
+        className={`max-w-2xl w-full bg-orange-200 rounded-lg shadow-lg p-5 sm:p-8 transform transition-all duration-500 ${
           isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
         }`}
       >
         <h1
-          className={`text-6xl md:text-8xl font-bold text-orange-800 mb-4 ${
+          className={`text-5xl sm:text-6xl md:text-8xl font-bold text-orange-800 mb-4 ${
             glitchEffect ? "animate-glitch" : ""
           }`}
         >
           404
         </h1>
-        <p className="text-2xl md:text-3xl text-orange-700 mb-8 font-serif">
+        <p className="text-xl sm:text-2xl md:text-3xl text-orange-700 mb-8 font-serif">
           Oops! This page is lost in time.
         </p>
-        <p className="text-lg text-orange-600 mb-8 font-mono">
+        <p className="text-base sm:text-lg text-orange-600 mb-8 font-mono">
           It seems you've stumbled upon a page that doesn't exist in this era.
           Let's get you back to the present!
         </p>

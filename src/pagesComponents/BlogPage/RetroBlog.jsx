@@ -36,19 +36,19 @@ const blogPosts = [
 
 export default function RetroBlog() {
   return (
-    <div className="min-h-screen bg-yellow-100 p-2 sm:p-8 font-mono">
-      <div className=" mx-auto">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold text-blue-800 mb-4">
+    <div className="min-h-screen bg-yellow-100 px-4 py-6 sm:p-8 font-mono">
+      <div className="max-w-7xl mx-auto">
+        <header className="text-center mb-10 md:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-800 mb-4">
             Retro Rewind
           </h1>
-          <p className="text-xl text-blue-600">
+          <p className="text-base sm:text-xl text-blue-600">
             Exploring the timeless charm of yesteryear
           </p>
         </header>
 
-        <div className="bg-blue-200 border-4 border-blue-800 rounded-lg p-6 mb-12 ">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">
+        <div className="bg-blue-200 border-4 border-blue-800 rounded-lg p-5 sm:p-6 mb-10 md:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold text-blue-800 mb-4">
             Welcome to Retro Rewind!
           </h2>
           <p className="text-blue-700">
@@ -59,7 +59,7 @@ export default function RetroBlog() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {blogPosts.map((post) => (
             <article
               key={post.id}
@@ -71,11 +71,11 @@ export default function RetroBlog() {
                 className="w-full h-48 object-cover border-b-4 border-blue-800"
               />
               <div className="p-4">
-                <h3 className="text-xl font-bold mb-2 text-blue-800">
+                <h3 className="text-lg sm:text-xl font-bold mb-2 text-blue-800">
                   {post.title}
                 </h3>
-                <p className="text-blue-600 mb-4">{post.excerpt}</p>
-                <div className="flex justify-between items-center text-sm text-blue-600">
+                <p className="text-blue-600 mb-4 text-sm sm:text-base">{post.excerpt}</p>
+                <div className="flex flex-wrap justify-between items-center gap-2 text-sm text-blue-600">
                   <span className="flex items-center">
                     <Calendar className="w-4 h-4 mr-1" />
                     {post.date}

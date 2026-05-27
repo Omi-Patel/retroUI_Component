@@ -5,13 +5,19 @@ const NeonFooter = () => {
     <footer className="bg-[#333] text-[#39ff14] font-mono p-4">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10">
         {/* Logo Section */}
-        <div className="flex items-center justify-center sm:justify-start">
-          <img
-            src="https://picsum.photos/id/1025/150"
-            alt="Retro Logo"
-            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full"
-          />
-          <span className="ml-3 text-2xl sm:text-3xl">RetroWave</span>
+        <div className="flex items-center justify-center sm:justify-start gap-3">
+          <span
+            className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#39ff14] text-black text-3xl font-black border-2 border-[#39ff14]"
+            style={{ textShadow: "0 0 6px #39ff14" }}
+          >
+            R
+          </span>
+          <span
+            className="text-2xl sm:text-3xl tracking-wider"
+            style={{ textShadow: "0 0 8px currentColor" }}
+          >
+            RetroWave
+          </span>
         </div>
 
         {/* Links Section */}

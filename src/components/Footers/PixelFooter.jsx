@@ -6,12 +6,20 @@ const PixelFooter = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-4 gap-8">
         {/* Logo Section */}
         <div className="flex flex-col items-center sm:items-start">
-          <img
-            src="https://picsum.photos/id/660/150"
-            alt="Pixel Logo"
-            className="w-16 h-16 pixelated rounded-lg"
-          />
-          <span className="text-2xl mt-4">PixelTech</span>
+          <div className="grid grid-cols-4 gap-[2px] w-16 h-16">
+            {[
+              1,1,1,1,
+              1,0,0,1,
+              1,0,0,1,
+              1,1,1,1,
+            ].map((c, i) => (
+              <span
+                key={i}
+                style={{ background: c ? "#facc15" : "transparent" }}
+              />
+            ))}
+          </div>
+          <span className="text-2xl mt-4 tracking-widest text-yellow-400">PixelTech</span>
         </div>
 
         {/* Navigation Links Section */}

@@ -16,7 +16,7 @@ export default function RetroDesc() {
     <div className="min-h-[500px] bg-blue-50 flex items-center justify-center p-2 sm:p-4 font-sans">
       <div className="max-w-4xl w-full bg-yellow-100 rounded-lg overflow-hidden shadow-2xl">
         <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/2 p-8 relative overflow-hidden flex justify-center items-center">
+          <div className="w-full lg:w-1/2 p-5 sm:p-8 relative overflow-hidden flex justify-center items-center">
             <motion.div
               className="absolute inset-0 bg-blue-200 rounded-full "
               animate={{ scale: isHovering ? 1.2 : 1 }}
@@ -34,11 +34,11 @@ export default function RetroDesc() {
               $129.99
             </div>
           </div>
-          <div className="lg:w-1/2 p-2 sm:p-8 bg-white">
-            <h1 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">
+          <div className="w-full lg:w-1/2 p-4 sm:p-8 bg-white">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-800 mb-4">
               RetroWave Radio
             </h1>
-            <div className="flex space-x-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-6">
               {["description", "features", "reviews"].map((tab) => (
                 <button
                   key={tab}

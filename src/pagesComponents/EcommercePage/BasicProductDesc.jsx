@@ -9,8 +9,8 @@ export default function BasicProductDesc() {
     <div className="min-h-[500px] bg-yellow-50 flex items-center justify-center p-2 sm:p-4 font-mono">
       <div className="max-w-4xl w-full bg-white rounded-3xl overflow-hidden shadow-xl">
         <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/2 p-4 sm:p-8 bg-blue-100 flex items-center justify-center">
-            <div className="relative w-64 h-64">
+          <div className="w-full md:w-1/2 p-4 sm:p-8 bg-blue-100 flex items-center justify-center">
+            <div className="relative w-48 h-48 sm:w-64 sm:h-64">
               <div className="absolute inset-0 bg-yellow-200 rounded-full transform -rotate-6"></div>
               <img
                 src="https://picsum.photos/id/701/600/600"
@@ -19,8 +19,8 @@ export default function BasicProductDesc() {
               />
             </div>
           </div>
-          <div className="md:w-1/2 p-3 sm:p-8">
-            <h1 className="text-3xl font-bold text-blue-800 mb-4">
+          <div className="w-full md:w-1/2 p-4 sm:p-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-blue-800 mb-4">
               Vintage Melody Maker
             </h1>
             <div className="flex items-center mb-4">
@@ -38,8 +38,8 @@ export default function BasicProductDesc() {
               aesthetics with modern technology, delivering crystal-clear sound
               in a nostalgic package.
             </p>
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-3xl font-bold text-blue-800">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+              <span className="text-2xl sm:text-3xl font-bold text-blue-800">
                 ${(129.99 * quantity).toFixed(2)}
               </span>
               <div className="flex items-center">
