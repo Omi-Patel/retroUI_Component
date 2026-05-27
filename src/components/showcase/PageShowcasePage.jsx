@@ -10,7 +10,7 @@ import {
   Maximize2,
 } from "lucide-react";
 import { useCopyToClipboard, useDocumentMeta } from "../../hooks";
-import { SITE_META } from "../../lib/constants";
+import { SITE_META, buildOgImageUrl } from "../../lib/constants";
 import { PAGE_REGISTRY } from "../../lib/registries";
 import { DevicePreviewDialog } from "./DevicePreviewDialog";
 
@@ -30,6 +30,11 @@ export const PageShowcasePage = ({ slug, title, description, variants }) => {
       description ||
       `Retro-themed ${title.toLowerCase()} page template — fully responsive.`,
     canonical: `${SITE_META.url}/pages/${slug}`,
+    ogImage: buildOgImageUrl({
+      title,
+      subtitle: `${variants.length} retro ${title.toLowerCase()} template${variants.length === 1 ? "" : "s"}`,
+      kind: "page",
+    }),
   });
 
   useEffect(() => {

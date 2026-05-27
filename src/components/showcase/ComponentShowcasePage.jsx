@@ -11,7 +11,7 @@ import {
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useCopyToClipboard, useDocumentMeta } from "../../hooks";
-import { SITE_META } from "../../lib/constants";
+import { SITE_META, buildOgImageUrl } from "../../lib/constants";
 import { getComponentStatus } from "../../lib/componentStatus";
 import { formatComponentName } from "../../lib/utils";
 import { COMPONENT_REGISTRY } from "../../lib/registries";
@@ -40,6 +40,11 @@ export const ComponentShowcasePage = ({
       description ||
       `Retro-themed ${title.toLowerCase()} components — copy and paste ready.`,
     canonical: `${SITE_META.url}/components/${folder.toLowerCase()}`,
+    ogImage: buildOgImageUrl({
+      title,
+      subtitle: `${components.length} retro ${title.toLowerCase()} variants`,
+      kind: "component",
+    }),
   });
 
   useEffect(() => {
