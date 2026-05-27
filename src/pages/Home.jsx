@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useDocumentMeta } from "../hooks";
 import { SITE_META } from "../lib/constants";
+import { COMPONENT_REGISTRY, PAGE_REGISTRY } from "../lib/registries";
 import {
   ArrowRight,
   Github,
@@ -14,17 +15,30 @@ import {
   ToggleRight,
   Box,
   Copy,
-  Square,
-  LayoutGrid,
-  Type,
-  Table as TableIcon,
-  Loader,
-  PanelLeft,
 } from "lucide-react";
 
+const COMPONENT_VARIANT_COUNT = COMPONENT_REGISTRY.reduce(
+  (sum, c) => sum + (c.count || 0),
+  0,
+);
+const COMPONENT_CATEGORY_COUNT = COMPONENT_REGISTRY.length;
+const PAGE_VARIANT_COUNT = PAGE_REGISTRY.reduce(
+  (sum, p) => sum + (p.count || 0),
+  0,
+);
+const PAGE_CATEGORY_COUNT = PAGE_REGISTRY.length;
+
 const STATS = [
-  { v: "58", l: "Components", sub: "across 12 categories" },
-  { v: "8", l: "Page templates", sub: "production-ready" },
+  {
+    v: `${COMPONENT_VARIANT_COUNT}`,
+    l: "Components",
+    sub: `across ${COMPONENT_CATEGORY_COUNT} categories`,
+  },
+  {
+    v: `${PAGE_VARIANT_COUNT}`,
+    l: "Page templates",
+    sub: `${PAGE_CATEGORY_COUNT} categories · production-ready`,
+  },
   { v: "9", l: "GitHub stars", sub: "early days · star us!" },
   { v: "MIT", l: "Open source", sub: "forever free" },
 ];
@@ -58,20 +72,33 @@ const FEATURES = [
   {
     Icon: Box,
     title: "Page templates",
-    body: "Eight pre-composed templates — Home, About, Dashboard, Blog, Ecommerce, Error, Contact, Services.",
+    body: `${PAGE_VARIANT_COUNT} pre-composed templates across ${PAGE_CATEGORY_COUNT} categories — landing, dashboard, blog, ecommerce, auth, docs, and more.`,
   },
 ];
 
-const CATEGORIES = [
-  { name: "Buttons", Icon: Square, count: 5, path: "/components/buttons" },
-  { name: "Cards", Icon: LayoutGrid, count: 5, path: "/components/cards" },
-  { name: "Inputs", Icon: Type, count: 5, path: "/components/inputs" },
-  { name: "Tables", Icon: TableIcon, count: 5, path: "/components/tables" },
-  { name: "Switches", Icon: ToggleRight, count: 5, path: "/components/switch" },
-  { name: "Loaders", Icon: Loader, count: 8, path: "/components/loaders" },
-  { name: "Navbars", Icon: PanelLeft, count: 6, path: "/components/navbars" },
-  { name: "Footers", Icon: Layers, count: 6, path: "/components/footers" },
+// Show a curated 8-card preview from the canonical component registry —
+// keeps the home page in sync as new categories are added.
+const HIGHLIGHTED_PATHS = [
+  "buttons",
+  "cards",
+  "inputs",
+  "tables",
+  "switch",
+  "loaders",
+  "navbars",
+  "footers",
 ];
+const CATEGORIES = HIGHLIGHTED_PATHS.map((slug) => {
+  const entry = COMPONENT_REGISTRY.find((c) => c.path === slug);
+  return entry
+    ? {
+        name: entry.name,
+        Icon: entry.Icon,
+        count: entry.count,
+        path: `/components/${entry.path}`,
+      }
+    : null;
+}).filter(Boolean);
 
 export default function Home() {
   const navigate = useNavigate();
@@ -363,13 +390,13 @@ export default function Home() {
               eyebrow="The library"
               title={
                 <>
-                  Twelve categories.
+                  {COMPONENT_CATEGORY_COUNT} categories.
                   <br />
                   <span
                     className="display-italic"
                     style={{ color: "var(--muted)" }}
                   >
-                    58 components.
+                    {COMPONENT_VARIANT_COUNT} components.
                   </span>
                 </>
               }

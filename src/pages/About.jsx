@@ -5,6 +5,7 @@ import { SectionHeading } from "./Home";
 import { SITE_META, SOCIAL_LINKS } from "../lib/constants";
 import { useDocumentMeta } from "../hooks";
 import { APP_VERSION, releases } from "../data/releases";
+import { COMPONENT_REGISTRY, PAGE_REGISTRY } from "../lib/registries";
 
 const latestReleaseDate = releases[0]?.date
   ? new Date(releases[0].date).toLocaleDateString("en-US", {
@@ -13,6 +14,15 @@ const latestReleaseDate = releases[0]?.date
       day: "numeric",
     })
   : "—";
+
+const COMPONENT_TOTAL = COMPONENT_REGISTRY.reduce(
+  (sum, c) => sum + (c.count || 0),
+  0,
+);
+const TEMPLATE_TOTAL = PAGE_REGISTRY.reduce(
+  (sum, p) => sum + (p.count || 0),
+  0,
+);
 
 const PRINCIPLES = [
   {
@@ -55,8 +65,8 @@ const FAQ = [
 const AT_A_GLANCE = [
   ["License", "MIT"],
   ["Version", `v${APP_VERSION}`],
-  ["Components", "60+"],
-  ["Templates", "13"],
+  ["Components", `${COMPONENT_TOTAL}`],
+  ["Templates", `${TEMPLATE_TOTAL}`],
   ["Built with", "React 18 · Tailwind 3"],
   ["Last release", latestReleaseDate],
 ];
