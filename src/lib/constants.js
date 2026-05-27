@@ -47,6 +47,20 @@ export const SITE_META = {
 };
 
 /**
+ * Build an absolute URL to the dynamic OG image endpoint (/api/og).
+ * Returns an absolute URL so it can be embedded in <meta property="og:image">.
+ *
+ * @param {{ title?: string, subtitle?: string, kind?: "component" | "page" | "site" }} params
+ */
+export const buildOgImageUrl = ({ title, subtitle, kind = "site" } = {}) => {
+  const qs = new URLSearchParams();
+  if (title) qs.set("title", title);
+  if (subtitle) qs.set("subtitle", subtitle);
+  if (kind) qs.set("kind", kind);
+  return `${SITE_META.url}/api/og?${qs.toString()}`;
+};
+
+/**
  * Lookup the SEO-friendly title/description for a component showcase by its
  * route slug. Reads from COMPONENT_REGISTRY (the single source of truth);
  * falls back to a generic title if no entry matches the slug.
