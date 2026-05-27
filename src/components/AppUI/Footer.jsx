@@ -14,6 +14,7 @@ const QUICK_LINKS = [
   { name: "About", path: "/about" },
   { name: "Components", path: "/components" },
   { name: "Pages", path: "/pages" },
+  { name: "Release Notes", path: "/release-notes" },
   { name: "Privacy", path: "/privacy-policy" },
   { name: "Terms", path: "/terms-conditions" },
   { name: "Contact", path: "/contact-us" },

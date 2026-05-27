@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
+import { useDocumentMeta } from "../../hooks";
+import { SITE_META } from "../../lib/constants";
 
 const SECTIONS = [
   [
@@ -23,6 +25,12 @@ const SECTIONS = [
 ];
 
 export default function Terms() {
+  useDocumentMeta({
+    title: `Terms & Conditions | ${SITE_META.name}`,
+    description: "Terms of use for retroUI.",
+    canonical: `${SITE_META.url}/terms-conditions`,
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

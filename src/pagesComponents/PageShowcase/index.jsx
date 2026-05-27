@@ -14,6 +14,8 @@ import {
   AlertTriangle,
   LayoutDashboard,
 } from "lucide-react";
+import { useDocumentMeta } from "../../hooks";
+import { SITE_META } from "../../lib/constants";
 
 const PAGE_LIST = [
   {
@@ -206,6 +208,13 @@ function PageWireframe({ type }) {
 export default function PagesIndex() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
+
+  useDocumentMeta({
+    title: `Page Templates | ${SITE_META.name}`,
+    description:
+      "Full retro-themed page templates — landing, dashboard, blog, ecommerce, auth, and more.",
+    canonical: `${SITE_META.url}/pages`,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://retro-ui.basecase.site/sitemap.xml

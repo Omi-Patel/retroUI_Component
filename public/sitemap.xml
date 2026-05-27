@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://retro-ui.basecase.site/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://retro-ui.basecase.site/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://retro-ui.basecase.site/release-notes</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://retro-ui.basecase.site/privacy-policy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://retro-ui.basecase.site/terms-conditions</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://retro-ui.basecase.site/contact-us</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+
+  <url><loc>https://retro-ui.basecase.site/components/buttons</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/cards</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/inputs</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/loaders</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/switch</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/navbars</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/footers</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/tables</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/avatars</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/signin</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/signup</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/pricing</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/modals</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/toasts</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/dropdowns</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/tabs</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/accordions</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/badges</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/tooltips</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/alerts</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/progress</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/breadcrumbs</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/paginations</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/skeletons</loc><priority>0.8</priority></url>
+
+  <url><loc>https://retro-ui.basecase.site/pages/home</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/about</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/service</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/contact</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/dashboard</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/error</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/ecommerce</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/blog</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/auth</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/pricing</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/coming-soon</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/settings</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/docs</loc><priority>0.7</priority></url>
+</urlset>

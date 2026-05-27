@@ -17,7 +17,8 @@ import {
   Table as TableIcon,
   Tag,
 } from "lucide-react";
-import { COMPONENT_CATEGORIES } from "../lib/constants";
+import { COMPONENT_CATEGORIES, SITE_META } from "../lib/constants";
+import { useDocumentMeta } from "../hooks";
 
 const ICON_MAP = {
   Button: Square,
@@ -57,6 +58,13 @@ const CATEGORY_LIST = [
 export default function Component() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
+
+  useDocumentMeta({
+    title: `Components | ${SITE_META.name}`,
+    description:
+      "Browse retroUI's full catalog of retro-themed React components — buttons, cards, inputs, navbars, and more.",
+    canonical: `${SITE_META.url}/components`,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);

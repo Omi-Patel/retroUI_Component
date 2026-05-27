@@ -9,6 +9,7 @@ import {
 
 import Navbar from "./components/AppUI/Navbar";
 import { Footer } from "./components/AppUI/Footer";
+import ErrorBoundary from "./components/AppUI/ErrorBoundary";
 import {
   ShowcaseLayout,
   PageShowcaseLayout,
@@ -18,6 +19,7 @@ import {
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Component = lazy(() => import("./pages/Component"));
+const ReleaseNotes = lazy(() => import("./pages/ReleaseNotes"));
 
 const ButtonShowcase = lazy(() => import("./pages/ComponentShowcase"));
 const CardShowcase = lazy(() => import("./pages/CardShowcase"));
@@ -115,9 +117,11 @@ const rootRoute = createRootRoute({
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar />
       <main style={{ flex: 1 }}>
-        <Suspense fallback={<PageLoader />}>
-          <Outlet />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
+            <Outlet />
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
       <ScrollRestoration />
@@ -157,6 +161,7 @@ const topLevel = [
   ["/about", About],
   ["/components", Component],
   ["/pages", Pages],
+  ["/release-notes", ReleaseNotes],
   ["/privacy-policy", PrivacyPolicy],
   ["/terms-conditions", Terms],
   ["/contact-us", ContactUs],

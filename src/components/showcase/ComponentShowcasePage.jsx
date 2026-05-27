@@ -10,7 +10,9 @@ import {
 } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useCopyToClipboard } from "../../hooks";
+import { useCopyToClipboard, useDocumentMeta } from "../../hooks";
+import { SITE_META } from "../../lib/constants";
+import { getComponentStatus } from "../../lib/componentStatus";
 import { formatComponentName } from "../../lib/utils";
 import { COMPONENT_REGISTRY } from "../../lib/registries";
 import { DevicePreviewDialog } from "./DevicePreviewDialog";
@@ -31,6 +33,14 @@ export const ComponentShowcasePage = ({
   const [tab, setTab] = useState("preview");
   const [fullscreen, setFullscreen] = useState(false);
   const [copied, copy] = useCopyToClipboard();
+
+  useDocumentMeta({
+    title: `${title} Components | ${SITE_META.name}`,
+    description:
+      description ||
+      `Retro-themed ${title.toLowerCase()} components — copy and paste ready.`,
+    canonical: `${SITE_META.url}/components/${folder.toLowerCase()}`,
+  });
 
   useEffect(() => {
     setActive(components[0]?.name || "");
@@ -98,18 +108,38 @@ export const ComponentShowcasePage = ({
       >
         {components.map((v) => {
           const sel = v.name === active;
+          const status = getComponentStatus(v.name);
           return (
             <button
               key={v.name}
               onClick={() => setActive(v.name)}
-              className="px-3 h-8 rounded-md text-[12.5px] font-medium whitespace-nowrap transition-colors mono"
+              className="px-3 h-8 rounded-md text-[12.5px] font-medium whitespace-nowrap transition-colors mono inline-flex items-center gap-1.5"
               style={{
                 background: sel ? "var(--fg)" : "var(--bg)",
                 color: sel ? "var(--bg)" : "var(--muted)",
                 border: "1px solid var(--border)",
               }}
             >
-              {formatComponentName(v.name)}
+              <span>{formatComponentName(v.name)}</span>
+              {status && (
+                <span
+                  className="inline-flex items-center px-1.5 rounded-sm"
+                  style={{
+                    fontSize: 9,
+                    lineHeight: "14px",
+                    height: 14,
+                    letterSpacing: "0.06em",
+                    background:
+                      status === "new" ? "var(--accent)" : "var(--surface-2)",
+                    color:
+                      status === "new" ? "var(--accent-fg)" : "var(--fg)",
+                    border: "1px solid var(--border)",
+                  }}
+                  aria-label={status === "new" ? "New component" : "Updated component"}
+                >
+                  {status === "new" ? "NEW" : "UPD"}
+                </span>
+              )}
             </button>
           );
         })}

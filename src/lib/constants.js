@@ -2,6 +2,8 @@
  * Centralized constants and shared data
  */
 
+import { APP_VERSION } from "../data/releases";
+
 // Navigation items used by Navbar and mobile menu
 export const NAV_ITEMS = [
   { name: "Home", href: "/" },
@@ -16,6 +18,7 @@ export const FOOTER_LINKS = [
   { name: "About", path: "/about" },
   { name: "Components", path: "/components" },
   { name: "Pages Example", path: "/pages" },
+  { name: "Release Notes", path: "/release-notes" },
   { name: "Privacy Policy", path: "/privacy-policy" },
   { name: "Terms & Conditions", path: "/terms-conditions" },
   { name: "Contact Us", path: "/contact-us" },
@@ -34,14 +37,16 @@ export const SOCIAL_LINKS = {
 // Site metadata
 export const SITE_META = {
   name: "retroUI",
-  version: "v1",
+  version: `v${APP_VERSION}`,
+  url: "https://retro-ui.basecase.site",
   tagline: "Retro-themed UI components for modern web apps",
   description:
     "A collection of retro-themed UI components built with Tailwind CSS for modern web applications.",
   author: "Omi Patel",
 };
 
-// Component categories for the listing page
+// Component categories for the listing page.
+// `description` doubles as the SEO meta description for the showcase route.
 export const COMPONENT_CATEGORIES = [
   {
     name: "Button",
@@ -116,6 +121,38 @@ export const COMPONENT_CATEGORIES = [
     description: "Product pricing displays",
   },
 ];
+
+/**
+ * Lookup the SEO-friendly title/description for a component showcase by its
+ * route slug. Falls back to the slug if no category matches (e.g. for newer
+ * routes like /components/modals that aren't in COMPONENT_CATEGORIES yet).
+ */
+export const getComponentRouteMeta = (slug) => {
+  const cat = COMPONENT_CATEGORIES.find((c) => c.path === slug);
+  const niceName = cat
+    ? cat.name
+    : slug.charAt(0).toUpperCase() + slug.slice(1);
+  return {
+    title: `${niceName} Components | ${SITE_META.name}`,
+    description: cat
+      ? `${cat.description} — retro-themed ${niceName.toLowerCase()} components, copy-and-paste ready.`
+      : `Retro-themed ${niceName.toLowerCase()} components for modern web apps.`,
+  };
+};
+
+/**
+ * Lookup SEO meta for a page-template showcase route slug.
+ */
+export const getPageRouteMeta = (slug) => {
+  const niceName = slug
+    .split("-")
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(" ");
+  return {
+    title: `${niceName} Page Template | ${SITE_META.name}`,
+    description: `Retro-themed ${niceName.toLowerCase()} page template — fully responsive, copy-and-paste ready.`,
+  };
+};
 
 // Category color map for component badges
 export const CATEGORY_COLORS = {

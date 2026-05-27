@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
+import { useDocumentMeta } from "../hooks";
+import { SITE_META } from "../lib/constants";
 import {
   ArrowRight,
   Github,
@@ -74,6 +76,12 @@ const CATEGORIES = [
 export default function Home() {
   const navigate = useNavigate();
 
+  useDocumentMeta({
+    title: `${SITE_META.name} | ${SITE_META.tagline}`,
+    description: SITE_META.description,
+    canonical: SITE_META.url,
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -91,10 +99,10 @@ export default function Home() {
             <div className="flex flex-wrap items-center gap-4 mb-8">
               <span className="sticker">
                 <Sparkles className="w-[10px] h-[10px]" />
-                NEW · v1.0.0
+                NEW · {SITE_META.version}
               </span>
               <Link
-                to="/about"
+                to="/release-notes"
                 className="text-[13px] retro-link"
                 style={{ color: "var(--muted)" }}
               >

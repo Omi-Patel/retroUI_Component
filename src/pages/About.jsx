@@ -2,7 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Github, ChevronRight, ChevronDown, Copy } from "lucide-react";
 import { SectionHeading } from "./Home";
-import { SOCIAL_LINKS } from "../lib/constants";
+import { SITE_META, SOCIAL_LINKS } from "../lib/constants";
+import { useDocumentMeta } from "../hooks";
+import { APP_VERSION, releases } from "../data/releases";
+
+const latestReleaseDate = releases[0]?.date
+  ? new Date(releases[0].date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  : "—";
 
 const PRINCIPLES = [
   {
@@ -44,11 +54,11 @@ const FAQ = [
 
 const AT_A_GLANCE = [
   ["License", "MIT"],
-  ["Version", "v1.0.2"],
+  ["Version", `v${APP_VERSION}`],
   ["Components", "60+"],
-  ["Templates", "8"],
+  ["Templates", "13"],
   ["Built with", "React 18 · Tailwind 3"],
-  ["Last release", "2 days ago"],
+  ["Last release", latestReleaseDate],
 ];
 
 function FAQItem({ q, a, last }) {
@@ -79,6 +89,13 @@ function FAQItem({ q, a, last }) {
 }
 
 export default function About() {
+  useDocumentMeta({
+    title: `About | ${SITE_META.name}`,
+    description:
+      "RetroUI's philosophy: own your code, composable parts, distinctive by default. Copy-paste retro-themed components for modern React apps.",
+    canonical: `${SITE_META.url}/about`,
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

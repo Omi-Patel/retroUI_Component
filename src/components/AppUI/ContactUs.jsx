@@ -9,7 +9,8 @@ import {
   ArrowRight,
   Check,
 } from "lucide-react";
-import { SOCIAL_LINKS } from "../../lib/constants";
+import { SITE_META, SOCIAL_LINKS } from "../../lib/constants";
+import { useDocumentMeta } from "../../hooks";
 
 function Field({ label, placeholder, type = "text", textarea, required }) {
   const sharedStyle = {
@@ -48,6 +49,12 @@ function Field({ label, placeholder, type = "text", textarea, required }) {
 
 export default function ContactUs() {
   const [sent, setSent] = useState(false);
+
+  useDocumentMeta({
+    title: `Contact | ${SITE_META.name}`,
+    description: "Get in touch with the retroUI team.",
+    canonical: `${SITE_META.url}/contact-us`,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
