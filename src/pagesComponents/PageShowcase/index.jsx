@@ -1,90 +1,11 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  Search,
-  ChevronRight,
-  ArrowRight,
-  Box,
-  Home,
-  Info,
-  Briefcase,
-  Mail,
-  ShoppingBag,
-  Rss,
-  AlertTriangle,
-  LayoutDashboard,
-} from "lucide-react";
+import { Search, ChevronRight, ArrowRight, Box } from "lucide-react";
 import { useDocumentMeta } from "../../hooks";
 import { SITE_META } from "../../lib/constants";
+import { PAGE_REGISTRY } from "../../lib/registries";
 
-const PAGE_LIST = [
-  {
-    name: "Home Page",
-    path: "home",
-    Icon: Home,
-    category: "Landing",
-    count: 3,
-    desc: "Marketing & landing page templates.",
-  },
-  {
-    name: "About Page",
-    path: "about",
-    Icon: Info,
-    category: "Content",
-    count: 2,
-    desc: "Company and project information.",
-  },
-  {
-    name: "Service Page",
-    path: "service",
-    Icon: Briefcase,
-    category: "Content",
-    count: 1,
-    desc: "Services and feature showcases.",
-  },
-  {
-    name: "Contact Page",
-    path: "contact",
-    Icon: Mail,
-    category: "Contact",
-    count: 3,
-    desc: "Contact forms and information.",
-  },
-  {
-    name: "Dashboard",
-    path: "dashboard",
-    Icon: LayoutDashboard,
-    category: "Admin",
-    count: 1,
-    desc: "Dashboard and analytics interfaces.",
-  },
-  {
-    name: "Error / 404",
-    path: "error",
-    Icon: AlertTriangle,
-    category: "System",
-    count: 4,
-    desc: "Error states and 404 pages.",
-  },
-  {
-    name: "Ecommerce",
-    path: "ecommerce",
-    Icon: ShoppingBag,
-    category: "Shop",
-    count: 4,
-    desc: "Product listings and detail pages.",
-  },
-  {
-    name: "Blog",
-    path: "blog",
-    Icon: Rss,
-    category: "Content",
-    count: 3,
-    desc: "Blog index and article layouts.",
-  },
-];
-
-const CATEGORIES = ["All", ...new Set(PAGE_LIST.map((p) => p.category))];
+const CATEGORIES = ["All", ...new Set(PAGE_REGISTRY.map((p) => p.category))];
 
 /* ---------- Mini SVG wireframe per template type ---------- */
 function PageWireframe({ type }) {
@@ -196,11 +117,89 @@ function PageWireframe({ type }) {
         <rect x="106" y="56" width="40" height="44" rx="2" fill={colors.fill} />
       </g>
     ),
+    auth: (
+      <g>
+        <rect x="8" y="8" width="144" height="6" fill={colors.fill} />
+        <rect x="44" y="28" width="72" height="80" rx="2" fill={colors.fill} />
+        <rect x="56" y="40" width="48" height="6" fill={colors.accent} />
+        <rect x="56" y="56" width="48" height="8" rx="2" fill={colors.bg} stroke={colors.line} />
+        <rect x="56" y="68" width="48" height="8" rx="2" fill={colors.bg} stroke={colors.line} />
+        <rect x="56" y="84" width="48" height="10" rx="2" fill={colors.accent} />
+      </g>
+    ),
+    pricing: (
+      <g>
+        <rect x="8" y="8" width="144" height="6" fill={colors.fill} />
+        <rect x="14" y="28" width="80" height="6" fill={colors.accent} />
+        <rect x="14" y="46" width="40" height="60" rx="2" fill={colors.fill} />
+        <rect x="60" y="42" width="40" height="64" rx="2" fill={colors.accent} opacity="0.85" />
+        <rect x="106" y="46" width="40" height="60" rx="2" fill={colors.fill} />
+      </g>
+    ),
+    "coming-soon": (
+      <g>
+        <rect x="8" y="8" width="144" height="6" fill={colors.fill} />
+        <text x="80" y="56" fontFamily="JetBrains Mono, monospace" fontSize="14" fontWeight="700" fill={colors.accent} textAnchor="middle">COMING SOON</text>
+        <rect x="36" y="68" width="22" height="20" rx="2" fill={colors.fill} />
+        <rect x="62" y="68" width="22" height="20" rx="2" fill={colors.fill} />
+        <rect x="88" y="68" width="22" height="20" rx="2" fill={colors.fill} />
+        <rect x="114" y="68" width="22" height="20" rx="2" fill={colors.fill} />
+        <rect x="50" y="96" width="60" height="8" rx="2" fill={colors.accent} />
+      </g>
+    ),
+    settings: (
+      <g>
+        <rect x="8" y="8" width="40" height="100" fill={colors.fill} />
+        <rect x="14" y="20" width="28" height="4" fill={colors.accent} />
+        <rect x="14" y="32" width="28" height="3" fill={colors.line} />
+        <rect x="14" y="40" width="28" height="3" fill={colors.line} />
+        <rect x="14" y="48" width="28" height="3" fill={colors.line} />
+        <rect x="54" y="14" width="100" height="6" fill={colors.accent} />
+        <rect x="54" y="28" width="100" height="20" rx="2" fill={colors.fill} />
+        <rect x="54" y="54" width="100" height="20" rx="2" fill={colors.fill} />
+        <rect x="54" y="80" width="100" height="20" rx="2" fill={colors.fill} />
+      </g>
+    ),
+    docs: (
+      <g>
+        <rect x="8" y="8" width="40" height="100" fill={colors.fill} />
+        <rect x="14" y="20" width="28" height="3" fill={colors.accent} />
+        <rect x="14" y="28" width="22" height="3" fill={colors.line} />
+        <rect x="14" y="36" width="24" height="3" fill={colors.line} />
+        <rect x="14" y="44" width="20" height="3" fill={colors.line} />
+        <rect x="54" y="14" width="80" height="6" fill={colors.accent} />
+        <rect x="54" y="26" width="100" height="3" fill={colors.line} />
+        <rect x="54" y="34" width="100" height="3" fill={colors.line} />
+        <rect x="54" y="42" width="76" height="3" fill={colors.line} />
+        <rect x="54" y="56" width="100" height="50" rx="2" fill={colors.fill} />
+      </g>
+    ),
+    zine: (
+      <g>
+        <rect x="8" y="8" width="144" height="6" fill={colors.fill} />
+        <text x="80" y="40" fontFamily="JetBrains Mono, monospace" fontSize="14" fontWeight="700" fill={colors.accent} textAnchor="middle">RETROZINE</text>
+        <rect x="40" y="48" width="80" height="2" fill={colors.line} />
+        <rect x="14" y="60" width="44" height="44" rx="2" fill={colors.fill} transform="rotate(-4, 36, 82)" />
+        <rect x="60" y="58" width="40" height="46" rx="2" fill={colors.fill} />
+        <rect x="106" y="62" width="40" height="42" rx="2" fill={colors.fill} transform="rotate(3, 126, 83)" />
+      </g>
+    ),
+    default: (
+      <g>
+        <rect x="8" y="8" width="144" height="6" fill={colors.fill} />
+        <rect x="14" y="24" width="60" height="6" fill={colors.accent} />
+        <rect x="14" y="38" width="132" height="3" fill={colors.line} />
+        <rect x="14" y="46" width="100" height="3" fill={colors.line} />
+        <rect x="14" y="60" width="42" height="40" rx="2" fill={colors.fill} />
+        <rect x="60" y="60" width="42" height="40" rx="2" fill={colors.fill} />
+        <rect x="106" y="60" width="42" height="40" rx="2" fill={colors.fill} />
+      </g>
+    ),
   };
   return (
     <svg viewBox="0 0 160 116" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
       <rect width="160" height="116" fill={colors.bg} />
-      {wm[type] || wm.home}
+      {wm[type] || wm.default}
     </svg>
   );
 }
@@ -221,7 +220,7 @@ export default function PagesIndex() {
   }, []);
 
   const filtered = useMemo(() => {
-    return PAGE_LIST.filter(
+    return PAGE_REGISTRY.filter(
       (p) => cat === "All" || p.category === cat
     ).filter(
       (p) =>
@@ -284,7 +283,7 @@ export default function PagesIndex() {
             >
               <Box className="w-3 h-3" />
               <span className="mono">
-                {filtered.length} of {PAGE_LIST.length} templates
+                {filtered.length} of {PAGE_REGISTRY.length} templates
               </span>
             </div>
           </div>

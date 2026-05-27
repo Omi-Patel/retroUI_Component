@@ -25,7 +25,7 @@ export const PageShowcasePage = ({ slug, title, description, variants }) => {
   const [, copy] = useCopyToClipboard();
 
   useDocumentMeta({
-    title: `${title} Page Template | ${SITE_META.name}`,
+    title: `${title} | ${SITE_META.name}`,
     description:
       description ||
       `Retro-themed ${title.toLowerCase()} page template — fully responsive.`,

@@ -33,6 +33,10 @@
   <url><loc>https://retro-ui.basecase.site/components/breadcrumbs</loc><priority>0.8</priority></url>
   <url><loc>https://retro-ui.basecase.site/components/paginations</loc><priority>0.8</priority></url>
   <url><loc>https://retro-ui.basecase.site/components/skeletons</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/polaroids</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/sticky-notes</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/receipts</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/tickers</loc><priority>0.8</priority></url>
 
   <url><loc>https://retro-ui.basecase.site/pages/home</loc><priority>0.7</priority></url>
   <url><loc>https://retro-ui.basecase.site/pages/about</loc><priority>0.7</priority></url>
@@ -47,4 +51,5 @@
   <url><loc>https://retro-ui.basecase.site/pages/coming-soon</loc><priority>0.7</priority></url>
   <url><loc>https://retro-ui.basecase.site/pages/settings</loc><priority>0.7</priority></url>
   <url><loc>https://retro-ui.basecase.site/pages/docs</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/zine</loc><priority>0.7</priority></url>
 </urlset>
