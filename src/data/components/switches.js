@@ -53,34 +53,22 @@ export default BasicSwitch;`,
     },
     code: `import React, { useState } from "react";
 
+// Chunky power switch with ON/OFF rail
 const BorderedSwitch = () => {
   const [isOn, setIsOn] = useState(false);
 
-  const toggleSwitch = () => {
-    setIsOn(!isOn);
-  };
-
   return (
     <div
-      onClick={toggleSwitch}
-      className={\`relative w-16 h-8 flex items-center cursor-pointer rounded-full 
-      transition-all duration-300 
-      \${
-        isOn
-          ? "bg-opacity-50 border-[#f1887e]"
-          : "bg-opacity-30 border-[#f4eb9b]"
-      }
-      border-2 shadow-lg backdrop-filter backdrop-blur-lg\`}
-      style={{
-        background: isOn
-          ? "rgba(255, 111, 97, 0.5)"
-          : "rgba(240, 230, 140, 0.5)",
-      }}
+      onClick={() => setIsOn(!isOn)}
+      className={\`relative w-20 h-9 flex items-center cursor-pointer border-4 border-black shadow-[4px_4px_0px_0px_black] transition-colors font-mono select-none \${
+        isOn ? "bg-lime-400" : "bg-stone-200"
+      }\`}
     >
+      <span className={\`absolute left-2 text-[10px] font-black tracking-widest \${isOn ? "opacity-100 text-black" : "opacity-30"}\`}>ON</span>
+      <span className={\`absolute right-2 text-[10px] font-black tracking-widest \${isOn ? "opacity-30" : "opacity-100 text-black"}\`}>OFF</span>
       <div
-        className={\`w-6 h-6 bg-[#4A4A4A] rounded-full shadow-lg transition-transform duration-300 
-        \${isOn ? "translate-x-8" : "translate-x-1"} 
-        border-2 border-white\`}
+        className={\`w-7 h-7 bg-black border-2 border-black transition-transform duration-200 ease-out \${isOn ? "translate-x-[44px]" : "translate-x-0.5"}\`}
+        style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent 0 2px, rgba(255,255,255,0.15) 2px 4px)" }}
       />
     </div>
   );
@@ -98,25 +86,30 @@ export default BorderedSwitch;`,
     },
     code: `import React, { useState } from "react";
 
+// Arcade neon switch — pink/cyan glow
 const GlowSwitch = () => {
   const [isOn, setIsOn] = useState(false);
 
-  const toggleSwitch = () => {
-    setIsOn(!isOn);
-  };
-
   return (
     <div
-      onClick={toggleSwitch}
-      className={\`relative w-14 h-8 flex items-center rounded-full cursor-pointer transition-all duration-300 \${
-        isOn ? "bg-[#2846ee] shadow-[0_0_10px_4px_#1d37cb]" : "bg-[#B4CFB0]"
+      onClick={() => setIsOn(!isOn)}
+      className={\`relative w-16 h-8 flex items-center cursor-pointer border-2 transition-all duration-300 font-mono \${
+        isOn
+          ? "bg-black border-pink-400 shadow-[0_0_15px_rgba(244,114,182,0.6)]"
+          : "bg-black border-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.3)]"
       }\`}
     >
-      <div
-        className={\`w-6 h-6 bg-[#333] rounded-full transform transition-transform duration-300 \${
-          isOn ? "translate-x-7" : "translate-x-1"
-        }\`}
-      />
+      <div className={\`w-5 h-5 transition-all duration-300 \${
+        isOn
+          ? "translate-x-[34px] bg-pink-400 shadow-[0_0_8px_rgba(244,114,182,0.9)]"
+          : "translate-x-1.5 bg-cyan-300 shadow-[0_0_8px_rgba(34,211,238,0.6)]"
+      }\`} />
+      <span
+        className={\`absolute inset-0 flex items-center justify-center text-[8px] font-black tracking-widest pointer-events-none \${isOn ? "text-pink-400" : "text-cyan-300"}\`}
+        style={{ textShadow: "0 0 6px currentColor" }}
+      >
+        {isOn ? "▸ ON" : "OFF ◂"}
+      </span>
     </div>
   );
 };

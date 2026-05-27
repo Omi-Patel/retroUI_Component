@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Logo from "./Logo";
 import ThemeToggle from "./ModeToggle";
+import PaletteToggle from "./PaletteToggle";
 import { SOCIAL_LINKS } from "../../lib/constants";
 
 /* ---------- Marquee ticker ---------- */
@@ -126,6 +127,7 @@ export default function Navbar() {
                 <span className="flex-1 text-left">Search components…</span>
                 <kbd>⌘K</kbd>
               </button>
+              <PaletteToggle />
               <ThemeToggle />
               <a
                 href={SOCIAL_LINKS.github}
@@ -140,6 +142,7 @@ export default function Navbar() {
             </div>
 
             <div className="md:hidden flex items-center gap-1">
+              <PaletteToggle compact />
               <ThemeToggle compact />
               <button
                 onClick={() => setOpen(!open)}

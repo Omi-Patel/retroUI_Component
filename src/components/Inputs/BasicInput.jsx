@@ -1,21 +1,24 @@
 import React from "react";
 
-const RetroInput = () => {
+const BasicInput = () => {
   return (
-    <>
-      {/* Basic Retro Input */}
-      <div className="mb-6 w-full max-w-md">
-        <label className="block text-xl font-bold mb-2 text-gray-700">
-          Basic Input
-        </label>
+    <div className="w-full max-w-md font-mono">
+      <label className="block text-[10px] font-bold uppercase tracking-[0.25em] mb-2 text-black/70">
+        ✎ Field 01 · Name
+      </label>
+      <div className="relative">
         <input
           type="text"
-          placeholder="Enter text"
-          className="w-full font-mono px-4 py-2 text-lg bg-gray-200 text-gray-800 border-4 border-black shadow-[6px_6px_0px_0px_black] hover:shadow-[10px_10px_0px_0px_black] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-150 ease-out"
+          placeholder="Type something…"
+          className="w-full px-4 py-3 text-base bg-[#f5f1e6] text-black border-4 border-black focus:outline-none focus:bg-yellow-50 placeholder:opacity-40"
         />
+        <span className="absolute -bottom-1 left-2 right-2 border-t-2 border-dashed border-black/40" />
       </div>
-    </>
+      <p className="mt-1.5 text-[10px] opacity-50 uppercase tracking-widest">
+        Press [TAB] to continue
+      </p>
+    </div>
   );
 };
 
-export default RetroInput;
+export default BasicInput;

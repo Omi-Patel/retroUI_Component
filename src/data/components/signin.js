@@ -1,6 +1,5 @@
 import { LogIn } from 'lucide-react';
 
-// Component imports
 import SignInPage from '../../components/SignIn/SignInPage';
 
 export const signinComponents = [
@@ -8,80 +7,74 @@ export const signinComponents = [
     name: 'SignInPage',
     component: SignInPage,
     icon: LogIn,
-    code: `
-import React from "react";
+    code: `import React from "react";
+import { Mail, Lock, Github } from "lucide-react";
 
 const SignInPage = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-yellow-100 rounded-lg p-3 sm:p-6 lg:p-8">
-      {/* Sign-in Box */}
-      <div className="w-full max-w-xs sm:max-w-sm md:max-w-md p-6 sm:p-8 bg-white shadow-[8px_8px_0px_0px_black] border-4 border-black rounded-lg">
-        {/* Title */}
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 tracking-wider">
-          Sign In
-        </h1>
+    <div className="flex items-center justify-center min-h-screen bg-[#ede7d6] text-black font-mono p-4 sm:p-6 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-25 pointer-events-none" style={{
+        backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.3) 1px, transparent 1.4px)",
+        backgroundSize: "18px 18px",
+      }} />
 
-        {/* Sign-in Form */}
-        <form className="space-y-4 sm:space-y-6 font-mono">
-          {/* Email Field */}
-          <div>
-            <label htmlFor="email" className="block text-md sm:text-lg font-semibold mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Enter your email"
-              className="w-full p-2 sm:p-3 bg-gray-100 border-2 border-black rounded-md shadow-[4px_4px_0px_0px_black] text-md sm:text-lg"
-            />
-          </div>
+      <div className="relative w-full max-w-sm">
+        <div className="absolute -top-3 -right-3 z-10 inline-block px-3 py-1 bg-[#ede7d6] border-[3px] border-red-600 text-red-600 rotate-[-8deg] text-[10px] font-black uppercase tracking-widest">
+          MEMBERS · ONLY
+        </div>
 
-          {/* Password Field */}
-          <div>
-            <div className="flex justify-between items-center">
-              <label
-                htmlFor="password"
-                className="block text-md sm:text-lg font-semibold mb-2"
-              >
-                Password
-              </label>
-              <a href="#" className="text-blue-500 hover:underline text-sm sm:text-base">
-                Forgot Password?
-              </a>
+        <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_black]">
+          <header className="bg-[#f5f1e6] border-b-4 border-double border-black p-5 text-center">
+            <p className="text-[10px] tracking-[0.4em] uppercase opacity-60">VOL. 27 · ACCESS PASS</p>
+            <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tight mt-1">Sign In</h1>
+            <p className="text-[10px] tracking-[0.3em] uppercase opacity-60 mt-1">★ WELCOME BACK ★</p>
+          </header>
+
+          <form className="p-6 space-y-4">
+            <div>
+              <label className="block text-[10px] font-black uppercase tracking-widest mb-1.5">Email</label>
+              <div className="flex items-center gap-2 px-3 py-2 bg-[#fafaf3] border-4 border-black focus-within:bg-yellow-50">
+                <Mail className="w-3.5 h-3.5 opacity-60" />
+                <input type="email" placeholder="hello@retro.dev" className="flex-1 bg-transparent text-sm focus:outline-none placeholder:opacity-40" />
+              </div>
             </div>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-              className="w-full p-2 sm:p-3 bg-gray-100 border-2 border-black rounded-md shadow-[4px_4px_0px_0px_black] text-md sm:text-lg"
-            />
-          </div>
 
-          {/* Sign-In Button */}
-          <div>
-            <button
-              type="submit"
-              className="w-full p-2 sm:p-3 text-white bg-blue-500 border-4 border-black rounded-md shadow-[4px_4px_0px_0px_black] hover:bg-blue-600 transition-all duration-150"
-            >
-              Sign In
+            <div>
+              <div className="flex justify-between items-center mb-1.5">
+                <label className="text-[10px] font-black uppercase tracking-widest">Password</label>
+                <a href="#" className="text-[10px] uppercase tracking-widest font-bold underline underline-offset-2">Forgot?</a>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-2 bg-[#fafaf3] border-4 border-black focus-within:bg-yellow-50">
+                <Lock className="w-3.5 h-3.5 opacity-60" />
+                <input type="password" placeholder="••••••••" className="flex-1 bg-transparent text-sm focus:outline-none placeholder:opacity-40" />
+              </div>
+            </div>
+
+            <label className="inline-flex items-center gap-2 text-xs cursor-pointer">
+              <input type="checkbox" className="w-3.5 h-3.5 accent-black" />
+              <span>Keep me signed in</span>
+            </label>
+
+            <button type="submit" className="w-full py-3 bg-yellow-300 text-black border-4 border-black shadow-[4px_4px_0px_0px_black] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_black] transition-all font-black uppercase tracking-widest text-xs">
+              Enter the Clubhouse
             </button>
-          </div>
-        </form>
 
-        {/* Additional Links */}
-        <div className="mt-4 sm:mt-6 flex justify-center gap-2 text-sm sm:text-base">
-          <p>Don't have an account?</p>
-          <a href="#" className="text-blue-500 hover:underline">
-            Sign Up
-          </a>
+            <button type="button" className="w-full py-2.5 bg-white text-black border-4 border-black shadow-[4px_4px_0px_0px_black] hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[11px]">
+              <Github className="w-3.5 h-3.5" /> Continue with GitHub
+            </button>
+          </form>
+
+          <footer className="border-t-4 border-dashed border-black bg-[#f5f1e6] py-3 text-center text-[10px] tracking-[0.3em] uppercase opacity-70">
+            No account?{" "}
+            <a href="#" className="font-black underline ml-1">Become a member</a>
+          </footer>
         </div>
       </div>
     </div>
   );
 };
 
-export default SignInPage;
-`,
+export default SignInPage;`,
   },
 ];
 

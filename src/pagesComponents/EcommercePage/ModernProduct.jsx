@@ -1,265 +1,247 @@
-import React, { useState, useEffect } from "react";
-import { ShoppingBag, Heart, X, Plus, Minus, Trash2 } from "lucide-react";
+import React, { useState } from "react";
+import { ShoppingBag, Heart, X, Plus, Minus, Trash2, Star } from "lucide-react";
 
 const products = [
-  {
-    id: 1,
-    name: "Vintage Polaroid Camera",
-    price: 129.99,
-    image: "https://picsum.photos/id/501/300/200",
-    description:
-      "Capture moments in classic style with this refurbished Polaroid camera from the 1970s.",
-  },
-  {
-    id: 2,
-    name: "Retro Vinyl Record Player",
-    price: 189.99,
-    image: "https://picsum.photos/id/502/300/200",
-    description:
-      "Experience the warm sound of vinyl with this beautifully crafted record player, featuring modern connectivity.",
-  },
-  {
-    id: 3,
-    name: "Antique Brass Telescope",
-    price: 79.99,
-    image: "https://picsum.photos/id/503/300/200",
-    description:
-      "Gaze at the stars or use as a stunning decorative piece. This brass telescope is a true conversation starter.",
-  },
-  {
-    id: 4,
-    name: "Classic Leather-bound Journal",
-    price: 39.99,
-    image: "https://picsum.photos/id/504/300/200",
-    description:
-      "Write your thoughts in style with this handcrafted leather journal, featuring high-quality paper and a timeless design.",
-  },
-  {
-    id: 5,
-    name: "Vintage Typewriter",
-    price: 249.99,
-    image: "https://picsum.photos/id/505/300/200",
-    description:
-      "Create with a touch of nostalgia using this fully restored vintage typewriter. Perfect for writers and collectors alike.",
-  },
-  {
-    id: 6,
-    name: "Antique World Globe",
-    price: 89.99,
-    image: "https://picsum.photos/id/506/300/200",
-    description:
-      "Explore the world from your study with this beautifully detailed antique-style world globe on a wooden stand.",
-  },
+  { id: 1, name: "Polaroid Camera", cat: "PHOTO", price: 129.99, emoji: "📷", color: "bg-pink-300" },
+  { id: 2, name: "Vinyl Record Player", cat: "AUDIO", price: 189.99, emoji: "🎙", color: "bg-yellow-300" },
+  { id: 3, name: "Brass Telescope", cat: "OPTICS", price: 79.99, emoji: "🔭", color: "bg-cyan-300" },
+  { id: 4, name: "Leather Journal", cat: "PAPER", price: 39.99, emoji: "📓", color: "bg-orange-300" },
+  { id: 5, name: "Vintage Typewriter", cat: "WRITE", price: 249.99, emoji: "⌨", color: "bg-lime-300" },
+  { id: 6, name: "World Globe", cat: "DECOR", price: 89.99, emoji: "🌐", color: "bg-rose-300" },
 ];
 
 export default function ModernProduct() {
   const [cart, setCart] = useState([]);
   const [likes, setLikes] = useState({});
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartTotal, setCartTotal] = useState(0);
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const newTotal = cart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-    setCartTotal(newTotal);
-  }, [cart]);
+  const total = cart.reduce((s, x) => s + x.price * x.qty, 0);
 
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prevCart, { ...product, quantity: 1 }];
+  const add = (p) => {
+    setCart((c) => {
+      const ex = c.find((x) => x.id === p.id);
+      if (ex) return c.map((x) => (x.id === p.id ? { ...x, qty: x.qty + 1 } : x));
+      return [...c, { ...p, qty: 1 }];
     });
+    setOpen(true);
   };
-
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
-  };
-
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity === 0) {
-      removeFromCart(productId);
-    } else {
-      setCart((prevCart) =>
-        prevCart.map((item) =>
-          item.id === productId ? { ...item, quantity: newQuantity } : item
-        )
-      );
-    }
-  };
-
-  const toggleLike = (productId) => {
-    setLikes((prevLikes) => ({
-      ...prevLikes,
-      [productId]: !prevLikes[productId],
-    }));
-  };
+  const inc = (id) =>
+    setCart((c) => c.map((x) => (x.id === id ? { ...x, qty: x.qty + 1 } : x)));
+  const dec = (id) =>
+    setCart((c) =>
+      c
+        .map((x) => (x.id === id ? { ...x, qty: x.qty - 1 } : x))
+        .filter((x) => x.qty > 0)
+    );
+  const rm = (id) => setCart((c) => c.filter((x) => x.id !== id));
+  const tog = (id) => setLikes((l) => ({ ...l, [id]: !l[id] }));
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 font-sans">
-      <header className="bg-white shadow-md py-4 px-4 sm:px-6 lg:px-8 top-0 z-10">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl sm:text-3xl font-bold text-indigo-600">ModernRetro</h1>
+    <div className="min-h-screen bg-[#ede7d6] text-black font-mono">
+      <header className="border-b-4 border-black bg-[#f5f1e6] sticky top-0 z-30">
+        <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+          <a href="#" className="text-2xl font-black uppercase tracking-tight">
+            Curio<span className="italic font-light"> · Co.</span>
+          </a>
+          <nav className="hidden md:flex items-center gap-1">
+            {["Shop", "Catalog", "About", "Stockists"].map((it) => (
+              <a
+                key={it}
+                href="#"
+                className="px-3 py-1.5 text-xs uppercase tracking-widest font-bold hover:bg-yellow-300"
+              >
+                {it}
+              </a>
+            ))}
+          </nav>
           <button
-            onClick={() => setIsCartOpen(true)}
-            className="relative p-2 text-gray-600 hover:text-indigo-600 transition-colors duration-300"
+            onClick={() => setOpen(true)}
+            className="relative inline-flex items-center gap-2 px-3 py-1.5 bg-yellow-300 text-black border-4 border-black shadow-[3px_3px_0px_0px_black] text-xs font-black uppercase tracking-wider"
           >
-            <ShoppingBag size={24} />
+            <ShoppingBag className="w-3.5 h-3.5" /> Cart
             {cart.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {cart.length}
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-black w-5 h-5 rounded-full border-2 border-black flex items-center justify-center">
+                {cart.reduce((n, x) => n + x.qty, 0)}
               </span>
             )}
           </button>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800">
-          Our Curated Collection
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-            >
-              <div className="relative">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-64 object-cover"
-                />
-                <button
-                  onClick={() => toggleLike(product.id)}
-                  className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-indigo-100 transition-colors duration-300"
+      <main className="max-w-6xl mx-auto px-6 py-10">
+        <section className="text-center mb-10">
+          <p className="text-[10px] tracking-[0.4em] uppercase opacity-60">
+            ★ CURATED · HAND-PICKED · POSTAGE INCLUDED ★
+          </p>
+          <h1 className="text-5xl sm:text-6xl font-black uppercase tracking-tighter mt-1">
+            The General Store
+          </h1>
+          <p className="text-sm opacity-70 mt-2 max-w-lg mx-auto">
+            Six objects worth keeping. All small-batch, all hand-stamped,
+            shipped in brown paper.
+          </p>
+        </section>
+
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.map((p) => {
+            const liked = likes[p.id];
+            return (
+              <article
+                key={p.id}
+                className="relative bg-[#f5f1e6] text-black border-4 border-black shadow-[6px_6px_0px_0px_black] flex flex-col"
+              >
+                <div
+                  className={`relative ${p.color} h-44 border-b-4 border-black flex items-center justify-center text-6xl`}
                 >
-                  <Heart
-                    size={20}
-                    className={`${
-                      likes[product.id]
-                        ? "text-red-500 fill-red-500"
-                        : "text-gray-400"
-                    }`}
+                  <div
+                    className="absolute inset-0 opacity-25"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle, rgba(0,0,0,0.4) 1.2px, transparent 1.5px)",
+                      backgroundSize: "8px 8px",
+                    }}
                   />
-                </button>
-              </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4 text-sm sm:text-base">{product.description}</p>
-                <div className="flex flex-wrap justify-between items-center gap-3">
-                  <span className="text-xl sm:text-2xl font-bold text-indigo-600">
-                    ${product.price.toFixed(2)}
-                  </span>
+                  <span className="relative">{p.emoji}</span>
                   <button
-                    onClick={() => addToCart(product)}
-                    className="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition-colors duration-300 whitespace-nowrap"
+                    onClick={() => tog(p.id)}
+                    aria-label="Like"
+                    className={`absolute top-2 right-2 inline-flex items-center justify-center w-8 h-8 border-2 border-black ${
+                      liked ? "bg-red-500 text-white" : "bg-[#f5f1e6] text-black"
+                    }`}
                   >
-                    Add to Cart
+                    <Heart className={`w-4 h-4 ${liked ? "fill-white" : ""}`} />
                   </button>
+                  <span className="absolute top-2 left-2 bg-black text-yellow-300 text-[10px] font-black uppercase tracking-widest px-2 py-0.5">
+                    {p.cat}
+                  </span>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+                <div className="p-4 flex-1 flex flex-col">
+                  <p className="text-[10px] tracking-[0.3em] uppercase opacity-60">
+                    CAT № {String(p.id).padStart(3, "0")}
+                  </p>
+                  <h3 className="text-lg font-black uppercase mt-0.5 mb-2">
+                    {p.name}
+                  </h3>
+                  <div className="flex items-center gap-1 mb-3 text-xs opacity-70">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 fill-current" />
+                    ))}
+                    <span className="ml-1 opacity-60">(127)</span>
+                  </div>
+                  <div className="mt-auto flex items-center justify-between border-t-2 border-dashed border-black/40 pt-3">
+                    <span className="text-xl font-black">${p.price}</span>
+                    <button
+                      onClick={() => add(p)}
+                      className="px-3 py-1.5 bg-black text-yellow-300 border-2 border-black text-xs font-black uppercase tracking-wider hover:bg-yellow-300 hover:text-black transition-colors"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </section>
       </main>
 
-      {isCartOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end z-50">
-          <div className="bg-white w-full max-w-md p-4 sm:p-6 overflow-y-auto">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Your Cart</h2>
+      {/* Cart drawer */}
+      {open && (
+        <div className="fixed inset-0 z-50 flex justify-end">
+          <div
+            onClick={() => setOpen(false)}
+            className="absolute inset-0 bg-black/60"
+          />
+          <div className="relative w-full max-w-sm bg-[#f5f1e6] text-black border-l-4 border-black flex flex-col font-mono">
+            <header className="flex items-center justify-between px-5 py-3 border-b-4 border-black bg-yellow-300">
+              <div>
+                <p className="text-[10px] tracking-[0.3em] uppercase opacity-70">
+                  YOUR ORDER
+                </p>
+                <h2 className="font-black uppercase">Shopping Crate</h2>
+              </div>
               <button
-                onClick={() => setIsCartOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center w-8 h-8 bg-[#f5f1e6] border-2 border-black hover:bg-black hover:text-yellow-300 transition-colors"
               >
-                <X size={24} />
+                <X className="w-3.5 h-3.5" />
               </button>
-            </div>
-            {cart.length === 0 ? (
-              <p className="text-gray-500 text-center">Your cart is empty.</p>
-            ) : (
-              <>
-                {cart.map((item) => (
+            </header>
+
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              {cart.length === 0 ? (
+                <p className="text-center opacity-60 text-sm py-12">
+                  Crate is empty.
+                  <br /> Pick something nice.
+                </p>
+              ) : (
+                cart.map((it) => (
                   <div
-                    key={item.id}
-                    className="flex items-center mb-4 pb-4 border-b border-gray-200"
+                    key={it.id}
+                    className="bg-[#ede7d6] border-2 border-black shadow-[3px_3px_0px_0px_black] p-3 flex items-center gap-3"
                   >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-20 h-20 object-cover rounded-md mr-4"
-                    />
-                    <div className="flex-grow">
-                      <h3 className="font-semibold text-gray-800">
-                        {item.name}
-                      </h3>
-                      <p className="text-gray-600">${item.price.toFixed(2)}</p>
-                      <div className="flex items-center mt-2">
+                    <div
+                      className={`${it.color} w-12 h-12 border-2 border-black flex items-center justify-center text-2xl flex-shrink-0`}
+                    >
+                      {it.emoji}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-black uppercase truncate">
+                        {it.name}
+                      </p>
+                      <p className="text-[10px] opacity-60">
+                        ${it.price} × {it.qty}
+                      </p>
+                      <div className="mt-1 inline-flex items-center border-2 border-black">
                         <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
-                          className="text-gray-500 hover:text-indigo-600"
+                          onClick={() => dec(it.id)}
+                          className="px-1.5 hover:bg-yellow-300"
                         >
-                          <Minus size={16} />
+                          <Minus className="w-2.5 h-2.5" />
                         </button>
-                        <span className="mx-2 text-gray-800">
-                          {item.quantity}
-                        </span>
+                        <span className="px-2 text-xs font-bold">{it.qty}</span>
                         <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
-                          }
-                          className="text-gray-500 hover:text-indigo-600"
+                          onClick={() => inc(it.id)}
+                          className="px-1.5 hover:bg-yellow-300"
                         >
-                          <Plus size={16} />
+                          <Plus className="w-2.5 h-2.5" />
                         </button>
                       </div>
                     </div>
                     <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="text-red-500 hover:text-red-700 ml-4"
+                      onClick={() => rm(it.id)}
+                      className="text-red-600 p-1"
+                      aria-label="Remove"
                     >
-                      <Trash2 size={20} />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
-                ))}
-                <div className="mt-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-xl font-semibold text-gray-800">
-                      Total:
-                    </span>
-                    <span className="text-2xl font-bold text-indigo-600">
-                      ${cartTotal.toFixed(2)}
-                    </span>
-                  </div>
-                  <button className="w-full bg-indigo-600 text-white py-3 rounded-full text-lg font-semibold hover:bg-indigo-700 transition-colors duration-300">
-                    Proceed to Checkout
-                  </button>
-                </div>
-              </>
-            )}
+                ))
+              )}
+            </div>
+
+            <footer className="border-t-4 border-dashed border-black p-4 space-y-3 bg-[#f5f1e6]">
+              <div className="flex justify-between text-sm">
+                <span className="opacity-70">Subtotal</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="opacity-70">Postage</span>
+                <span>$0.00</span>
+              </div>
+              <div className="flex justify-between text-base font-black border-t-2 border-dashed border-black/40 pt-2">
+                <span>TOTAL</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+              <button
+                disabled={!cart.length}
+                className="w-full py-3 bg-black text-yellow-300 border-4 border-black text-xs font-black uppercase tracking-wider disabled:opacity-40 hover:bg-yellow-300 hover:text-black transition-colors"
+              >
+                Checkout →
+              </button>
+            </footer>
           </div>
         </div>
       )}
-
-      <footer className="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8 mt-12">
-        <div className="max-w-7xl mx-auto text-center">
-          <p>&copy; 2023 ModernRetro. All rights reserved.</p>
-          <p className="mt-2 text-gray-400">
-            Bringing the past into the future, one product at a time.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

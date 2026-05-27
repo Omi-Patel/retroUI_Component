@@ -1,4 +1,4 @@
-import { Loader, RotateCw, RefreshCw, Hourglass, Clock, Gauge } from 'lucide-react';
+import { Loader, Disc, Heart, Music, Clock, Gauge } from 'lucide-react';
 
 // Component imports
 import RetroLoader from '../../components/Loaders/RetroLoader';
@@ -64,68 +64,94 @@ const RetroLoader = () => {
 export default RetroLoader;`,
   },
   {
-    name: 'RetroSpinner',
+    name: 'CassetteLoader',
     component: RetroSpinner,
-    icon: RotateCw,
+    icon: Music,
     colors: {
-      gradient: 'from-blue-400 to-blue-500',
-      bg: 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-900/30',
+      gradient: 'from-pink-400 to-rose-500',
+      bg: 'bg-gradient-to-br from-pink-50 to-rose-100 dark:from-pink-900/20 dark:to-rose-900/30',
     },
     code: `import React from "react";
 
-const RetroSpinner = () => {
+// Cassette tape with spinning reels
+const CassetteLoader = () => {
   return (
-    <div className="flex">
-      <div className="w-8 h-8 rounded-full border-4 border-black border-t-transparent border-b-[#60a5fa] shadow-[2px_2px_0px_0px_black] animate-[spin_0.8s_linear_infinite]"></div>
-    </div>
-  );
-};
-
-export default RetroSpinner;`,
-  },
-  {
-    name: 'ThreeSpinner',
-    component: ThreeSpinner,
-    icon: RefreshCw,
-    colors: {
-      gradient: 'from-pink-400 to-pink-500',
-      bg: 'bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-900/30',
-    },
-    code: `import React from "react";
-
-const ThreeSpinner = () => {
-  return (
-    <div className="flex space-x-6">
-      <div className="w-8 h-8 border-4 border-t-transparent border-black bg-[#fbbf24] delay-0 rounded-full animate-spin shadow-[1px_1px_14px_0px_#fbbf24]"></div>
-      <div className="w-8 h-8 border-4 border-t-transparent border-black bg-[#ec4899] delay-300 rounded-full animate-spin shadow-[1px_1px_14px_0px_#ec4899]"></div>
-      <div className="w-8 h-8 border-4 border-t-transparent border-black bg-[#3b82f6] delay-600 rounded-full animate-spin shadow-[1px_1px_14px_0px_#3b82f6]"></div>
-    </div>
-  );
-};
-
-export default ThreeSpinner;`,
-  },
-  {
-    name: 'ShadowSpinner',
-    component: ShadowSpinner,
-    icon: Hourglass,
-    colors: {
-      gradient: 'from-purple-400 to-purple-500',
-      bg: 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-900/30',
-    },
-    code: `import React from "react";
-
-const ShadowSpinner = () => {
-  return (
-    <div className="flex space-x-4 items-center">
-      <div className="w-8 h-8 rounded-full border-4 border-black relative bg-yellow-100 shadow-[2px_2px_14px_0px_yellow] animate-[spin_0.6s_linear_infinite]">
-        <div className="w-2 h-2 bg-[#ffdb25] absolute right-1 top-2 rounded-full"></div>
+    <div className="relative w-32 h-20 bg-pink-300 border-4 border-black shadow-[4px_4px_0px_0px_black] font-mono">
+      <div className="absolute top-1 left-1 right-1 h-2 bg-black/80" />
+      <div className="absolute inset-2 top-4 flex items-center justify-around bg-stone-900">
+        <div className="w-7 h-7 rounded-full bg-stone-700 border-2 border-black flex items-center justify-center">
+          <div className="w-4 h-4 rounded-full border-2 border-pink-300 border-t-transparent animate-spin" />
+        </div>
+        <div className="text-[8px] text-pink-300 tracking-widest">► REC</div>
+        <div className="w-7 h-7 rounded-full bg-stone-700 border-2 border-black flex items-center justify-center">
+          <div className="w-4 h-4 rounded-full border-2 border-pink-300 border-t-transparent animate-spin" style={{ animationDirection: "reverse" }} />
+        </div>
       </div>
     </div>
   );
 };
 
-export default ShadowSpinner;`,
+export default CassetteLoader;`,
+  },
+  {
+    name: 'ArcadeHeartsLoader',
+    component: ThreeSpinner,
+    icon: Heart,
+    colors: {
+      gradient: 'from-lime-400 to-green-600',
+      bg: 'bg-gradient-to-br from-lime-50 to-green-100 dark:from-lime-900/20 dark:to-green-900/30',
+    },
+    code: `import React from "react";
+
+// Retro arcade HUD — 3 pixel hearts pulsing
+const ArcadeHeartsLoader = () => {
+  return (
+    <div className="flex items-center gap-2 px-4 py-2 bg-black border-4 border-lime-400 shadow-[0_0_15px_rgba(163,230,53,0.4)] font-mono">
+      <span className="text-[10px] tracking-widest text-lime-300">HP</span>
+      {[0, 1, 2].map((i) => (
+        <span key={i} className="text-2xl text-pink-400" style={{
+          animation: "heartPulse 1.2s ease-in-out infinite",
+          animationDelay: \`\${i * 0.2}s\`,
+        }}>♥</span>
+      ))}
+      <style>{\`
+        @keyframes heartPulse {
+          0%, 100% { opacity: 0.3; transform: scale(0.85); }
+          50% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 8px currentColor; }
+        }
+      \`}</style>
+    </div>
+  );
+};
+
+export default ArcadeHeartsLoader;`,
+  },
+  {
+    name: 'VinylLoader',
+    component: ShadowSpinner,
+    icon: Disc,
+    colors: {
+      gradient: 'from-amber-400 to-orange-500',
+      bg: 'bg-gradient-to-br from-amber-50 to-orange-100 dark:from-amber-900/20 dark:to-orange-900/30',
+    },
+    code: `import React from "react";
+
+// Vinyl record spinning on a turntable
+const VinylLoader = () => {
+  return (
+    <div className="flex items-center justify-center w-24 h-24 bg-amber-100 border-4 border-black shadow-[4px_4px_0px_0px_black]">
+      <div className="relative w-16 h-16 rounded-full bg-stone-900 animate-spin" style={{ animationDuration: "1.5s" }}>
+        <div className="absolute inset-1 rounded-full border border-stone-700" />
+        <div className="absolute inset-3 rounded-full border border-stone-700" />
+        <div className="absolute inset-5 rounded-full border border-stone-700" />
+        <div className="absolute inset-0 m-auto w-5 h-5 rounded-full bg-red-500 border-2 border-black" />
+        <div className="absolute inset-0 m-auto w-1 h-1 rounded-full bg-black" />
+      </div>
+    </div>
+  );
+};
+
+export default VinylLoader;`,
   },
   {
     name: 'SequenceLoader',

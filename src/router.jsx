@@ -31,6 +31,18 @@ const AvatarShowcase = lazy(() => import("./pages/AvatarShowcase"));
 const SigninShowcase = lazy(() => import("./pages/SigninShowcase"));
 const SignupShowcase = lazy(() => import("./pages/SignupShowcase"));
 const PricingShowcase = lazy(() => import("./pages/PricingShowcase"));
+const ModalShowcase = lazy(() => import("./pages/ModalShowcase"));
+const ToastShowcase = lazy(() => import("./pages/ToastShowcase"));
+const DropdownShowcase = lazy(() => import("./pages/DropdownShowcase"));
+const TabsShowcase = lazy(() => import("./pages/TabsShowcase"));
+const AccordionShowcase = lazy(() => import("./pages/AccordionShowcase"));
+const BadgeShowcase = lazy(() => import("./pages/BadgeShowcase"));
+const TooltipShowcase = lazy(() => import("./pages/TooltipShowcase"));
+const AlertShowcase = lazy(() => import("./pages/AlertShowcase"));
+const ProgressShowcase = lazy(() => import("./pages/ProgressShowcase"));
+const BreadcrumbShowcase = lazy(() => import("./pages/BreadcrumbShowcase"));
+const PaginationShowcase = lazy(() => import("./pages/PaginationShowcase"));
+const SkeletonShowcase = lazy(() => import("./pages/SkeletonShowcase"));
 
 const Pages = lazy(() => import("./pagesComponents/PageShowcase"));
 const HomePageShowcase = lazy(() =>
@@ -56,6 +68,21 @@ const EcomPageShowcase = lazy(() =>
 );
 const BlogPageShowcase = lazy(() =>
   import("./pagesComponents/PageShowcase/BlogPageShowcase")
+);
+const AuthPageShowcase = lazy(() =>
+  import("./pagesComponents/PageShowcase/AuthPageShowcase")
+);
+const PricingPageShowcase = lazy(() =>
+  import("./pagesComponents/PageShowcase/PricingPageShowcase")
+);
+const ComingSoonPageShowcase = lazy(() =>
+  import("./pagesComponents/PageShowcase/ComingSoonPageShowcase")
+);
+const SettingsPageShowcase = lazy(() =>
+  import("./pagesComponents/PageShowcase/SettingsPageShowcase")
+);
+const DocsPageShowcase = lazy(() =>
+  import("./pagesComponents/PageShowcase/DocsPageShowcase")
 );
 
 const PrivacyPolicy = lazy(() => import("./components/AppUI/PrivacyPolicy"));
@@ -155,6 +182,18 @@ const componentShowcaseChildren = [
   ["/components/signin", SigninShowcase],
   ["/components/signup", SignupShowcase],
   ["/components/pricing", PricingShowcase],
+  ["/components/modals", ModalShowcase],
+  ["/components/toasts", ToastShowcase],
+  ["/components/dropdowns", DropdownShowcase],
+  ["/components/tabs", TabsShowcase],
+  ["/components/accordions", AccordionShowcase],
+  ["/components/badges", BadgeShowcase],
+  ["/components/tooltips", TooltipShowcase],
+  ["/components/alerts", AlertShowcase],
+  ["/components/progress", ProgressShowcase],
+  ["/components/breadcrumbs", BreadcrumbShowcase],
+  ["/components/paginations", PaginationShowcase],
+  ["/components/skeletons", SkeletonShowcase],
 ].map(([p, el]) => makeRoute(p, el, componentShowcaseLayoutRoute));
 
 /* ---------- Page-template showcase layout (sticky sidebar) ---------- */
@@ -173,6 +212,11 @@ const pageShowcaseChildren = [
   ["/pages/error", ErrorPageShowcase],
   ["/pages/ecommerce", EcomPageShowcase],
   ["/pages/blog", BlogPageShowcase],
+  ["/pages/auth", AuthPageShowcase],
+  ["/pages/pricing", PricingPageShowcase],
+  ["/pages/coming-soon", ComingSoonPageShowcase],
+  ["/pages/settings", SettingsPageShowcase],
+  ["/pages/docs", DocsPageShowcase],
 ].map(([p, el]) => makeRoute(p, el, pageShowcaseLayoutRoute));
 
 const routeTree = rootRoute.addChildren([

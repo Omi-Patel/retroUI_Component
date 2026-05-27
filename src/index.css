@@ -42,6 +42,66 @@
   --sticker-2: #6a9686;
 }
 
+/* ===========================================
+   PALETTE VARIANTS — switchable site-wide
+   Each palette sets its own chrome colors.
+   Newsprint is the default (no data-palette attr).
+   =========================================== */
+
+[data-palette="neon"] {
+  --bg: #0d0a18;
+  --surface: #161029;
+  --surface-2: #20183a;
+  --fg: #f5e8ff;
+  --muted: #a890c8;
+  --border: #2a1f4d;
+  --border-strong: #4a3a7a;
+  --accent: #f472b6;
+  --accent-fg: #0d0a18;
+  --brand: #f472b6;
+  --paper-tint: rgba(244, 114, 182, 0.02);
+  --warning: #fbbf24;
+  --ok: #34d399;
+  --sticker: #f472b6;
+  --sticker-2: #22d3ee;
+}
+
+[data-palette="terminal"] {
+  --bg: #000000;
+  --surface: #0a0f0a;
+  --surface-2: #0f1a0f;
+  --fg: #4ade80;
+  --muted: #2d8a48;
+  --border: #1a3a1a;
+  --border-strong: #2d5a2d;
+  --accent: #4ade80;
+  --accent-fg: #000000;
+  --brand: #4ade80;
+  --paper-tint: rgba(74, 222, 128, 0.02);
+  --warning: #fcd34d;
+  --ok: #4ade80;
+  --sticker: #4ade80;
+  --sticker-2: #fcd34d;
+}
+
+[data-palette="polaroid"] {
+  --bg: #fff5ee;
+  --surface: #ffe8d6;
+  --surface-2: #ffd5b8;
+  --fg: #5a2d1a;
+  --muted: #a06848;
+  --border: #f0bf9a;
+  --border-strong: #d99b6e;
+  --accent: #e0758a;
+  --accent-fg: #fff5ee;
+  --brand: #e0758a;
+  --paper-tint: rgba(224, 117, 138, 0.015);
+  --warning: #c66e3a;
+  --ok: #6ba87e;
+  --sticker: #e0758a;
+  --sticker-2: #8eb4d9;
+}
+
 html,
 body {
   background: var(--bg);

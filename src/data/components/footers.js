@@ -13,116 +13,77 @@ export const footerComponents = [
     name: 'BasicFooter',
     component: BasicFooter,
     icon: Layout,
-    code: `
-import React from "react";
+    code: `import React from "react";
 
+// Marquee-strip footer
 const BasicFooter = () => {
+  const items = [
+    "© 2024 RETRO BRAND",
+    "★ ALL RIGHTS RESERVED",
+    "✱ MADE WITH NOSTALGIA",
+    "▸ NO COOKIES, JUST CRUMBS",
+    "✉ SAY HELLO@RETRO.DEV",
+  ];
+
   return (
-    <div>
-      <footer className="bg-slate-300 border-t-4 border-black py-4">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="font-mono text-black text-lg">
-            &copy; 2024 RetroBrand. All Rights Reserved.
-          </p>
-        </div>
-      </footer>
-    </div>
+    <footer className="bg-black text-yellow-300 border-t-4 border-black font-mono overflow-hidden">
+      <div className="py-2 whitespace-nowrap animate-[mqFoot_28s_linear_infinite] text-xs tracking-widest font-bold">
+        {[...items, ...items, ...items].map((t, i) => (
+          <span key={i} className="inline-block px-6">
+            {t} <span className="opacity-40">·</span>
+          </span>
+        ))}
+      </div>
+      <style>{\`@keyframes mqFoot { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }\`}</style>
+    </footer>
   );
 };
 
-export default BasicFooter;
-`,
+export default BasicFooter;`,
   },
   {
     name: 'BorderedFooter',
     component: BorderedFooter,
     icon: Columns,
-    code: `
-import React from "react";
+    code: `import React from "react";
+import { Twitter, Instagram, Github } from "lucide-react";
 
+// Postmark footer — stamp aesthetic
 const BorderedFooter = () => {
   return (
-    <footer className="bg-yellow-100 border-t-4 border-[#333] py-6">
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        {/* Footer Content */}
-        <p className="font-sans text-gray-800 text-lg md:text-xl font-medium mb-4">
-          &copy; 2024 CreativeBrand. All Rights Reserved.
-        </p>
-
-        {/* Navigation Links */}
-        <div className="flex justify-center space-x-6 mb-4">
-          <a
-            href="#"
-            className="text-gray-800 hover:text-[#333] transition duration-300"
-          >
-            Privacy Policy
-          </a>
-          <a
-            href="#"
-            className="text-gray-800 hover:text-[#333] transition duration-300"
-          >
-            Terms of Service
-          </a>
-          <a
-            href="#"
-            className="text-gray-800 hover:text-[#333] transition duration-300"
-          >
-            Contact Us
-          </a>
+    <footer className="bg-yellow-200 text-black border-t-4 border-black font-mono py-8 px-6 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-15 pointer-events-none" style={{
+        backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.4) 1.2px, transparent 1.5px)",
+        backgroundSize: "16px 16px",
+      }} />
+      <div className="relative max-w-3xl mx-auto text-center">
+        <div className="inline-block px-4 py-1 bg-yellow-200 border-[3px] border-red-600 text-red-600 rotate-[-4deg] text-[10px] font-black uppercase tracking-widest mb-4">
+          ★ STAMP OF APPROVAL ★
         </div>
-
-        {/* Social Media Icons */}
-        <div className="flex justify-center space-x-6 mt-4">
-          <a href="#" aria-label="Facebook">
-            <svg
-              className="w-6 h-6 text-gray-800 hover:text-[#333] transition duration-300"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M22 12.1c0-5.5-4.5-10-10-10S2 6.6 2 12.1c0 4.9 3.5 9 8.2 9.8v-6.9H7.7v-2.9h2.5v-2.2c0-2.5 1.5-3.8 3.7-3.8 1.1 0 2.2.1 2.2.1v2.5h-1.2c-1.2 0-1.6.7-1.6 1.4v1.7h2.8l-.4 2.9h-2.4v6.9c4.7-.8 8.2-4.9 8.2-9.8z" />
-            </svg>
-          </a>
-          <a href="#" aria-label="Twitter">
-            <svg
-              className="w-6 h-6 text-gray-800 hover:text-[#333] transition duration-300"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-            </svg>
-          </a>
-          <a href="#" aria-label="Instagram">
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-6 h-6 text-gray-800 hover:text-[#333] transition duration-300"
-              viewBox="0 0 24 24"
-            >
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-            </svg>
-          </a>
-          <a href="#" aria-label="LinkedIn">
-            <svg
-              className="w-6 h-6 text-gray-800 hover:text-[#333] transition duration-300"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-              <circle cx="4" cy="4" r="2" />
-            </svg>
-          </a>
+        <h3 className="text-3xl font-black uppercase tracking-tight mb-1">CreativeBrand</h3>
+        <p className="text-[10px] tracking-[0.3em] uppercase opacity-60 mb-5">
+          POSTMARK · 2024 · ALL RIGHTS RESERVED
+        </p>
+        <div className="flex justify-center gap-1 mb-5 flex-wrap">
+          {["Privacy", "Terms", "Contact", "FAQ"].map((l) => (
+            <a key={l} href="#" className="px-3 py-1.5 text-[11px] uppercase tracking-widest font-bold border-2 border-black hover:bg-black hover:text-yellow-200">
+              {l}
+            </a>
+          ))}
+        </div>
+        <div className="flex justify-center gap-2">
+          {[Twitter, Instagram, Github].map((Icon, i) => (
+            <a key={i} href="#" className="inline-flex items-center justify-center w-9 h-9 bg-yellow-200 text-black border-2 border-black shadow-[3px_3px_0px_0px_black]">
+              <Icon className="w-4 h-4" />
+            </a>
+          ))}
         </div>
       </div>
     </footer>
   );
 };
 
-export default BorderedFooter;
-`,
+export default BorderedFooter;`,
   },
   {
     name: 'ShadowFooter',
@@ -207,141 +168,78 @@ export default ShadowFooter;
     name: 'ClassicFooter',
     component: ClassicFooter,
     icon: Layout,
-    code: `
-import React from "react";
+    code: `import React from "react";
+import { Twitter, Instagram, Linkedin, Github, Mail } from "lucide-react";
 
+// Newsprint columned footer with newsletter
 const ClassicFooter = () => {
   return (
-    <footer className="bg-white text-gray-800 font-sans p-4 sm:p-10 border-t border-gray-300">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        {/* Logo Section */}
-        <div className="flex items-center justify-center sm:justify-start lg:col-span-1">
-          <img
-            src="https://picsum.photos/id/1005/150"
-            alt="Logo"
-            className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg border-2 border-gray-800"
-          />
-          <span className="ml-3 text-xl sm:text-2xl font-bold text-gray-800">
-            RetroBrand
-          </span>
-        </div>
-
-        <div className=" grid grid-cols-2 sm:grid-cols-2 lg:gap-8">
-          {/* Navigation Links */}
-          <div className="flex flex-col items-center sm:items-start lg:col-span-1 space-y-4">
-            <span className="text-gray-800 font-semibold text-lg">
-              Navigation
-            </span>
-            <a
-              href="#"
-              className="text-gray-800 hover:text-gray-600 transition duration-300"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="text-gray-800 hover:text-gray-600 transition duration-300"
-            >
-              About
-            </a>
-            <a
-              href="#"
-              className="text-gray-800 hover:text-gray-600 transition duration-300"
-            >
-              Services
-            </a>
-            <a
-              href="#"
-              className="text-gray-800 hover:text-gray-600 transition duration-300"
-            >
-              Blog
-            </a>
-            <a
-              href="#"
-              className="text-gray-800 hover:text-gray-600 transition duration-300"
-            >
-              Contact
-            </a>
+    <footer className="bg-[#f5f1e6] text-black border-t-4 border-double border-black font-mono px-6 py-10">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-black text-yellow-300 font-black text-xl mb-3">R</div>
+            <h3 className="text-2xl font-black uppercase tracking-tight">RetroBrand</h3>
+            <p className="text-xs opacity-70 mt-2">Hand-stamped objects for thoughtful people. Est. 1997.</p>
           </div>
 
-          {/* Social Media Links */}
-          <div className="flex flex-col items-center sm:items-start space-y-4">
-            <span className="text-gray-800 font-semibold text-lg">
-              Follow Us
-            </span>
-            <a
-              href="#"
-              aria-label="Twitter"
-              className="text-gray-800 hover:text-blue-500 transition duration-300"
-            >
-              Twitter
-            </a>
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="text-gray-800 hover:text-pink-500 transition duration-300"
-            >
-              Instagram
-            </a>
-            <a
-              href="#"
-              aria-label="LinkedIn"
-              className="text-gray-800 hover:text-blue-700 transition duration-300"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="text-gray-800 hover:text-blue-600 transition duration-300"
-            >
-              Facebook
-            </a>
-            <a
-              href="#"
-              aria-label="GitHub"
-              className="text-gray-800 hover:text-gray-900 transition duration-300"
-            >
-              GitHub
-            </a>
+          <Column title="Navigation" items={["Home", "About", "Services", "Blog", "Contact"]} />
+          <Column title="Follow" items={[
+            { label: "Twitter", Icon: Twitter },
+            { label: "Instagram", Icon: Instagram },
+            { label: "LinkedIn", Icon: Linkedin },
+            { label: "GitHub", Icon: Github },
+          ]} />
+
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-widest opacity-70 mb-3">Newsletter</p>
+            <p className="text-xs opacity-80 mb-3">Subscribe for sporadic dispatches and rare drops.</p>
+            <form className="space-y-2">
+              <div className="flex items-center gap-2 px-3 py-2 bg-white border-2 border-black">
+                <Mail className="w-3.5 h-3.5 opacity-60" />
+                <input type="email" placeholder="hello@you.dev" className="flex-1 bg-transparent text-xs focus:outline-none placeholder:opacity-40" />
+              </div>
+              <button type="submit" className="w-full py-2 bg-black text-yellow-300 border-2 border-black text-[10px] font-black uppercase tracking-widest">
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
 
-        {/* Newsletter Subscription */}
-        <div className="bg-gray-200 p-4 rounded-lg shadow-sm w-full sm:w-72">
-          <span className="block text-gray-800 font-semibold text-lg mb-2">
-            Newsletter
-          </span>
-          <p className="text-gray-600 mb-4">
-            Subscribe to our newsletter for updates and promotions.
-          </p>
-          <form className="flex flex-col gap-2">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-            />
-            <button
-              type="submit"
-              className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
+        <hr className="my-6 border-dashed border-black/30 border-t-2" />
 
-      {/* Bottom Line */}
-      <hr className="mt-4" />
-      <div className="mt-6 text-center text-sm text-gray-700">
-        &copy; 2024 RetroBrand. All Rights Reserved.
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] tracking-[0.3em] uppercase opacity-60">
+          <p>© 2024 RETROBRAND</p>
+          <p>★ NO COOKIES · JUST CRUMBS ★</p>
+        </div>
       </div>
     </footer>
   );
 };
 
-export default ClassicFooter;
-`,
+function Column({ title, items }) {
+  return (
+    <div>
+      <p className="text-[10px] font-black uppercase tracking-widest opacity-70 mb-3">{title}</p>
+      <ul className="space-y-1.5">
+        {items.map((it) => {
+          const label = typeof it === "string" ? it : it.label;
+          const Icon = typeof it === "string" ? null : it.Icon;
+          return (
+            <li key={label}>
+              <a href="#" className="inline-flex items-center gap-1.5 text-xs hover:underline underline-offset-4">
+                {Icon && <Icon className="w-3 h-3 opacity-70" />}
+                {label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+export default ClassicFooter;`,
   },
   {
     name: 'NeonFooter',

@@ -2,37 +2,43 @@ import React from "react";
 
 const BlogCard = () => {
   return (
-    <div className="font-mono border-4 border-black p-6 rounded-lg shadow-[6px_6px_0px_0px_black] hover:shadow-[12px_12px_0px_0px_black] transition-shadow duration-150 ease-in-out max-w-md ">
-      {/* Image */}
-      <img
-        src="https://picsum.photos/id/660/150"
-        alt="Blog Cover"
-        className="w-full h-48 object-cover rounded-lg mb-4"
-      />
-
-      {/* Title */}
-      <h3 className="text-3xl font-bold mb-2 text-white bg-black p-2 rounded-lg shadow-lg">
-        Retro Design Tips
-      </h3>
-
-      {/* Metadata */}
-      <div className="flex items-center mb-4 text-white text-sm">
-        <span className="mr-2">📅 August 15, 2024</span>
-        <span className="mr-2">✍️ John Doe</span>
+    <article className="max-w-md font-mono bg-[#f5f1e6] text-black border-4 border-black shadow-[8px_8px_0px_0px_black] overflow-hidden">
+      <div
+        className="relative h-40 bg-black text-yellow-300 flex flex-col items-center justify-center p-4"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 8px)",
+        }}
+      >
+        <p className="text-[10px] tracking-[0.4em] uppercase opacity-70">
+          THE WEEKLY · ISSUE 27
+        </p>
+        <h2 className="text-3xl font-black uppercase tracking-tighter text-center leading-none mt-1">
+          Retro Design <br />
+          <span className="italic font-light text-pink-300">never died.</span>
+        </h2>
+        <span className="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-black uppercase tracking-widest px-2 py-0.5 border-2 border-black rotate-[-3deg]">
+          ESSAY
+        </span>
       </div>
 
-      {/* Description */}
-      <p className="text-white mb-4 text-sm font-mono">
-        Discover the secrets to creating eye-catching retro designs that stand
-        out in modern projects. Learn tips and tricks to give your designs a
-        nostalgic feel with a modern twist.
-      </p>
-
-      {/* Button */}
-      <button className="px-5 py-2 bg-black text-white border-2 border-gray-800 rounded-md shadow-[4px_4px_0px_0px_black] hover:shadow-[6px_6px_0px_0px_black] transition-shadow duration-150">
-        Read More
-      </button>
-    </div>
+      <div className="p-5">
+        <div className="flex items-center gap-2 text-[10px] tracking-widest uppercase opacity-60 mb-2">
+          <span>★ AUG 15, 2024</span>
+          <span>·</span>
+          <span>BY J. DOE</span>
+          <span>·</span>
+          <span>5 MIN READ</span>
+        </div>
+        <p className="text-sm leading-relaxed mb-4">
+          Discover the secrets behind eye-catching retro designs that stand out
+          in modern projects. Tips, tricks, and a healthy dose of nostalgia.
+        </p>
+        <button className="inline-flex items-center gap-2 px-4 py-1.5 bg-yellow-300 text-black border-4 border-black shadow-[3px_3px_0px_0px_black] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_black] text-xs font-black uppercase tracking-wider transition-all">
+          Read on →
+        </button>
+      </div>
+    </article>
   );
 };
 

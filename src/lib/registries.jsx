@@ -19,6 +19,23 @@ import {
   AlertTriangle,
   ShoppingBag,
   Rss,
+  MessageSquare,
+  Bell,
+  ChevronsDown,
+  Bookmark,
+  ListCollapse,
+  Sticker,
+  HelpCircle,
+  AlertCircle,
+  BarChart3,
+  ChevronsRight,
+  Hash,
+  Sparkles,
+  KeyRound,
+  Receipt,
+  Rocket,
+  Settings as SettingsIcon,
+  BookOpen,
 } from "lucide-react";
 
 /**
@@ -38,6 +55,18 @@ export const COMPONENT_REGISTRY = [
   { name: "Switch", path: "switch", Icon: ToggleRight, count: 5, category: "Form" },
   { name: "Table", path: "tables", Icon: TableIcon, count: 5, category: "Data" },
   { name: "Pricing", path: "pricing", Icon: Tag, count: 3, category: "Display" },
+  { name: "Modal", path: "modals", Icon: MessageSquare, count: 4, category: "Overlay" },
+  { name: "Toast", path: "toasts", Icon: Bell, count: 4, category: "Feedback" },
+  { name: "Dropdown", path: "dropdowns", Icon: ChevronsDown, count: 4, category: "Form" },
+  { name: "Tabs", path: "tabs", Icon: Bookmark, count: 4, category: "Navigation" },
+  { name: "Accordion", path: "accordions", Icon: ListCollapse, count: 4, category: "Layout" },
+  { name: "Badge", path: "badges", Icon: Sticker, count: 5, category: "Display" },
+  { name: "Tooltip", path: "tooltips", Icon: HelpCircle, count: 4, category: "Overlay" },
+  { name: "Alert", path: "alerts", Icon: AlertCircle, count: 4, category: "Feedback" },
+  { name: "Progress", path: "progress", Icon: BarChart3, count: 4, category: "Feedback" },
+  { name: "Breadcrumb", path: "breadcrumbs", Icon: ChevronsRight, count: 4, category: "Navigation" },
+  { name: "Pagination", path: "paginations", Icon: Hash, count: 4, category: "Navigation" },
+  { name: "Skeleton", path: "skeletons", Icon: Sparkles, count: 4, category: "Feedback" },
 ];
 
 /**
@@ -52,4 +81,9 @@ export const PAGE_REGISTRY = [
   { name: "Error / 404", path: "error", Icon: AlertTriangle, count: 4, category: "System", desc: "Error states and 404 pages." },
   { name: "Ecommerce", path: "ecommerce", Icon: ShoppingBag, count: 4, category: "Shop", desc: "Product listings and detail pages." },
   { name: "Blog", path: "blog", Icon: Rss, count: 3, category: "Content", desc: "Blog index and article layouts." },
+  { name: "Auth", path: "auth", Icon: KeyRound, count: 1, category: "Auth", desc: "Full sign-in / sign-up page flow." },
+  { name: "Pricing Page", path: "pricing", Icon: Receipt, count: 1, category: "Marketing", desc: "Full-page pricing template with tiers and FAQ." },
+  { name: "Coming Soon", path: "coming-soon", Icon: Rocket, count: 1, category: "System", desc: "Pre-launch page with countdown and signup." },
+  { name: "Settings", path: "settings", Icon: SettingsIcon, count: 1, category: "App", desc: "User settings page with sidebar sections." },
+  { name: "Documentation", path: "docs", Icon: BookOpen, count: 1, category: "Content", desc: "Documentation template with TOC and changelog." },
 ];
