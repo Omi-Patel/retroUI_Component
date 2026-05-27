@@ -1,74 +1,105 @@
+# retroUI
 
-# RetroUI Component Library
+> Retro-themed React component library — copy and paste, ship instantly.
 
-**RetroUI Component Library** is a collection of retro-themed UI components designed to be easy to integrate into modern web applications. All components are fully responsive and customizable, with multiple variants and theming options.
+[![Made with React](https://img.shields.io/badge/React-18-149eca)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-5-646cff)](https://vitejs.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8)](https://tailwindcss.com)
+[![TanStack Router](https://img.shields.io/badge/Router-TanStack-ef4444)](https://tanstack.com/router)
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Customization](#customization)
-- [Contributing](#contributing)
-- [License](#license)
+retroUI is a showcase site for a 90s-zine / faded-newsprint themed React component library. Browse 50+ components and 13 full-page templates, copy any source, drop into your project. No install, no lock-in.
+
+**Live:** https://retro-ui.basecase.site
 
 ---
 
-## Overview
+## Quickstart
 
-RetroUI provides a suite of retro-styled components such as buttons, card layouts, input fields, and more, giving your web app a vintage yet professional aesthetic. Each component is fully customizable and responsive, making it suitable for a wide range of screen sizes and devices.
+```bash
+git clone https://github.com/Omi-Patel/retroUI_Component.git
+cd retroUI_Component
+npm install
+npm run dev
+```
 
-## Features
+Then open <http://localhost:5173>.
 
-- **Retro-themed components**: Buttons, cards, input fields, and more.
-- **Responsive**: Optimized for all device sizes.
-- **Customizable**: Easily change colors, fonts, and themes.
-- **Lightweight**: Minimal design with fast load times.
+### Scripts
 
-## Installation
+| Command           | What it does                          |
+| ----------------- | ------------------------------------- |
+| `npm run dev`     | Start Vite dev server                 |
+| `npm run build`   | Production build (`dist/`)            |
+| `npm run lint`    | Run ESLint (incl. `jsx-a11y` checks)  |
+| `npm run preview` | Serve the production build locally    |
 
-To install RetroUI in your project, follow these steps:
+## Tech stack
 
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/Omi-Patel/retroUI_Component.git
-    cd retroUI_Component
-    ```
+- **React 18** + **Vite 5**
+- **Tailwind CSS 3** with a custom CSS variable–driven theme (`src/index.css`)
+- **TanStack Router** with lazy-loaded routes
+- **Framer Motion** for animation, **lucide-react** for icons
+- **react-syntax-highlighter** for the in-app code preview
+- Deployed on **Vercel**
 
-2. **Install the dependencies**:
-    ```bash
-    npm install
-    # or
-    yarn install
-    ```
+## Project structure
 
-3. **Run the development server**:
-    ```bash
-    npm run dev
-    ```
+```
+src/
+  components/        Retro UI components, organized by category
+    Buttons/  Cards/  Inputs/  Loaders/  Switch/  Tables/  ...
+    AppUI/             Site chrome (Navbar, Footer, ErrorBoundary, ...)
+    showcase/          Shared showcase layout primitives
+  pages/             Standalone route components + per-category showcases
+  pagesComponents/   Full page-template examples + their showcase pages
+  data/components/   Component metadata/registry, exported by category
+  data/releases.js   Canonical release log (drives /release-notes + badges)
+  hooks/             useCopyToClipboard, useDocumentMeta, useScrollToTop
+  lib/               theme.js, utils.js, animations.js, constants.js
+  router.jsx         TanStack Router config (root layout + all routes)
+```
 
-## Usage
+See [CLAUDE.md](./CLAUDE.md) for deeper architecture notes.
 
-You can start using RetroUI components by copy pasting them into your React or Next.js projects.
+## Adding a new component
 
-## Customization
+1. Create the component file under the right category folder, e.g.
+   `src/components/Buttons/MyButton.jsx`.
+2. Register it in the corresponding data file, e.g.
+   `src/data/components/buttons.js`.
+3. (Optional) Add a `NEW` / `UPDATED` flag for the next release in
+   `src/data/releases.js` under `components: { new: [...] }`.
 
-You can easily customize the look and feel of the components by adjusting the theme and styling.
+The showcase page picks it up automatically from the data file.
 
-### Responsive Design
+## Adding a new component category
 
-All components are built with responsiveness in mind. You can easily override styles to suit different screen sizes using standard CSS or Tailwind classes.
+1. Create `src/components/<Category>/` with the components and an `index.js`.
+2. Create `src/data/components/<category>.js` exporting the array.
+3. Create `src/pages/<Category>Showcase.jsx` using the shared
+   `ComponentShowcasePage` wrapper from `src/components/showcase/`.
+4. Register the route in `src/router.jsx`.
+5. Append the entry to `public/sitemap.xml`.
+
+## Releases
+
+Releases are tracked in two places — kept in sync manually for now:
+
+- [`src/data/releases.js`](./src/data/releases.js) — source of truth. Powers the
+  `/release-notes` page, the version string in the Navbar marquee, and `NEW`/
+  `UPDATED` badges on showcase cards.
+- [`CHANGELOG.md`](./CHANGELOG.md) — Markdown mirror for GitHub Releases and
+  changelog viewers.
+
+When publishing a release, prepend an entry to `releases.js`, copy it into
+`CHANGELOG.md`, bump `package.json` version, and tag.
 
 ## Contributing
 
-We welcome contributions to improve the RetroUI library! To contribute:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m 'Add feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a Pull Request.
+PRs welcome — read [CONTRIBUTING.md](./CONTRIBUTING.md) for branch naming,
+commit conventions, and the component-add walkthrough. Bug reports and feature
+requests have templates under [`.github/`](./.github).
 
 ## License
 
-This project is licensed under the MIT License.
+See repository for license details.

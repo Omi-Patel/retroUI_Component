@@ -2,6 +2,9 @@
  * Centralized constants and shared data
  */
 
+import { APP_VERSION } from "../data/releases";
+import { COMPONENT_REGISTRY } from "./registries";
+
 // Navigation items used by Navbar and mobile menu
 export const NAV_ITEMS = [
   { name: "Home", href: "/" },
@@ -16,6 +19,7 @@ export const FOOTER_LINKS = [
   { name: "About", path: "/about" },
   { name: "Components", path: "/components" },
   { name: "Pages Example", path: "/pages" },
+  { name: "Release Notes", path: "/release-notes" },
   { name: "Privacy Policy", path: "/privacy-policy" },
   { name: "Terms & Conditions", path: "/terms-conditions" },
   { name: "Contact Us", path: "/contact-us" },
@@ -34,88 +38,45 @@ export const SOCIAL_LINKS = {
 // Site metadata
 export const SITE_META = {
   name: "retroUI",
-  version: "v1",
+  version: `v${APP_VERSION}`,
+  url: "https://retro-ui.basecase.site",
   tagline: "Retro-themed UI components for modern web apps",
   description:
     "A collection of retro-themed UI components built with Tailwind CSS for modern web applications.",
   author: "Omi Patel",
 };
 
-// Component categories for the listing page
-export const COMPONENT_CATEGORIES = [
-  {
-    name: "Button",
-    path: "buttons",
-    category: "Basic",
-    description: "Interactive elements for user actions",
-  },
-  {
-    name: "Card",
-    path: "cards",
-    category: "Layout",
-    description: "Containers for organizing content",
-  },
-  {
-    name: "Input",
-    path: "inputs",
-    category: "Form",
-    description: "Fields for user data entry",
-  },
-  {
-    name: "Avatar",
-    path: "avatars",
-    category: "Display",
-    description: "User profile representations",
-  },
-  {
-    name: "Signin",
-    path: "signin",
-    category: "Auth",
-    description: "Authentication entry points",
-  },
-  {
-    name: "Signup",
-    path: "signup",
-    category: "Auth",
-    description: "User registration interfaces",
-  },
-  {
-    name: "Loader",
-    path: "loaders",
-    category: "Feedback",
-    description: "Loading state indicators",
-  },
-  {
-    name: "Navbar",
-    path: "navbars",
-    category: "Navigation",
-    description: "Site navigation headers",
-  },
-  {
-    name: "Footer",
-    path: "footers",
-    category: "Layout",
-    description: "Page footer sections",
-  },
-  {
-    name: "Switch",
-    path: "switch",
-    category: "Form",
-    description: "Toggle controls for binary options",
-  },
-  {
-    name: "Table",
-    path: "tables",
-    category: "Data",
-    description: "Structured data displays",
-  },
-  {
-    name: "Pricing",
-    path: "pricing",
-    category: "Display",
-    description: "Product pricing displays",
-  },
-];
+/**
+ * Lookup the SEO-friendly title/description for a component showcase by its
+ * route slug. Reads from COMPONENT_REGISTRY (the single source of truth);
+ * falls back to a generic title if no entry matches the slug.
+ */
+export const getComponentRouteMeta = (slug) => {
+  const entry = COMPONENT_REGISTRY.find((c) => c.path === slug);
+  const niceName = entry
+    ? entry.name
+    : slug.charAt(0).toUpperCase() + slug.slice(1);
+  return {
+    title: `${niceName} Components | ${SITE_META.name}`,
+    description: entry
+      ? `${entry.description} — retro-themed ${niceName.toLowerCase()} components, copy-and-paste ready.`
+      : `Retro-themed ${niceName.toLowerCase()} components for modern web apps.`,
+  };
+};
+
+/**
+ * Lookup SEO meta for a page-template showcase route slug.
+ */
+export const getPageRouteMeta = (slug) => {
+  const niceName = slug
+    .split("-")
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(" ");
+  return {
+    title: `${niceName} Page Template | ${SITE_META.name}`,
+    description: `Retro-themed ${niceName.toLowerCase()} page template — fully responsive, copy-and-paste ready.`,
+  };
+};
 
 // Category color map for component badges
 export const CATEGORY_COLORS = {

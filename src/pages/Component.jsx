@@ -1,69 +1,32 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  Search,
-  Layers,
-  ChevronRight,
-  ArrowRight,
-  Square,
-  LayoutGrid,
-  Type,
-  User,
-  LogIn,
-  UserPlus,
-  Loader,
-  PanelLeft,
-  ToggleRight,
-  Table as TableIcon,
-  Tag,
-} from "lucide-react";
-import { COMPONENT_CATEGORIES } from "../lib/constants";
-
-const ICON_MAP = {
-  Button: Square,
-  Card: LayoutGrid,
-  Input: Type,
-  Avatar: User,
-  Signin: LogIn,
-  Signup: UserPlus,
-  Loader: Loader,
-  Navbar: PanelLeft,
-  Footer: Layers,
-  Switch: ToggleRight,
-  Table: TableIcon,
-  Pricing: Tag,
-};
-
-const COUNT_MAP = {
-  Button: 5,
-  Card: 5,
-  Input: 5,
-  Avatar: 4,
-  Signin: 3,
-  Signup: 7,
-  Loader: 8,
-  Navbar: 5,
-  Footer: 6,
-  Switch: 5,
-  Table: 5,
-  Pricing: 3,
-};
+import { Search, Layers, ChevronRight, ArrowRight, Square } from "lucide-react";
+import { SITE_META } from "../lib/constants";
+import { COMPONENT_REGISTRY } from "../lib/registries";
+import { useDocumentMeta } from "../hooks";
 
 const CATEGORY_LIST = [
   "All",
-  ...new Set(COMPONENT_CATEGORIES.map((c) => c.category)),
+  ...new Set(COMPONENT_REGISTRY.map((c) => c.category)),
 ];
 
 export default function Component() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
 
+  useDocumentMeta({
+    title: `Components | ${SITE_META.name}`,
+    description:
+      "Browse retroUI's full catalog of retro-themed React components — buttons, cards, inputs, navbars, and more.",
+    canonical: `${SITE_META.url}/components`,
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const filtered = useMemo(() => {
-    return COMPONENT_CATEGORIES.filter(
+    return COMPONENT_REGISTRY.filter(
       (c) => cat === "All" || c.category === cat
     ).filter(
       (c) =>
@@ -127,7 +90,7 @@ export default function Component() {
             >
               <Layers className="w-3 h-3" />
               <span className="mono">
-                {filtered.length} of {COMPONENT_CATEGORIES.length} components
+                {filtered.length} of {COMPONENT_REGISTRY.length} components
               </span>
             </div>
           </div>
@@ -180,8 +143,8 @@ export default function Component() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map((c) => {
-                const Icon = ICON_MAP[c.name] || Square;
-                const count = COUNT_MAP[c.name] || 4;
+                const Icon = c.Icon || Square;
+                const count = c.count;
                 return (
                   <Link
                     key={c.path}

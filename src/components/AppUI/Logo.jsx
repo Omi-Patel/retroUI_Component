@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "@tanstack/react-router";
+import { SITE_META } from "../../lib/constants";
 
 const SIZES = {
   small: 26,
@@ -59,7 +60,7 @@ export default function Logo({ size = "default" }) {
           className="label mt-0.5"
           style={{ color: "var(--muted)", fontSize: 9 }}
         >
-          EST. 2024 · v1.0
+          EST. 2024 · {SITE_META.version}
         </span>
       </span>
     </Link>

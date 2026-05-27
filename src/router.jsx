@@ -9,6 +9,7 @@ import {
 
 import Navbar from "./components/AppUI/Navbar";
 import { Footer } from "./components/AppUI/Footer";
+import ErrorBoundary from "./components/AppUI/ErrorBoundary";
 import {
   ShowcaseLayout,
   PageShowcaseLayout,
@@ -18,6 +19,7 @@ import {
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Component = lazy(() => import("./pages/Component"));
+const ReleaseNotes = lazy(() => import("./pages/ReleaseNotes"));
 
 const ButtonShowcase = lazy(() => import("./pages/ComponentShowcase"));
 const CardShowcase = lazy(() => import("./pages/CardShowcase"));
@@ -43,6 +45,10 @@ const ProgressShowcase = lazy(() => import("./pages/ProgressShowcase"));
 const BreadcrumbShowcase = lazy(() => import("./pages/BreadcrumbShowcase"));
 const PaginationShowcase = lazy(() => import("./pages/PaginationShowcase"));
 const SkeletonShowcase = lazy(() => import("./pages/SkeletonShowcase"));
+const PolaroidShowcase = lazy(() => import("./pages/PolaroidShowcase"));
+const StickyNoteShowcase = lazy(() => import("./pages/StickyNoteShowcase"));
+const ReceiptShowcase = lazy(() => import("./pages/ReceiptShowcase"));
+const TickerShowcase = lazy(() => import("./pages/TickerShowcase"));
 
 const Pages = lazy(() => import("./pagesComponents/PageShowcase"));
 const HomePageShowcase = lazy(() =>
@@ -84,6 +90,9 @@ const SettingsPageShowcase = lazy(() =>
 const DocsPageShowcase = lazy(() =>
   import("./pagesComponents/PageShowcase/DocsPageShowcase")
 );
+const ZinePageShowcase = lazy(() =>
+  import("./pagesComponents/PageShowcase/ZinePageShowcase")
+);
 
 const PrivacyPolicy = lazy(() => import("./components/AppUI/PrivacyPolicy"));
 const Terms = lazy(() => import("./components/AppUI/Terms"));
@@ -115,9 +124,11 @@ const rootRoute = createRootRoute({
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar />
       <main style={{ flex: 1 }}>
-        <Suspense fallback={<PageLoader />}>
-          <Outlet />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
+            <Outlet />
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
       <ScrollRestoration />
@@ -157,6 +168,7 @@ const topLevel = [
   ["/about", About],
   ["/components", Component],
   ["/pages", Pages],
+  ["/release-notes", ReleaseNotes],
   ["/privacy-policy", PrivacyPolicy],
   ["/terms-conditions", Terms],
   ["/contact-us", ContactUs],
@@ -194,6 +206,10 @@ const componentShowcaseChildren = [
   ["/components/breadcrumbs", BreadcrumbShowcase],
   ["/components/paginations", PaginationShowcase],
   ["/components/skeletons", SkeletonShowcase],
+  ["/components/polaroids", PolaroidShowcase],
+  ["/components/sticky-notes", StickyNoteShowcase],
+  ["/components/receipts", ReceiptShowcase],
+  ["/components/tickers", TickerShowcase],
 ].map(([p, el]) => makeRoute(p, el, componentShowcaseLayoutRoute));
 
 /* ---------- Page-template showcase layout (sticky sidebar) ---------- */
@@ -217,6 +233,7 @@ const pageShowcaseChildren = [
   ["/pages/coming-soon", ComingSoonPageShowcase],
   ["/pages/settings", SettingsPageShowcase],
   ["/pages/docs", DocsPageShowcase],
+  ["/pages/zine", ZinePageShowcase],
 ].map(([p, el]) => makeRoute(p, el, pageShowcaseLayoutRoute));
 
 const routeTree = rootRoute.addChildren([

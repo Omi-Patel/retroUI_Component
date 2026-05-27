@@ -9,7 +9,8 @@ import {
   Check,
   Maximize2,
 } from "lucide-react";
-import { useCopyToClipboard } from "../../hooks";
+import { useCopyToClipboard, useDocumentMeta } from "../../hooks";
+import { SITE_META } from "../../lib/constants";
 import { PAGE_REGISTRY } from "../../lib/registries";
 import { DevicePreviewDialog } from "./DevicePreviewDialog";
 
@@ -22,6 +23,14 @@ export const PageShowcasePage = ({ slug, title, description, variants }) => {
   const [active, setActive] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
   const [, copy] = useCopyToClipboard();
+
+  useDocumentMeta({
+    title: `${title} | ${SITE_META.name}`,
+    description:
+      description ||
+      `Retro-themed ${title.toLowerCase()} page template — fully responsive.`,
+    canonical: `${SITE_META.url}/pages/${slug}`,
+  });
 
   useEffect(() => {
     setActive(0);

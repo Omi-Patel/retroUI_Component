@@ -14,17 +14,17 @@ import {
 import Logo from "./Logo";
 import ThemeToggle from "./ModeToggle";
 import PaletteToggle from "./PaletteToggle";
-import { SOCIAL_LINKS } from "../../lib/constants";
+import { SITE_META, SOCIAL_LINKS } from "../../lib/constants";
 
 /* ---------- Marquee ticker ---------- */
 function MarqueeTicker() {
   const items = [
-    { Icon: Sparkles, text: "v1.0 SHIPPED — 60+ COMPONENTS" },
+    { Icon: Sparkles, text: `${SITE_META.version} SHIPPED — SEE RELEASE NOTES`, to: "/release-notes" },
     { Icon: Star, text: "NOW WITH DARK MODE" },
     { Icon: Zap, text: "COPY · PASTE · SHIP" },
     { Icon: Heart, text: "MADE FOR BUILDERS, BY BUILDERS" },
     { Icon: Package, text: "NEW · 8 PAGE TEMPLATES" },
-    { Icon: Github, text: "OPEN SOURCE · MIT LICENSED" },
+    { Icon: Github, text: "OPEN SOURCE" },
   ];
 
   return (
@@ -40,15 +40,29 @@ function MarqueeTicker() {
         className="marquee-track py-1.5 whitespace-nowrap label"
         style={{ fontSize: 10.5, fontWeight: 600 }}
       >
-        {[...items, ...items].map(({ Icon, text }, i) => (
-          <span key={i} className="inline-flex items-center gap-2">
-            <Icon className="w-[11px] h-[11px]" />
-            <span>{text}</span>
-            <span className="opacity-50" style={{ marginLeft: "1.5rem" }}>
-              ✱
+        {[...items, ...items].map(({ Icon, text, to }, i) => {
+          const inner = (
+            <span className="inline-flex items-center gap-2">
+              <Icon className="w-[11px] h-[11px]" />
+              <span>{text}</span>
+              <span className="opacity-50" style={{ marginLeft: "1.5rem" }}>
+                ✱
+              </span>
             </span>
-          </span>
-        ))}
+          );
+          return to ? (
+            <Link
+              key={i}
+              to={to}
+              className="hover:opacity-80 transition-opacity"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              {inner}
+            </Link>
+          ) : (
+            <span key={i}>{inner}</span>
+          );
+        })}
       </div>
     </div>
   );

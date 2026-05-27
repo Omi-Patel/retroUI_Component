@@ -36,37 +36,48 @@ import {
   Rocket,
   Settings as SettingsIcon,
   BookOpen,
+  Camera,
+  StickyNote,
+  Newspaper,
+  BookText,
 } from "lucide-react";
 
 /**
- * Master registry of all component categories shown in the docs-style sidebar.
- * `path` is the URL slug (after /components/), `count` is the number of variants.
+ * Master registry of all component categories shown in the docs-style sidebar
+ * AND the /components index page. Single source of truth — when you add a new
+ * component category, register it here and the sidebar + index update together.
+ * `path` is the URL slug (after /components/), `count` is the number of variants,
+ * `description` doubles as the SEO meta description for the showcase route.
  */
 export const COMPONENT_REGISTRY = [
-  { name: "Button", path: "buttons", Icon: Square, count: 5, category: "Basic" },
-  { name: "Card", path: "cards", Icon: LayoutGrid, count: 5, category: "Layout" },
-  { name: "Input", path: "inputs", Icon: Type, count: 5, category: "Form" },
-  { name: "Avatar", path: "avatars", Icon: User, count: 5, category: "Display" },
-  { name: "Sign in", path: "signin", Icon: LogIn, count: 1, category: "Auth" },
-  { name: "Sign up", path: "signup", Icon: UserPlus, count: 5, category: "Auth" },
-  { name: "Loader", path: "loaders", Icon: Loader, count: 8, category: "Feedback" },
-  { name: "Navbar", path: "navbars", Icon: PanelLeft, count: 5, category: "Navigation" },
-  { name: "Footer", path: "footers", Icon: Layers, count: 6, category: "Layout" },
-  { name: "Switch", path: "switch", Icon: ToggleRight, count: 5, category: "Form" },
-  { name: "Table", path: "tables", Icon: TableIcon, count: 5, category: "Data" },
-  { name: "Pricing", path: "pricing", Icon: Tag, count: 3, category: "Display" },
-  { name: "Modal", path: "modals", Icon: MessageSquare, count: 4, category: "Overlay" },
-  { name: "Toast", path: "toasts", Icon: Bell, count: 4, category: "Feedback" },
-  { name: "Dropdown", path: "dropdowns", Icon: ChevronsDown, count: 4, category: "Form" },
-  { name: "Tabs", path: "tabs", Icon: Bookmark, count: 4, category: "Navigation" },
-  { name: "Accordion", path: "accordions", Icon: ListCollapse, count: 4, category: "Layout" },
-  { name: "Badge", path: "badges", Icon: Sticker, count: 5, category: "Display" },
-  { name: "Tooltip", path: "tooltips", Icon: HelpCircle, count: 4, category: "Overlay" },
-  { name: "Alert", path: "alerts", Icon: AlertCircle, count: 4, category: "Feedback" },
-  { name: "Progress", path: "progress", Icon: BarChart3, count: 4, category: "Feedback" },
-  { name: "Breadcrumb", path: "breadcrumbs", Icon: ChevronsRight, count: 4, category: "Navigation" },
-  { name: "Pagination", path: "paginations", Icon: Hash, count: 4, category: "Navigation" },
-  { name: "Skeleton", path: "skeletons", Icon: Sparkles, count: 4, category: "Feedback" },
+  { name: "Button", path: "buttons", Icon: Square, count: 9, category: "Basic", description: "Interactive elements for user actions" },
+  { name: "Card", path: "cards", Icon: LayoutGrid, count: 5, category: "Layout", description: "Containers for organizing content" },
+  { name: "Input", path: "inputs", Icon: Type, count: 5, category: "Form", description: "Fields for user data entry" },
+  { name: "Avatar", path: "avatars", Icon: User, count: 5, category: "Display", description: "User profile representations" },
+  { name: "Sign in", path: "signin", Icon: LogIn, count: 1, category: "Auth", description: "Authentication entry points" },
+  { name: "Sign up", path: "signup", Icon: UserPlus, count: 5, category: "Auth", description: "User registration interfaces" },
+  { name: "Loader", path: "loaders", Icon: Loader, count: 6, category: "Feedback", description: "Loading state indicators" },
+  { name: "Navbar", path: "navbars", Icon: PanelLeft, count: 5, category: "Navigation", description: "Site navigation headers" },
+  { name: "Footer", path: "footers", Icon: Layers, count: 6, category: "Layout", description: "Page footer sections" },
+  { name: "Switch", path: "switch", Icon: ToggleRight, count: 5, category: "Form", description: "Toggle controls for binary options" },
+  { name: "Table", path: "tables", Icon: TableIcon, count: 5, category: "Data", description: "Structured data displays" },
+  { name: "Pricing", path: "pricing", Icon: Tag, count: 3, category: "Display", description: "Product pricing displays" },
+  { name: "Modal", path: "modals", Icon: MessageSquare, count: 4, category: "Overlay", description: "Dialogs and modal windows" },
+  { name: "Toast", path: "toasts", Icon: Bell, count: 4, category: "Feedback", description: "Transient notification messages" },
+  { name: "Dropdown", path: "dropdowns", Icon: ChevronsDown, count: 4, category: "Form", description: "Menus and option selectors" },
+  { name: "Tabs", path: "tabs", Icon: Bookmark, count: 4, category: "Navigation", description: "Tabbed content navigation" },
+  { name: "Accordion", path: "accordions", Icon: ListCollapse, count: 4, category: "Layout", description: "Expandable Q&A and detail panels" },
+  { name: "Badge", path: "badges", Icon: Sticker, count: 5, category: "Display", description: "Tags, chips, and status badges" },
+  { name: "Tooltip", path: "tooltips", Icon: HelpCircle, count: 4, category: "Overlay", description: "Contextual hover and focus hints" },
+  { name: "Alert", path: "alerts", Icon: AlertCircle, count: 4, category: "Feedback", description: "Banner messages for important info" },
+  { name: "Progress", path: "progress", Icon: BarChart3, count: 4, category: "Feedback", description: "Progress bars and completion meters" },
+  { name: "Breadcrumb", path: "breadcrumbs", Icon: ChevronsRight, count: 4, category: "Navigation", description: "Hierarchical location indicators" },
+  { name: "Pagination", path: "paginations", Icon: Hash, count: 4, category: "Navigation", description: "Multi-page list navigation" },
+  { name: "Skeleton", path: "skeletons", Icon: Sparkles, count: 4, category: "Feedback", description: "Placeholder loading states" },
+  { name: "Polaroid", path: "polaroids", Icon: Camera, count: 4, category: "Display", description: "Instant-camera photo cards and galleries" },
+  { name: "Sticky Note", path: "sticky-notes", Icon: StickyNote, count: 4, category: "Display", description: "Post-its, index cards, and pinned notes" },
+  { name: "Receipt", path: "receipts", Icon: Receipt, count: 4, category: "Display", description: "Dot-matrix slips for carts and orders" },
+  { name: "Ticker", path: "tickers", Icon: Newspaper, count: 3, category: "Feedback", description: "Scrolling marquee announcement bars" },
 ];
 
 /**
@@ -74,9 +85,9 @@ export const COMPONENT_REGISTRY = [
  */
 export const PAGE_REGISTRY = [
   { name: "Home Page", path: "home", Icon: Home, count: 3, category: "Landing", desc: "Marketing & landing page templates." },
-  { name: "About Page", path: "about", Icon: Info, count: 2, category: "Content", desc: "Company and project information." },
-  { name: "Service Page", path: "service", Icon: Briefcase, count: 1, category: "Content", desc: "Services and feature showcases." },
-  { name: "Contact Page", path: "contact", Icon: Mail, count: 3, category: "Contact", desc: "Contact forms and information." },
+  { name: "About Page", path: "about", Icon: Info, count: 3, category: "Content", desc: "Company and project information." },
+  { name: "Service Page", path: "service", Icon: Briefcase, count: 2, category: "Content", desc: "Services and feature showcases." },
+  { name: "Contact Page", path: "contact", Icon: Mail, count: 4, category: "Contact", desc: "Contact forms and information." },
   { name: "Dashboard", path: "dashboard", Icon: LayoutDashboard, count: 1, category: "Admin", desc: "Dashboard and analytics interfaces." },
   { name: "Error / 404", path: "error", Icon: AlertTriangle, count: 4, category: "System", desc: "Error states and 404 pages." },
   { name: "Ecommerce", path: "ecommerce", Icon: ShoppingBag, count: 4, category: "Shop", desc: "Product listings and detail pages." },
@@ -86,4 +97,5 @@ export const PAGE_REGISTRY = [
   { name: "Coming Soon", path: "coming-soon", Icon: Rocket, count: 1, category: "System", desc: "Pre-launch page with countdown and signup." },
   { name: "Settings", path: "settings", Icon: SettingsIcon, count: 1, category: "App", desc: "User settings page with sidebar sections." },
   { name: "Documentation", path: "docs", Icon: BookOpen, count: 1, category: "Content", desc: "Documentation template with TOC and changelog." },
+  { name: "Zine", path: "zine", Icon: BookText, count: 1, category: "Editorial", desc: "Magazine-spread landing page built from the Zine Spread Pack." },
 ];
