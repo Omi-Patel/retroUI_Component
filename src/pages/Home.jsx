@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useDocumentMeta } from "../hooks";
-import { SITE_META, buildOgImageUrl } from "../lib/constants";
+import { SITE_META } from "../lib/constants";
 import { COMPONENT_REGISTRY, PAGE_REGISTRY } from "../lib/registries";
 import {
   ArrowRight,
@@ -107,11 +107,6 @@ export default function Home() {
     title: `${SITE_META.name} | ${SITE_META.tagline}`,
     description: SITE_META.description,
     canonical: SITE_META.url,
-    ogImage: buildOgImageUrl({
-      title: SITE_META.name,
-      subtitle: SITE_META.tagline,
-      kind: "site",
-    }),
   });
 
   useEffect(() => {
