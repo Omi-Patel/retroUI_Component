@@ -13,11 +13,12 @@ import { useCopyToClipboard, useDocumentMeta } from "../../hooks";
 import { SITE_META } from "../../lib/constants";
 import { PAGE_REGISTRY } from "../../lib/registries";
 import { DevicePreviewDialog } from "./DevicePreviewDialog";
+import { ShowcaseHeader, VariantChips, InfoCard } from "./parts";
 
 /**
  * Renders the contents of a single page-template showcase (header + variant
  * chips + browser-frame preview + info cards). The surrounding chrome —
- * breadcrumb, sidebar, prev/next pager — is provided by `PageShowcaseLayout`.
+ * breadcrumb, sidebar, prev/next pager — is provided by `ShowcaseLayout`.
  */
 export const PageShowcasePage = ({ slug, title, description, variants }) => {
   const [active, setActive] = useState(0);
@@ -43,64 +44,22 @@ export const PageShowcasePage = ({ slug, title, description, variants }) => {
 
   return (
     <div>
-      {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-3 flex-wrap">
-          {Icon && (
-            <span
-              className="inline-flex h-10 w-10 items-center justify-center rounded"
-              style={{
-                background: "var(--surface)",
-                color: "var(--fg)",
-                border: "1px solid var(--border)",
-              }}
-            >
-              <Icon className="w-4 h-4" />
-            </span>
-          )}
-          <h1
-            className="display text-[36px] tracking-tight"
-            style={{ color: "var(--fg)" }}
-          >
-            {title}
-          </h1>
-          {meta?.category && (
-            <span
-              className="inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-[4px] border"
-              style={{ color: "var(--muted)", borderColor: "var(--border)" }}
-            >
-              {meta.category}
-            </span>
-          )}
-        </div>
-        <p
-          className="text-[15px] max-w-2xl leading-relaxed"
-          style={{ color: "var(--muted)" }}
-        >
-          {description}
-        </p>
-      </div>
+      <ShowcaseHeader
+        Icon={Icon}
+        title={title}
+        category={meta?.category}
+        description={description}
+        className="mb-6"
+      />
 
       {/* Variant chips */}
-      <div className="mb-4 flex items-center gap-1.5 overflow-x-auto nice-scroll">
-        {variants.map((v, i) => {
-          const sel = i === active;
-          return (
-            <button
-              key={v.name}
-              onClick={() => setActive(i)}
-              className="px-3 h-8 rounded-md text-[12.5px] font-medium whitespace-nowrap transition-colors mono"
-              style={{
-                background: sel ? "var(--fg)" : "var(--bg)",
-                color: sel ? "var(--bg)" : "var(--muted)",
-                border: "1px solid var(--border)",
-              }}
-            >
-              {v.label || v.name}
-            </button>
-          );
-        })}
-      </div>
+      <VariantChips
+        items={variants}
+        getKey={(v) => v.name}
+        isActive={(v, i) => i === active}
+        onSelect={(v, i) => setActive(i)}
+        renderLabel={(v) => v.label || v.name}
+      />
 
       {/* Browser-frame preview */}
       <div
@@ -253,28 +212,5 @@ export const PageShowcasePage = ({ slug, title, description, variants }) => {
     </div>
   );
 };
-
-function InfoCard({ title, Icon, children }) {
-  return (
-    <div
-      className="rounded-lg p-5"
-      style={{
-        background: "var(--bg)",
-        border: "1px solid var(--border)",
-      }}
-    >
-      <div className="flex items-center gap-2 mb-3">
-        <Icon className="w-3.5 h-3.5" style={{ color: "var(--muted)" }} />
-        <h3
-          className="text-[13px] font-semibold uppercase tracking-wider"
-          style={{ color: "var(--muted)" }}
-        >
-          {title}
-        </h3>
-      </div>
-      {children}
-    </div>
-  );
-}
 
 export default PageShowcasePage;
