@@ -38,16 +38,4 @@ export const scrollToTop = (smooth = true) => {
   });
 };
 
-/**
- * Generate CSS class string from conditions
- * @param {...(string|[boolean, string])} classes 
- * @returns {string}
- */
-export const cn = (...classes) => {
-  return classes
-    .filter(Boolean)
-    .map(c => (Array.isArray(c) ? (c[0] ? c[1] : '') : c))
-    .filter(Boolean)
-    .join(' ');
-};
 

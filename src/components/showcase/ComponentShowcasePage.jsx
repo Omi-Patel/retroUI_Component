@@ -16,6 +16,7 @@ import { getComponentStatus } from "../../lib/componentStatus";
 import { formatComponentName } from "../../lib/utils";
 import { COMPONENT_REGISTRY } from "../../lib/registries";
 import { DevicePreviewDialog } from "./DevicePreviewDialog";
+import { ShowcaseHeader, VariantChips, InfoCard } from "./parts";
 
 /**
  * Renders the contents of a component showcase (header + variant chips +
@@ -28,6 +29,7 @@ export const ComponentShowcasePage = ({
   title,
   description,
   folder,
+  slug,
 }) => {
   const [active, setActive] = useState(components[0]?.name || "");
   const [tab, setTab] = useState("preview");
@@ -39,7 +41,7 @@ export const ComponentShowcasePage = ({
     description:
       description ||
       `Retro-themed ${title.toLowerCase()} components — copy and paste ready.`,
-    canonical: `${SITE_META.url}/components/${folder.toLowerCase()}`,
+    canonical: `${SITE_META.url}/components/${slug || folder.toLowerCase()}`,
   });
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export const ComponentShowcasePage = ({
   }, [components]);
 
   const meta = COMPONENT_REGISTRY.find(
-    (c) => c.path === folder.toLowerCase() || c.name === title
+    (c) => c.path === slug || c.path === folder.toLowerCase() || c.name === title
   );
   const Icon = meta?.Icon;
 
@@ -58,92 +60,42 @@ export const ComponentShowcasePage = ({
 
   return (
     <div>
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-3 flex-wrap">
-          {Icon && (
-            <span
-              className="inline-flex h-10 w-10 items-center justify-center rounded"
-              style={{
-                background: "var(--surface)",
-                color: "var(--fg)",
-                border: "1px solid var(--border)",
-              }}
-            >
-              <Icon className="w-4 h-4" />
-            </span>
-          )}
-          <h1
-            className="display text-[36px] tracking-tight"
-            style={{ color: "var(--fg)" }}
-          >
-            {title}
-          </h1>
-          {meta?.category && (
-            <span
-              className="inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-[4px] border"
-              style={{
-                color: "var(--muted)",
-                borderColor: "var(--border)",
-              }}
-            >
-              {meta.category}
-            </span>
-          )}
-        </div>
-        {description && (
-          <p
-            className="text-[15px] max-w-2xl leading-relaxed"
-            style={{ color: "var(--muted)" }}
-          >
-            {description}
-          </p>
-        )}
-      </div>
+      <ShowcaseHeader
+        Icon={Icon}
+        title={title}
+        category={meta?.category}
+        description={description}
+      />
 
       {/* Variant chips */}
-      <div
-        className="mb-4 flex items-center gap-1.5 overflow-x-auto nice-scroll"
-        style={{ paddingBottom: 4 }}
-      >
-        {components.map((v) => {
-          const sel = v.name === active;
+      <VariantChips
+        items={components}
+        getKey={(v) => v.name}
+        isActive={(v) => v.name === active}
+        onSelect={(v) => setActive(v.name)}
+        renderLabel={(v) => formatComponentName(v.name)}
+        renderTrailing={(v) => {
           const status = getComponentStatus(v.name);
+          if (!status) return null;
           return (
-            <button
-              key={v.name}
-              onClick={() => setActive(v.name)}
-              className="px-3 h-8 rounded-md text-[12.5px] font-medium whitespace-nowrap transition-colors mono inline-flex items-center gap-1.5"
+            <span
+              className="inline-flex items-center px-1.5 rounded-sm"
               style={{
-                background: sel ? "var(--fg)" : "var(--bg)",
-                color: sel ? "var(--bg)" : "var(--muted)",
+                fontSize: 9,
+                lineHeight: "14px",
+                height: 14,
+                letterSpacing: "0.06em",
+                background: status === "new" ? "var(--accent)" : "var(--surface-2)",
+                color: status === "new" ? "var(--accent-fg)" : "var(--fg)",
                 border: "1px solid var(--border)",
               }}
+              aria-label={status === "new" ? "New component" : "Updated component"}
             >
-              <span>{formatComponentName(v.name)}</span>
-              {status && (
-                <span
-                  className="inline-flex items-center px-1.5 rounded-sm"
-                  style={{
-                    fontSize: 9,
-                    lineHeight: "14px",
-                    height: 14,
-                    letterSpacing: "0.06em",
-                    background:
-                      status === "new" ? "var(--accent)" : "var(--surface-2)",
-                    color:
-                      status === "new" ? "var(--accent-fg)" : "var(--fg)",
-                    border: "1px solid var(--border)",
-                  }}
-                  aria-label={status === "new" ? "New component" : "Updated component"}
-                >
-                  {status === "new" ? "NEW" : "UPD"}
-                </span>
-              )}
-            </button>
+              {status === "new" ? "NEW" : "UPD"}
+            </span>
           );
-        })}
-      </div>
+        }}
+      />
 
       {/* Preview / Code tab card */}
       <div
@@ -263,26 +215,8 @@ export const ComponentShowcasePage = ({
 
       {/* Info cards */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div
-          className="rounded-lg p-5"
-          style={{
-            background: "var(--bg)",
-            border: "1px solid var(--border)",
-          }}
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <Info className="w-3.5 h-3.5" style={{ color: "var(--muted)" }} />
-            <h3
-              className="text-[13px] font-semibold uppercase tracking-wider"
-              style={{ color: "var(--muted)" }}
-            >
-              Features
-            </h3>
-          </div>
-          <ul
-            className="space-y-2 text-[13.5px]"
-            style={{ color: "var(--fg)" }}
-          >
+        <InfoCard title="Features" Icon={Info}>
+          <ul className="space-y-2 text-[13.5px]" style={{ color: "var(--fg)" }}>
             {[
               "Retro-inspired with pixel-perfect detail",
               "Interactive hover & active states",
@@ -290,31 +224,13 @@ export const ComponentShowcasePage = ({
               "AA-accessible color contrast",
             ].map((t) => (
               <li key={t} className="flex items-start gap-2">
-                <Check
-                  className="w-3.5 h-3.5 mt-0.5 flex-shrink-0"
-                  style={{ color: "var(--muted)" }}
-                />
+                <Check className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" style={{ color: "var(--muted)" }} />
                 <span>{t}</span>
               </li>
             ))}
           </ul>
-        </div>
-        <div
-          className="rounded-lg p-5"
-          style={{
-            background: "var(--bg)",
-            border: "1px solid var(--border)",
-          }}
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <Zap className="w-3.5 h-3.5" style={{ color: "var(--muted)" }} />
-            <h3
-              className="text-[13px] font-semibold uppercase tracking-wider"
-              style={{ color: "var(--muted)" }}
-            >
-              Dependencies
-            </h3>
-          </div>
+        </InfoCard>
+        <InfoCard title="Dependencies" Icon={Zap}>
           <div className="space-y-2 mono text-[12.5px]">
             {[
               { name: "react", v: "^18.0.0" },
@@ -328,7 +244,7 @@ export const ComponentShowcasePage = ({
               </div>
             ))}
           </div>
-        </div>
+        </InfoCard>
       </div>
 
       {/* Fullscreen device-preview dialog */}
