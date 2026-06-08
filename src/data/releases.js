@@ -19,9 +19,85 @@
  *   }
  */
 
-export const APP_VERSION = "0.2.0";
+export const APP_VERSION = "0.4.0";
 
 export const releases = [
+  {
+    version: "0.4.0",
+    date: "2026-06-08",
+    summary:
+      "Form staples in retro dress — Radio/Checkbox, Sliders, Calendars, and Ratings — plus a ⌘K command palette for instant navigation.",
+    changes: {
+      added: [
+        "New Radio & Checkbox category (6 variants) — stamp/pixel checkboxes, a checklist, and ballot/chip/card radio groups.",
+        "New Slider category (5 variants) — volume, stepped, dual-range, vertical fader, and tuner sliders.",
+        "New Calendar category (5 variants) — tear-off, desk, navigable month picker, mini date picker, and event calendar.",
+        "New Rating category (5 variants) — star, stamp, heart, emoji, and 0–10 number ratings.",
+        "⌘K / Ctrl+K command palette: fuzzy-search and jump to any component, page template, or section. Also reachable from the navbar search box and a mobile search button.",
+      ],
+      changed: [
+        "The navbar search box now opens the command palette instead of a placeholder link.",
+      ],
+      fixed: [],
+      removed: [],
+    },
+    components: {
+      new: [
+        "StampCheckbox",
+        "PixelCheckbox",
+        "ChecklistGroup",
+        "BallotRadioGroup",
+        "ChipRadioGroup",
+        "CardRadioGroup",
+        "VolumeSlider",
+        "SteppedSlider",
+        "DualRangeSlider",
+        "VerticalFader",
+        "TickSlider",
+        "TearOffCalendar",
+        "DeskCalendar",
+        "MonthPicker",
+        "MiniDatePicker",
+        "EventCalendar",
+        "StarRating",
+        "StampRating",
+        "HeartRating",
+        "EmojiRating",
+        "NumberPillRating",
+      ],
+      updated: [],
+    },
+  },
+  {
+    version: "0.3.0",
+    date: "2026-06-08",
+    summary:
+      "Retro Icons gallery and the 88×31 Web Badges category — two corners of the old web that modern libraries forgot.",
+    changes: {
+      added: [
+        "New top-level Icons section at /icons — a searchable, style-filtered gallery of ~188 retro icons. Click any icon to copy it as a self-contained SVG or a ready-to-paste JSX component.",
+        "12 retro icon styles, including 5 animated ones: Pixel, Sticker, Halftone, Stamp, Bevel, Neon, plus animated Glitch (RGB-split), Marquee (chasing bulbs), Hologram (hue-shift foil), Wiggle (hand-drawn boil), Lite-Brite (glowing pegboard), and Cross-stitch (embroidery). Animations are baked into the copied SVG, so they keep moving wherever you paste them.",
+        "New Web Badge component category (6 variants) — ClassicButtonStrip (88×31 buttons), BlinkieBadge, UnderConstructionBanner, AwardRibbonBadge, WebRingNav, and VisitorCounterBadge.",
+        "Live GitHub star count on the home page (fetched from the GitHub API with a 1-hour cache) replacing the hardcoded number.",
+      ],
+      changed: [
+        "Navbar and footer gain an Icons link alongside Components and Pages.",
+      ],
+      fixed: [],
+      removed: [],
+    },
+    components: {
+      new: [
+        "ClassicButtonStrip",
+        "BlinkieBadge",
+        "UnderConstructionBanner",
+        "AwardRibbonBadge",
+        "WebRingNav",
+        "VisitorCounterBadge",
+      ],
+      updated: [],
+    },
+  },
   {
     version: "0.2.0",
     date: "2026-05-27",

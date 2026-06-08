@@ -11,6 +11,59 @@ changelog viewers, etc.) that consume it directly.
 
 ## [Unreleased]
 
+### Added
+- **Data & App Pack** — four new component categories:
+  - `Chart` (`/components/charts`) — `NewsprintBarChart`, `ASCIILineChart`,
+    `HalftonePieChart`, `LedgerAreaChart`. Hand-rolled SVG/CSS, no chart library.
+  - `Stat` (`/components/stats`) — `KPIStatCard`, `MetricTrendCard`,
+    `GaugeBlock`, `LeaderboardBlock`. Dashboard/analytics blocks.
+  - `Chat` (`/components/chat`) — `TeletypeChat`, `TerminalChat`,
+    `MessengerChat`, `NewsprintChat`. Retro chat / AI conversation UIs.
+  - `Stepper` (`/components/steppers`) — `WizardStepper`, `ReceiptCheckout`,
+    `StampedForm`, `DOSSetup`. Multi-step form / wizard flows.
+
+## [0.4.0] - 2026-06-08
+
+Form staples in retro dress, plus a ⌘K command palette.
+
+### Added
+- **Radio & Checkbox** (`/components/radio-checkbox`) — `StampCheckbox`,
+  `PixelCheckbox`, `ChecklistGroup`, `BallotRadioGroup`, `ChipRadioGroup`,
+  `CardRadioGroup`.
+- **Slider** (`/components/sliders`) — `VolumeSlider`, `SteppedSlider`,
+  `DualRangeSlider`, `VerticalFader`, `TickSlider`.
+- **Calendar** (`/components/calendars`) — `TearOffCalendar`, `DeskCalendar`,
+  `MonthPicker`, `MiniDatePicker`, `EventCalendar`.
+- **Rating** (`/components/ratings`) — `StarRating`, `StampRating`, `HeartRating`,
+  `EmojiRating`, `NumberPillRating`.
+- **⌘K command palette** — fuzzy search + jump to any component, page, or
+  section (`src/components/AppUI/CommandPalette.jsx`), wired into the navbar.
+
+### Changed
+- The navbar search box now opens the command palette instead of a placeholder
+  link.
+
+## [0.3.0] - 2026-06-08
+
+Retro Icons gallery and the 88×31 Web Badges category — two corners of the old
+web that modern component libraries forgot.
+
+### Added
+- **Icons** — a new top-level section at `/icons`: a searchable, style-filtered
+  gallery of ~188 retro icons. Click any icon to copy it as a self-contained SVG
+  or a ready-to-paste JSX component. 12 styles (built in `src/data/icons/`):
+  `Pixel`, `Sticker`, `Halftone`, `Stamp`, `Bevel`, `Neon`, plus 5 **animated**
+  styles — `Glitch`, `Marquee`, `Hologram`, `Wiggle`, `Lite-Brite` — and
+  `Cross-stitch`. Animations are baked into the copied SVG.
+- **Web Badge** (`/components/web-badges`) — 6 variants: `ClassicButtonStrip`,
+  `BlinkieBadge`, `UnderConstructionBanner`, `AwardRibbonBadge`, `WebRingNav`,
+  and `VisitorCounterBadge`.
+- Live GitHub star count on the home page (GitHub API, 1-hour localStorage
+  cache) replacing the previously hardcoded number.
+
+### Changed
+- Navbar and footer gain an **Icons** link alongside Components and Pages.
+
 ## [0.2.0] - 2026-05-27
 
 Zine Spread Pack: four new component categories, five new button variants,

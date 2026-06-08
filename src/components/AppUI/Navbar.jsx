@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Github,
   Menu,
@@ -14,6 +14,7 @@ import {
 import Logo from "./Logo";
 import ThemeToggle from "./ModeToggle";
 import PaletteToggle from "./PaletteToggle";
+import CommandPalette from "./CommandPalette";
 import { SITE_META, SOCIAL_LINKS } from "../../lib/constants";
 
 /* ---------- Marquee ticker ---------- */
@@ -71,13 +72,14 @@ function MarqueeTicker() {
 const LINKS = [
   { name: "About", href: "/about" },
   { name: "Components", href: "/components" },
+  { name: "Icons", href: "/icons" },
   { name: "Pages", href: "/pages" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const navigate = useNavigate();
+  const [cmdOpen, setCmdOpen] = useState(false);
   const routerState = useRouterState();
   const pathname = routerState.location.pathname;
 
@@ -85,6 +87,18 @@ export default function Navbar() {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Global ⌘K / Ctrl+K to open the command palette.
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setCmdOpen((o) => !o);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   const isActive = (href) => {
@@ -129,8 +143,8 @@ export default function Navbar() {
 
             <div className="hidden md:flex flex-1 justify-end items-center gap-2">
               <button
-                onClick={() => navigate({ to: "/components" })}
-                className="inline-flex items-center gap-2 h-9 w-64 px-3 rounded-md text-[13px] transition-colors"
+                onClick={() => setCmdOpen(true)}
+                className="inline-flex items-center gap-2 h-9 w-64 px-3 rounded-md text-[13px] transition-colors hover:!text-[var(--fg)]"
                 style={{
                   background: "var(--surface)",
                   border: "1px solid var(--border)",
@@ -156,6 +170,14 @@ export default function Navbar() {
             </div>
 
             <div className="md:hidden flex items-center gap-1">
+              <button
+                onClick={() => setCmdOpen(true)}
+                className="inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-[var(--surface-2)]"
+                style={{ color: "var(--fg)" }}
+                aria-label="Search"
+              >
+                <Search className="w-[18px] h-[18px]" />
+              </button>
               <PaletteToggle compact />
               <ThemeToggle compact />
               <button
@@ -204,6 +226,8 @@ export default function Navbar() {
           </div>
         )}
       </header>
+
+      <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} />
     </>
   );
 }

@@ -1,12 +1,7 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
 import { Palette, Check } from "lucide-react";
-
-const PALETTES = [
-  { id: "newsprint", label: "Newsprint", swatch: ["#ede7d6", "#1c1814", "#e07b67"] },
-  { id: "neon", label: "Neon", swatch: ["#0d0a18", "#f472b6", "#22d3ee"] },
-  { id: "terminal", label: "Terminal", swatch: ["#000000", "#4ade80", "#fcd34d"] },
-  { id: "polaroid", label: "Polaroid", swatch: ["#fff5ee", "#e0758a", "#8eb4d9"] },
-];
+import { PALETTES } from "../../lib/constants";
 
 const PaletteToggle = ({ compact = false }) => {
   const [palette, setPalette] = useState(

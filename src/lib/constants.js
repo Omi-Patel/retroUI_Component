@@ -10,6 +10,7 @@ export const NAV_ITEMS = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Components", href: "/components" },
+  { name: "Icons", href: "/icons" },
   { name: "Pages Example", href: "/pages" },
 ];
 
@@ -18,11 +19,24 @@ export const FOOTER_LINKS = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Components", path: "/components" },
+  { name: "Icons", path: "/icons" },
   { name: "Pages Example", path: "/pages" },
   { name: "Release Notes", path: "/release-notes" },
   { name: "Privacy Policy", path: "/privacy-policy" },
   { name: "Terms & Conditions", path: "/terms-conditions" },
   { name: "Contact Us", path: "/contact-us" },
+];
+
+// GitHub repository in "owner/repo" form — used to fetch live star counts.
+export const GITHUB_REPO = "Omi-Patel/retroUI_Component";
+
+// Switchable retro palettes (see [data-palette] tokens in src/index.css).
+// Shared by the navbar PaletteToggle.
+export const PALETTES = [
+  { id: "newsprint", label: "Newsprint", swatch: ["#ede7d6", "#1c1814", "#e07b67"] },
+  { id: "neon", label: "Neon", swatch: ["#0d0a18", "#f472b6", "#22d3ee"] },
+  { id: "terminal", label: "Terminal", swatch: ["#000000", "#4ade80", "#fcd34d"] },
+  { id: "polaroid", label: "Polaroid", swatch: ["#fff5ee", "#e0758a", "#8eb4d9"] },
 ];
 
 // Social links

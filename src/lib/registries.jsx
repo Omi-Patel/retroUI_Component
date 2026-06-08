@@ -40,6 +40,15 @@ import {
   StickyNote,
   Newspaper,
   BookText,
+  LineChart,
+  Gauge,
+  Bot,
+  ListOrdered,
+  Award,
+  CheckSquare,
+  SlidersHorizontal,
+  CalendarDays,
+  Star,
 } from "lucide-react";
 
 /**
@@ -78,6 +87,15 @@ export const COMPONENT_REGISTRY = [
   { name: "Sticky Note", path: "sticky-notes", folder: "StickyNotes", Icon: StickyNote, count: 4, category: "Display", description: "Post-its, index cards, and pinned notes" },
   { name: "Receipt", path: "receipts", folder: "Receipts", Icon: Receipt, count: 4, category: "Display", description: "Dot-matrix slips for carts and orders" },
   { name: "Ticker", path: "tickers", folder: "Tickers", Icon: Newspaper, count: 3, category: "Feedback", description: "Scrolling marquee announcement bars" },
+  { name: "Chart", path: "charts", folder: "Charts", Icon: LineChart, count: 4, category: "Data", description: "Newsprint bar, line, pie, and area charts" },
+  { name: "Stat", path: "stats", folder: "Stats", Icon: Gauge, count: 4, category: "Data", description: "KPI tiles, trend sparklines, gauges, and leaderboards" },
+  { name: "Chat", path: "chat", folder: "Chat", Icon: Bot, count: 4, category: "App", description: "Teletype, terminal, messenger, and newsprint chat UIs" },
+  { name: "Stepper", path: "steppers", folder: "Steppers", Icon: ListOrdered, count: 4, category: "Form", description: "Multi-step wizards, checkouts, and setup flows" },
+  { name: "Web Badge", path: "web-badges", folder: "WebBadges", Icon: Award, count: 6, category: "Display", description: "90s web buttons, blinkies, under-construction banners, webrings & hit counters" },
+  { name: "Radio & Checkbox", path: "radio-checkbox", folder: "RadioCheckbox", Icon: CheckSquare, count: 6, category: "Form", description: "Retro checkboxes, checklists, and single-choice radio groups" },
+  { name: "Slider", path: "sliders", folder: "Sliders", Icon: SlidersHorizontal, count: 5, category: "Form", description: "Volume sliders, steppers, dual ranges, and console faders" },
+  { name: "Calendar", path: "calendars", folder: "Calendars", Icon: CalendarDays, count: 5, category: "Form", description: "Tear-off, desk, and date-picker calendars" },
+  { name: "Rating", path: "ratings", folder: "Ratings", Icon: Star, count: 5, category: "Form", description: "Star, stamp, heart, emoji, and number rating controls" },
 ];
 
 /**
