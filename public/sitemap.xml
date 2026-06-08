@@ -3,6 +3,7 @@
   <url><loc>https://retro-ui.basecase.site/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://retro-ui.basecase.site/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://retro-ui.basecase.site/components</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://retro-ui.basecase.site/icons</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://retro-ui.basecase.site/pages</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://retro-ui.basecase.site/release-notes</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://retro-ui.basecase.site/privacy-policy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
@@ -37,6 +38,15 @@
   <url><loc>https://retro-ui.basecase.site/components/sticky-notes</loc><priority>0.8</priority></url>
   <url><loc>https://retro-ui.basecase.site/components/receipts</loc><priority>0.8</priority></url>
   <url><loc>https://retro-ui.basecase.site/components/tickers</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/charts</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/stats</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/chat</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/steppers</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/web-badges</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/radio-checkbox</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/sliders</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/calendars</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/ratings</loc><priority>0.8</priority></url>
 
   <url><loc>https://retro-ui.basecase.site/pages/home</loc><priority>0.7</priority></url>
   <url><loc>https://retro-ui.basecase.site/pages/about</loc><priority>0.7</priority></url>

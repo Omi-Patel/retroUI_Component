@@ -37,4 +37,13 @@ export const componentLoaders = {
   'sticky-notes': () => import('./stickyNotes').then((m) => m.stickyNoteComponents),
   receipts: () => import('./receipts').then((m) => m.receiptComponents),
   tickers: () => import('./tickers').then((m) => m.tickerComponents),
+  charts: () => import('./charts').then((m) => m.chartComponents),
+  stats: () => import('./stats').then((m) => m.statComponents),
+  chat: () => import('./chat').then((m) => m.chatComponents),
+  steppers: () => import('./steppers').then((m) => m.stepperComponents),
+  'web-badges': () => import('./webBadges').then((m) => m.webBadgeComponents),
+  'radio-checkbox': () => import('./radioCheckbox').then((m) => m.radioCheckboxComponents),
+  sliders: () => import('./sliders').then((m) => m.sliderComponents),
+  calendars: () => import('./calendars').then((m) => m.calendarComponents),
+  ratings: () => import('./ratings').then((m) => m.ratingComponents),
 };

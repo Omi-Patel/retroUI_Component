@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useDocumentMeta } from "../hooks";
+import { useDocumentMeta, useGitHubStars } from "../hooks";
 import { SITE_META } from "../lib/constants";
 import { COMPONENT_REGISTRY, PAGE_REGISTRY } from "../lib/registries";
 import {
@@ -28,7 +28,7 @@ const PAGE_VARIANT_COUNT = PAGE_REGISTRY.reduce(
 );
 const PAGE_CATEGORY_COUNT = PAGE_REGISTRY.length;
 
-const STATS = [
+const buildStats = (starsLabel) => [
   {
     v: `${COMPONENT_VARIANT_COUNT}`,
     l: "Components",
@@ -39,7 +39,7 @@ const STATS = [
     l: "Page templates",
     sub: `${PAGE_CATEGORY_COUNT} categories · production-ready`,
   },
-  { v: "9", l: "GitHub stars", sub: "early days · star us!" },
+  { v: starsLabel, l: "GitHub stars", sub: "live from GitHub · star us!" },
   { v: "MIT", l: "Open source", sub: "forever free" },
 ];
 
@@ -102,6 +102,9 @@ const CATEGORIES = HIGHLIGHTED_PATHS.map((slug) => {
 
 export default function Home() {
   const navigate = useNavigate();
+  const { stars, loading: starsLoading } = useGitHubStars({ fallback: 9 });
+  const starsLabel = starsLoading ? "…" : stars.toLocaleString();
+  const STATS = buildStats(starsLabel);
 
   useDocumentMeta({
     title: `${SITE_META.name} | ${SITE_META.tagline}`,
@@ -205,7 +208,7 @@ export default function Home() {
                   className="ml-1 inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] mono"
                   style={{ background: "var(--surface-2)", color: "var(--muted)" }}
                 >
-                  <Star className="w-[10px] h-[10px]" /> 9
+                  <Star className="w-[10px] h-[10px]" /> {starsLabel}
                 </span>
               </a>
             </div>
