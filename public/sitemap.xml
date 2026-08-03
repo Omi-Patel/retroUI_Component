@@ -48,6 +48,14 @@
   <url><loc>https://retro-ui.basecase.site/components/sliders</loc><priority>0.8</priority></url>
   <url><loc>https://retro-ui.basecase.site/components/calendars</loc><priority>0.8</priority></url>
   <url><loc>https://retro-ui.basecase.site/components/ratings</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/selects</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/textareas</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/sidebars</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/file-uploads</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/timelines</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/empty-states</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/media-players</loc><priority>0.8</priority></url>
+  <url><loc>https://retro-ui.basecase.site/components/windows</loc><priority>0.8</priority></url>
 
   <url><loc>https://retro-ui.basecase.site/pages/home</loc><priority>0.7</priority></url>
   <url><loc>https://retro-ui.basecase.site/pages/about</loc><priority>0.7</priority></url>

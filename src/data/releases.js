@@ -19,9 +19,69 @@
  *   }
  */
 
-export const APP_VERSION = "0.5.0";
+export const APP_VERSION = "0.6.0";
 
 export const releases = [
+  {
+    version: "0.6.0",
+    date: "2026-08-03",
+    summary:
+      "The Builder Pack — eight new categories that close the everyday gaps: Selects, Textareas, Sidebars, File Uploads, Timelines, Empty States, plus two showpieces: Media Players and Windows.",
+    changes: {
+      added: [
+        "New Select category (4 variants) — NewsprintSelect, TerminalCombobox (type-to-filter), TagMultiSelect (sticker chips), and ChannelDialSelect (TV dial).",
+        "New Textarea category (4 variants) — TypewriterTextarea (ruled paper), TelegramTextarea (priced by the word), StickyNoteTextarea, and TerminalTextarea.",
+        "New Sidebar category (4 variants) — FileDrawerSidebar, SlideOutDrawer (accessible overlay drawer), BinderTabSidebar, and TerminalTreeSidebar.",
+        "New File Upload category (4 variants) — FloppyDropzone (drag & drop), ScannerUpload (animated scan progress), MailSlotUpload, and PolaroidUpload (image previews).",
+        "New Timeline category (4 variants) — NewspaperTimeline, TicketStubTimeline, TerminalLogTimeline, and PackageTrackingTimeline.",
+        "New Empty State category (4 variants) — EmptyDrawerState, StaticTVEmptyState (animated no-signal static), EmptyMailboxState, and NoResultsClassified.",
+        "New Media Player category (4 variants) — CassetteDeckPlayer (spinning spools), BoomboxPlayer (animated EQ), RadioTunerPlayer (moving dial needle), and WalkmanPlayer.",
+        "New Window category (4 variants) — RetroOSWindow, TerminalWindow, BrowserWindow95, and AlertDialog98 (accessible system alert).",
+      ],
+      changed: [],
+      fixed: [
+        "The Getting Started link is now actually reachable — it was registered in unused constants instead of the navbar, footer, and command palette lists that render the real navigation.",
+      ],
+      removed: [],
+    },
+    components: {
+      new: [
+        "NewsprintSelect",
+        "TerminalCombobox",
+        "TagMultiSelect",
+        "ChannelDialSelect",
+        "TypewriterTextarea",
+        "TelegramTextarea",
+        "StickyNoteTextarea",
+        "TerminalTextarea",
+        "FileDrawerSidebar",
+        "SlideOutDrawer",
+        "BinderTabSidebar",
+        "TerminalTreeSidebar",
+        "FloppyDropzone",
+        "ScannerUpload",
+        "MailSlotUpload",
+        "PolaroidUpload",
+        "NewspaperTimeline",
+        "TicketStubTimeline",
+        "TerminalLogTimeline",
+        "PackageTrackingTimeline",
+        "EmptyDrawerState",
+        "StaticTVEmptyState",
+        "EmptyMailboxState",
+        "NoResultsClassified",
+        "CassetteDeckPlayer",
+        "BoomboxPlayer",
+        "RadioTunerPlayer",
+        "WalkmanPlayer",
+        "RetroOSWindow",
+        "TerminalWindow",
+        "BrowserWindow95",
+        "AlertDialog98",
+      ],
+      updated: [],
+    },
+  },
   {
     version: "0.5.0",
     date: "2026-08-03",

@@ -49,6 +49,14 @@ import {
   SlidersHorizontal,
   CalendarDays,
   Star,
+  ChevronsUpDown,
+  AlignLeft,
+  PanelLeftOpen,
+  Upload,
+  History,
+  Inbox,
+  Music,
+  AppWindow,
 } from "lucide-react";
 
 /**
@@ -96,6 +104,14 @@ export const COMPONENT_REGISTRY = [
   { name: "Slider", path: "sliders", folder: "Sliders", Icon: SlidersHorizontal, count: 5, category: "Form", description: "Volume sliders, steppers, dual ranges, and console faders" },
   { name: "Calendar", path: "calendars", folder: "Calendars", Icon: CalendarDays, count: 5, category: "Form", description: "Tear-off, desk, and date-picker calendars" },
   { name: "Rating", path: "ratings", folder: "Ratings", Icon: Star, count: 5, category: "Form", description: "Star, stamp, heart, emoji, and number rating controls" },
+  { name: "Select", path: "selects", folder: "Selects", Icon: ChevronsUpDown, count: 4, category: "Form", description: "Dropdown selects, comboboxes, and multi-selects" },
+  { name: "Textarea", path: "textareas", folder: "Textareas", Icon: AlignLeft, count: 4, category: "Form", description: "Ruled paper, telegram, sticky-note, and terminal text areas" },
+  { name: "Sidebar", path: "sidebars", folder: "Sidebars", Icon: PanelLeftOpen, count: 4, category: "Navigation", description: "Dashboard sidebars, drawers, and tree navigation" },
+  { name: "File Upload", path: "file-uploads", folder: "FileUploads", Icon: Upload, count: 4, category: "Form", description: "Floppy dropzones, scanners, mail slots, and polaroid previews" },
+  { name: "Timeline", path: "timelines", folder: "Timelines", Icon: History, count: 4, category: "Display", description: "Edition histories, ticket stubs, commit logs, and package tracking" },
+  { name: "Empty State", path: "empty-states", folder: "EmptyStates", Icon: Inbox, count: 4, category: "Feedback", description: "No-signal TVs, empty drawers, and zero-result placeholders" },
+  { name: "Media Player", path: "media-players", folder: "MediaPlayers", Icon: Music, count: 4, category: "App", description: "Cassette decks, boomboxes, radio tuners, and walkmans" },
+  { name: "Window", path: "windows", folder: "Windows", Icon: AppWindow, count: 4, category: "Layout", description: "Retro OS windows, terminals, 90s browsers, and system dialogs" },
 ];
 
 /**

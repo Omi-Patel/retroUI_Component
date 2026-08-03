@@ -11,6 +11,39 @@ changelog viewers, etc.) that consume it directly.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-08-03
+
+The Builder Pack — eight new categories that close the everyday gaps, plus two
+showpieces.
+
+### Added
+- **Select** (`/components/selects`) — `NewsprintSelect`, `TerminalCombobox`
+  (type-to-filter), `TagMultiSelect` (sticker chips), `ChannelDialSelect`
+  (TV dial).
+- **Textarea** (`/components/textareas`) — `TypewriterTextarea` (ruled paper),
+  `TelegramTextarea` (priced by the word), `StickyNoteTextarea`,
+  `TerminalTextarea`.
+- **Sidebar** (`/components/sidebars`) — `FileDrawerSidebar`, `SlideOutDrawer`
+  (accessible overlay drawer), `BinderTabSidebar`, `TerminalTreeSidebar`.
+- **File Upload** (`/components/file-uploads`) — `FloppyDropzone` (drag & drop),
+  `ScannerUpload` (animated scan progress), `MailSlotUpload`, `PolaroidUpload`
+  (image previews).
+- **Timeline** (`/components/timelines`) — `NewspaperTimeline`,
+  `TicketStubTimeline`, `TerminalLogTimeline`, `PackageTrackingTimeline`.
+- **Empty State** (`/components/empty-states`) — `EmptyDrawerState`,
+  `StaticTVEmptyState` (animated no-signal static), `EmptyMailboxState`,
+  `NoResultsClassified`.
+- **Media Player** (`/components/media-players`) — `CassetteDeckPlayer`
+  (spinning spools), `BoomboxPlayer` (animated EQ), `RadioTunerPlayer` (moving
+  dial needle), `WalkmanPlayer`.
+- **Window** (`/components/windows`) — `RetroOSWindow`, `TerminalWindow`,
+  `BrowserWindow95`, `AlertDialog98` (accessible system alert).
+
+### Fixed
+- The Getting Started link is now actually reachable — it was registered in
+  unused constants instead of the navbar, footer, and command palette lists
+  that render the real navigation.
+
 ## [0.5.0] - 2026-08-03
 
 Copy-paste you can trust — a Getting Started guide, fully self-contained
