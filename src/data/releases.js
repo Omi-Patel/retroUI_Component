@@ -38,9 +38,13 @@ export const releases = [
         "New Media Player category (4 variants) — CassetteDeckPlayer (spinning spools), BoomboxPlayer (animated EQ), RadioTunerPlayer (moving dial needle), and WalkmanPlayer.",
         "New Window category (4 variants) — RetroOSWindow, TerminalWindow, BrowserWindow95, and AlertDialog98 (accessible system alert).",
       ],
-      changed: [],
+      changed: [
+        "Footer overhaul — five variants redesigned around strong retro concepts: BorderedFooter is now an airmail envelope (par-avion stripes, perforated stamp, postmark), ShadowFooter is a VHS end-credits roll (scanlines, tracking bar, color-bar sign-off), ClassicFooter is a newspaper back page (column rules, clip-out subscription coupon), NeonFooter is a flickering neon diner sign, and PixelFooter is an arcade game-over screen (score bar, level-select links, pixel hearts).",
+      ],
       fixed: [
         "The Getting Started link is now actually reachable — it was registered in unused constants instead of the navbar, footer, and command palette lists that render the real navigation.",
+        "Ticker marquees no longer collapse and wrap word-by-word inside the preview — the track now keeps its natural width (w-max + nowrap) in all four ticker variants.",
+        "PixelFooter referenced a non-existent font-pixel class; footers now use real Tailwind font stacks.",
       ],
       removed: [],
     },
@@ -79,7 +83,17 @@ export const releases = [
         "BrowserWindow95",
         "AlertDialog98",
       ],
-      updated: [],
+      updated: [
+        "BorderedFooter",
+        "ShadowFooter",
+        "ClassicFooter",
+        "NeonFooter",
+        "PixelFooter",
+        "BreakingNewsTicker",
+        "StockTicker",
+        "EmojiRibbon",
+        "DepartureBoardTicker",
+      ],
     },
   },
   {

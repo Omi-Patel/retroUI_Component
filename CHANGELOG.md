@@ -39,10 +39,24 @@ showpieces.
 - **Window** (`/components/windows`) — `RetroOSWindow`, `TerminalWindow`,
   `BrowserWindow95`, `AlertDialog98` (accessible system alert).
 
+### Changed
+- **Footer overhaul** — five variants redesigned around strong retro concepts:
+  `BorderedFooter` (airmail envelope: par-avion stripes, perforated stamp,
+  postmark), `ShadowFooter` (VHS end-credits: scanlines, tracking bar,
+  color-bar sign-off), `ClassicFooter` (newspaper back page: column rules,
+  clip-out subscription coupon), `NeonFooter` (flickering neon diner sign),
+  `PixelFooter` (arcade game-over: score bar, level-select links, pixel
+  hearts).
+
 ### Fixed
 - The Getting Started link is now actually reachable — it was registered in
   unused constants instead of the navbar, footer, and command palette lists
   that render the real navigation.
+- Ticker marquees no longer collapse and wrap word-by-word inside the preview —
+  the track now keeps its natural width (`w-max` + `nowrap`) in all four
+  ticker variants.
+- `PixelFooter` referenced a non-existent `font-pixel` class; footers now use
+  real Tailwind font stacks.
 
 ## [0.5.0] - 2026-08-03
 

@@ -1,132 +1,127 @@
-import React from "react";
+import { Twitter, Instagram, Github } from "lucide-react";
 
+// Neon diner sign footer — buzzing tube letters, a flickering "A", open 24 hrs.
 const NeonFooter = () => {
+  const year = new Date().getFullYear();
+  const columns = [
+    { title: "Menu", links: ["Home", "About", "Components"] },
+    { title: "Late Night", links: ["Features", "Pricing", "Support"] },
+  ];
+
   return (
-    <footer className="bg-[#333] text-[#39ff14] font-mono p-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10">
-        {/* Logo Section */}
-        <div className="flex items-center justify-center sm:justify-start gap-3">
-          <span
-            className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#39ff14] text-black text-3xl font-black border-2 border-[#39ff14]"
-            style={{ textShadow: "0 0 6px #39ff14" }}
+    <footer className="relative bg-[#0a0a14] text-stone-300 font-mono overflow-hidden">
+      {/* Night-sky glow */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(244,114,182,0.12), transparent 70%)",
+        }}
+      />
+
+      <div className="relative max-w-5xl mx-auto px-6 py-12">
+        {/* The sign */}
+        <div className="text-center mb-10">
+          <p
+            className="text-2xl sm:text-4xl font-black tracking-[0.3em] uppercase text-pink-400 select-none"
+            style={{ textShadow: "0 0 6px #f472b6, 0 0 20px #f472b6, 0 0 45px rgba(244,114,182,0.6)" }}
           >
-            R
-          </span>
-          <span
-            className="text-2xl sm:text-3xl tracking-wider"
-            style={{ textShadow: "0 0 8px currentColor" }}
+            RETRO&nbsp;W
+            <span
+              className="animate-[neon-flicker_4s_linear_infinite]"
+              style={{ textShadow: "inherit" }}
+            >
+              A
+            </span>
+            VE
+          </p>
+          <div
+            className="inline-block mt-4 px-4 py-1 rounded-full border-2 border-cyan-300 text-cyan-300 text-[11px] font-bold tracking-[0.4em] uppercase"
+            style={{
+              boxShadow: "0 0 8px rgba(103,232,249,0.6), inset 0 0 8px rgba(103,232,249,0.4)",
+              textShadow: "0 0 8px #67e8f9",
+            }}
           >
-            RetroWave
-          </span>
-        </div>
-
-        {/* Links Section */}
-        <div className="flex text-center  gap-8 justify-center items-center ">
-          <div className="flex flex-col gap-4 text-left">
-            <a
-              href="/"
-              className="hover:text-[#ffeb3b] transition duration-300"
-            >
-              Home
-            </a>
-            <a
-              href="/about"
-              className="hover:text-[#ffeb3b] transition duration-300"
-            >
-              About
-            </a>
-            <a
-              href="/components"
-              className="hover:text-[#ffeb3b] transition duration-300"
-            >
-              Components
-            </a>
-          </div>
-
-          <div className="flex flex-col gap-4 text-left">
-            <a
-              href="#"
-              className="hover:text-[#ffeb3b] transition duration-300"
-            >
-              Features
-            </a>
-            <a
-              href="#"
-              className="hover:text-[#ffeb3b] transition duration-300"
-            >
-              Pricing
-            </a>
-            <a
-              href="#"
-              className="hover:text-[#ffeb3b] transition duration-300"
-            >
-              Support
-            </a>
+            Open 24 hrs
           </div>
         </div>
 
-        {/* Social Media Section */}
-        <div className="flex flex-col items-center gap-4 ">
-          {/* Instagram */}
-          <h1 className="text-2xl font-bold font-sans text-gray-300">
-            Follow Us at
-          </h1>
-          <div className="flex justify-center items-center gap-4">
-            <a href="#" aria-label="Instagram">
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-6 h-6 hover:text-pink-500 transition duration-200"
-                viewBox="0 0 24 24"
-              >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-              </svg>
-            </a>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-10 max-w-2xl mx-auto">
+          {columns.map((col) => (
+            <nav key={col.title} aria-label={col.title}>
+              <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-stone-500 mb-3">
+                {col.title}
+              </p>
+              <ul className="space-y-2">
+                {col.links.map((l) => (
+                  <li key={l}>
+                    <a
+                      href="#"
+                      className="group inline-flex items-center gap-2 text-[13px] tracking-[0.1em] text-stone-400 hover:text-cyan-300 transition-colors"
+                      style={{ textShadow: "none" }}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-300"
+                      >
+                        →
+                      </span>
+                      {l}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
 
-            {/* LinkedIn */}
-            <a href="#" aria-label="LinkedIn">
-              <svg
-                fill="currentColor"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="0"
-                className="w-6 h-6 hover:text-blue-600 transition duration-200"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="none"
-                  d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
-                ></path>
-                <circle cx="4" cy="4" r="2" stroke="none"></circle>
-              </svg>
-            </a>
-
-            {/* Twitter */}
-            <a href="#" aria-label="Twitter">
-              <svg
-                fill="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-6 h-6 hover:text-blue-400 transition duration-200"
-                viewBox="0 0 24 24"
-              >
-                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-              </svg>
-            </a>
+          {/* Social tubes */}
+          <div className="col-span-2 sm:col-span-1">
+            <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-stone-500 mb-3">
+              Transmissions
+            </p>
+            <div className="flex gap-3">
+              {[
+                { Icon: Twitter, label: "Twitter", glow: "#67e8f9" },
+                { Icon: Instagram, label: "Instagram", glow: "#f472b6" },
+                { Icon: Github, label: "GitHub", glow: "#a3e635" },
+              ].map(({ Icon, label, glow }) => (
+                <a
+                  key={label}
+                  href="#"
+                  aria-label={label}
+                  className="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all hover:scale-105"
+                  style={{ borderColor: glow, color: glow, boxShadow: `0 0 10px ${glow}55, inset 0 0 6px ${glow}33` }}
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
+
+        {/* Curb line */}
+        <div
+          aria-hidden="true"
+          className="mt-12 h-px"
+          style={{ background: "linear-gradient(90deg, transparent, rgba(244,114,182,0.5), transparent)" }}
+        />
+        <p className="mt-4 text-center text-[10px] tracking-[0.35em] uppercase text-stone-500">
+          © {year} RetroWave Diner · Corner of Sunset &amp; VHS · Est. 1985
+        </p>
       </div>
 
-      {/* Bottom Line */}
-      <div className="mt-8 border-t border-[#39ff14] pt-4 text-center text-sm">
-        © 2024 RetroWave. All rights reserved.
-      </div>
+      <style>{`
+        @keyframes neon-flicker {
+          0%, 6%, 10%, 100% { opacity: 1; }
+          7%, 9% { opacity: 0.25; }
+          48%, 52% { opacity: 1; }
+          50% { opacity: 0.4; }
+          83% { opacity: 1; }
+          84% { opacity: 0.3; }
+          85% { opacity: 1; }
+        }
+      `}</style>
     </footer>
   );
 };
