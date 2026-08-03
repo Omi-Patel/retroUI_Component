@@ -40,6 +40,12 @@ showpieces.
   `BrowserWindow95`, `AlertDialog98` (accessible system alert).
 
 ### Changed
+- **Card refresh** — `ProfileCard` is now a laminated club membership ID
+  (photo tile, stats row, barcode), `ServiceCard` a classified flyer with
+  tear-off phone tabs (one already taken), and `TestimonialCard` a
+  letters-to-the-editor column entry (drop cap, inked stars, handwritten
+  signature, VERIFIED BUYER stamp). `ProfileCard` no longer hotlinks an
+  external placeholder image.
 - **Navbar overhaul** — `RetroNavbar` is now a zine-shop sticker bar
   (label-tape brand, sticker links, cart stub), `RetroNavbar1` a cinema box
   office (chasing marquee bulbs, ticket-stub links), `NeonNavbar` an arcade
