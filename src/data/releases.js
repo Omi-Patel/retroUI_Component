@@ -45,6 +45,7 @@ export const releases = [
         "The Getting Started link is now actually reachable — it was registered in unused constants instead of the navbar, footer, and command palette lists that render the real navigation.",
         "Ticker marquees no longer collapse and wrap word-by-word inside the preview — the track now keeps its natural width (w-max + nowrap) in all four ticker variants.",
         "PixelFooter referenced a non-existent font-pixel class; footers now use real Tailwind font stacks.",
+        "Full-width components (navbars, footers) now span the entire preview — and the entire device frame in fullscreen — instead of shrink-wrapping to their content width.",
       ],
       removed: [],
     },

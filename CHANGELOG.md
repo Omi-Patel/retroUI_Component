@@ -57,6 +57,9 @@ showpieces.
   ticker variants.
 - `PixelFooter` referenced a non-existent `font-pixel` class; footers now use
   real Tailwind font stacks.
+- Full-width components (navbars, footers) now span the entire preview — and
+  the entire device frame in fullscreen — instead of shrink-wrapping to their
+  content width.
 
 ## [0.5.0] - 2026-08-03
 

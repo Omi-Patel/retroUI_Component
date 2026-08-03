@@ -57,6 +57,10 @@ export const ComponentShowcasePage = ({
   const activeComp = components.find((c) => c.name === active) || components[0];
   if (!activeComp) return null;
   const ActiveComponent = activeComp.component;
+  // Full-width categories (navbars, footers, …) render edge-to-edge in block
+  // flow — centering them in a flex container would shrink-wrap them to their
+  // content width, which is not how they lay out in a real page.
+  const fullWidth = !!meta?.fullWidth;
 
   return (
     <div>
@@ -173,7 +177,11 @@ export const ComponentShowcasePage = ({
 
         {tab === "preview" ? (
           <div
-            className="flex items-center justify-center p-10 min-h-[320px] overflow-x-auto"
+            className={
+              fullWidth
+                ? "flex flex-col justify-center min-h-[320px] overflow-x-auto"
+                : "flex items-center justify-center p-10 min-h-[320px] overflow-x-auto"
+            }
             style={{ background: "var(--surface)" }}
           >
             <ActiveComponent />
@@ -254,7 +262,13 @@ export const ComponentShowcasePage = ({
         title={`${title} · ${formatComponentName(activeComp.name)}`}
         subtitle={`components/${folder}/${activeComp.name}.jsx`}
       >
-        <div className="flex items-center justify-center p-10 min-h-full">
+        <div
+          className={
+            fullWidth
+              ? "flex flex-col justify-center min-h-full"
+              : "flex items-center justify-center p-10 min-h-full"
+          }
+        >
           <ActiveComponent />
         </div>
       </DevicePreviewDialog>
