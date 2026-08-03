@@ -1,97 +1,105 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+
+// Arcade neon navbar — tube-glow brand with a flickering letter and an OPEN lamp.
+const LINKS = ["Home", "Games", "Prizes", "Contact"];
 
 const NeonNavbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="bg-[#1c1c1c] border-b-4 border-[#00ffff] shadow-[6px_6px_0px_0px_#00ffff] p-4 font-mono">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <div className="text-3xl font-bold text-[#00ffff] hover:text-[#8aec48] transition duration-300 ease-out">
-          NeonNav
-        </div>
+    <nav
+      className="bg-[#0a0a14] text-stone-300 font-mono border-b-2 border-cyan-400"
+      style={{ boxShadow: "0 4px 18px -6px rgba(34,211,238,0.5)" }}
+    >
+      <div className="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
+        {/* Tube brand */}
+        <a
+          href="#"
+          className="text-xl font-black tracking-[0.25em] uppercase text-pink-400 select-none"
+          style={{ textShadow: "0 0 6px #f472b6, 0 0 18px rgba(244,114,182,0.7)" }}
+        >
+          NE
+          <span className="animate-[nav-neon-flicker_3.5s_linear_infinite]">O</span>
+          N&nbsp;NAV
+        </a>
 
-        {/* Desktop Menu Links */}
-        <ul className="hidden md:flex space-x-6">
-          {["Home", "About", "Services", "Contact"].map((item, idx) => (
-            <li key={idx}>
+        {/* Tube links */}
+        <ul className="hidden md:flex items-center gap-6">
+          {LINKS.map((l) => (
+            <li key={l}>
               <a
                 href="#"
-                className="relative group text-[#00ffff] hover:text-[#fff] transition-all duration-300"
+                className="group relative py-1 text-[12px] tracking-[0.25em] uppercase text-stone-400 hover:text-cyan-300 transition-colors"
+                style={{ textShadow: "none" }}
               >
-                {item}
-                <span className="absolute left-0 bottom-[-5px] w-full h-[2px] bg-[#00ffff] animate-pulse"></span>
+                <span className="group-hover:[text-shadow:0_0_8px_rgba(103,232,249,0.8)]">
+                  {l}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 -bottom-0.5 w-full h-[2px] bg-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ boxShadow: "0 0 8px #67e8f9" }}
+                />
               </a>
             </li>
           ))}
         </ul>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <button
-            onClick={toggleMenu}
-            className="text-[#00ffff] hover:text-white transition-all duration-300 focus:outline-none"
+        {/* OPEN lamp + mobile toggle */}
+        <div className="flex items-center gap-3">
+          <span
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full border-2 border-lime-400 text-lime-400 text-[10px] font-bold tracking-[0.35em] uppercase"
+            style={{
+              boxShadow: "0 0 8px rgba(163,230,53,0.5), inset 0 0 6px rgba(163,230,53,0.3)",
+              textShadow: "0 0 6px #a3e635",
+            }}
           >
-            {isOpen ? (
-              // Close button when menu is open
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 "
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              // Hamburger menu icon when closed
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
+            Open
+          </span>
+          <button
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded border-2 border-pink-400 text-pink-400"
+            style={{ boxShadow: "0 0 8px rgba(244,114,182,0.5)" }}
+          >
+            {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Links */}
-      <div
-        className={`${
-          isOpen ? "block" : "hidden"
-        } md:hidden bg-[#1c1c1c] border-t-4 border-[#00ffff] p-4 mt-4`}
-      >
-        <ul className="space-y-4">
-          {["Home", "About", "Services", "Contact"].map((item, idx) => (
-            <li key={idx}>
-              <a
-                href="#"
-                className="relative block text-2xl font-bold text-[#00ffff] hover:text-[#fff] transition-all duration-300"
-              >
-                {item}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* Mobile tube menu */}
+      {open && (
+        <div className="md:hidden border-t border-cyan-400/30 px-4 py-3">
+          <ul className="space-y-1">
+            {LINKS.map((l) => (
+              <li key={l}>
+                <a
+                  href="#"
+                  className="group flex items-center gap-3 px-2 py-2.5 text-[13px] tracking-[0.25em] uppercase text-stone-400 hover:text-cyan-300 transition-colors"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="w-1.5 h-1.5 rounded-full bg-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{ boxShadow: "0 0 6px #67e8f9" }}
+                  />
+                  {l}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes nav-neon-flicker {
+          0%, 8%, 12%, 100% { opacity: 1; }
+          9%, 11% { opacity: 0.2; }
+          62%, 66% { opacity: 1; }
+          64% { opacity: 0.35; }
+        }
+      `}</style>
     </nav>
   );
 };

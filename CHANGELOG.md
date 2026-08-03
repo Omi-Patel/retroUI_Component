@@ -40,6 +40,15 @@ showpieces.
   `BrowserWindow95`, `AlertDialog98` (accessible system alert).
 
 ### Changed
+- **Navbar overhaul** — `RetroNavbar` is now a zine-shop sticker bar
+  (label-tape brand, sticker links, cart stub), `RetroNavbar1` a cinema box
+  office (chasing marquee bulbs, ticket-stub links), `NeonNavbar` an arcade
+  neon marquee (flickering tube brand, glow-underline links, OPEN lamp),
+  `PixelNavbar` an 8-bit HUD that pairs with `PixelFooter` (pixel logo,
+  level-tab links, coin counter), and the newsprint masthead
+  (`GradientNavbar`) gained a serif wordmark, double-rule active state, and
+  edition-strip polish. All five now have working, accessible mobile menus —
+  two previously shipped drawers that could never open.
 - **Footer overhaul** — five variants redesigned around strong retro concepts:
   `BorderedFooter` (airmail envelope: par-avion stripes, perforated stamp,
   postmark), `ShadowFooter` (VHS end-credits: scanlines, tracking bar,

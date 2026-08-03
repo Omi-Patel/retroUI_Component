@@ -39,6 +39,7 @@ export const releases = [
         "New Window category (4 variants) — RetroOSWindow, TerminalWindow, BrowserWindow95, and AlertDialog98 (accessible system alert).",
       ],
       changed: [
+        "Navbar overhaul — RetroNavbar is now a zine-shop sticker bar (label-tape brand, sticker links, cart stub), RetroNavbar1 a cinema box office (chasing marquee bulbs, ticket-stub links), NeonNavbar an arcade neon marquee (flickering tube brand, glow-underline links, OPEN lamp), PixelNavbar an 8-bit HUD that pairs with PixelFooter (pixel logo, level-tab links, coin counter), and the newsprint masthead gained a serif wordmark, double-rule active state, and edition strip polish. All five now have working, accessible mobile menus.",
         "Footer overhaul — five variants redesigned around strong retro concepts: BorderedFooter is now an airmail envelope (par-avion stripes, perforated stamp, postmark), ShadowFooter is a VHS end-credits roll (scanlines, tracking bar, color-bar sign-off), ClassicFooter is a newspaper back page (column rules, clip-out subscription coupon), NeonFooter is a flickering neon diner sign, and PixelFooter is an arcade game-over screen (score bar, level-select links, pixel hearts).",
       ],
       fixed: [
@@ -85,6 +86,11 @@ export const releases = [
         "AlertDialog98",
       ],
       updated: [
+        "RetroNavbar",
+        "RetroNavbar1",
+        "GradientNavbar",
+        "NeonNavbar",
+        "PixelNavbar",
         "BorderedFooter",
         "ShadowFooter",
         "ClassicFooter",
