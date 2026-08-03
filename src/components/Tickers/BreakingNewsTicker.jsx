@@ -12,9 +12,9 @@ const BreakingNewsTicker = () => {
         ● BREAKING
       </span>
       <div className="relative flex-1 overflow-hidden">
-        <div className="inline-flex gap-12 pr-12 animate-[ticker-marquee_40s_linear_infinite] py-2 font-mono text-[12.5px] text-stone-800 tracking-wider">
+        <div className="flex w-max whitespace-nowrap gap-12 pr-12 animate-[ticker-marquee_40s_linear_infinite] py-2 font-mono text-[12.5px] text-stone-800 tracking-wider">
           {[...headlines, ...headlines].map((h, i) => (
-            <span key={i} className="inline-flex items-center">
+            <span key={i} className="inline-flex items-center shrink-0">
               {h}
               <span aria-hidden="true" className="mx-6 text-red-600">●</span>
             </span>

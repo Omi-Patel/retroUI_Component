@@ -13,9 +13,9 @@ const DepartureBoardTicker = () => {
         DEPARTURES
       </span>
       <div className="relative flex-1 overflow-hidden">
-        <div className="inline-flex gap-12 pr-12 animate-[ticker-marquee_40s_linear_infinite] py-2 font-mono text-[12.5px] text-amber-300 tracking-wider">
+        <div className="flex w-max whitespace-nowrap gap-12 pr-12 animate-[ticker-marquee_40s_linear_infinite] py-2 font-mono text-[12.5px] text-amber-300 tracking-wider">
           {[...departures, ...departures].map((d, i) => (
-            <span key={i} className="inline-flex items-center gap-2 whitespace-nowrap">
+            <span key={i} className="inline-flex items-center gap-2 shrink-0">
               <span className="text-white tabular-nums">{d.time}</span>
               <span>{d.dest}</span>
               <span className="text-amber-500/80">TRK {d.track}</span>
