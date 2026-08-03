@@ -14,7 +14,7 @@ const StockTicker = () => {
         LIVE
       </span>
       <div className="relative flex-1 overflow-hidden">
-        <div className="marquee-track py-2 font-mono text-[12.5px] text-green-400">
+        <div className="inline-flex gap-12 pr-12 animate-[ticker-marquee_40s_linear_infinite] py-2 font-mono text-[12.5px] text-green-400">
           {[...stocks, ...stocks].map((s, i) => {
             const up = s.change > 0;
             const flat = s.change === 0;
@@ -36,6 +36,12 @@ const StockTicker = () => {
           })}
         </div>
       </div>
+      <style>{`
+        @keyframes ticker-marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+      `}</style>
     </div>
   );
 };

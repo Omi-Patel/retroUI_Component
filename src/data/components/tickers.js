@@ -4,6 +4,8 @@ import StockTicker from '../../components/Tickers/StockTicker';
 import StockTickerSrc from '../../components/Tickers/StockTicker.jsx?raw';
 import EmojiRibbon from '../../components/Tickers/EmojiRibbon';
 import EmojiRibbonSrc from '../../components/Tickers/EmojiRibbon.jsx?raw';
+import DepartureBoardTicker from '../../components/Tickers/DepartureBoardTicker';
+import DepartureBoardTickerSrc from '../../components/Tickers/DepartureBoardTicker.jsx?raw';
 
 export const tickerComponents = [
   {
@@ -20,6 +22,11 @@ export const tickerComponents = [
     name: 'EmojiRibbon',
     component: EmojiRibbon,
     code: EmojiRibbonSrc,
+  },
+  {
+    name: 'DepartureBoardTicker',
+    component: DepartureBoardTicker,
+    code: DepartureBoardTickerSrc,
   },
 ];
 

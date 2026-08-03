@@ -5,6 +5,8 @@ import PricingRetro3D from '../../components/Pricing/PricingRetro3D';
 import PricingRetro3DSrc from '../../components/Pricing/PricingRetro3D.jsx?raw';
 import PricingRetroVibrant from '../../components/Pricing/PricingRetroVibrant';
 import PricingRetroVibrantSrc from '../../components/Pricing/PricingRetroVibrant.jsx?raw';
+import NewsprintPricing from '../../components/Pricing/NewsprintPricing';
+import NewsprintPricingSrc from '../../components/Pricing/NewsprintPricing.jsx?raw';
 
 export const pricingComponents = [
   {
@@ -21,6 +23,11 @@ export const pricingComponents = [
     name: 'PricingRetroVibrant',
     component: PricingRetroVibrant,
     code: PricingRetroVibrantSrc,
+  },
+  {
+    name: 'NewsprintPricing',
+    component: NewsprintPricing,
+    code: NewsprintPricingSrc,
   },
 ];
 

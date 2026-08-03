@@ -128,10 +128,12 @@ export default function BasicBlog() {
         </section>
 
         {/* Bottom band */}
-        <div className="ornament-hr mt-12">
+        <div className="flex items-center gap-4 mt-12">
+          <span className="flex-1 border-t-2 border-dashed border-black/30" />
           <span className="text-[10px] tracking-[0.4em] uppercase opacity-60">
             END · COLUMN 03
           </span>
+          <span className="flex-1 border-t-2 border-dashed border-black/30" />
         </div>
       </main>
 

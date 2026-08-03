@@ -92,8 +92,10 @@ const SignInPage = () => {
               Enter the Clubhouse
             </button>
 
-            <div className="ornament-hr text-[10px] tracking-widest uppercase">
-              <span className="px-2 opacity-70">OR</span>
+            <div className="flex items-center gap-3 text-[10px] tracking-widest uppercase">
+              <span className="flex-1 border-t-2 border-dashed border-black/30" />
+              <span className="opacity-70">OR</span>
+              <span className="flex-1 border-t-2 border-dashed border-black/30" />
             </div>
 
             <button

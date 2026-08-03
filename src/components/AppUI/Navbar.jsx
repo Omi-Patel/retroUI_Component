@@ -71,6 +71,7 @@ function MarqueeTicker() {
 
 const LINKS = [
   { name: "About", href: "/about" },
+  { name: "Get Started", href: "/getting-started" },
   { name: "Components", href: "/components" },
   { name: "Icons", href: "/icons" },
   { name: "Pages", href: "/pages" },

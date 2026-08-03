@@ -21,6 +21,7 @@ const StickyNoteAccordion = () => {
           >
             <button
               onClick={() => setOpen(isOpen ? -1 : i)}
+              aria-expanded={isOpen}
               className="w-full flex items-center justify-between px-4 py-2 text-left text-sm font-black uppercase"
             >
               <span className="flex items-center gap-2">

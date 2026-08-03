@@ -19,9 +19,89 @@
  *   }
  */
 
-export const APP_VERSION = "0.4.0";
+export const APP_VERSION = "0.5.0";
 
 export const releases = [
+  {
+    version: "0.5.0",
+    date: "2026-08-03",
+    summary:
+      "Copy-paste you can trust — a Getting Started guide, fully self-contained component code, an accessibility pass, and the Data & App Pack (Charts, Stats, Chat, Steppers).",
+    changes: {
+      added: [
+        "New Getting Started page at /getting-started — a five-minute setup guide covering the Tailwind config, the three fonts, dark mode, the optional design tokens, and a troubleshooting section. Linked from the navbar and footer.",
+        "Data & App Pack — four component categories: Chart (NewsprintBarChart, ASCIILineChart, HalftonePieChart, LedgerAreaChart), Stat (KPIStatCard, MetricTrendCard, GaugeBlock, LeaderboardBlock), Chat (TeletypeChat, TerminalChat, MessengerChat, NewsprintChat), and Stepper (WizardStepper, ReceiptCheckout, StampedForm, DOSSetup).",
+        "Three new Sign in variants — TerminalSignIn (green-phosphor shell login), ArcadeSignIn (insert-coin cabinet), and LibraryCardSignIn (manila checkout card).",
+        "NewsprintPricing — a classified-ads style three-tier pricing table.",
+        "DepartureBoardTicker — a split-flap station departure board marquee.",
+      ],
+      changed: [
+        "Every copyable component is now fully self-contained: dependencies on site-global CSS (design-token variables and helper classes like marquee-track, ornament-hr, retro-link, mono) were replaced with inline Tailwind, so pasted code renders correctly in any Tailwind project. This includes the Dashboard page template, which previously relied on ~130 CSS variables.",
+        "Accessibility pass across interactive components: modals close on Escape and ship dialog roles with initial focus; dropdowns close on Escape and expose listbox semantics; tabs support arrow-key navigation with proper tablist roles and roving tabindex; accordions announce their expanded state; sliders and ratings gained accessible labels.",
+      ],
+      fixed: [
+        "The About page quickstart linked to the old deployment URL instead of retro-ui.basecase.site.",
+      ],
+      removed: [],
+    },
+    components: {
+      new: [
+        "NewsprintBarChart",
+        "ASCIILineChart",
+        "HalftonePieChart",
+        "LedgerAreaChart",
+        "KPIStatCard",
+        "MetricTrendCard",
+        "GaugeBlock",
+        "LeaderboardBlock",
+        "TeletypeChat",
+        "TerminalChat",
+        "MessengerChat",
+        "NewsprintChat",
+        "WizardStepper",
+        "ReceiptCheckout",
+        "StampedForm",
+        "DOSSetup",
+        "TerminalSignIn",
+        "ArcadeSignIn",
+        "LibraryCardSignIn",
+        "NewsprintPricing",
+        "DepartureBoardTicker",
+      ],
+      updated: [
+        "NewsprintModal",
+        "PolaroidModal",
+        "TerminalModal",
+        "TornPaperModal",
+        "ZineDropdown",
+        "NeonDropdown",
+        "TypewriterDropdown",
+        "FileCabinetDropdown",
+        "PixelTabs",
+        "FileFolderTabs",
+        "IndexCardTabs",
+        "CassetteTabs",
+        "RetroFAQAccordion",
+        "FoldedPaperAccordion",
+        "StickyNoteAccordion",
+        "TerminalAccordion",
+        "BreakingNewsTicker",
+        "StockTicker",
+        "EmojiRibbon",
+        "SignInPage",
+        "ShadowFooter",
+        "VHSProgress",
+        "PixelProgress",
+        "HalftoneProgress",
+        "NumberedPagination",
+        "NewsprintPagination",
+        "TypewriterBreadcrumb",
+        "VolumeSlider",
+        "SteppedSlider",
+        "HeartRating",
+      ],
+    },
+  },
   {
     version: "0.4.0",
     date: "2026-06-08",

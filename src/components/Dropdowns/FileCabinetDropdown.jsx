@@ -10,8 +10,13 @@ const FileCabinetDropdown = () => {
     const onClick = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     };
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
     document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   const options = [
@@ -25,6 +30,8 @@ const FileCabinetDropdown = () => {
     <div ref={ref} className="relative font-mono w-60">
       <button
         onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
         className="w-full flex items-center gap-2 px-4 py-2 bg-amber-100 text-black border-4 border-black shadow-[4px_4px_0px_0px_black] hover:shadow-[6px_6px_0px_0px_black] transition-all"
       >
         {open ? (
@@ -39,10 +46,15 @@ const FileCabinetDropdown = () => {
       </button>
 
       {open && (
-        <div className="absolute z-10 mt-2 w-full bg-amber-50 border-4 border-black shadow-[6px_6px_0px_0px_black]">
+        <div
+          role="listbox"
+          className="absolute z-10 mt-2 w-full bg-amber-50 border-4 border-black shadow-[6px_6px_0px_0px_black]"
+        >
           {options.map((opt) => (
             <button
               key={opt.label}
+              role="option"
+              aria-selected={selected === opt.label}
               onClick={() => {
                 setSelected(opt.label);
                 setOpen(false);

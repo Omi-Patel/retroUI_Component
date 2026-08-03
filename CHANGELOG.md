@@ -11,7 +11,15 @@ changelog viewers, etc.) that consume it directly.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-08-03
+
+Copy-paste you can trust — a Getting Started guide, fully self-contained
+component code, an accessibility pass, and the Data & App Pack.
+
 ### Added
+- **Getting Started** (`/getting-started`) — a five-minute setup guide covering
+  the Tailwind config, the three fonts, dark mode, the optional design tokens,
+  and a troubleshooting section. Linked from the navbar and footer.
 - **Data & App Pack** — four new component categories:
   - `Chart` (`/components/charts`) — `NewsprintBarChart`, `ASCIILineChart`,
     `HalftonePieChart`, `LedgerAreaChart`. Hand-rolled SVG/CSS, no chart library.
@@ -21,6 +29,28 @@ changelog viewers, etc.) that consume it directly.
     `MessengerChat`, `NewsprintChat`. Retro chat / AI conversation UIs.
   - `Stepper` (`/components/steppers`) — `WizardStepper`, `ReceiptCheckout`,
     `StampedForm`, `DOSSetup`. Multi-step form / wizard flows.
+- **Sign in** grew from 1 to 4 variants — `TerminalSignIn` (green-phosphor
+  shell login), `ArcadeSignIn` (insert-coin cabinet), `LibraryCardSignIn`
+  (manila checkout card).
+- `NewsprintPricing` — a classified-ads style three-tier pricing table.
+- `DepartureBoardTicker` — a split-flap station departure board marquee.
+
+### Changed
+- **Every copyable component is now fully self-contained.** Dependencies on
+  site-global CSS (design-token variables and helper classes like
+  `marquee-track`, `ornament-hr`, `retro-link`, `mono`) were replaced with
+  inline Tailwind, so pasted code renders correctly in any Tailwind project.
+  This includes the Dashboard page template, which previously relied on ~130
+  CSS variables.
+- **Accessibility pass** across interactive components: modals close on Escape
+  and ship dialog roles with initial focus; dropdowns close on Escape and
+  expose listbox semantics; tabs support arrow-key navigation with proper
+  tablist roles and roving tabindex; accordions announce their expanded state;
+  sliders and ratings gained accessible labels.
+
+### Fixed
+- The About page quickstart linked to the old deployment URL instead of
+  retro-ui.basecase.site.
 
 ## [0.4.0] - 2026-06-08
 

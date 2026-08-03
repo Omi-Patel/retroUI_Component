@@ -17,6 +17,7 @@ const RetroFAQAccordion = () => {
           <div key={it.q}>
             <button
               onClick={() => setOpen(isOpen ? -1 : i)}
+              aria-expanded={isOpen}
               className="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-bold uppercase hover:bg-yellow-200 transition-colors"
             >
               <span className="flex items-center gap-3">

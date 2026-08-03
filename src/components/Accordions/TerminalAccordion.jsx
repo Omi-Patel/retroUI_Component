@@ -24,6 +24,7 @@ const TerminalAccordion = () => {
           >
             <button
               onClick={() => toggle(i)}
+              aria-expanded={isOpen}
               className="w-full flex items-center gap-2 px-4 py-2 text-left text-sm hover:bg-green-400/10 transition-colors"
             >
               <span className="opacity-60">$</span>

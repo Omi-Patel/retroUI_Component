@@ -20,25 +20,25 @@ const ShadowFooter = () => {
           <div className="flex flex-col sm:flex-row gap-6">
             <a
               href="#"
-              className="text-[#e0e0e0] hover:text-[#f9c84d] transition duration-300 retro-link"
+              className="text-[#e0e0e0] hover:text-[#f9c84d] transition duration-300 underline decoration-dashed decoration-1 underline-offset-4 decoration-[#e0e0e0]/40 hover:decoration-current"
             >
               Privacy Policy
             </a>
             <a
               href="#"
-              className="text-[#e0e0e0] hover:text-[#f9c84d] transition duration-300 retro-link"
+              className="text-[#e0e0e0] hover:text-[#f9c84d] transition duration-300 underline decoration-dashed decoration-1 underline-offset-4 decoration-[#e0e0e0]/40 hover:decoration-current"
             >
               Terms of Service
             </a>
             <a
               href="#"
-              className="text-[#e0e0e0] hover:text-[#f9c84d] transition duration-300 retro-link"
+              className="text-[#e0e0e0] hover:text-[#f9c84d] transition duration-300 underline decoration-dashed decoration-1 underline-offset-4 decoration-[#e0e0e0]/40 hover:decoration-current"
             >
               Contact
             </a>
             <a
               href="#"
-              className="text-[#e0e0e0] hover:text-[#f9c84d] transition duration-300 retro-link"
+              className="text-[#e0e0e0] hover:text-[#f9c84d] transition duration-300 underline decoration-dashed decoration-1 underline-offset-4 decoration-[#e0e0e0]/40 hover:decoration-current"
             >
               FAQ
             </a>

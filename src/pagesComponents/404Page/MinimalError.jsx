@@ -25,10 +25,12 @@ export default function MinimalError() {
           <h1 className="text-[120px] sm:text-[160px] font-black tracking-tighter leading-none">
             404
           </h1>
-          <div className="ornament-hr mt-2 mb-4">
+          <div className="flex items-center gap-4 mt-2 mb-4">
+            <span className="flex-1 border-t-2 border-dashed border-black/30" />
             <span className="text-[10px] tracking-[0.3em] uppercase opacity-60">
               END OF LINE
             </span>
+            <span className="flex-1 border-t-2 border-dashed border-black/30" />
           </div>
 
           <p className="text-base sm:text-lg max-w-md mx-auto mb-2">

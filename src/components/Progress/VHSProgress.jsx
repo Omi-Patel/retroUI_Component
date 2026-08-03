@@ -12,7 +12,7 @@ const VHSProgress = () => {
 
   return (
     <div className="font-mono w-full max-w-sm">
-      <div className="flex justify-between text-[10px] uppercase tracking-widest mb-1" style={{ color: "var(--fg)" }}>
+      <div className="flex justify-between text-[10px] uppercase tracking-widest mb-1 text-stone-900 dark:text-stone-100">
         <span>REC ●</span>
         <span>{String(Math.floor(pct)).padStart(3, "0")}%</span>
       </div>
@@ -25,7 +25,7 @@ const VHSProgress = () => {
           backgroundImage: "repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,0.25) 2px, rgba(0,0,0,0.25) 3px)"
         }} />
       </div>
-      <p className="mt-1 text-[10px] uppercase tracking-widest opacity-60" style={{ color: "var(--fg)" }}>
+      <p className="mt-1 text-[10px] uppercase tracking-widest opacity-60 text-stone-900 dark:text-stone-100">
         SP · NTSC · CH 03
       </p>
     </div>

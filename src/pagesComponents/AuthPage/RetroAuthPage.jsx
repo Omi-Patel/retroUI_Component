@@ -85,8 +85,10 @@ export default function RetroAuthPage() {
               {mode === "signin" ? "Enter the Clubhouse" : "Become a member"}
             </button>
 
-            <div className="ornament-hr text-xs">
-              <span className="px-2 opacity-70">OR</span>
+            <div className="flex items-center gap-3 text-xs">
+              <span className="flex-1 border-t-2 border-dashed border-black/30" />
+              <span className="opacity-70">OR</span>
+              <span className="flex-1 border-t-2 border-dashed border-black/30" />
             </div>
 
             <button className="w-full py-2.5 bg-white text-black border-4 border-black shadow-[4px_4px_0px_0px_black] font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors">

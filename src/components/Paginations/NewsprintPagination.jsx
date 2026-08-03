@@ -6,7 +6,7 @@ const NewsprintPagination = () => {
 
   return (
     <nav className="font-mono inline-flex flex-col items-center gap-1" aria-label="Pagination">
-      <p className="text-[10px] tracking-[0.3em] uppercase opacity-60" style={{ color: "var(--fg)" }}>
+      <p className="text-[10px] tracking-[0.3em] uppercase opacity-60 text-stone-900 dark:text-stone-100">
         Page {page} of {total}
       </p>
       <div className="inline-flex items-center divide-x-2 divide-black border-2 border-black">

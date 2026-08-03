@@ -16,6 +16,7 @@ import { Dots } from "./components/showcase/parts";
 /* ---------- Lazy pages ---------- */
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
+const GettingStarted = lazy(() => import("./pages/GettingStarted"));
 const Component = lazy(() => import("./pages/Component"));
 const Icons = lazy(() => import("./pages/Icons"));
 const ReleaseNotes = lazy(() => import("./pages/ReleaseNotes"));
@@ -84,6 +85,7 @@ const makeRoute = (path, Element, parent = rootRoute) =>
 const topLevel = [
   ["/", Home],
   ["/about", About],
+  ["/getting-started", GettingStarted],
   ["/components", Component],
   ["/icons", Icons],
   ["/pages", Pages],

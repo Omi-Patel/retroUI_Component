@@ -13,11 +13,13 @@ import {
   ScrollText,
   Mail,
   Layers,
+  Rocket,
 } from "lucide-react";
 import { COMPONENT_REGISTRY, PAGE_REGISTRY } from "../../lib/registries";
 
 const NAV_ITEMS = [
   { label: "Home", to: "/", Icon: Home },
+  { label: "Getting Started", to: "/getting-started", Icon: Rocket },
   { label: "Components", to: "/components", Icon: Layers },
   { label: "Icons", to: "/icons", Icon: Shapes },
   { label: "Page Templates", to: "/pages", Icon: Box },

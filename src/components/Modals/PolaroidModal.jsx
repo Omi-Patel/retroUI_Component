@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const PolaroidModal = () => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <div>
@@ -19,6 +26,9 @@ const PolaroidModal = () => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Polaroid memory — good times only"
             className="relative bg-white text-black p-3 pb-14 w-full max-w-xs shadow-[10px_10px_0px_0px_rgba(0,0,0,0.3)] rotate-[-2deg]"
             style={{ fontFamily: "'Caveat', 'Comic Sans MS', cursive" }}
           >
@@ -37,6 +47,7 @@ const PolaroidModal = () => {
             <p className="text-center text-sm text-gray-500">- the gang</p>
             <button
               onClick={() => setOpen(false)}
+              autoFocus
               className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-xs font-mono font-bold bg-black text-white border-2 border-black"
             >
               KEEP

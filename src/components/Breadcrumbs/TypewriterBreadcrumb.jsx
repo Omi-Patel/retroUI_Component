@@ -3,7 +3,7 @@ import React from "react";
 const TypewriterBreadcrumb = () => {
   const items = ["Home", "Library", "Components", "Buttons"];
   return (
-    <nav className="font-mono text-sm" style={{ color: "var(--fg)" }} aria-label="Breadcrumb">
+    <nav className="font-mono text-sm text-stone-900 dark:text-stone-100" aria-label="Breadcrumb">
       <ol className="flex flex-wrap items-center gap-1">
         {items.map((it, i) => {
           const last = i === items.length - 1;
