@@ -59,6 +59,10 @@ import {
   AppWindow,
 } from "lucide-react";
 
+/** Registries are always displayed A→Z — the sort below enforces it, so new
+ *  entries can be appended anywhere in the array. */
+const byName = (a, b) => a.name.localeCompare(b.name);
+
 /**
  * Master registry of all component categories shown in the docs-style sidebar
  * AND the /components index page. Single source of truth — when you add a new
@@ -112,7 +116,7 @@ export const COMPONENT_REGISTRY = [
   { name: "Empty State", path: "empty-states", folder: "EmptyStates", Icon: Inbox, count: 4, category: "Feedback", description: "No-signal TVs, empty drawers, and zero-result placeholders" },
   { name: "Media Player", path: "media-players", folder: "MediaPlayers", Icon: Music, count: 4, category: "App", description: "Cassette decks, boomboxes, radio tuners, and walkmans" },
   { name: "Window", path: "windows", folder: "Windows", Icon: AppWindow, count: 4, category: "Layout", description: "Retro OS windows, terminals, 90s browsers, and system dialogs" },
-];
+].sort(byName);
 
 /**
  * Master registry of all page templates shown in the pages sidebar.
@@ -132,4 +136,4 @@ export const PAGE_REGISTRY = [
   { name: "Settings", path: "settings", Icon: SettingsIcon, count: 1, category: "App", desc: "User settings page with sidebar sections." },
   { name: "Documentation", path: "docs", Icon: BookOpen, count: 1, category: "Content", desc: "Documentation template with TOC and changelog." },
   { name: "Zine", path: "zine", Icon: BookText, count: 1, category: "Editorial", desc: "Magazine-spread landing page built from the Zine Spread Pack." },
-];
+].sort(byName);
