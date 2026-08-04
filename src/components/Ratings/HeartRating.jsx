@@ -15,8 +15,8 @@ const HeartRating = () => {
             <span key={n} className="relative w-7 h-7" aria-label={`${n}`}>
               <span className="absolute inset-0 text-2xl leading-none" style={{ color: "transparent", WebkitTextStroke: "2px #1f1b16" }}>♥</span>
               <span className="absolute inset-0 overflow-hidden text-2xl leading-none text-[#e07b67]" style={{ width: `${fill}%` }}>♥</span>
-              <button onMouseEnter={() => setHover(n - 0.5)} onClick={() => setVal(n - 0.5)} className="absolute inset-0 left-0 w-1/2" onMouseLeave={() => setHover(0)} />
-              <button onMouseEnter={() => setHover(n)} onClick={() => setVal(n)} className="absolute inset-0 left-1/2 w-1/2" onMouseLeave={() => setHover(0)} />
+              <button aria-label={`${n - 0.5} hearts`} onMouseEnter={() => setHover(n - 0.5)} onClick={() => setVal(n - 0.5)} className="absolute inset-0 left-0 w-1/2" onMouseLeave={() => setHover(0)} />
+              <button aria-label={`${n} hearts`} onMouseEnter={() => setHover(n)} onClick={() => setVal(n)} className="absolute inset-0 left-1/2 w-1/2" onMouseLeave={() => setHover(0)} />
             </span>
           );
         })}

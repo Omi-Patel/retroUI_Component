@@ -10,8 +10,13 @@ const NeonDropdown = () => {
     const onClick = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     };
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
     document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   const options = ["ARCADE", "CRUISE", "BATTLE", "TIME ATTACK"];
@@ -20,6 +25,8 @@ const NeonDropdown = () => {
     <div ref={ref} className="relative font-mono w-56">
       <button
         onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
         className="w-full flex items-center justify-between px-4 py-2 bg-black text-pink-400 border-2 border-pink-400 shadow-[0_0_15px_rgba(244,114,182,0.5)] hover:shadow-[0_0_25px_rgba(244,114,182,0.7)] transition-shadow text-sm font-bold tracking-wider"
       >
         <span className="flex items-center gap-2">
@@ -32,10 +39,15 @@ const NeonDropdown = () => {
       </button>
 
       {open && (
-        <ul className="absolute z-10 mt-2 w-full bg-black border-2 border-pink-400 shadow-[0_0_20px_rgba(244,114,182,0.5)] py-1">
+        <ul
+          role="listbox"
+          className="absolute z-10 mt-2 w-full bg-black border-2 border-pink-400 shadow-[0_0_20px_rgba(244,114,182,0.5)] py-1"
+        >
           {options.map((opt) => (
-            <li key={opt}>
+            <li key={opt} role="none">
               <button
+                role="option"
+                aria-selected={selected === opt}
                 onClick={() => {
                   setSelected(opt);
                   setOpen(false);

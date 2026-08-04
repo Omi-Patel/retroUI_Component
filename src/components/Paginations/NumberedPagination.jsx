@@ -19,7 +19,7 @@ const NumberedPagination = () => {
           {String(page).padStart(2, "0")}
         </span>
         <span className="opacity-50 mx-1">/</span>
-        <span className="font-bold opacity-60" style={{ color: "var(--fg)" }}>
+        <span className="font-bold opacity-60 text-stone-900 dark:text-stone-100">
           {String(total).padStart(2, "0")}
         </span>
       </div>

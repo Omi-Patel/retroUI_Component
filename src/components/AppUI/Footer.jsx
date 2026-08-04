@@ -12,6 +12,7 @@ import { SOCIAL_LINKS } from "../../lib/constants";
 
 const QUICK_LINKS = [
   { name: "About", path: "/about" },
+  { name: "Get Started", path: "/getting-started" },
   { name: "Components", path: "/components" },
   { name: "Pages", path: "/pages" },
   { name: "Release Notes", path: "/release-notes" },

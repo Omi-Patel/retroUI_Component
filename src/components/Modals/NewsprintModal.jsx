@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const NewsprintModal = () => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <div>
@@ -19,6 +26,9 @@ const NewsprintModal = () => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="The Daily Zine — special edition"
             className="relative w-full max-w-md bg-[#f5f1e6] text-black border-4 border-black shadow-[10px_10px_0px_0px_black] p-6 font-mono"
           >
             <div className="text-center border-b-2 border-dashed border-black pb-2 mb-3">
@@ -38,6 +48,7 @@ const NewsprintModal = () => {
             <div className="flex justify-end gap-2 pt-3 border-t-2 border-dashed border-black">
               <button
                 onClick={() => setOpen(false)}
+                autoFocus
                 className="px-3 py-1 text-xs font-bold border-2 border-black hover:bg-black hover:text-white transition-colors"
               >
                 CLOSE

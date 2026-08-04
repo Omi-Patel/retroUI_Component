@@ -46,4 +46,12 @@ export const componentLoaders = {
   sliders: () => import('./sliders').then((m) => m.sliderComponents),
   calendars: () => import('./calendars').then((m) => m.calendarComponents),
   ratings: () => import('./ratings').then((m) => m.ratingComponents),
+  selects: () => import('./selects').then((m) => m.selectComponents),
+  textareas: () => import('./textareas').then((m) => m.textareaComponents),
+  sidebars: () => import('./sidebars').then((m) => m.sidebarComponents),
+  'file-uploads': () => import('./fileUploads').then((m) => m.fileUploadComponents),
+  timelines: () => import('./timelines').then((m) => m.timelineComponents),
+  'empty-states': () => import('./emptyStates').then((m) => m.emptyStateComponents),
+  'media-players': () => import('./mediaPlayers').then((m) => m.mediaPlayerComponents),
+  windows: () => import('./windows').then((m) => m.windowComponents),
 };

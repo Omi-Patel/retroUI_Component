@@ -9,6 +9,7 @@ import { COMPONENT_REGISTRY } from "./registries";
 export const NAV_ITEMS = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
+  { name: "Get Started", href: "/getting-started" },
   { name: "Components", href: "/components" },
   { name: "Icons", href: "/icons" },
   { name: "Pages Example", href: "/pages" },
@@ -18,6 +19,7 @@ export const NAV_ITEMS = [
 export const FOOTER_LINKS = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
+  { name: "Get Started", path: "/getting-started" },
   { name: "Components", path: "/components" },
   { name: "Icons", path: "/icons" },
   { name: "Pages Example", path: "/pages" },

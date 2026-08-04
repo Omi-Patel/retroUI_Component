@@ -26,6 +26,7 @@ const FoldedPaperAccordion = () => {
           >
             <button
               onClick={() => setOpen(isOpen ? -1 : i)}
+              aria-expanded={isOpen}
               className="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-bold uppercase"
             >
               <span>{it.q}</span>

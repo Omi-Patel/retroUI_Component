@@ -15,7 +15,7 @@ const PixelProgress = () => {
 
   return (
     <div className="font-mono w-full max-w-sm">
-      <div className="flex justify-between text-xs font-black uppercase mb-2" style={{ color: "var(--fg)" }}>
+      <div className="flex justify-between text-xs font-black uppercase mb-2 text-stone-900 dark:text-stone-100">
         <span>▣ LEVEL UP</span>
         <span>{pct}%</span>
       </div>

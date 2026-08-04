@@ -12,7 +12,7 @@ const HalftoneProgress = () => {
 
   return (
     <div className="font-mono w-full max-w-sm">
-      <div className="flex justify-between text-xs font-bold uppercase mb-2" style={{ color: "var(--fg)" }}>
+      <div className="flex justify-between text-xs font-bold uppercase mb-2 text-stone-900 dark:text-stone-100">
         <span>Loading</span>
         <span>{pct}%</span>
       </div>

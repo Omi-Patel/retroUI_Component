@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TornPaperModal = () => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <div>
@@ -19,6 +26,9 @@ const TornPaperModal = () => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="You've got mail — handwritten note"
             className="relative w-full max-w-md bg-yellow-100 text-black border-x-4 border-black p-6 font-mono"
             style={{
               clipPath:
@@ -38,6 +48,7 @@ const TornPaperModal = () => {
             <div className="flex justify-end gap-2">
               <button
                 onClick={() => setOpen(false)}
+                autoFocus
                 className="px-4 py-1.5 text-xs font-bold bg-white border-2 border-black hover:bg-black hover:text-white transition-colors"
               >
                 Toss

@@ -1,109 +1,134 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+
+// 8-bit HUD navbar — pixel logo, level-tab links, and a coin counter.
+// Pairs with PixelFooter for a matching arcade shell.
+const LEVELS = [
+  { code: "1-1", label: "Home" },
+  { code: "1-2", label: "About" },
+  { code: "2-1", label: "Games" },
+  { code: "2-2", label: "Contact" },
+];
+
+const PixelCoin = () => (
+  <span aria-hidden="true" className="inline-grid grid-cols-5 gap-[1px]">
+    {[
+      0,1,1,1,0,
+      1,1,0,1,1,
+      1,0,0,0,1,
+      1,1,0,1,1,
+      0,1,1,1,0,
+    ].map((c, i) => (
+      <span key={i} className="w-[3px] h-[3px]" style={{ background: c ? "#facc15" : "transparent" }} />
+    ))}
+  </span>
+);
 
 const PixelNavbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("1-1");
 
   return (
-    <nav className="bg-[#d9f99d] border-b-4 border-black shadow-[6px_6px_0px_0px_black] p-4 font-mono">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <div className="text-3xl font-bold text-black pixel-font hover:text-cyan-900 transition duration-300 ease-out transform hover:scale-110">
-          PixelNav
-        </div>
+    <nav className="bg-[#0f0f23] text-stone-200 font-mono border-b-4 border-[#facc15]">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        {/* Pixel brand */}
+        <a href="#" className="flex items-center gap-2.5">
+          <span aria-hidden="true" className="grid grid-cols-4 gap-[2px]">
+            {[1,1,1,1, 1,0,0,1, 1,0,0,1, 1,1,1,1].map((c, i) => (
+              <span key={i} className="w-2 h-2" style={{ background: c ? "#facc15" : "#2a2a4a" }} />
+            ))}
+          </span>
+          <span className="text-[15px] font-black tracking-[0.3em] text-[#facc15] uppercase">
+            PixelNav
+          </span>
+        </a>
 
-        {/* Menu Links for Desktop */}
-        <ul className="hidden md:flex space-x-6">
-          {["Home", "About", "Services", "Contact"].map((item, idx) => (
-            <li key={idx}>
-              <a
-                href="#"
-                className="relative group text-black hover:text-pink-500 transition-all duration-300"
-              >
-                {item}
-                <span className="absolute left-0 bottom-[-5px] w-full h-[2px] bg-black group-hover:animate-bounce"></span>
-              </a>
-            </li>
-          ))}
+        {/* Level-tab links */}
+        <ul className="hidden md:flex items-center gap-1">
+          {LEVELS.map((lv) => {
+            const isActive = active === lv.code;
+            return (
+              <li key={lv.code}>
+                <a
+                  href="#"
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActive(lv.code);
+                  }}
+                  className={`group inline-flex items-center gap-2 px-3 py-1.5 text-[11px] font-bold tracking-[0.2em] uppercase border-2 transition-colors ${
+                    isActive
+                      ? "bg-[#facc15] text-[#0f0f23] border-[#facc15] shadow-[3px_3px_0_0_#000]"
+                      : "border-transparent text-stone-400 hover:text-[#facc15] hover:border-[#3f3f5e]"
+                  }`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={isActive ? "" : "opacity-0 group-hover:opacity-100 transition-opacity"}
+                  >
+                    ▶
+                  </span>
+                  <span className={isActive ? "" : "text-stone-500 group-hover:text-stone-300"}>
+                    {lv.code}
+                  </span>
+                  {lv.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        {/* Coin counter + mobile toggle */}
+        <div className="flex items-center gap-3">
+          <span className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 bg-[#1a1a35] border-2 border-[#3f3f5e] text-[11px] font-bold tracking-[0.2em] text-[#facc15] uppercase">
+            <PixelCoin />
+            ×99
+          </span>
           <button
-            onClick={toggleMenu}
-            className="text-black hover:text-pink-500 transition-all duration-300 focus:outline-none"
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="md:hidden inline-flex items-center justify-center w-9 h-9 bg-[#1a1a35] text-[#facc15] border-2 border-[#3f3f5e] shadow-[3px_3px_0_0_#000]"
           >
-            {isOpen ? (
-              // Close button when menu is open
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 "
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              // Hamburger menu icon when closed
-              <>
-                <div className="w-6 h-1 bg-black my-1 transition duration-300 ease-in-out transform-gpu origin-center" />
-                <div className="w-7 h-1 bg-black my-1 transition duration-300 ease-in-out transform-gpu origin-center" />
-                <div className="w-5 h-1 bg-black my-1 transition duration-300 ease-in-out transform-gpu origin-center" />
-              </>
-            )}
+            {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Links */}
-      <div
-        className={`fixed top-0 left-0 w-full h-full bg-[#d9f99d] border-t-4 border-black p-8 transform ${
-          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-        } transition-transform duration-500 ease-in-out z-50 hidden`}
-      >
-        <div className="flex justify-end mb-6">
-          <button
-            onClick={toggleMenu}
-            className="text-black hover:text-pink-500 transition-all duration-300 focus:outline-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+      {/* Mobile level select */}
+      {open && (
+        <div className="md:hidden border-t-2 border-[#2a2a4a] px-4 py-3">
+          <p className="text-[9px] tracking-[0.35em] text-stone-500 uppercase mb-2">
+            ★ Select World
+          </p>
+          <ul className="space-y-1">
+            {LEVELS.map((lv) => (
+              <li key={lv.code}>
+                <a
+                  href="#"
+                  className="group flex items-center gap-2.5 px-2 py-2 text-[12px] font-bold tracking-[0.2em] uppercase text-stone-300 hover:text-[#facc15] transition-colors"
+                >
+                  <span aria-hidden="true" className="opacity-0 group-hover:opacity-100 text-[#facc15] transition-opacity">
+                    ▶
+                  </span>
+                  <span className="text-stone-500 group-hover:text-stone-300">{lv.code}</span>
+                  {lv.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-[10px] font-black tracking-[0.25em] text-[#4ade80] uppercase animate-[pixelnav-blink_1.1s_steps(1)_infinite]">
+            ▸ Press Start
+          </p>
         </div>
-        <ul className="space-y-6 text-center">
-          {["Home", "About", "Services", "Contact"].map((item, idx) => (
-            <li key={idx}>
-              <a
-                href="#"
-                className="text-3xl font-bold text-black pixel-font hover:text-pink-500 transition-all duration-300 block"
-              >
-                {item}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      )}
+
+      <style>{`
+        @keyframes pixelnav-blink {
+          0%, 55% { opacity: 1; }
+          56%, 100% { opacity: 0.1; }
+        }
+      `}</style>
     </nav>
   );
 };

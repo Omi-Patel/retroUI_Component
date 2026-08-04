@@ -24,6 +24,8 @@ const SteppedSlider = () => {
         step="1"
         value={step}
         onChange={(e) => setStep(Number(e.target.value))}
+        aria-label="Toast level"
+        aria-valuetext={STOPS[step]}
         className="step-rng"
       />
       <div className="flex justify-between mt-2 px-0.5">

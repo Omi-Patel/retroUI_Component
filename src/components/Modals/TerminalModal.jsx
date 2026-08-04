@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TerminalModal = () => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <div>
@@ -19,6 +26,9 @@ const TerminalModal = () => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="System alert — confirm action to continue"
             className="w-full max-w-md bg-black text-green-400 border-2 border-green-400 font-mono shadow-[0_0_30px_rgba(74,222,128,0.4)]"
           >
             <div className="flex items-center justify-between px-3 py-1.5 border-b border-green-400/40 bg-green-400/10">
@@ -41,6 +51,7 @@ const TerminalModal = () => {
               <div className="mt-5 flex gap-2">
                 <button
                   onClick={() => setOpen(false)}
+                  autoFocus
                   className="px-4 py-1 text-xs font-bold border border-green-400 hover:bg-green-400 hover:text-black transition-colors"
                 >
                   [ABORT]

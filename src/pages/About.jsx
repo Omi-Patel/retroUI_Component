@@ -45,7 +45,7 @@ const QUICKSTART = [
   {
     step: 3,
     label: "Browse the gallery & copy a component",
-    code: "# Open https://retro-component.vercel.app/components\n# Pick a variant, hit \"Copy\"",
+    code: "# Open https://retro-ui.basecase.site/components\n# Pick a variant, hit \"Copy\"",
   },
   {
     step: 4,

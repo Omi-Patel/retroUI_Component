@@ -26,6 +26,7 @@ const VolumeSlider = () => {
         max="100"
         value={vol}
         onChange={(e) => setVol(Number(e.target.value))}
+        aria-label="Volume"
         className="vol-rng"
       />
     </div>

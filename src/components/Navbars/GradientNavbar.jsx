@@ -1,67 +1,98 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
+// Newspaper masthead navbar — edition strip, serif-italic wordmark, and
+// section links with a double-rule active state.
+const SECTIONS = ["Front Page", "Culture", "Classifieds", "Archive"];
+
 const UniqueNavbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("Front Page");
 
   return (
-    <nav className="bg-[#f5f1e6] text-black border-b-4 border-black font-mono">
-      <div className="border-b-2 border-dashed border-black/40 text-[10px] tracking-[0.3em] uppercase">
-        <div className="container mx-auto px-4 py-1 flex items-center justify-between opacity-70">
-          <span>VOL. 27 · NO. 14</span>
-          <span className="hidden sm:inline">★ ESTABLISHED 1997 ★</span>
-          <span>FRIDAY EDITION</span>
+    <nav className="bg-[#f5f1e6] text-stone-900 border-b-4 border-double border-stone-900 font-mono">
+      {/* Edition strip */}
+      <div className="border-b-2 border-dashed border-stone-900/30 text-[9px] tracking-[0.3em] uppercase text-stone-500">
+        <div className="max-w-6xl mx-auto px-4 py-1 flex items-center justify-between">
+          <span>Vol. 27 · No. 14</span>
+          <span className="hidden sm:inline">★ Established 1997 ★</span>
+          <span>Friday Edition · 5¢</span>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <a
-          href="#"
-          className="text-3xl sm:text-4xl font-black uppercase tracking-tighter leading-none"
-        >
-          Unique<span className="italic font-light">Daily</span>
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        {/* Masthead */}
+        <a href="#" className="leading-none">
+          <span className="text-3xl sm:text-4xl font-black uppercase tracking-tighter">
+            Unique
+          </span>
+          <span className="text-3xl sm:text-4xl font-serif italic font-normal tracking-tight">
+            Daily
+          </span>
         </a>
 
+        {/* Section links */}
         <ul className="hidden md:flex items-center gap-1">
-          {["Home", "About", "Services", "Contact"].map((item) => (
-            <li key={item}>
-              <a
-                href="#"
-                className="px-3 py-1.5 text-xs uppercase tracking-widest font-bold hover:bg-yellow-300 transition-colors"
-              >
-                {item}
-              </a>
-            </li>
-          ))}
+          {SECTIONS.map((s) => {
+            const isActive = active === s;
+            return (
+              <li key={s}>
+                <a
+                  href="#"
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActive(s);
+                  }}
+                  className={`inline-block px-3 py-1.5 text-[11px] uppercase tracking-[0.15em] font-bold transition-colors ${
+                    isActive
+                      ? "border-y-2 border-stone-900"
+                      : "hover:bg-yellow-300"
+                  }`}
+                >
+                  {s}
+                </a>
+              </li>
+            );
+          })}
           <li>
             <a
               href="#"
-              className="ml-2 px-3 py-1.5 bg-black text-yellow-300 text-xs uppercase tracking-widest font-bold border-2 border-black hover:bg-yellow-300 hover:text-black transition-colors"
+              className="ml-2 px-3.5 py-1.5 bg-stone-900 text-[#f5f1e6] text-[11px] uppercase tracking-[0.15em] font-black border-2 border-stone-900 hover:bg-yellow-300 hover:text-stone-900 transition-colors"
             >
               Subscribe
             </a>
           </li>
         </ul>
 
+        {/* Mobile toggle */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Menu"
-          className="md:hidden inline-flex items-center justify-center w-9 h-9 bg-yellow-300 text-black border-2 border-black shadow-[3px_3px_0px_0px_black]"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-label={open ? "Close menu" : "Open menu"}
+          className="md:hidden inline-flex items-center justify-center w-9 h-9 bg-yellow-300 text-stone-900 border-2 border-stone-900 shadow-[3px_3px_0_0_#1c1814]"
         >
-          {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+          {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
         </button>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden border-t-2 border-dashed border-black/40 bg-[#f5f1e6]">
-          <ul className="px-4 py-3 space-y-1">
-            {["Home", "About", "Services", "Contact", "Subscribe"].map((item) => (
-              <li key={item}>
+      {/* Mobile index */}
+      {open && (
+        <div className="md:hidden border-t-2 border-dashed border-stone-900/30 px-4 py-3">
+          <p className="text-[9px] tracking-[0.35em] uppercase text-stone-500 mb-2">
+            In this edition
+          </p>
+          <ul className="space-y-0.5">
+            {[...SECTIONS, "Subscribe"].map((s) => (
+              <li key={s}>
                 <a
                   href="#"
-                  className="block px-3 py-2 text-sm uppercase tracking-widest font-bold hover:bg-yellow-300"
+                  className="group flex items-baseline gap-2 px-2 py-2 text-[12px] uppercase tracking-[0.15em] font-bold hover:bg-yellow-300 transition-colors"
                 >
-                  {item}
+                  <span aria-hidden="true" className="text-stone-400 group-hover:text-stone-900">
+                    ☞
+                  </span>
+                  {s}
                 </a>
               </li>
             ))}

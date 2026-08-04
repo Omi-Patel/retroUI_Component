@@ -49,7 +49,19 @@ import {
   SlidersHorizontal,
   CalendarDays,
   Star,
+  ChevronsUpDown,
+  AlignLeft,
+  PanelLeftOpen,
+  Upload,
+  History,
+  Inbox,
+  Music,
+  AppWindow,
 } from "lucide-react";
+
+/** Registries are always displayed A→Z — the sort below enforces it, so new
+ *  entries can be appended anywhere in the array. */
+const byName = (a, b) => a.name.localeCompare(b.name);
 
 /**
  * Master registry of all component categories shown in the docs-style sidebar
@@ -63,14 +75,14 @@ export const COMPONENT_REGISTRY = [
   { name: "Card", path: "cards", folder: "Cards", Icon: LayoutGrid, count: 5, category: "Layout", description: "Containers for organizing content" },
   { name: "Input", path: "inputs", folder: "Inputs", Icon: Type, count: 5, category: "Form", description: "Fields for user data entry" },
   { name: "Avatar", path: "avatars", folder: "Avatars", Icon: User, count: 5, category: "Display", description: "User profile representations" },
-  { name: "Sign in", path: "signin", folder: "SignIn", Icon: LogIn, count: 1, category: "Auth", description: "Authentication entry points" },
+  { name: "Sign in", path: "signin", folder: "SignIn", Icon: LogIn, count: 4, category: "Auth", description: "Authentication entry points" },
   { name: "Sign up", path: "signup", folder: "Signup", Icon: UserPlus, count: 5, category: "Auth", description: "User registration interfaces" },
   { name: "Loader", path: "loaders", folder: "Loaders", Icon: Loader, count: 6, category: "Feedback", description: "Loading state indicators" },
-  { name: "Navbar", path: "navbars", folder: "Navbars", Icon: PanelLeft, count: 5, category: "Navigation", description: "Site navigation headers" },
-  { name: "Footer", path: "footers", folder: "Footers", Icon: Layers, count: 6, category: "Layout", description: "Page footer sections" },
+  { name: "Navbar", path: "navbars", folder: "Navbars", Icon: PanelLeft, count: 5, category: "Navigation", description: "Site navigation headers", fullWidth: true },
+  { name: "Footer", path: "footers", folder: "Footers", Icon: Layers, count: 6, category: "Layout", description: "Page footer sections", fullWidth: true },
   { name: "Switch", path: "switch", folder: "Switch", Icon: ToggleRight, count: 5, category: "Form", description: "Toggle controls for binary options" },
   { name: "Table", path: "tables", folder: "Tables", Icon: TableIcon, count: 5, category: "Data", description: "Structured data displays" },
-  { name: "Pricing", path: "pricing", folder: "Pricing", Icon: Tag, count: 3, category: "Display", description: "Product pricing displays" },
+  { name: "Pricing", path: "pricing", folder: "Pricing", Icon: Tag, count: 4, category: "Display", description: "Product pricing displays" },
   { name: "Modal", path: "modals", folder: "Modals", Icon: MessageSquare, count: 4, category: "Overlay", description: "Dialogs and modal windows" },
   { name: "Toast", path: "toasts", folder: "Toasts", Icon: Bell, count: 4, category: "Feedback", description: "Transient notification messages" },
   { name: "Dropdown", path: "dropdowns", folder: "Dropdowns", Icon: ChevronsDown, count: 4, category: "Form", description: "Menus and option selectors" },
@@ -86,7 +98,7 @@ export const COMPONENT_REGISTRY = [
   { name: "Polaroid", path: "polaroids", folder: "Polaroids", Icon: Camera, count: 4, category: "Display", description: "Instant-camera photo cards and galleries" },
   { name: "Sticky Note", path: "sticky-notes", folder: "StickyNotes", Icon: StickyNote, count: 4, category: "Display", description: "Post-its, index cards, and pinned notes" },
   { name: "Receipt", path: "receipts", folder: "Receipts", Icon: Receipt, count: 4, category: "Display", description: "Dot-matrix slips for carts and orders" },
-  { name: "Ticker", path: "tickers", folder: "Tickers", Icon: Newspaper, count: 3, category: "Feedback", description: "Scrolling marquee announcement bars" },
+  { name: "Ticker", path: "tickers", folder: "Tickers", Icon: Newspaper, count: 4, category: "Feedback", description: "Scrolling marquee announcement bars" },
   { name: "Chart", path: "charts", folder: "Charts", Icon: LineChart, count: 4, category: "Data", description: "Newsprint bar, line, pie, and area charts" },
   { name: "Stat", path: "stats", folder: "Stats", Icon: Gauge, count: 4, category: "Data", description: "KPI tiles, trend sparklines, gauges, and leaderboards" },
   { name: "Chat", path: "chat", folder: "Chat", Icon: Bot, count: 4, category: "App", description: "Teletype, terminal, messenger, and newsprint chat UIs" },
@@ -96,7 +108,15 @@ export const COMPONENT_REGISTRY = [
   { name: "Slider", path: "sliders", folder: "Sliders", Icon: SlidersHorizontal, count: 5, category: "Form", description: "Volume sliders, steppers, dual ranges, and console faders" },
   { name: "Calendar", path: "calendars", folder: "Calendars", Icon: CalendarDays, count: 5, category: "Form", description: "Tear-off, desk, and date-picker calendars" },
   { name: "Rating", path: "ratings", folder: "Ratings", Icon: Star, count: 5, category: "Form", description: "Star, stamp, heart, emoji, and number rating controls" },
-];
+  { name: "Select", path: "selects", folder: "Selects", Icon: ChevronsUpDown, count: 4, category: "Form", description: "Dropdown selects, comboboxes, and multi-selects" },
+  { name: "Textarea", path: "textareas", folder: "Textareas", Icon: AlignLeft, count: 4, category: "Form", description: "Ruled paper, telegram, sticky-note, and terminal text areas" },
+  { name: "Sidebar", path: "sidebars", folder: "Sidebars", Icon: PanelLeftOpen, count: 4, category: "Navigation", description: "Dashboard sidebars, drawers, and tree navigation" },
+  { name: "File Upload", path: "file-uploads", folder: "FileUploads", Icon: Upload, count: 4, category: "Form", description: "Floppy dropzones, scanners, mail slots, and polaroid previews" },
+  { name: "Timeline", path: "timelines", folder: "Timelines", Icon: History, count: 4, category: "Display", description: "Edition histories, ticket stubs, commit logs, and package tracking" },
+  { name: "Empty State", path: "empty-states", folder: "EmptyStates", Icon: Inbox, count: 4, category: "Feedback", description: "No-signal TVs, empty drawers, and zero-result placeholders" },
+  { name: "Media Player", path: "media-players", folder: "MediaPlayers", Icon: Music, count: 4, category: "App", description: "Cassette decks, boomboxes, radio tuners, and walkmans" },
+  { name: "Window", path: "windows", folder: "Windows", Icon: AppWindow, count: 4, category: "Layout", description: "Retro OS windows, terminals, 90s browsers, and system dialogs" },
+].sort(byName);
 
 /**
  * Master registry of all page templates shown in the pages sidebar.
@@ -116,4 +136,4 @@ export const PAGE_REGISTRY = [
   { name: "Settings", path: "settings", Icon: SettingsIcon, count: 1, category: "App", desc: "User settings page with sidebar sections." },
   { name: "Documentation", path: "docs", Icon: BookOpen, count: 1, category: "Content", desc: "Documentation template with TOC and changelog." },
   { name: "Zine", path: "zine", Icon: BookText, count: 1, category: "Editorial", desc: "Magazine-spread landing page built from the Zine Spread Pack." },
-];
+].sort(byName);

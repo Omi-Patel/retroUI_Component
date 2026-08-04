@@ -11,7 +11,80 @@ changelog viewers, etc.) that consume it directly.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-08-03
+
+The Builder Pack — eight new categories that close the everyday gaps, plus two
+showpieces.
+
 ### Added
+- **Select** (`/components/selects`) — `NewsprintSelect`, `TerminalCombobox`
+  (type-to-filter), `TagMultiSelect` (sticker chips), `ChannelDialSelect`
+  (TV dial).
+- **Textarea** (`/components/textareas`) — `TypewriterTextarea` (ruled paper),
+  `TelegramTextarea` (priced by the word), `StickyNoteTextarea`,
+  `TerminalTextarea`.
+- **Sidebar** (`/components/sidebars`) — `FileDrawerSidebar`, `SlideOutDrawer`
+  (accessible overlay drawer), `BinderTabSidebar`, `TerminalTreeSidebar`.
+- **File Upload** (`/components/file-uploads`) — `FloppyDropzone` (drag & drop),
+  `ScannerUpload` (animated scan progress), `MailSlotUpload`, `PolaroidUpload`
+  (image previews).
+- **Timeline** (`/components/timelines`) — `NewspaperTimeline`,
+  `TicketStubTimeline`, `TerminalLogTimeline`, `PackageTrackingTimeline`.
+- **Empty State** (`/components/empty-states`) — `EmptyDrawerState`,
+  `StaticTVEmptyState` (animated no-signal static), `EmptyMailboxState`,
+  `NoResultsClassified`.
+- **Media Player** (`/components/media-players`) — `CassetteDeckPlayer`
+  (spinning spools), `BoomboxPlayer` (animated EQ), `RadioTunerPlayer` (moving
+  dial needle), `WalkmanPlayer`.
+- **Window** (`/components/windows`) — `RetroOSWindow`, `TerminalWindow`,
+  `BrowserWindow95`, `AlertDialog98` (accessible system alert).
+
+### Changed
+- **Card refresh** — `ProfileCard` is now a laminated club membership ID
+  (photo tile, stats row, barcode), `ServiceCard` a classified flyer with
+  tear-off phone tabs (one already taken), and `TestimonialCard` a
+  letters-to-the-editor column entry (drop cap, inked stars, handwritten
+  signature, VERIFIED BUYER stamp). `ProfileCard` no longer hotlinks an
+  external placeholder image.
+- **Navbar overhaul** — `RetroNavbar` is now a zine-shop sticker bar
+  (label-tape brand, sticker links, cart stub), `RetroNavbar1` a cinema box
+  office (chasing marquee bulbs, ticket-stub links), `NeonNavbar` an arcade
+  neon marquee (flickering tube brand, glow-underline links, OPEN lamp),
+  `PixelNavbar` an 8-bit HUD that pairs with `PixelFooter` (pixel logo,
+  level-tab links, coin counter), and the newsprint masthead
+  (`GradientNavbar`) gained a serif wordmark, double-rule active state, and
+  edition-strip polish. All five now have working, accessible mobile menus —
+  two previously shipped drawers that could never open.
+- **Footer overhaul** — five variants redesigned around strong retro concepts:
+  `BorderedFooter` (airmail envelope: par-avion stripes, perforated stamp,
+  postmark), `ShadowFooter` (VHS end-credits: scanlines, tracking bar,
+  color-bar sign-off), `ClassicFooter` (newspaper back page: column rules,
+  clip-out subscription coupon), `NeonFooter` (flickering neon diner sign),
+  `PixelFooter` (arcade game-over: score bar, level-select links, pixel
+  hearts).
+
+### Fixed
+- The Getting Started link is now actually reachable — it was registered in
+  unused constants instead of the navbar, footer, and command palette lists
+  that render the real navigation.
+- Ticker marquees no longer collapse and wrap word-by-word inside the preview —
+  the track now keeps its natural width (`w-max` + `nowrap`) in all four
+  ticker variants.
+- `PixelFooter` referenced a non-existent `font-pixel` class; footers now use
+  real Tailwind font stacks.
+- Full-width components (navbars, footers) now span the entire preview — and
+  the entire device frame in fullscreen — instead of shrink-wrapping to their
+  content width.
+
+## [0.5.0] - 2026-08-03
+
+Copy-paste you can trust — a Getting Started guide, fully self-contained
+component code, an accessibility pass, and the Data & App Pack.
+
+### Added
+- **Getting Started** (`/getting-started`) — a five-minute setup guide covering
+  the Tailwind config, the three fonts, dark mode, the optional design tokens,
+  and a troubleshooting section. Linked from the navbar and footer.
 - **Data & App Pack** — four new component categories:
   - `Chart` (`/components/charts`) — `NewsprintBarChart`, `ASCIILineChart`,
     `HalftonePieChart`, `LedgerAreaChart`. Hand-rolled SVG/CSS, no chart library.
@@ -21,6 +94,28 @@ changelog viewers, etc.) that consume it directly.
     `MessengerChat`, `NewsprintChat`. Retro chat / AI conversation UIs.
   - `Stepper` (`/components/steppers`) — `WizardStepper`, `ReceiptCheckout`,
     `StampedForm`, `DOSSetup`. Multi-step form / wizard flows.
+- **Sign in** grew from 1 to 4 variants — `TerminalSignIn` (green-phosphor
+  shell login), `ArcadeSignIn` (insert-coin cabinet), `LibraryCardSignIn`
+  (manila checkout card).
+- `NewsprintPricing` — a classified-ads style three-tier pricing table.
+- `DepartureBoardTicker` — a split-flap station departure board marquee.
+
+### Changed
+- **Every copyable component is now fully self-contained.** Dependencies on
+  site-global CSS (design-token variables and helper classes like
+  `marquee-track`, `ornament-hr`, `retro-link`, `mono`) were replaced with
+  inline Tailwind, so pasted code renders correctly in any Tailwind project.
+  This includes the Dashboard page template, which previously relied on ~130
+  CSS variables.
+- **Accessibility pass** across interactive components: modals close on Escape
+  and ship dialog roles with initial focus; dropdowns close on Escape and
+  expose listbox semantics; tabs support arrow-key navigation with proper
+  tablist roles and roving tabindex; accordions announce their expanded state;
+  sliders and ratings gained accessible labels.
+
+### Fixed
+- The About page quickstart linked to the old deployment URL instead of
+  retro-ui.basecase.site.
 
 ## [0.4.0] - 2026-06-08
 
