@@ -233,10 +233,10 @@ export default function PagesIndex() {
   return (
     <div>
       {/* Header */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+      <section className="page-intro">
+        <div className="site-container">
           <div
-            className="flex items-center gap-2 text-[12px] mono mb-4"
+            className="page-breadcrumb"
             style={{ color: "var(--muted)" }}
           >
             <Link to="/" className="hover:!text-[var(--fg)] transition-colors">
@@ -246,30 +246,29 @@ export default function PagesIndex() {
             <span style={{ color: "var(--fg)" }}>Pages</span>
           </div>
           <h1
-            className="display text-[44px] sm:text-[64px] leading-[1.0]"
-            style={{ color: "var(--fg)", letterSpacing: "-0.035em" }}
+            className="page-title"
           >
-            <span className="display-italic" style={{ color: "var(--muted)" }}>
-              Page
-            </span>{" "}
-            templates
+            Page templates{" "}
+            <span className="display-italic" style={{ color: "var(--accent)" }}>
+              ready to reshape.
+            </span>
           </h1>
           <p
-            className="mt-4 text-[15.5px] max-w-2xl leading-relaxed"
+            className="page-lede"
             style={{ color: "var(--muted)" }}
           >
             Pre-composed page layouts you can fork in minutes. Each template uses
             the retroui component library and ships in light + dark mode.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3 items-center">
-            <div className="relative flex-1 min-w-[260px] max-w-md">
+          <div className="page-controls">
+            <div className="relative w-full max-w-lg">
               <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search pages…"
-                className="w-full h-10 pl-9 pr-3 rounded-md text-[13.5px] outline-none"
+                className="site-input pl-9 pr-3"
                 style={{
                   background: "var(--bg)",
                   border: "1px solid var(--border)",
@@ -291,21 +290,17 @@ export default function PagesIndex() {
       </section>
 
       {/* Filter chips */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-1.5 overflow-x-auto nice-scroll">
+      <section className="filter-strip">
+        <div className="site-container filter-strip-inner">
+          <div className="flex items-center gap-1 overflow-x-auto nice-scroll">
             {CATEGORIES.map((c) => {
               const active = c === cat;
               return (
                 <button
                   key={c}
                   onClick={() => setCat(c)}
-                  className="px-3 h-8 rounded-md text-[13px] font-medium whitespace-nowrap transition-colors"
-                  style={{
-                    background: active ? "var(--fg)" : "transparent",
-                    color: active ? "var(--bg)" : "var(--muted)",
-                    border: "1px solid var(--border)",
-                  }}
+                  className="filter-chip"
+                  data-active={active}
                 >
                   {c}
                 </button>
@@ -316,27 +311,17 @@ export default function PagesIndex() {
       </section>
 
       {/* Grid */}
-      <section>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section className="site-section-compact">
+        <div className="site-container">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((p) => (
               <Link
                 key={p.path}
                 to={`/pages/${p.path}`}
-                className="group text-left rounded-lg overflow-hidden transition-colors block"
-                style={{
-                  background: "var(--bg)",
-                  border: "1px solid var(--border)",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "var(--surface)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = "var(--bg)")
-                }
+                className="catalog-card group text-left"
               >
                 <div
-                  className="aspect-[16/10] relative overflow-hidden"
+                  className="catalog-preview aspect-[16/10] relative overflow-hidden"
                   style={{
                     background: "var(--surface)",
                     borderBottom: "1px solid var(--border)",

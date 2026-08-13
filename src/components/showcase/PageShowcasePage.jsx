@@ -63,7 +63,7 @@ export const PageShowcasePage = ({ slug, title, description, variants }) => {
 
       {/* Browser-frame preview */}
       <div
-        className="rounded-lg overflow-hidden"
+        className="site-card overflow-hidden"
         style={{
           background: "var(--bg)",
           border: "1px solid var(--border)",
@@ -138,7 +138,7 @@ export const PageShowcasePage = ({ slug, title, description, variants }) => {
           }}
         >
           {ActivePage ? (
-            <div className="origin-top">
+            <div className="component-sandbox origin-top">
               <ActivePage />
             </div>
           ) : (
@@ -207,7 +207,7 @@ export const PageShowcasePage = ({ slug, title, description, variants }) => {
         title={`${title} · ${variants[active]?.label || variants[active]?.name}`}
         subtitle={`retroui.dev/templates/${slug}`}
       >
-        {ActivePage && <ActivePage />}
+        {ActivePage && <div className="component-sandbox min-h-full"><ActivePage /></div>}
       </DevicePreviewDialog>
     </div>
   );

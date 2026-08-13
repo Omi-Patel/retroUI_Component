@@ -1,66 +1,53 @@
 import PropTypes from "prop-types";
 import { Link } from "@tanstack/react-router";
-import { SITE_META } from "../../lib/constants";
 
 const SIZES = {
-  small: 26,
-  default: 30,
-  large: 36,
+  small: 28,
+  default: 32,
+  large: 38,
 };
 
 export default function Logo({ size = "default" }) {
   const px = SIZES[size] || SIZES.default;
 
   return (
-    <Link to="/" className="inline-flex items-center gap-2.5 group">
+    <Link to="/" className="group inline-flex shrink-0 items-center gap-2.5" aria-label="retroUI home">
       <span
-        className="inline-flex items-center justify-center relative"
+        className="relative inline-flex items-center justify-center rounded-[10px] transition-transform group-hover:-rotate-2"
         style={{
           width: px,
           height: px,
           background: "var(--fg)",
           color: "var(--bg)",
-          fontFamily: "'JetBrains Mono', monospace",
-          fontWeight: 700,
-          fontSize: Math.round(px * 0.48),
-          letterSpacing: "-0.04em",
-          borderRadius: 6,
-          boxShadow: "2px 2px 0 0 var(--border-strong)",
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: Math.round(px * 0.42),
+          fontWeight: 600,
+          letterSpacing: "-0.06em",
         }}
       >
-        <span style={{ transform: "translateY(-1px)" }}>R</span>
+        R
         <span
-          aria-hidden
+          aria-hidden="true"
+          className="absolute rounded-full"
           style={{
-            position: "absolute",
-            top: 2,
-            right: 3,
-            width: 4,
-            height: 4,
-            borderRadius: 1,
-            background: "var(--bg)",
-            opacity: 0.6,
+            width: Math.max(5, Math.round(px * 0.18)),
+            height: Math.max(5, Math.round(px * 0.18)),
+            right: -2,
+            top: -2,
+            background: "var(--accent)",
+            border: "2px solid var(--bg)",
           }}
         />
       </span>
-      <span className="flex flex-col leading-none">
+      <span className="flex items-baseline gap-1 leading-none">
         <span
-          className="font-semibold tracking-tight text-[16px]"
-          style={{ color: "var(--fg)", letterSpacing: "-0.02em" }}
+          className="text-[16px] font-bold tracking-[-0.04em]"
+          style={{ color: "var(--fg)" }}
         >
-          retroui
-          <span
-            className="display-italic ml-0.5"
-            style={{ color: "var(--muted)", fontSize: "14px" }}
-          >
-            ™
-          </span>
+          retroUI
         </span>
-        <span
-          className="label mt-0.5"
-          style={{ color: "var(--muted)", fontSize: 9 }}
-        >
-          EST. 2024 · {SITE_META.version}
+        <span className="hidden text-[10px] font-medium sm:inline" style={{ color: "var(--muted)" }}>
+          kit
         </span>
       </span>
     </Link>

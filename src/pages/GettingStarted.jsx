@@ -92,7 +92,7 @@ function CodeBlock({ label, language, code }) {
   const [copied, copy] = useCopyToClipboard();
   return (
     <div
-      className="rounded-lg overflow-hidden"
+      className="site-card-flat overflow-hidden"
       style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
     >
       <div
@@ -143,7 +143,7 @@ function Step({ num, Icon, title, children }) {
       <div className="flex flex-col items-center">
         <span
           className="inline-flex h-8 w-8 items-center justify-center rounded-md mono text-[12px] font-semibold shrink-0"
-          style={{ background: "var(--fg)", color: "var(--bg)" }}
+          style={{ background: "var(--accent)", color: "var(--accent-fg)" }}
         >
           {num}
         </span>
@@ -215,10 +215,10 @@ export default function GettingStarted() {
   return (
     <div>
       {/* HEADER */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+      <section className="page-intro">
+        <div className="site-container">
           <div
-            className="flex items-center gap-2 text-[12px] mono mb-4"
+            className="page-breadcrumb"
             style={{ color: "var(--muted)" }}
           >
             <Link to="/" className="hover:!text-[var(--fg)] transition-colors">
@@ -228,16 +228,15 @@ export default function GettingStarted() {
             <span style={{ color: "var(--fg)" }}>Getting Started</span>
           </div>
           <h1
-            className="display text-[44px] sm:text-[68px] leading-[1.0]"
-            style={{ color: "var(--fg)", letterSpacing: "-0.035em" }}
+            className="page-title"
           >
             Zero to retro in{" "}
-            <span className="display-italic" style={{ color: "var(--muted)" }}>
+            <span className="display-italic" style={{ color: "var(--accent)" }}>
               five minutes.
             </span>
           </h1>
           <p
-            className="mt-6 text-[16.5px] leading-relaxed max-w-2xl"
+            className="page-lede"
             style={{ color: "var(--muted)" }}
           >
             RetroUI is copy-paste first: there's no package to install and
@@ -250,7 +249,7 @@ export default function GettingStarted() {
 
       {/* STEPS */}
       <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20">
+        <div className="site-container site-section-compact">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4">
               <SectionHeading
@@ -331,7 +330,7 @@ export default function GettingStarted() {
 
               {/* Final CTA row (outside numbered steps) */}
               <div
-                className="rounded-lg p-6 flex flex-wrap items-center justify-between gap-4"
+                className="site-card-flat flex flex-wrap items-center justify-between gap-4 p-6"
                 style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
               >
                 <div>
@@ -349,16 +348,14 @@ export default function GettingStarted() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     to="/components"
-                    className="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md text-[13.5px] font-medium transition-opacity hover:opacity-90"
-                    style={{ background: "var(--accent)", color: "var(--accent-fg)" }}
+                    className="site-button-primary"
                   >
                     Browse components
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                   <Link
                     to="/pages"
-                    className="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md text-[13.5px] font-medium transition-colors hover:bg-[var(--surface-2)]"
-                    style={{ border: "1px solid var(--border)", color: "var(--fg)" }}
+                    className="site-button-secondary"
                   >
                     Page templates
                   </Link>
@@ -371,7 +368,7 @@ export default function GettingStarted() {
 
       {/* TROUBLESHOOTING */}
       <section>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20">
+        <div className="site-container site-section-compact">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4">
               <SectionHeading
@@ -382,7 +379,7 @@ export default function GettingStarted() {
             </div>
             <div className="lg:col-span-8">
               <div
-                className="rounded-lg overflow-hidden"
+                className="site-card-flat overflow-hidden"
                 style={{ border: "1px solid var(--border)" }}
               >
                 {TROUBLESHOOTING.map(([q, a], i) => (

@@ -61,14 +61,14 @@ function ReleaseEntry({ release, isLatest }) {
 
   return (
     <article
-      className="relative pl-6 sm:pl-10 pb-12 border-l-2"
+      className="relative border-l pb-14 pl-7 sm:pl-10"
       style={{ borderColor: "var(--border)" }}
     >
       <div
-        className="absolute -left-[9px] top-1 w-4 h-4 rounded-full"
+        className="absolute -left-[6px] top-1 h-3 w-3 rounded-full"
         style={{
           background: isLatest ? "var(--accent)" : "var(--surface)",
-          border: "2px solid var(--border-strong)",
+          border: "2px solid var(--bg)",
         }}
         aria-hidden="true"
       />
@@ -155,26 +155,20 @@ export default function ReleaseNotes() {
   });
 
   return (
-    <section className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-      <div className="max-w-[900px]">
+    <section className="site-container site-section-compact">
+      <div className="max-w-[860px]">
         <div className="ornament-hr mb-6 max-w-xs">
           <span className="label">CHANGELOG · {releases.length} RELEASES</span>
         </div>
 
         <header className="mb-10">
-          <h1
-            className="display"
-            style={{ fontSize: "56px", lineHeight: 1.05, color: "var(--fg)" }}
-          >
+          <h1 className="page-title">
             Release{" "}
             <span className="display-italic" style={{ color: "var(--muted)" }}>
               notes.
             </span>
           </h1>
-          <p
-            className="mt-4 text-[16px] leading-relaxed"
-            style={{ color: "var(--muted)", maxWidth: "60ch" }}
-          >
+          <p className="page-lede">
             Everything that has shipped in retroUI, newest first. The source of
             truth is{" "}
             <code className="mono" style={{ fontSize: 13 }}>

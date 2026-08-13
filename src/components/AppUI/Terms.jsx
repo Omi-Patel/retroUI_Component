@@ -37,10 +37,10 @@ export default function Terms() {
 
   return (
     <div>
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-12">
+      <section className="page-intro">
+        <div className="site-container">
           <div
-            className="flex items-center gap-2 text-[12px] mono mb-3"
+            className="page-breadcrumb"
             style={{ color: "var(--muted)" }}
           >
             <Link to="/" className="hover:!text-[var(--fg)] transition-colors">
@@ -50,7 +50,7 @@ export default function Terms() {
             <span style={{ color: "var(--fg)" }}>Terms &amp; Conditions</span>
           </div>
           <h1
-            className="display text-[40px] sm:text-[48px] tracking-tight leading-[1.0]"
+            className="page-title"
             style={{ color: "var(--fg)" }}
           >
             Terms{" "}
@@ -68,8 +68,8 @@ export default function Terms() {
       </section>
 
       <section>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-14">
-          <div className="space-y-8 max-w-[800px]">
+        <div className="site-container-narrow site-section-compact">
+          <div className="space-y-10">
             {SECTIONS.map(([h, body]) => (
               <div key={h}>
                 <h2

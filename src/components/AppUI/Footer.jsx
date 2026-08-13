@@ -1,158 +1,134 @@
 import { Link } from "@tanstack/react-router";
-import {
-  Github,
-  Twitter,
-  Instagram,
-  Linkedin,
-  ArrowUpRight,
-  Heart,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Twitter } from "lucide-react";
 import Logo from "./Logo";
 import { SOCIAL_LINKS } from "../../lib/constants";
 
-const QUICK_LINKS = [
-  { name: "About", path: "/about" },
-  { name: "Get Started", path: "/getting-started" },
-  { name: "Components", path: "/components" },
-  { name: "Pages", path: "/pages" },
-  { name: "Release Notes", path: "/release-notes" },
-  { name: "Privacy", path: "/privacy-policy" },
-  { name: "Terms", path: "/terms-conditions" },
-  { name: "Contact", path: "/contact-us" },
+const GROUPS = [
+  {
+    title: "Explore",
+    links: [
+      ["Components", "/components"],
+      ["Page templates", "/pages"],
+      ["Icons", "/icons"],
+      ["Release notes", "/release-notes"],
+    ],
+  },
+  {
+    title: "Learn",
+    links: [
+      ["Get started", "/getting-started"],
+      ["About", "/about"],
+      ["Contact", "/contact-us"],
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      ["Privacy", "/privacy-policy"],
+      ["Terms", "/terms-conditions"],
+    ],
+  },
+];
+
+const SOCIALS = [
+  ["GitHub", SOCIAL_LINKS.github, Github],
+  ["X / Twitter", SOCIAL_LINKS.twitter, Twitter],
+  ["Instagram", SOCIAL_LINKS.instagram, Instagram],
+  ["LinkedIn", SOCIAL_LINKS.linkedin, Linkedin],
 ];
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      style={{
-        borderTop: "1px solid var(--border)",
-        background: "var(--surface)",
-      }}
-    >
-      {/* Top ornament */}
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 pt-14">
-        <div className="ornament-hr">
-          <span className="label">★ ★ ★ ESTABLISHED MMXXIV ★ ★ ★</span>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div className="md:col-span-5 space-y-4">
-            <Logo />
-            <p
-              className="text-[13.5px] leading-relaxed max-w-xs"
-              style={{ color: "var(--muted)" }}
+    <footer className="border-t" style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
+      <div className="site-container">
+        <div className="grid gap-8 py-14 lg:grid-cols-[1.25fr_.75fr] lg:items-center lg:py-16">
+          <div>
+            <span className="section-kicker">Open-source craft</span>
+            <h2
+              className="display max-w-2xl text-[32px] leading-[1.08] sm:text-[42px]"
+              style={{ color: "var(--fg)" }}
             >
-              A retro-themed component library for modern React apps.
-              <br />
-              <span className="display-italic">Copy, paste, ship.</span>
+              Give the next interface a little more character.
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            <Link to="/components" className="site-button-primary">
+              Browse the library <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="site-button-secondary">
+              <Github className="h-3.5 w-3.5" /> View source
+            </a>
+          </div>
+        </div>
+
+        <div className="grid gap-10 border-t py-12 md:grid-cols-12" style={{ borderColor: "var(--border)" }}>
+          <div className="md:col-span-5">
+            <Logo />
+            <p className="mt-5 max-w-sm text-[13.5px] leading-7" style={{ color: "var(--muted)" }}>
+              A practical archive of expressive React components—made to be copied, understood, and shaped into your own.
             </p>
-            <div className="flex items-center gap-1">
-              {[
-                { href: SOCIAL_LINKS.github, Icon: Github, label: "GitHub" },
-                { href: SOCIAL_LINKS.twitter, Icon: Twitter, label: "Twitter" },
-                { href: SOCIAL_LINKS.instagram, Icon: Instagram, label: "Instagram" },
-                { href: SOCIAL_LINKS.linkedin, Icon: Linkedin, label: "LinkedIn" },
-              ].map(({ href, Icon, label }) => (
+            <div className="mt-5 flex items-center gap-1">
+              {SOCIALS.map(([label, href, Icon]) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-md hover:bg-[var(--surface-2)] hover:!text-[var(--fg)] transition-colors"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-[var(--surface-2)]"
                   style={{ color: "var(--muted)" }}
                 >
-                  <Icon className="w-[15px] h-[15px]" />
+                  <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
           </div>
 
-          <div className="md:col-span-7 space-y-4">
-            <h4
-              className="label flex items-center gap-1.5"
-              style={{ color: "var(--fg)" }}
-            >
-              <span style={{ color: "var(--muted)" }}>01</span>
-              <span>Quick Links</span>
-            </h4>
-            <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2.5">
-              {QUICK_LINKS.map((l) => (
-                <li key={l.name}>
-                  <Link
-                    to={l.path}
-                    className="text-[13.5px] inline-flex items-center gap-1.5 transition-colors hover:!text-[var(--fg)] group"
-                    style={{ color: "var(--muted)" }}
-                  >
-                    <ArrowUpRight className="w-[11px] h-[11px] opacity-40 group-hover:opacity-100 transition-opacity" />
-                    {l.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7">
+            {GROUPS.map((group) => (
+              <div key={group.title}>
+                <h3 className="label mb-4" style={{ color: "var(--muted)" }}>
+                  {group.title}
+                </h3>
+                <ul className="space-y-3">
+                  {group.links.map(([label, path]) => (
+                    <li key={path}>
+                      <Link
+                        to={path}
+                        className="group inline-flex items-center gap-1.5 text-[13.5px] font-medium transition-colors hover:!text-[var(--accent)]"
+                        style={{ color: "var(--fg)" }}
+                      >
+                        {label}
+                        <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
         <div
-          className="mt-14 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
-          style={{ borderTop: "1px dashed var(--border-strong)" }}
+          className="flex flex-col gap-2 border-t py-6 text-[11px] sm:flex-row sm:items-center sm:justify-between"
+          style={{ borderColor: "var(--border)", color: "var(--muted)" }}
         >
-          <p
-            className="text-[12px] mono"
-            style={{ color: "var(--muted)" }}
-          >
-            © MMXXIV–{year} · retroui™ · all rights reserved
-          </p>
-          <p
-            className="text-[12px] inline-flex items-center gap-1.5 mono"
-            style={{ color: "var(--muted)" }}
-          >
-            <span>BUILT WITH</span>
-            <Heart
-              className="w-3 h-3"
-              fill="currentColor"
-              style={{ color: "var(--sticker)" }}
-            />
-            <span>BY</span>
+          <p className="mono">© 2024–{year} retroUI. MIT licensed.</p>
+          <p>
+            Designed and maintained by{" "}
             <a
               href={SOCIAL_LINKS.twitter}
               target="_blank"
               rel="noreferrer"
-              className="hover:!text-[var(--fg)] transition-colors underline-offset-4 hover:underline"
+              className="font-semibold hover:underline"
               style={{ color: "var(--fg)" }}
             >
-              OM PATEL
+              Om Patel
             </a>
+            .
           </p>
-        </div>
-      </div>
-
-      {/* Giant wordmark flourish */}
-      <div
-        className="overflow-hidden"
-        style={{ borderTop: "1px solid var(--border)" }}
-      >
-        <div
-          className="display select-none text-center leading-[0.85] py-6 sm:py-10"
-          style={{
-            fontSize: "clamp(80px, 16vw, 220px)",
-            fontWeight: 700,
-            color: "transparent",
-            WebkitTextStroke: "1px var(--border-strong)",
-            letterSpacing: "-0.04em",
-          }}
-        >
-          retroui
-          <span
-            className="display-italic"
-            style={{ WebkitTextStroke: "1px var(--border-strong)" }}
-          >
-            ™
-          </span>
         </div>
       </div>
     </footer>

@@ -1,101 +1,41 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import {
-  Github,
-  Menu,
-  X,
-  Search,
-  Sparkles,
-  Star,
-  Zap,
-  Heart,
-  Package,
-} from "lucide-react";
+import { ArrowUpRight, Github, Menu, Search, X } from "lucide-react";
 import Logo from "./Logo";
 import ThemeToggle from "./ModeToggle";
-import PaletteToggle from "./PaletteToggle";
 import CommandPalette from "./CommandPalette";
-import { SITE_META, SOCIAL_LINKS } from "../../lib/constants";
-
-/* ---------- Marquee ticker ---------- */
-function MarqueeTicker() {
-  const items = [
-    { Icon: Sparkles, text: `${SITE_META.version} SHIPPED — SEE RELEASE NOTES`, to: "/release-notes" },
-    { Icon: Star, text: "NOW WITH DARK MODE" },
-    { Icon: Zap, text: "COPY · PASTE · SHIP" },
-    { Icon: Heart, text: "MADE FOR BUILDERS, BY BUILDERS" },
-    { Icon: Package, text: "NEW · 8 PAGE TEMPLATES" },
-    { Icon: Github, text: "OPEN SOURCE" },
-  ];
-
-  return (
-    <div
-      className="relative overflow-hidden"
-      style={{
-        background: "var(--fg)",
-        color: "var(--bg)",
-        borderBottom: "1px solid var(--border-strong)",
-      }}
-    >
-      <div
-        className="marquee-track py-1.5 whitespace-nowrap label"
-        style={{ fontSize: 10.5, fontWeight: 600 }}
-      >
-        {[...items, ...items].map(({ Icon, text, to }, i) => {
-          const inner = (
-            <span className="inline-flex items-center gap-2">
-              <Icon className="w-[11px] h-[11px]" />
-              <span>{text}</span>
-              <span className="opacity-50" style={{ marginLeft: "1.5rem" }}>
-                ✱
-              </span>
-            </span>
-          );
-          return to ? (
-            <Link
-              key={i}
-              to={to}
-              className="hover:opacity-80 transition-opacity"
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
-              {inner}
-            </Link>
-          ) : (
-            <span key={i}>{inner}</span>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
+import { SOCIAL_LINKS } from "../../lib/constants";
 
 const LINKS = [
-  { name: "About", href: "/about" },
-  { name: "Get Started", href: "/getting-started" },
   { name: "Components", href: "/components" },
+  { name: "Templates", href: "/pages" },
   { name: "Icons", href: "/icons" },
-  { name: "Pages", href: "/pages" },
+  { name: "Get started", href: "/getting-started" },
+  { name: "About", href: "/about" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
-  const routerState = useRouterState();
-  const pathname = routerState.location.pathname;
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Global ⌘K / Ctrl+K to open the command palette.
   useEffect(() => {
-    const onKey = (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        setCmdOpen((o) => !o);
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const onKey = (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setCmdOpen((value) => !value);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -104,112 +44,120 @@ export default function Navbar() {
 
   const isActive = (href) => {
     if (href === "/") return pathname === "/";
-    const base = href.split("/").slice(0, 2).join("/");
-    return pathname.startsWith(base);
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   return (
     <>
-      <MarqueeTicker />
       <header
-        className="sticky top-0 z-40 transition-colors duration-200"
+        className="sticky top-0 z-40 border-b transition-[background-color,box-shadow] duration-200"
         style={{
+          height: 64,
           background: scrolled
-            ? "color-mix(in oklab, var(--bg) 85%, transparent)"
+            ? "color-mix(in srgb, var(--bg) 88%, transparent)"
             : "var(--bg)",
-          backdropFilter: scrolled ? "saturate(180%) blur(12px)" : "none",
-          borderBottom: "1px solid var(--border)",
+          borderColor: "var(--border)",
+          backdropFilter: "blur(18px)",
+          boxShadow: scrolled ? "0 8px 28px rgba(23,24,22,.035)" : "none",
         }}
       >
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-          <div className="flex h-14 items-center justify-between gap-6">
-            <div className="flex items-center gap-8">
-              <Logo />
-              <nav className="hidden md:flex items-center gap-1">
-                {LINKS.map((l) => {
-                  const active = isActive(l.href);
-                  return (
-                    <Link
-                      key={l.name}
-                      to={l.href}
-                      className="relative px-3 py-1.5 text-[13.5px] font-medium rounded-md transition-colors hover:!text-[var(--fg)]"
-                      style={{ color: active ? "var(--fg)" : "var(--muted)" }}
-                    >
-                      {l.name}
-                    </Link>
-                  );
-                })}
-              </nav>
-            </div>
+        <div className="site-container flex h-full items-center justify-between gap-5">
+          <div className="flex min-w-0 items-center gap-8">
+            <Logo />
+            <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
+              {LINKS.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="rounded-lg px-3 py-2 text-[13px] font-semibold transition-colors"
+                    style={{
+                      background: active ? "var(--surface-2)" : "transparent",
+                      color: active ? "var(--fg)" : "var(--muted)",
+                    }}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
 
-            <div className="hidden md:flex flex-1 justify-end items-center gap-2">
-              <button
-                onClick={() => setCmdOpen(true)}
-                className="inline-flex items-center gap-2 h-9 w-64 px-3 rounded-md text-[13px] transition-colors hover:!text-[var(--fg)]"
-                style={{
-                  background: "var(--surface)",
-                  border: "1px solid var(--border)",
-                  color: "var(--muted)",
-                }}
-              >
-                <Search className="w-3.5 h-3.5" />
-                <span className="flex-1 text-left">Search components…</span>
-                <kbd>⌘K</kbd>
-              </button>
-              <PaletteToggle />
-              <ThemeToggle />
-              <a
-                href={SOCIAL_LINKS.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-[var(--surface-2)] transition-colors"
-                style={{ color: "var(--fg)" }}
-                aria-label="GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-            </div>
+          <div className="hidden items-center gap-2 md:flex">
+            <button
+              type="button"
+              onClick={() => setCmdOpen(true)}
+              className="flex h-9 w-48 items-center gap-2 rounded-lg px-3 text-[12.5px] transition-colors lg:w-56"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                color: "var(--muted)",
+              }}
+              aria-label="Search the library"
+            >
+              <Search className="h-3.5 w-3.5" />
+              <span className="flex-1 text-left">Search library</span>
+              <kbd>⌘K</kbd>
+            </button>
+            <ThemeToggle />
+            <a
+              href={SOCIAL_LINKS.github}
+              target="_blank"
+              rel="noreferrer"
+              className="site-button-secondary h-9 min-h-0 px-3"
+              aria-label="Open retroUI on GitHub"
+            >
+              <Github className="h-3.5 w-3.5" />
+              <span className="hidden xl:inline">GitHub</span>
+              <ArrowUpRight className="hidden h-3 w-3 xl:block" />
+            </a>
+          </div>
 
-            <div className="md:hidden flex items-center gap-1">
-              <button
-                onClick={() => setCmdOpen(true)}
-                className="inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-[var(--surface-2)]"
-                style={{ color: "var(--fg)" }}
-                aria-label="Search"
-              >
-                <Search className="w-[18px] h-[18px]" />
-              </button>
-              <PaletteToggle compact />
-              <ThemeToggle compact />
-              <button
-                onClick={() => setOpen(!open)}
-                className="inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-[var(--surface-2)]"
-                style={{ color: "var(--fg)" }}
-                aria-label="Menu"
-              >
-                {open ? <X className="w-[18px] h-[18px]" /> : <Menu className="w-[18px] h-[18px]" />}
-              </button>
-            </div>
+          <div className="flex items-center gap-1 md:hidden">
+            <button
+              type="button"
+              onClick={() => setCmdOpen(true)}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg"
+              style={{ color: "var(--fg)" }}
+              aria-label="Search the library"
+            >
+              <Search className="h-[18px] w-[18px]" />
+            </button>
+            <ThemeToggle compact />
+            <button
+              type="button"
+              onClick={() => setOpen((value) => !value)}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg"
+              style={{ color: "var(--fg)" }}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+            >
+              {open ? <X className="h-[18px] w-[18px]" /> : <Menu className="h-[18px] w-[18px]" />}
+            </button>
           </div>
         </div>
 
         {open && (
-          <div className="md:hidden border-t" style={{ borderColor: "var(--border)" }}>
-            <div className="px-4 py-3 space-y-1">
-              {LINKS.map((l) => {
-                const active = isActive(l.href);
+          <div
+            className="border-t md:hidden"
+            style={{ background: "var(--bg)", borderColor: "var(--border)" }}
+          >
+            <nav className="site-container grid grid-cols-2 gap-2 py-4" aria-label="Mobile navigation">
+              {LINKS.map((link) => {
+                const active = isActive(link.href);
                 return (
                   <Link
-                    key={l.name}
-                    to={l.href}
-                    onClick={() => setOpen(false)}
-                    className="block px-3 py-2 rounded-md text-[14px] font-medium"
+                    key={link.name}
+                    to={link.href}
+                    className="rounded-xl px-4 py-3 text-[13.5px] font-semibold"
                     style={{
-                      background: active ? "var(--surface-2)" : "transparent",
-                      color: "var(--fg)",
+                      background: active ? "var(--accent-soft)" : "var(--surface)",
+                      border: "1px solid var(--border)",
+                      color: active ? "var(--accent)" : "var(--fg)",
                     }}
                   >
-                    {l.name}
+                    {link.name}
                   </Link>
                 );
               })}
@@ -217,13 +165,15 @@ export default function Navbar() {
                 href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 px-3 py-2 rounded-md text-[14px] font-medium"
-                style={{ color: "var(--fg)" }}
+                className="col-span-2 flex items-center justify-between rounded-xl px-4 py-3 text-[13.5px] font-semibold"
+                style={{ background: "var(--fg)", color: "var(--bg)" }}
               >
-                <Github className="w-4 h-4" />
-                <span>GitHub</span>
+                <span className="inline-flex items-center gap-2">
+                  <Github className="h-4 w-4" /> GitHub repository
+                </span>
+                <ArrowUpRight className="h-4 w-4" />
               </a>
-            </div>
+            </nav>
           </div>
         )}
       </header>

@@ -1,23 +1,20 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Search, Layers, ChevronRight, ArrowRight, Square } from "lucide-react";
+import { ArrowRight, ChevronRight, Layers3, Search, Square } from "lucide-react";
+import { useDocumentMeta } from "../hooks";
 import { SITE_META } from "../lib/constants";
 import { COMPONENT_REGISTRY } from "../lib/registries";
-import { useDocumentMeta } from "../hooks";
 
-const CATEGORY_LIST = [
-  "All",
-  ...new Set(COMPONENT_REGISTRY.map((c) => c.category)),
-];
+const CATEGORIES = ["All", ...new Set(COMPONENT_REGISTRY.map((component) => component.category))];
+const VARIANT_TOTAL = COMPONENT_REGISTRY.reduce((sum, component) => sum + (component.count || 0), 0);
 
 export default function Component() {
-  const [q, setQ] = useState("");
-  const [cat, setCat] = useState("All");
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("All");
 
   useDocumentMeta({
     title: `Components | ${SITE_META.name}`,
-    description:
-      "Browse retroUI's full catalog of retro-themed React components — buttons, cards, inputs, navbars, and more.",
+    description: "Browse retroUI's complete catalog of expressive, copy-paste React components.",
     canonical: `${SITE_META.url}/components`,
   });
 
@@ -26,194 +23,111 @@ export default function Component() {
   }, []);
 
   const filtered = useMemo(() => {
+    const needle = query.trim().toLowerCase();
     return COMPONENT_REGISTRY.filter(
-      (c) => cat === "All" || c.category === cat
+      (component) => category === "All" || component.category === category,
     ).filter(
-      (c) =>
-        !q ||
-        c.name.toLowerCase().includes(q.toLowerCase()) ||
-        c.description.toLowerCase().includes(q.toLowerCase())
+      (component) =>
+        !needle ||
+        component.name.toLowerCase().includes(needle) ||
+        component.description.toLowerCase().includes(needle),
     );
-  }, [q, cat]);
+  }, [query, category]);
+
+  const reset = () => {
+    setQuery("");
+    setCategory("All");
+  };
 
   return (
     <div>
-      {/* Header */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
-          <div
-            className="flex items-center gap-2 text-[12px] mono mb-4"
-            style={{ color: "var(--muted)" }}
-          >
-            <Link to="/" className="hover:!text-[var(--fg)] transition-colors">
-              Home
-            </Link>
-            <ChevronRight className="w-[11px] h-[11px]" />
+      <section className="page-intro">
+        <div className="site-container">
+          <div className="page-breadcrumb">
+            <Link to="/" className="transition-colors hover:!text-[var(--fg)]">Home</Link>
+            <ChevronRight className="h-3 w-3" />
             <span style={{ color: "var(--fg)" }}>Components</span>
           </div>
-          <h1
-            className="display text-[44px] sm:text-[64px] leading-[1.0]"
-            style={{ color: "var(--fg)", letterSpacing: "-0.035em" }}
-          >
-            <span className="display-italic" style={{ color: "var(--muted)" }}>
-              The
-            </span>{" "}
-            Components
+
+          <h1 className="page-title">
+            Components with a <span className="display-italic" style={{ color: "var(--accent)" }}>point of view.</span>
           </h1>
-          <p
-            className="mt-4 text-[15.5px] max-w-2xl leading-relaxed"
-            style={{ color: "var(--muted)" }}
-          >
-            A growing collection of retro-styled, accessible React components.
-            Each comes with a live preview, source code, and copy-paste
-            integration.
+          <p className="page-lede">
+            Explore {COMPONENT_REGISTRY.length} categories and {VARIANT_TOTAL} production-ready variants. Each entry includes a live preview, readable source, and a one-click copy workflow.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3 items-center">
-            <div className="relative flex-1 min-w-[260px] max-w-md">
-              <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2" />
+          <div className="page-controls">
+            <label className="relative w-full max-w-lg">
+              <Search className="absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2" style={{ color: "var(--muted)" }} />
               <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Search components by name or category…"
-                className="w-full h-10 pl-9 pr-3 rounded-md text-[13.5px] outline-none focus:ring-2"
-                style={{
-                  background: "var(--bg)",
-                  border: "1px solid var(--border)",
-                  color: "var(--fg)",
-                }}
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search by component name or purpose…"
+                className="site-input pl-10 pr-4"
+                aria-label="Search components"
               />
-            </div>
-            <div
-              className="flex items-center gap-2 text-[12px]"
-              style={{ color: "var(--muted)" }}
-            >
-              <Layers className="w-3 h-3" />
-              <span className="mono">
-                {filtered.length} of {COMPONENT_REGISTRY.length} components
-              </span>
-            </div>
+            </label>
+            <span className="inline-flex items-center gap-2 text-[11.5px]" style={{ color: "var(--muted)" }}>
+              <Layers3 className="h-3.5 w-3.5" />
+              <span className="mono">{filtered.length} shown</span>
+            </span>
           </div>
         </div>
       </section>
 
-      {/* Filter chips */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-1.5 overflow-x-auto nice-scroll">
-            {CATEGORY_LIST.map((c) => {
-              const active = cat === c;
-              return (
-                <button
-                  key={c}
-                  onClick={() => setCat(c)}
-                  className="px-3 h-8 rounded-md text-[13px] font-medium whitespace-nowrap transition-colors"
-                  style={{
-                    background: active ? "var(--fg)" : "transparent",
-                    color: active ? "var(--bg)" : "var(--muted)",
-                    border: "1px solid var(--border)",
-                  }}
-                >
-                  {c}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Grid */}
-      <section>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-12">
-          {filtered.length === 0 ? (
-            <div className="text-center py-20" style={{ color: "var(--muted)" }}>
-              <Search className="w-7 h-7 mx-auto mb-3 opacity-40" />
-              <p className="text-[14px]">No components match your search.</p>
+      <section className="filter-strip">
+        <div className="site-container filter-strip-inner">
+          <div className="nice-scroll flex items-center gap-1 overflow-x-auto" role="group" aria-label="Filter components by category">
+            {CATEGORIES.map((item) => (
               <button
-                onClick={() => {
-                  setQ("");
-                  setCat("All");
-                }}
-                className="mt-3 text-[13px] underline"
-                style={{ color: "var(--fg)" }}
+                key={item}
+                type="button"
+                onClick={() => setCategory(item)}
+                className="filter-chip"
+                data-active={category === item}
               >
-                Reset filters
+                {item}
               </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="site-section-compact">
+        <div className="site-container">
+          {filtered.length === 0 ? (
+            <div className="site-card-flat py-20 text-center">
+              <Search className="mx-auto h-6 w-6" style={{ color: "var(--muted)" }} />
+              <h2 className="mt-4 text-[16px] font-bold" style={{ color: "var(--fg)" }}>No matching components</h2>
+              <p className="mt-1 text-[13px]" style={{ color: "var(--muted)" }}>Try a broader term or clear the current category.</p>
+              <button type="button" onClick={reset} className="site-button-secondary mt-5">Reset filters</button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filtered.map((c) => {
-                const Icon = c.Icon || Square;
-                const count = c.count;
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {filtered.map((component) => {
+                const Icon = component.Icon || Square;
                 return (
-                  <Link
-                    key={c.path}
-                    to={`/components/${c.path}`}
-                    className="group text-left rounded-lg overflow-hidden transition-colors block"
-                    style={{
-                      background: "var(--bg)",
-                      border: "1px solid var(--border)",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.background = "var(--surface)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.background = "var(--bg)")
-                    }
-                  >
-                    <div
-                      className="aspect-[16/9] relative placeholder-tile"
-                      style={{ borderBottom: "1px solid var(--border)" }}
-                    >
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div
-                          className="inline-flex h-12 w-12 items-center justify-center rounded-lg"
-                          style={{
-                            background: "var(--bg)",
-                            border: "1px solid var(--border)",
-                            color: "var(--fg)",
-                          }}
-                        >
-                          <Icon className="w-5 h-5" />
-                        </div>
-                      </div>
+                  <Link key={component.path} to={`/components/${component.path}`} className="catalog-card group">
+                    <div className="catalog-preview flex aspect-[16/8] items-center justify-center">
+                      <span
+                        className="inline-flex h-14 w-14 items-center justify-center rounded-2xl transition-transform duration-200 group-hover:-rotate-2 group-hover:scale-105"
+                        style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--fg)", boxShadow: "var(--shadow-sm)" }}
+                      >
+                        <Icon className="h-5 w-5" />
+                      </span>
                     </div>
                     <div className="p-5">
-                      <div className="flex items-start justify-between gap-3 mb-1.5">
-                        <h3
-                          className="text-[15px] font-semibold tracking-tight"
-                          style={{ color: "var(--fg)" }}
-                        >
-                          {c.name}
-                        </h3>
-                        <span
-                          className="inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-[4px] border"
-                          style={{
-                            background: "transparent",
-                            color: "var(--muted)",
-                            borderColor: "var(--border)",
-                          }}
-                        >
-                          {c.category}
-                        </span>
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h2 className="text-[15px] font-bold tracking-[-0.02em]" style={{ color: "var(--fg)" }}>{component.name}</h2>
+                          <p className="mt-1.5 text-[12.5px] leading-5" style={{ color: "var(--muted)" }}>{component.description}</p>
+                        </div>
+                        <span className="rounded-md px-2 py-1 text-[9.5px] font-semibold uppercase tracking-[0.08em]" style={{ background: "var(--surface-2)", color: "var(--muted)" }}>{component.category}</span>
                       </div>
-                      <p
-                        className="text-[13px] mb-3"
-                        style={{ color: "var(--muted)" }}
-                      >
-                        {c.description}
-                      </p>
-                      <div
-                        className="flex items-center justify-between text-[12px]"
-                        style={{ color: "var(--muted)" }}
-                      >
-                        <span className="mono">{count} variants</span>
-                        <span
-                          className="inline-flex items-center gap-1 transition-transform group-hover:translate-x-0.5"
-                          style={{ color: "var(--fg)" }}
-                        >
-                          View
-                          <ArrowRight className="w-[11px] h-[11px]" />
+                      <div className="mt-5 flex items-center justify-between border-t pt-4 text-[11.5px]" style={{ borderColor: "var(--border)", color: "var(--muted)" }}>
+                        <span className="mono">{component.count} variants</span>
+                        <span className="inline-flex items-center gap-1.5 font-bold" style={{ color: "var(--fg)" }}>
+                          Open category <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                         </span>
                       </div>
                     </div>

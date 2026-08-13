@@ -56,9 +56,9 @@ export const SITE_META = {
   name: "retroUI",
   version: `v${APP_VERSION}`,
   url: "https://retro-ui.basecase.site",
-  tagline: "Retro-themed UI components for modern web apps",
+  tagline: "Retro character. Production discipline.",
   description:
-    "A collection of retro-themed UI components built with Tailwind CSS for modern web applications.",
+    "A considered collection of expressive React components made to copy, adapt, and ship.",
   author: "Omi Patel",
 };
 
