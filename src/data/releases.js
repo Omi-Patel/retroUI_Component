@@ -19,9 +19,35 @@
  *   }
  */
 
-export const APP_VERSION = "0.6.0";
+export const APP_VERSION = "1.0.0";
 
 export const releases = [
+  {
+    version: "1.0.0",
+    date: "2026-08-13",
+    summary:
+      "The first stable RetroUI release — a polished, production-ready component library with a clearer site, consistent showcases, and a redesigned icon browser.",
+    changes: {
+      added: [],
+      changed: [
+        "The public site now uses a cohesive editorial design system with consistent typography, spacing, page introductions, navigation, content widths, and responsive behavior across every top-level screen.",
+        "Component and page showcases now share a cleaner two-column layout with a flat navigation index, right-aligned breadcrumbs, restrained content spacing, and safer width constraints for large previews.",
+        "Variant navigation is now a clearly labeled selector with a visible option count, strong active state, Manrope interface typography, and touch-friendly horizontal scrolling.",
+        "The icon showcase is now a full asset browser with library statistics, style counts, clearer search and format controls, larger previews, descriptive card metadata, and persistent copy affordances.",
+      ],
+      fixed: [
+        "Route loading states reserve the viewport so the footer and showcase pager no longer flash before page content or cause visible layout shifts.",
+        "The landing page loads eagerly, the navbar ticker reserves its height, and the document keeps a stable scrollbar gutter to prevent first-render movement.",
+        "Showcase content now stays within the available right column at intermediate viewport sizes instead of clipping or overflowing the page.",
+        "The GitHub star count and large homepage imagery reserve their final dimensions before asynchronous content and assets finish loading.",
+      ],
+      removed: [],
+    },
+    components: {
+      new: [],
+      updated: [],
+    },
+  },
   {
     version: "0.6.0",
     date: "2026-08-03",

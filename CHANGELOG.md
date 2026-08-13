@@ -11,6 +11,26 @@ changelog viewers, etc.) that consume it directly.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-08-13
+
+The first stable RetroUI release — a polished, production-ready component
+library with a clearer site, consistent showcases, and a redesigned icon
+browser.
+
+### Changed
+- The public site now uses a cohesive editorial design system with consistent
+  typography, spacing, page introductions, navigation, content widths, and
+  responsive behavior across every top-level screen.
+- Component and page showcases now share a cleaner two-column layout with a
+  flat navigation index, right-aligned breadcrumbs, restrained content spacing,
+  and safer width constraints for large previews.
+- Variant navigation is now a clearly labeled selector with a visible option
+  count, strong active state, Manrope interface typography, and touch-friendly
+  horizontal scrolling.
+- The icon showcase is now a full asset browser with library statistics, style
+  counts, clearer search and format controls, larger previews, descriptive card
+  metadata, and persistent copy affordances.
+
 ### Fixed
 - **Cumulative Layout Shift** — route loading states now reserve a full viewport,
   so the footer and showcase pager stay below the fold while a page loads and
@@ -24,6 +44,8 @@ changelog viewers, etc.) that consume it directly.
 - The hero GitHub star count renders its cached/fallback value immediately
   instead of an `…` placeholder that resized after the fetch resolved.
 - `RetroHomePage` hero image now declares intrinsic `width`/`height`.
+- Showcase content now stays within the available right column at intermediate
+  viewport sizes instead of clipping or overflowing the page.
 
 ## [0.6.0] - 2026-08-03
 
