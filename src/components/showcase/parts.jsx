@@ -58,24 +58,31 @@ export function ShowcaseHeader({ Icon, title, category, description, className =
 /** A single horizontally-scrolling row of selectable variant chips. */
 export function VariantChips({ items, isActive, onSelect, getKey, renderLabel, renderTrailing }) {
   return (
-    <div className="mb-5 flex items-center gap-1 overflow-x-auto nice-scroll" style={{ paddingBottom: 4 }}>
-      {items.map((item, i) => {
-        const sel = isActive(item, i);
-        return (
-          <button
-            key={getKey(item, i)}
-            onClick={() => onSelect(item, i)}
-            className="filter-chip mono inline-flex items-center gap-1.5"
-            data-active={sel}
-            style={{
-              color: sel ? "var(--fg)" : "var(--muted)",
-            }}
-          >
-            <span>{renderLabel(item, i)}</span>
-            {renderTrailing && renderTrailing(item, i)}
-          </button>
-        );
-      })}
+    <div className="variant-switcher">
+      <div className="variant-switcher__label" aria-hidden="true">
+        <span>Variants</span>
+        <span className="variant-switcher__count">{items.length}</span>
+      </div>
+
+      <div className="variant-switcher__options nice-scroll" aria-label="Available variants">
+        {items.map((item, i) => {
+          const sel = isActive(item, i);
+
+          return (
+            <button
+              key={getKey(item, i)}
+              type="button"
+              onClick={() => onSelect(item, i)}
+              className="variant-tab"
+              data-active={sel}
+              aria-pressed={sel}
+            >
+              <span>{renderLabel(item, i)}</span>
+              {renderTrailing && renderTrailing(item, i)}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

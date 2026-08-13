@@ -63,7 +63,7 @@ export const ComponentShowcasePage = ({
   const fullWidth = !!meta?.fullWidth;
 
   return (
-    <div>
+    <div className="min-w-0 max-w-full">
       <ShowcaseHeader
         Icon={Icon}
         title={title}
@@ -103,14 +103,14 @@ export const ComponentShowcasePage = ({
 
       {/* Preview / Code tab card */}
       <div
-        className="site-card overflow-hidden"
+        className="site-card w-full max-w-full overflow-hidden"
         style={{
           background: "var(--bg)",
           border: "1px solid var(--border)",
         }}
       >
         <div
-          className="flex items-center justify-between px-4 py-2"
+          className="flex min-w-0 items-center justify-between gap-3 px-4 py-2"
           style={{ borderBottom: "1px solid var(--border)" }}
         >
           <div
@@ -139,7 +139,7 @@ export const ComponentShowcasePage = ({
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex shrink-0 items-center gap-1.5">
             <button
               onClick={() => setFullscreen(true)}
               title="Preview at device sizes"
