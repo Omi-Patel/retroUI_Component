@@ -31,7 +31,7 @@ function Field({ label, placeholder, type = "text", textarea, required }) {
           placeholder={placeholder}
           required={required}
           rows={5}
-          className="w-full px-3 py-2.5 rounded-md text-[13.5px] outline-none transition-colors resize-y focus:ring-2 focus:ring-[var(--fg)]"
+          className="site-input h-auto w-full resize-y px-3 py-2.5"
           style={sharedStyle}
         />
       ) : (
@@ -39,7 +39,7 @@ function Field({ label, placeholder, type = "text", textarea, required }) {
           type={type}
           placeholder={placeholder}
           required={required}
-          className="w-full h-10 px-3 rounded-md text-[13.5px] outline-none transition-colors focus:ring-2 focus:ring-[var(--fg)]"
+          className="site-input px-3"
           style={sharedStyle}
         />
       )}
@@ -62,10 +62,10 @@ export default function ContactUs() {
 
   return (
     <div>
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+      <section className="page-intro">
+        <div className="site-container">
           <div
-            className="flex items-center gap-2 text-[12px] mono mb-4"
+            className="page-breadcrumb"
             style={{ color: "var(--muted)" }}
           >
             <Link to="/" className="hover:!text-[var(--fg)] transition-colors">
@@ -75,7 +75,7 @@ export default function ContactUs() {
             <span style={{ color: "var(--fg)" }}>Contact</span>
           </div>
           <h1
-            className="display text-[44px] sm:text-[60px] leading-[1.0]"
+            className="page-title"
             style={{ color: "var(--fg)", letterSpacing: "-0.035em" }}
           >
             Get{" "}
@@ -84,7 +84,7 @@ export default function ContactUs() {
             </span>
           </h1>
           <p
-            className="mt-4 text-[15.5px] max-w-xl leading-relaxed"
+            className="page-lede"
             style={{ color: "var(--muted)" }}
           >
             Have feedback, a feature request, or want to contribute? Drop us a
@@ -94,7 +94,7 @@ export default function ContactUs() {
       </section>
 
       <section>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-12">
+        <div className="site-container site-section-compact">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="space-y-4">
               {[
@@ -122,7 +122,7 @@ export default function ContactUs() {
                   href={c.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center gap-3 rounded-lg p-4 transition-colors"
+                  className="site-card-flat group flex items-center gap-3 p-4 transition-colors"
                   style={{
                     border: "1px solid var(--border)",
                     background: "var(--bg)",
@@ -164,7 +164,7 @@ export default function ContactUs() {
 
             <div className="lg:col-span-2">
               <div
-                className="rounded-lg p-7"
+                className="site-card p-7"
                 style={{
                   background: "var(--bg)",
                   border: "1px solid var(--border)",
@@ -247,7 +247,7 @@ export default function ContactUs() {
                       </label>
                       <button
                         type="submit"
-                        className="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md text-[13.5px] font-medium transition-opacity hover:opacity-90"
+                        className="site-button-primary"
                         style={{
                           background: "var(--accent)",
                           color: "var(--accent-fg)",

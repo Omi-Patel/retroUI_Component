@@ -184,8 +184,8 @@ export const CommandPalette = ({ open, onClose }) => {
         onClick={onClose}
         className="absolute inset-0 cursor-default"
         style={{
-          background: "color-mix(in oklab, var(--fg) 38%, transparent)",
-          backdropFilter: "blur(3px)",
+          background: "color-mix(in srgb, var(--fg) 28%, transparent)",
+          backdropFilter: "blur(8px)",
           animation: "cmdkFade .12s ease-out",
         }}
       />
@@ -195,16 +195,16 @@ export const CommandPalette = ({ open, onClose }) => {
         role="dialog"
         aria-modal="true"
         aria-label="Command palette"
-        className="relative w-full max-w-xl rounded-xl overflow-hidden"
+        className="relative w-full max-w-xl overflow-hidden rounded-2xl"
         style={{
-          background: "var(--bg)",
-          border: "2px solid var(--border-strong)",
-          boxShadow: "6px 6px 0 0 var(--border-strong)",
+          background: "var(--surface)",
+          border: "1px solid var(--border)",
+          boxShadow: "var(--shadow-md)",
           animation: "cmdkPop .14s cubic-bezier(.2,.8,.2,1)",
         }}
       >
         {/* Search field */}
-        <div className="flex items-center gap-2.5 px-4 h-[52px]" style={{ borderBottom: "2px solid var(--border)" }}>
+        <div className="flex h-[56px] items-center gap-2.5 px-4" style={{ borderBottom: "1px solid var(--border)" }}>
           <Search className="w-4 h-4 flex-shrink-0" style={{ color: "var(--muted)" }} />
           <input
             ref={inputRef}
@@ -297,7 +297,7 @@ export const CommandPalette = ({ open, onClose }) => {
         {/* Footer legend */}
         <div
           className="flex items-center gap-4 px-4 h-9 text-[11px]"
-          style={{ borderTop: "2px solid var(--border)", background: "var(--surface)", color: "var(--muted)" }}
+          style={{ borderTop: "1px solid var(--border)", background: "var(--surface-2)", color: "var(--muted)" }}
         >
           <span className="flex items-center gap-1.5">
             <Kbd><ArrowUp className="w-2.5 h-2.5" /></Kbd>

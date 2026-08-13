@@ -68,10 +68,10 @@ export default function Icons() {
   return (
     <div>
       {/* Header */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+      <section className="page-intro">
+        <div className="site-container">
           <div
-            className="flex items-center gap-2 text-[12px] mono mb-4"
+            className="page-breadcrumb"
             style={{ color: "var(--muted)" }}
           >
             <Link to="/" className="hover:!text-[var(--fg)] transition-colors">
@@ -81,16 +81,15 @@ export default function Icons() {
             <span style={{ color: "var(--fg)" }}>Icons</span>
           </div>
           <h1
-            className="display text-[44px] sm:text-[64px] leading-[1.0]"
-            style={{ color: "var(--fg)", letterSpacing: "-0.035em" }}
+            className="page-title"
           >
-            <span className="display-italic" style={{ color: "var(--muted)" }}>
-              The
-            </span>{" "}
-            Icons
+            Icons with{" "}
+            <span className="display-italic" style={{ color: "var(--accent)" }}>
+              old-school detail.
+            </span>
           </h1>
           <p
-            className="mt-4 text-[15.5px] max-w-2xl leading-relaxed"
+            className="page-lede"
             style={{ color: "var(--muted)" }}
           >
             A hand-built set of retro-styled icons across 12 looks — pixel-art,
@@ -100,14 +99,14 @@ export default function Icons() {
           </p>
 
           {/* Controls */}
-          <div className="mt-8 flex flex-wrap gap-3 items-center">
-            <div className="relative flex-1 min-w-[260px] max-w-md">
+          <div className="page-controls">
+            <div className="relative w-full max-w-lg">
               <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search icons by name, style, or keyword…"
-                className="w-full h-10 pl-9 pr-3 rounded-md text-[13.5px] outline-none focus:ring-2"
+                className="site-input pl-9 pr-3"
                 style={{
                   background: "var(--bg)",
                   border: "1px solid var(--border)",
@@ -150,21 +149,17 @@ export default function Icons() {
       </section>
 
       {/* Style filter chips */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-1.5 overflow-x-auto nice-scroll">
+      <section className="filter-strip">
+        <div className="site-container filter-strip-inner">
+          <div className="flex items-center gap-1 overflow-x-auto nice-scroll">
             {STYLE_CHIPS.map((c) => {
               const active = style === c.id;
               return (
                 <button
                   key={c.id}
                   onClick={() => setStyle(c.id)}
-                  className="px-3 h-8 rounded-md text-[13px] font-medium whitespace-nowrap transition-colors"
-                  style={{
-                    background: active ? "var(--fg)" : "transparent",
-                    color: active ? "var(--bg)" : "var(--muted)",
-                    border: "1px solid var(--border)",
-                  }}
+                  className="filter-chip"
+                  data-active={active}
                 >
                   {c.label}
                 </button>
@@ -175,8 +170,8 @@ export default function Icons() {
       </section>
 
       {/* Grid */}
-      <section>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-12">
+      <section className="site-section-compact">
+        <div className="site-container">
           {!mod ? (
             <Dots />
           ) : filtered.length === 0 ? (
@@ -195,7 +190,7 @@ export default function Icons() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
+            <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
               {filtered.map((ic) => {
                 const isCopied = copiedId === ic.id;
                 return (
@@ -203,17 +198,11 @@ export default function Icons() {
                     key={ic.id}
                     onClick={() => handleCopy(ic)}
                     title={`Copy ${ic.componentName} as ${format.toUpperCase()}`}
-                    className="group relative flex flex-col items-center gap-2 rounded-lg p-3 transition-colors"
+                    className="catalog-card group relative flex flex-col items-center gap-2 p-3"
                     style={{
                       background: "var(--bg)",
                       border: "1px solid var(--border)",
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.background = "var(--surface)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.background = "var(--bg)")
-                    }
                   >
                     <div
                       className="flex items-center justify-center w-12 h-12"

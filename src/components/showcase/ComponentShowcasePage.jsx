@@ -103,7 +103,7 @@ export const ComponentShowcasePage = ({
 
       {/* Preview / Code tab card */}
       <div
-        className="rounded-lg overflow-hidden"
+        className="site-card overflow-hidden"
         style={{
           background: "var(--bg)",
           border: "1px solid var(--border)",
@@ -179,8 +179,8 @@ export const ComponentShowcasePage = ({
           <div
             className={
               fullWidth
-                ? "flex flex-col justify-center min-h-[320px] overflow-x-auto"
-                : "flex items-center justify-center p-10 min-h-[320px] overflow-x-auto"
+                ? "component-sandbox flex flex-col justify-center min-h-[320px] overflow-x-auto"
+                : "component-sandbox flex items-center justify-center p-10 min-h-[320px] overflow-x-auto"
             }
             style={{ background: "var(--surface)" }}
           >
@@ -264,9 +264,9 @@ export const ComponentShowcasePage = ({
       >
         <div
           className={
-            fullWidth
-              ? "flex flex-col justify-center min-h-full"
-              : "flex items-center justify-center p-10 min-h-full"
+              fullWidth
+              ? "component-sandbox flex flex-col justify-center min-h-full"
+              : "component-sandbox flex items-center justify-center p-10 min-h-full"
           }
         >
           <ActiveComponent />

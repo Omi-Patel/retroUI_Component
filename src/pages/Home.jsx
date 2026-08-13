@@ -1,83 +1,31 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
-import { useDocumentMeta, useGitHubStars } from "../hooks";
-import { SITE_META } from "../lib/constants";
-import { COMPONENT_REGISTRY, PAGE_REGISTRY } from "../lib/registries";
+import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  Github,
-  Star,
-  Sparkles,
+  ArrowUpRight,
+  Check,
   Code2,
-  Palette,
-  Zap,
-  Layers,
-  ToggleRight,
-  Box,
   Copy,
+  Github,
+  Layers3,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  Star,
 } from "lucide-react";
+import { useCopyToClipboard, useDocumentMeta, useGitHubStars } from "../hooks";
+import { SITE_META, SOCIAL_LINKS } from "../lib/constants";
+import { COMPONENT_REGISTRY, PAGE_REGISTRY } from "../lib/registries";
 
 const COMPONENT_VARIANT_COUNT = COMPONENT_REGISTRY.reduce(
-  (sum, c) => sum + (c.count || 0),
+  (sum, component) => sum + (component.count || 0),
   0,
 );
-const COMPONENT_CATEGORY_COUNT = COMPONENT_REGISTRY.length;
 const PAGE_VARIANT_COUNT = PAGE_REGISTRY.reduce(
-  (sum, p) => sum + (p.count || 0),
+  (sum, page) => sum + (page.count || 0),
   0,
 );
-const PAGE_CATEGORY_COUNT = PAGE_REGISTRY.length;
 
-const buildStats = (starsLabel) => [
-  {
-    v: `${COMPONENT_VARIANT_COUNT}`,
-    l: "Components",
-    sub: `across ${COMPONENT_CATEGORY_COUNT} categories`,
-  },
-  {
-    v: `${PAGE_VARIANT_COUNT}`,
-    l: "Page templates",
-    sub: `${PAGE_CATEGORY_COUNT} categories · production-ready`,
-  },
-  { v: starsLabel, l: "GitHub stars", sub: "live from GitHub · star us!" },
-  { v: "MIT", l: "Open source", sub: "forever free" },
-];
-
-const FEATURES = [
-  {
-    Icon: Code2,
-    title: "Copy & paste",
-    body: "No npm install required. Drop the JSX into your project and tweak the Tailwind classes.",
-  },
-  {
-    Icon: Palette,
-    title: "Tailwind native",
-    body: "Built on Tailwind utilities. Your design tokens stay in your tailwind.config — no opaque CSS.",
-  },
-  {
-    Icon: Zap,
-    title: "Zero runtime",
-    body: "No state, no providers. Components are dumb by default, composable by design.",
-  },
-  {
-    Icon: Layers,
-    title: "Composable",
-    body: "Each block is single-purpose. Mix and match to build complete page layouts in minutes.",
-  },
-  {
-    Icon: ToggleRight,
-    title: "Dark mode",
-    body: "Every component ships with light & dark variants tested for AA contrast.",
-  },
-  {
-    Icon: Box,
-    title: "Page templates",
-    body: `${PAGE_VARIANT_COUNT} pre-composed templates across ${PAGE_CATEGORY_COUNT} categories — landing, dashboard, blog, ecommerce, auth, docs, and more.`,
-  },
-];
-
-// Show a curated 8-card preview from the canonical component registry —
-// keeps the home page in sync as new categories are added.
 const HIGHLIGHTED_PATHS = [
   "buttons",
   "cards",
@@ -88,26 +36,46 @@ const HIGHLIGHTED_PATHS = [
   "navbars",
   "footers",
 ];
-const CATEGORIES = HIGHLIGHTED_PATHS.map((slug) => {
-  const entry = COMPONENT_REGISTRY.find((c) => c.path === slug);
-  return entry
-    ? {
-        name: entry.name,
-        Icon: entry.Icon,
-        count: entry.count,
-        path: `/components/${entry.path}`,
-      }
-    : null;
-}).filter(Boolean);
+
+const CATEGORIES = HIGHLIGHTED_PATHS.map((slug) =>
+  COMPONENT_REGISTRY.find((component) => component.path === slug),
+).filter(Boolean);
+
+const PRINCIPLES = [
+  {
+    Icon: Code2,
+    number: "01",
+    title: "Readable by default",
+    body: "Every component is ordinary React and Tailwind. No private API, generated wrapper, or dependency maze to decode.",
+  },
+  {
+    Icon: Layers3,
+    number: "02",
+    title: "Made to be adapted",
+    body: "Copy the exact source into your project, keep the pieces you need, and tune the visual language to your product.",
+  },
+  {
+    Icon: ShieldCheck,
+    number: "03",
+    title: "Character with restraint",
+    body: "The nostalgic details are deliberate, while responsive behavior, accessibility, and hierarchy stay thoroughly modern.",
+  },
+];
+
+const WORKFLOW_CODE = `// 01 · copy a variant from the library
+import { RetroButton } from "./components/RetroButton";
+
+// 02 · use it like ordinary React
+export function CheckoutAction() {
+  return <RetroButton>Complete order</RetroButton>;
+}
+
+// 03 · edit the source until it feels like yours`;
 
 export default function Home() {
-  const navigate = useNavigate();
-  // Render the (cached or fallback) count straight away rather than an ellipsis
-  // placeholder — swapping "…" for a number resizes the hero badge and the
-  // stats tile after paint, which is a visible layout shift.
   const { stars } = useGitHubStars({ fallback: 9 });
   const starsLabel = stars.toLocaleString();
-  const STATS = buildStats(starsLabel);
+  const [copied, copy] = useCopyToClipboard();
 
   useDocumentMeta({
     title: `${SITE_META.name} | ${SITE_META.tagline}`,
@@ -121,353 +89,190 @@ export default function Home() {
 
   return (
     <div>
-      {/* HERO */}
-      <section
-        className="relative overflow-hidden"
-        style={{ borderBottom: "1px solid var(--border)" }}
-      >
-        <div className="absolute inset-0 bg-halftone pointer-events-none" />
-        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
-          <div className="max-w-3xl">
-            <div className="flex flex-wrap items-center gap-4 mb-8">
-              <span className="sticker">
-                <Sparkles className="w-[10px] h-[10px]" />
-                NEW · {SITE_META.version}
+      <section className="relative overflow-hidden border-b" style={{ borderColor: "var(--border)" }}>
+        <div
+          className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-px lg:block"
+          style={{ background: "var(--border)" }}
+        />
+        <div className="site-container grid gap-12 py-14 sm:py-16 lg:grid-cols-2 lg:gap-14 lg:py-20">
+          <div className="flex flex-col justify-center">
+            <div className="mb-7 flex flex-wrap items-center gap-3">
+              <span
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.11em]"
+                style={{ background: "var(--accent-soft)", color: "var(--accent)" }}
+              >
+                <Sparkles className="h-3 w-3" /> Open-source React UI kit
               </span>
               <Link
                 to="/release-notes"
-                className="text-[13px] retro-link"
+                className="inline-flex items-center gap-1.5 text-[12px] font-semibold transition-colors hover:!text-[var(--fg)]"
                 style={{ color: "var(--muted)" }}
               >
-                Read the release notes →
+                {SITE_META.version} is live <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
 
             <h1
-              className="display text-[52px] sm:text-[80px] leading-[0.96]"
-              style={{ color: "var(--fg)", letterSpacing: "-0.035em" }}
+              className="display max-w-[720px] text-[49px] leading-[0.98] sm:text-[70px] lg:text-[76px]"
+              style={{ color: "var(--fg)" }}
             >
-              The{" "}
-              <span className="display-italic" style={{ color: "var(--muted)" }}>
-                retro
-              </span>{" "}
-              UI library
+              Retro character.
               <br />
-              built for{" "}
-              <span className="relative inline-block">
-                <span style={{ position: "relative", zIndex: 1 }}>modern</span>
-                <span
-                  aria-hidden
-                  style={{
-                    position: "absolute",
-                    left: -4,
-                    right: -4,
-                    bottom: 6,
-                    height: 12,
-                    background: "var(--surface-2)",
-                    zIndex: 0,
-                    transform: "skew(-2deg)",
-                  }}
-                />
-              </span>{" "}
-              apps.
+              <span className="display-italic" style={{ color: "var(--accent)" }}>
+                Production discipline.
+              </span>
             </h1>
 
-            <p
-              className="mt-7 text-[17px] sm:text-[18.5px] leading-[1.55] max-w-2xl"
-              style={{ color: "var(--muted)" }}
-            >
-              Copy-paste React components with nostalgic charm and modern
-              ergonomics.
-              <br />
-              <span className="display-italic" style={{ color: "var(--fg)" }}>
-                Open source.
-              </span>{" "}
-              Fully accessible. Styled with Tailwind CSS.
+            <p className="mt-7 max-w-xl text-[16px] leading-7 sm:text-[17px]" style={{ color: "var(--muted)" }}>
+              A considered collection of React components for products that need more personality than another default design system—without sacrificing clarity or control.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <button
-                onClick={() => navigate({ to: "/components" })}
-                className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-md text-[15px] font-medium transition-opacity hover:opacity-90"
-                style={{
-                  background: "var(--accent)",
-                  color: "var(--accent-fg)",
-                }}
-              >
-                Browse components
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-              <a
-                href="https://github.com/Omi-Patel/retroUI_Component"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-md text-[15px] font-medium transition-colors hover:bg-[var(--surface-2)]"
-                style={{ color: "var(--fg)" }}
-              >
-                <Github className="w-3.5 h-3.5" />
-                Star on GitHub
-                <span
-                  className="ml-1 inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] mono"
-                  style={{ background: "var(--surface-2)", color: "var(--muted)" }}
-                >
-                  <Star className="w-[10px] h-[10px]" /> {starsLabel}
-                </span>
-              </a>
+              <Link to="/components" className="site-button-primary">
+                Explore components <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <Link to="/getting-started" className="site-button-secondary">
+                Read the setup guide
+              </Link>
             </div>
 
-            {/* code snippet */}
-            <div className="mt-12 max-w-2xl">
-              <div
-                className="rounded-lg overflow-hidden"
-                style={{
-                  background: "var(--surface)",
-                  border: "1px solid var(--border)",
-                  boxShadow: "3px 3px 0 0 var(--border-strong)",
-                }}
-              >
-                <div
-                  className="flex items-center justify-between px-3 py-2"
-                  style={{ borderBottom: "1px solid var(--border)" }}
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11.5px]" style={{ color: "var(--muted)" }}>
+              <span className="inline-flex items-center gap-1.5">
+                <Check className="h-3.5 w-3.5" style={{ color: "var(--ok)" }} /> MIT licensed
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Check className="h-3.5 w-3.5" style={{ color: "var(--ok)" }} /> Copy-paste source
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Check className="h-3.5 w-3.5" style={{ color: "var(--ok)" }} /> React + Tailwind
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center lg:pl-6">
+            <div className="site-card w-full overflow-hidden">
+              <div className="flex items-center justify-between border-b px-5 py-4" style={{ borderColor: "var(--border)" }}>
+                <div>
+                  <p className="text-[13px] font-bold" style={{ color: "var(--fg)" }}>Find the right building block</p>
+                  <p className="mt-0.5 text-[11px]" style={{ color: "var(--muted)" }}>Browse by the job your interface needs to do.</p>
+                </div>
+                <span className="label" style={{ color: "var(--muted)" }}>Library / 01</span>
+              </div>
+
+              <div className="p-4 sm:p-5">
+                <button
+                  type="button"
+                  className="site-input flex items-center gap-2.5 px-3 text-left"
+                  onClick={() => window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true }))}
                 >
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="inline-flex h-2 w-2 rounded-full"
-                      style={{ background: "#e07b67" }}
-                    />
-                    <span
-                      className="inline-flex h-2 w-2 rounded-full"
-                      style={{ background: "#e3b762" }}
-                    />
-                    <span
-                      className="inline-flex h-2 w-2 rounded-full"
-                      style={{ background: "#7da567" }}
-                    />
-                    <span
-                      className="label ml-3"
-                      style={{ color: "var(--muted)" }}
+                  <Search className="h-3.5 w-3.5" style={{ color: "var(--muted)" }} />
+                  <span className="flex-1" style={{ color: "var(--muted)" }}>Search components, patterns, pages…</span>
+                  <kbd>⌘K</kbd>
+                </button>
+
+                <div className="mt-4 space-y-1.5">
+                  {CATEGORIES.slice(0, 5).map((category, index) => (
+                    <Link
+                      key={category.path}
+                      to={`/components/${category.path}`}
+                      className="group flex items-center gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-[var(--surface-2)]"
                     >
-                      how it works
-                    </span>
-                  </div>
-                  <button
-                    className="inline-flex items-center gap-1.5 text-[11px] font-medium opacity-60 hover:opacity-100 mono"
-                    style={{ color: "var(--fg)" }}
-                  >
-                    <Copy className="w-[11px] h-[11px]" /> COPY
-                  </button>
+                      <span
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-lg"
+                        style={{ background: index === 0 ? "var(--accent-soft)" : "var(--surface-2)", color: index === 0 ? "var(--accent)" : "var(--fg)" }}
+                      >
+                        <category.Icon className="h-4 w-4" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-[13.5px] font-semibold" style={{ color: "var(--fg)" }}>{category.name}</span>
+                        <span className="block truncate text-[11px]" style={{ color: "var(--muted)" }}>{category.description}</span>
+                      </span>
+                      <span className="mono text-[10px]" style={{ color: "var(--muted)" }}>{category.count}</span>
+                      <ArrowUpRight className="h-3.5 w-3.5 opacity-30 transition-opacity group-hover:opacity-100" />
+                    </Link>
+                  ))}
                 </div>
-                <pre
-                  className="px-4 py-4 mono text-[13.5px] leading-relaxed overflow-x-auto"
-                  style={{ color: "var(--fg)" }}
-                >
-                  <span style={{ color: "var(--muted)" }}># </span>1. browse the gallery{"\n"}
-                  <span style={{ color: "var(--muted)" }}># </span>2. click <span style={{ color: "var(--fg)" }}>Copy</span> on any variant{"\n"}
-                  <span style={{ color: "var(--muted)" }}># </span>3. paste into your project{"\n"}
-                  <span style={{ color: "var(--ok)", opacity: 0.8 }}>✓</span>
-                  <span style={{ color: "var(--muted)" }}>
-                    {" "}no install · no lock-in
-                  </span>
-                </pre>
+              </div>
+
+              <div className="flex items-center justify-between border-t px-5 py-3" style={{ borderColor: "var(--border)", background: "var(--surface-2)" }}>
+                <span className="mono text-[10px]" style={{ color: "var(--muted)" }}>copy → paste → adapt</span>
+                <Link to="/components" className="text-[11px] font-bold" style={{ color: "var(--accent)" }}>View all {COMPONENT_REGISTRY.length} categories</Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* STATS */}
-      <section
-        style={{
-          borderBottom: "1px solid var(--border)",
-          background: "var(--surface)",
-        }}
-      >
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-12">
-          <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-lg overflow-hidden"
-            style={{ background: "var(--border)" }}
-          >
-            {STATS.map((s, i) => (
-              <div
-                key={s.l}
-                className="px-6 py-7"
-                style={{ background: "var(--bg)" }}
-              >
-                <div
-                  className="label mb-2 inline-flex items-center gap-1.5"
-                  style={{ color: "var(--muted)" }}
-                >
-                  <span className="chapter-num text-[14px]">
-                    No. {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <div
-                  className="display text-[40px] leading-none"
-                  style={{ color: "var(--fg)" }}
-                >
-                  {s.v}
-                </div>
-                <div className="text-[13px] mt-1.5" style={{ color: "var(--fg)" }}>
-                  {s.l}
-                </div>
-                <div
-                  className="text-[11.5px] mt-0.5 display-italic"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {s.sub}
-                </div>
+      <section className="border-b" style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
+        <div className="site-container grid grid-cols-2 divide-x divide-y sm:grid-cols-4 sm:divide-y-0" style={{ borderColor: "var(--border)" }}>
+          {[
+            [`${COMPONENT_VARIANT_COUNT}`, "Component variants"],
+            [`${PAGE_VARIANT_COUNT}`, "Page templates"],
+            [starsLabel, "GitHub stars", Star],
+            ["MIT", "Free forever"],
+          ].map(([value, label, Icon], index) => (
+            <div key={label} className={`px-4 py-6 sm:px-6 sm:py-7 ${index === 2 ? "sm:border-l" : ""}`} style={{ borderColor: "var(--border)" }}>
+              <div className="flex items-center gap-2">
+                <span className="display text-[26px] tracking-[-0.04em]" style={{ color: "var(--fg)" }}>{value}</span>
+                {Icon && <Icon className="h-3.5 w-3.5" style={{ color: "var(--accent)" }} />}
               </div>
-            ))}
-          </div>
+              <p className="mt-0.5 text-[11.5px] font-medium" style={{ color: "var(--muted)" }}>{label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-24">
+      <section className="site-section">
+        <div className="site-container">
           <SectionHeading
-            number="01"
-            eyebrow="Why retroui"
-            title={
-              <>
-                Nostalgic aesthetics.{" "}
-                <span className="display-italic" style={{ color: "var(--muted)" }}>
-                  Modern engineering.
-                </span>
-              </>
-            }
-            description="Every component is unstyled at its core and decorated with the retro look — strip it back or restyle it without rewriting your app."
+            eyebrow="The working principles"
+            title={<>Opinionated enough to be useful.<br /><span className="display-italic" style={{ color: "var(--muted)" }}>Simple enough to make yours.</span></>}
+            description="The library is designed like a good reference book: easy to scan, specific when you need it, and never between you and the work."
           />
 
-          <div
-            className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-px rounded-lg overflow-hidden"
-            style={{ background: "var(--border)" }}
-          >
-            {FEATURES.map((f, i) => (
-              <div
-                key={f.title}
-                className="p-8"
-                style={{ background: "var(--bg)" }}
-              >
-                <div className="flex items-center justify-between mb-5">
-                  <div
-                    className="inline-flex h-10 w-10 items-center justify-center rounded"
-                    style={{
-                      background: "var(--surface)",
-                      color: "var(--fg)",
-                      border: "1px solid var(--border)",
-                    }}
-                  >
-                    <f.Icon className="w-4 h-4" />
-                  </div>
-                  <span className="label" style={{ color: "var(--muted)" }}>
-                    0{i + 1}/06
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {PRINCIPLES.map(({ Icon, number, title, body }) => (
+              <article key={title} className="site-card-flat p-6 sm:p-7">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "var(--accent-soft)", color: "var(--accent)" }}>
+                    <Icon className="h-4 w-4" />
                   </span>
+                  <span className="mono text-[10px]" style={{ color: "var(--muted)" }}>{number} / 03</span>
                 </div>
-                <h3
-                  className="display text-[18px] tracking-tight mb-2"
-                  style={{ color: "var(--fg)" }}
-                >
-                  {f.title}
-                </h3>
-                <p
-                  className="text-[14px] leading-relaxed"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {f.body}
-                </p>
-              </div>
+                <h3 className="mt-8 text-[18px] font-bold tracking-[-0.025em]" style={{ color: "var(--fg)" }}>{title}</h3>
+                <p className="mt-2 text-[13.5px] leading-6" style={{ color: "var(--muted)" }}>{body}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CATEGORIES */}
-      <section
-        style={{
-          borderBottom: "1px solid var(--border)",
-          background: "var(--surface)",
-        }}
-      >
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-24">
-          <div className="flex items-end justify-between flex-wrap gap-6 mb-12">
+      <section className="site-section site-section-muted">
+        <div className="site-container">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeading
-              number="02"
-              eyebrow="The library"
-              title={
-                <>
-                  {COMPONENT_CATEGORY_COUNT} categories.
-                  <br />
-                  <span
-                    className="display-italic"
-                    style={{ color: "var(--muted)" }}
-                  >
-                    {COMPONENT_VARIANT_COUNT} components.
-                  </span>
-                </>
-              }
-              description="Built for landing pages, dashboards, and side projects you actually want to ship."
+              eyebrow="Component library"
+              title={<>Start with the familiar.<br /><span className="display-italic" style={{ color: "var(--muted)" }}>Finish somewhere distinctive.</span></>}
+              description="The everyday interface pieces, treated with more care and a little less sameness."
             />
-            <Link
-              to="/components"
-              className="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md text-[13.5px] font-medium transition-colors hover:bg-[var(--surface-2)]"
-              style={{
-                border: "1px solid var(--border)",
-                color: "var(--fg)",
-              }}
-            >
-              View all components
-              <ArrowRight className="w-3 h-3" />
+            <Link to="/components" className="site-button-secondary shrink-0">
+              See the complete library <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {CATEGORIES.map((cat, i) => (
-              <Link
-                key={cat.name}
-                to={cat.path}
-                className="group text-left rounded-lg p-5 transition-all relative block"
-                style={{
-                  background: "var(--bg)",
-                  border: "1px solid var(--border)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow =
-                    "3px 3px 0 0 var(--border-strong)";
-                  e.currentTarget.style.transform = "translate(-1px, -1px)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = "none";
-                  e.currentTarget.style.transform = "translate(0, 0)";
-                }}
-              >
-                <div className="flex items-start justify-between mb-7">
-                  <div
-                    className="inline-flex h-10 w-10 items-center justify-center rounded"
-                    style={{
-                      background: "var(--surface)",
-                      color: "var(--fg)",
-                      border: "1px solid var(--border)",
-                    }}
-                  >
-                    <cat.Icon className="w-4 h-4" />
-                  </div>
-                  <span className="label" style={{ color: "var(--muted)" }}>
-                    {String(i + 1).padStart(2, "0")}
+          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {CATEGORIES.map((category, index) => (
+              <Link key={category.path} to={`/components/${category.path}`} className="catalog-card group p-5">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "var(--surface-2)", color: "var(--fg)" }}>
+                    <category.Icon className="h-4 w-4" />
                   </span>
+                  <span className="mono text-[10px]" style={{ color: "var(--muted)" }}>{String(index + 1).padStart(2, "0")}</span>
                 </div>
-                <div
-                  className="display text-[18px] tracking-tight"
-                  style={{ color: "var(--fg)" }}
-                >
-                  {cat.name}
-                </div>
-                <div
-                  className="text-[12px] mt-1 mono flex items-center justify-between"
-                  style={{ color: "var(--muted)" }}
-                >
-                  <span>{cat.count} variants</span>
-                  <ArrowRight className="w-3 h-3 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                <h3 className="mt-7 text-[15px] font-bold" style={{ color: "var(--fg)" }}>{category.name}</h3>
+                <div className="mt-1.5 flex items-center justify-between text-[11.5px]" style={{ color: "var(--muted)" }}>
+                  <span>{category.count} variants</span>
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
             ))}
@@ -475,189 +280,74 @@ export default function Home() {
         </div>
       </section>
 
-      {/* INSTALL */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <SectionHeading
-                number="03"
-                eyebrow="Getting started"
-                title={
-                  <>
-                    From zero to{" "}
-                    <span
-                      className="display-italic"
-                      style={{ color: "var(--muted)" }}
-                    >
-                      ship
-                    </span>
-                    <br />
-                    in 5 minutes.
-                  </>
-                }
-              />
-              <ol className="mt-12 space-y-7">
-                {[
-                  {
-                    t: "Browse the gallery",
-                    d: "Find the component that matches your layout. Live preview & code on every page.",
-                  },
-                  {
-                    t: "Copy the snippet",
-                    d: "One-click copy. Every component is a single self-contained JSX file with Tailwind classes.",
-                  },
-                  {
-                    t: "Paste and customize",
-                    d: "Drop it into your project. Override the Tailwind tokens to match your brand.",
-                  },
-                ].map((s, i) => (
-                  <li key={i} className="flex gap-5">
-                    <span
-                      className="flex-shrink-0 chapter-num text-[40px] leading-none"
-                      style={{ color: "var(--muted)" }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="pt-1">
-                      <div
-                        className="display text-[18px] mb-1.5"
-                        style={{ color: "var(--fg)" }}
-                      >
-                        {s.t}
-                      </div>
-                      <div
-                        className="text-[14px] leading-relaxed"
-                        style={{ color: "var(--muted)" }}
-                      >
-                        {s.d}
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
+      <section className="site-section">
+        <div className="site-container grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:gap-20">
+          <div>
+            <SectionHeading
+              eyebrow="A lighter workflow"
+              title={<>Use the source.<br /><span className="display-italic" style={{ color: "var(--accent)" }}>Lose the lock-in.</span></>}
+              description="There is no package abstraction to work around. What you copy is what your application runs, so every detail remains inspectable and editable."
+            />
+            <ol className="mt-9 space-y-5">
+              {[
+                ["Browse", "Compare live variants in the context of the full library."],
+                ["Copy", "Take one self-contained JSX file and its explicit dependencies."],
+                ["Adapt", "Replace colors, type, motion, or structure until the result belongs to your product."],
+              ].map(([title, body], index) => (
+                <li key={title} className="flex gap-4">
+                  <span className="mono mt-0.5 text-[10px] font-semibold" style={{ color: "var(--accent)" }}>0{index + 1}</span>
+                  <div>
+                    <p className="text-[14px] font-bold" style={{ color: "var(--fg)" }}>{title}</p>
+                    <p className="mt-1 text-[13px] leading-6" style={{ color: "var(--muted)" }}>{body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
 
-            <div
-              className="rounded-lg overflow-hidden"
-              style={{
-                background: "var(--surface)",
-                border: "1px solid var(--border)",
-                boxShadow: "4px 4px 0 0 var(--border-strong)",
-              }}
-            >
-              <div
-                className="flex items-center gap-2 px-4 py-2.5"
-                style={{ borderBottom: "1px solid var(--border)" }}
-              >
-                <div className="flex items-center gap-1.5">
-                  <span
-                    className="h-2.5 w-2.5 rounded-full"
-                    style={{ background: "#e07b67" }}
-                  />
-                  <span
-                    className="h-2.5 w-2.5 rounded-full"
-                    style={{ background: "#e3b762" }}
-                  />
-                  <span
-                    className="h-2.5 w-2.5 rounded-full"
-                    style={{ background: "#7da567" }}
-                  />
-                </div>
-                <span
-                  className="label ml-2"
-                  style={{ color: "var(--muted)" }}
-                >
-                  RetroButton.jsx
-                </span>
+          <div className="site-card overflow-hidden">
+            <div className="flex items-center justify-between border-b px-4 py-3" style={{ borderColor: "var(--border)", background: "var(--surface-2)" }}>
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full" style={{ background: "var(--accent)" }} />
+                <span className="mono text-[10px] font-medium" style={{ color: "var(--muted)" }}>CheckoutAction.jsx</span>
               </div>
-              <pre
-                className="px-5 py-5 mono text-[12.5px] leading-[1.75] overflow-x-auto"
-                style={{ color: "var(--fg)" }}
+              <button
+                type="button"
+                onClick={() => copy(WORKFLOW_CODE)}
+                className="inline-flex items-center gap-1.5 text-[10px] font-semibold"
+                style={{ color: copied ? "var(--ok)" : "var(--muted)" }}
               >
-{`import { motion } from "framer-motion";
-
-export function RetroButton({ children, ...props }) {
-  return (
-    <motion.button
-      whileHover={{ y: -2 }}
-      whileTap={{ y: 0 }}
-      className="px-6 py-3 bg-black text-white
-                 border-2 border-black rounded-md
-                 shadow-[4px_4px_0_0_#000]
-                 hover:shadow-[6px_6px_0_0_#000]
-                 transition-all"
-      {...props}
-    >
-      {children}
-    </motion.button>
-  );
-}`}
-              </pre>
+                {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                {copied ? "Copied" : "Copy example"}
+              </button>
             </div>
+            <pre className="nice-scroll overflow-x-auto px-5 py-6 text-[12px] leading-6 sm:px-7 sm:py-8" style={{ color: "var(--fg)", fontFamily: "'IBM Plex Mono', monospace" }}>
+              {WORKFLOW_CODE}
+            </pre>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-24">
-          <div
-            className="rounded-xl px-8 py-16 sm:px-14 sm:py-20 text-center relative overflow-hidden"
-            style={{
-              background: "var(--bg)",
-              border: "1px solid var(--border-strong)",
-            }}
-          >
-            <div className="absolute inset-0 bg-dots opacity-50 pointer-events-none" />
-            <div className="relative">
-              <div className="ornament-hr mb-8 max-w-xs mx-auto">
-                <span className="label">FOR DEVELOPERS WHO SHIP</span>
+      <section className="pb-12 sm:pb-16">
+        <div className="site-container">
+          <div className="relative overflow-hidden rounded-[20px] px-6 py-12 sm:px-12 sm:py-16" style={{ background: "var(--fg)", color: "var(--bg)" }}>
+            <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+              <div>
+                <span className="label" style={{ color: "color-mix(in srgb, var(--bg) 62%, transparent)" }}>Ready when you are</span>
+                <h2 className="display mt-4 max-w-2xl text-[34px] leading-[1.05] sm:text-[48px]">
+                  Build something people will remember for the right reasons.
+                </h2>
               </div>
-              <h2
-                className="display text-[36px] sm:text-[52px] tracking-tight leading-[1.05]"
-                style={{ color: "var(--fg)" }}
-              >
-                Ready to build
-                <br />
-                <span
-                  className="display-italic"
-                  style={{ color: "var(--muted)" }}
-                >
-                  something nostalgic?
-                </span>
-              </h2>
-              <p
-                className="mt-5 text-[16px] max-w-xl mx-auto"
-                style={{ color: "var(--muted)" }}
-              >
-                Free, open-source, and improving every week. Start with a single
-                component or pull a whole page template.
-              </p>
-              <div className="mt-9 flex flex-wrap gap-3 justify-center">
-                <button
-                  onClick={() => navigate({ to: "/components" })}
-                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-md text-[15px] font-medium transition-opacity hover:opacity-90"
-                  style={{
-                    background: "var(--accent)",
-                    color: "var(--accent-fg)",
-                  }}
-                >
-                  Get started
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/components" className="site-button-primary">Browse components <ArrowRight className="h-3.5 w-3.5" /></Link>
                 <a
-                  href="https://github.com/Omi-Patel/retroUI_Component"
+                  href={SOCIAL_LINKS.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-md text-[15px] font-medium transition-colors hover:bg-[var(--surface-2)]"
-                  style={{
-                    border: "1px solid var(--border)",
-                    color: "var(--fg)",
-                  }}
+                  className="site-button-secondary"
+                  style={{ background: "transparent", borderColor: "color-mix(in srgb, var(--bg) 30%, transparent)", color: "var(--bg)" }}
                 >
-                  <Github className="w-3.5 h-3.5" />
-                  GitHub
+                  <Github className="h-3.5 w-3.5" /> Star on GitHub
                 </a>
               </div>
             </div>
@@ -668,50 +358,19 @@ export function RetroButton({ children, ...props }) {
   );
 }
 
-/* ---------- Section heading (shared) ---------- */
 export function SectionHeading({ eyebrow, title, description, align = "left", number }) {
   return (
-    <div
-      className={`${align === "center" ? "text-center mx-auto" : ""} max-w-2xl`}
-    >
+    <div className={`${align === "center" ? "mx-auto text-center" : ""} max-w-2xl`}>
       {(eyebrow || number) && (
-        <div
-          className={`flex items-center gap-3 mb-5 ${
-            align === "center" ? "justify-center" : ""
-          }`}
-        >
-          {number && (
-            <span
-              className="sticker-flat"
-              style={{ background: "var(--fg)", color: "var(--bg)" }}
-            >
-              CH. {number}
-            </span>
-          )}
-          {eyebrow && (
-            <div
-              className="label inline-flex items-center gap-2"
-              style={{ color: "var(--muted)" }}
-            >
-              <span aria-hidden style={{ fontSize: 13 }}>
-                ※
-              </span>
-              <span>[ {eyebrow} ]</span>
-            </div>
-          )}
+        <div className={`${align === "center" ? "justify-center" : ""} section-kicker`}>
+          {number ? `${number} · ` : ""}{eyebrow}
         </div>
       )}
-      <h2
-        className="display text-[34px] sm:text-[44px] leading-[1.02]"
-        style={{ color: "var(--fg)" }}
-      >
+      <h2 className="display text-[34px] leading-[1.05] sm:text-[46px]" style={{ color: "var(--fg)" }}>
         {title}
       </h2>
       {description && (
-        <p
-          className="mt-4 text-[15.5px] leading-relaxed"
-          style={{ color: "var(--muted)" }}
-        >
+        <p className="mt-5 text-[14.5px] leading-7 sm:text-[15px]" style={{ color: "var(--muted)" }}>
           {description}
         </p>
       )}

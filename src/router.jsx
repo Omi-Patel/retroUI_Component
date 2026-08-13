@@ -1,10 +1,10 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useLayoutEffect } from "react";
 import {
   createRootRoute,
   createRoute,
   createRouter,
   Outlet,
-  ScrollRestoration,
+  useRouterState,
 } from "@tanstack/react-router";
 
 import Navbar from "./components/AppUI/Navbar";
@@ -42,26 +42,40 @@ const ContactUs = lazy(() => import("./components/AppUI/ContactUs"));
 // Reserves a full viewport so the footer (and anything else below) starts off
 // screen while a route chunk loads. When the real content swaps in, nothing
 // that was visible moves — which is what Cumulative Layout Shift measures.
-const PageLoader = () => <Dots className="min-h-screen" />;
+const PageLoader = () => <Dots className="route-loader" />;
+
+/* Reset the viewport before the browser paints the next route. Doing this in
+   individual page effects happens one frame too late and can briefly expose
+   the footer at the previous page's scroll position. */
+const RouteContent = () => {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
+
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<PageLoader />}>
+        <Outlet />
+      </Suspense>
+    </ErrorBoundary>
+  );
+};
 
 /* ---------- Root layout ---------- */
 const rootRoute = createRootRoute({
   component: () => (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="site-shell">
       <Navbar />
-      <main style={{ flex: 1 }}>
-        <ErrorBoundary>
-          <Suspense fallback={<PageLoader />}>
-            <Outlet />
-          </Suspense>
-        </ErrorBoundary>
+      <main className="site-main">
+        <RouteContent />
       </main>
       <Footer />
-      <ScrollRestoration />
     </div>
   ),
   notFoundComponent: () => (
-    <section className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-24 text-center">
+    <section className="site-container py-24 text-center">
       <div className="ornament-hr mb-6 max-w-xs mx-auto">
         <span className="label">ERROR · 404</span>
       </div>

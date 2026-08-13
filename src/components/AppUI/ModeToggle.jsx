@@ -20,7 +20,7 @@ const ThemeToggle = ({ compact = false }) => {
     <button
       onClick={() => setTheme(next)}
       aria-label={`Switch to ${next} mode`}
-      className={`inline-flex items-center justify-center rounded-md transition-colors hover:bg-[var(--surface-2)] ${size}`}
+      className={`inline-flex items-center justify-center rounded-lg transition-colors hover:bg-[var(--surface-2)] ${size}`}
       style={{ color: "var(--fg)" }}
     >
       {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}

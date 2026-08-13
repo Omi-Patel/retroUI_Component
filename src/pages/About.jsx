@@ -113,10 +113,10 @@ export default function About() {
   return (
     <div>
       {/* HEADER */}
-      <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+      <section className="page-intro">
+        <div className="site-container">
           <div
-            className="flex items-center gap-2 text-[12px] mono mb-4"
+            className="page-breadcrumb"
             style={{ color: "var(--muted)" }}
           >
             <Link to="/" className="hover:!text-[var(--fg)] transition-colors">
@@ -125,90 +125,49 @@ export default function About() {
             <ChevronRight className="w-[11px] h-[11px]" />
             <span style={{ color: "var(--fg)" }}>About</span>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            <div className="lg:col-span-2">
-              <h1
-                className="display text-[44px] sm:text-[68px] leading-[1.0]"
-                style={{ color: "var(--fg)", letterSpacing: "-0.035em" }}
-              >
-                A component library
-                <br />
-                for{" "}
-                <span className="display-italic" style={{ color: "var(--muted)" }}>
-                  makers.
-                </span>
-              </h1>
-              <p
-                className="mt-6 text-[16.5px] leading-relaxed max-w-2xl"
-                style={{ color: "var(--muted)" }}
-              >
-                retroui is an open-source collection of React components built with
-                Tailwind CSS — designed for developers who want a distinctive,
-                retro-flavored aesthetic without writing CSS from scratch.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link
-                  to="/components"
-                  className="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md text-[13.5px] font-medium transition-opacity hover:opacity-90"
-                  style={{
-                    background: "var(--accent)",
-                    color: "var(--accent-fg)",
-                  }}
-                >
-                  Browse the library
-                  <ArrowRight className="w-3 h-3" />
-                </Link>
-                <a
-                  href={SOCIAL_LINKS.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md text-[13.5px] font-medium transition-colors hover:bg-[var(--surface-2)]"
-                  style={{
-                    border: "1px solid var(--border)",
-                    color: "var(--fg)",
-                  }}
-                >
-                  <Github className="w-3 h-3" />
-                  GitHub
-                </a>
-              </div>
-            </div>
-
-            <div
-              className="rounded-lg p-6"
-              style={{
-                background: "var(--bg)",
-                border: "1px solid var(--border)",
-              }}
+          <h1 className="page-title">
+            A component library for{" "}
+            <span className="display-italic" style={{ color: "var(--accent)" }}>
+              makers.
+            </span>
+          </h1>
+          <p className="page-lede">
+            retroui is an open-source collection of React components built with
+            Tailwind CSS — designed for developers who want a distinctive,
+            retro-flavored aesthetic without writing CSS from scratch.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link to="/components" className="site-button-primary">
+              Browse the library
+              <ArrowRight className="w-3 h-3" />
+            </Link>
+            <a
+              href={SOCIAL_LINKS.github}
+              target="_blank"
+              rel="noreferrer"
+              className="site-button-secondary"
             >
-              <div
-                className="text-[11px] font-semibold uppercase tracking-wider mb-3"
-                style={{ color: "var(--muted)" }}
-              >
-                At a glance
-              </div>
-              <dl className="space-y-3 text-[13.5px]">
-                {AT_A_GLANCE.map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="flex items-center justify-between gap-3 pb-2.5"
-                    style={{ borderBottom: "1px dashed var(--border)" }}
-                  >
-                    <dt style={{ color: "var(--muted)" }}>{k}</dt>
-                    <dd className="mono" style={{ color: "var(--fg)" }}>
-                      {v}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+              <Github className="w-3 h-3" />
+              GitHub
+            </a>
           </div>
         </div>
       </section>
 
+      <section className="border-b" style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
+        <dl className="site-container grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+          {AT_A_GLANCE.map(([key, value]) => (
+            <div key={key} className="border-b px-4 py-4 sm:border-b-0 sm:border-r" style={{ borderColor: "var(--border)" }}>
+              <dt className="text-[10px] font-semibold uppercase tracking-[0.09em]" style={{ color: "var(--muted)" }}>{key}</dt>
+              <dd className="mono mt-1.5 text-[12px]" style={{ color: "var(--fg)" }}>{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       {/* PRINCIPLES */}
       <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20">
+        <div className="site-container site-section-compact">
           <SectionHeading
             eyebrow="Principles"
             title="Three things we care about."
@@ -249,7 +208,7 @@ export default function About() {
 
       {/* QUICKSTART */}
       <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20">
+        <div className="site-container site-section-compact">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4">
               <SectionHeading
@@ -262,7 +221,7 @@ export default function About() {
               {QUICKSTART.map((s) => (
                 <div
                   key={s.step}
-                  className="rounded-lg overflow-hidden"
+                  className="site-card-flat overflow-hidden"
                   style={{
                     background: "var(--surface)",
                     border: "1px solid var(--border)",
@@ -310,7 +269,7 @@ export default function About() {
 
       {/* FAQ */}
       <section>
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20">
+        <div className="site-container site-section-compact">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4">
               <SectionHeading
@@ -320,7 +279,7 @@ export default function About() {
             </div>
             <div className="lg:col-span-8">
               <div
-                className="rounded-lg overflow-hidden"
+                className="site-card-flat overflow-hidden"
                 style={{ border: "1px solid var(--border)" }}
               >
                 {FAQ.map(([q, a], i) => (
