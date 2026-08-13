@@ -144,7 +144,10 @@ export const ShowcaseLayout = () => {
 
         {/* MAIN — only this part re-renders when the child changes */}
         <main className="col-span-12 lg:col-span-9 xl:col-span-10 min-w-0">
-          <Suspense fallback={<Dots className="min-h-[50vh]" />}>
+          {/* A full-viewport reservation keeps the pager + footer below the
+              fold while the route loads, so swapping in the real content
+              doesn't shift anything the user can see (CLS). */}
+          <Suspense fallback={<Dots className="min-h-screen" />}>
             <Outlet />
           </Suspense>
         </main>

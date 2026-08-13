@@ -11,6 +11,20 @@ changelog viewers, etc.) that consume it directly.
 
 ## [Unreleased]
 
+### Fixed
+- **Cumulative Layout Shift** — route loading states now reserve a full viewport,
+  so the footer and showcase pager stay below the fold while a page loads and
+  nothing visible moves when the real content swaps in.
+- Home is bundled eagerly instead of lazily, so the landing page paints its real
+  content on first render rather than a loader.
+- The navbar marquee ticker has a fixed height, so a webfont swap can no longer
+  push the whole document down.
+- `scrollbar-gutter: stable` on `html` prevents horizontal shifts when
+  navigating between short and tall pages.
+- The hero GitHub star count renders its cached/fallback value immediately
+  instead of an `…` placeholder that resized after the fetch resolved.
+- `RetroHomePage` hero image now declares intrinsic `width`/`height`.
+
 ## [0.6.0] - 2026-08-03
 
 The Builder Pack — eight new categories that close the everyday gaps, plus two

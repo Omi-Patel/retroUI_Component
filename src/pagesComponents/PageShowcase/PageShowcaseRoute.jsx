@@ -39,7 +39,9 @@ export default function PageShowcaseRoute() {
   }
 
   if (!data) {
-    return <Dots />;
+    // Full-viewport reservation: keeps the layout's pager and the footer below
+    // the fold while the template data loads, so the swap-in costs no CLS.
+    return <Dots className="min-h-screen" />;
   }
 
   return (

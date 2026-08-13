@@ -32,6 +32,11 @@ function MarqueeTicker() {
     <div
       className="relative overflow-hidden"
       style={{
+        // lineHeight 0 drops the block's font-derived strut so the bar's height
+        // comes only from the track's explicit line-height + padding. This bar
+        // sits above everything else in flow, so a font-metric-driven height
+        // change here would shift the entire document down (CLS).
+        lineHeight: 0,
         background: "var(--fg)",
         color: "var(--bg)",
         borderBottom: "1px solid var(--border-strong)",

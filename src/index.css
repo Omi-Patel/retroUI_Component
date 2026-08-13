@@ -108,6 +108,13 @@ body {
   color: var(--fg);
 }
 
+html {
+  /* Always reserve the scrollbar gutter. Without this, navigating from a short
+     page to a tall one adds a scrollbar and narrows the content box, shifting
+     every centered element sideways (counts against CLS). */
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: "Space Grotesk", ui-sans-serif, system-ui;
   -webkit-font-smoothing: antialiased;
@@ -337,6 +344,10 @@ body::before {
   gap: 3rem;
   padding-right: 3rem;
   animation: marquee 40s linear infinite;
+  /* Explicit, font-independent line box: the ticker sits above the whole
+     document, so letting the webfont swap resize it would shift every element
+     on the page. */
+  line-height: 16px;
 }
 
 /* ===========================================

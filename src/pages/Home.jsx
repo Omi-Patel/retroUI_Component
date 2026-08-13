@@ -102,8 +102,11 @@ const CATEGORIES = HIGHLIGHTED_PATHS.map((slug) => {
 
 export default function Home() {
   const navigate = useNavigate();
-  const { stars, loading: starsLoading } = useGitHubStars({ fallback: 9 });
-  const starsLabel = starsLoading ? "…" : stars.toLocaleString();
+  // Render the (cached or fallback) count straight away rather than an ellipsis
+  // placeholder — swapping "…" for a number resizes the hero badge and the
+  // stats tile after paint, which is a visible layout shift.
+  const { stars } = useGitHubStars({ fallback: 9 });
+  const starsLabel = stars.toLocaleString();
   const STATS = buildStats(starsLabel);
 
   useDocumentMeta({

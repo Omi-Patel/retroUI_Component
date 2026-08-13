@@ -13,8 +13,12 @@ import ErrorBoundary from "./components/AppUI/ErrorBoundary";
 import { ShowcaseLayout } from "./components/showcase";
 import { Dots } from "./components/showcase/parts";
 
+// Home is the landing route and the CLS-critical one: bundling it eagerly means
+// the first paint is the real page, instead of a short loader that then gets
+// replaced by much taller content (which shifts the footer by whole viewports).
+import Home from "./pages/Home";
+
 /* ---------- Lazy pages ---------- */
-const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const GettingStarted = lazy(() => import("./pages/GettingStarted"));
 const Component = lazy(() => import("./pages/Component"));
@@ -35,7 +39,10 @@ const Terms = lazy(() => import("./components/AppUI/Terms"));
 const ContactUs = lazy(() => import("./components/AppUI/ContactUs"));
 
 /* ---------- Loader ---------- */
-const PageLoader = () => <Dots className="min-h-[60vh]" />;
+// Reserves a full viewport so the footer (and anything else below) starts off
+// screen while a route chunk loads. When the real content swaps in, nothing
+// that was visible moves — which is what Cumulative Layout Shift measures.
+const PageLoader = () => <Dots className="min-h-screen" />;
 
 /* ---------- Root layout ---------- */
 const rootRoute = createRootRoute({
