@@ -58,6 +58,7 @@
   <url><loc>https://retro-ui.basecase.site/components/windows</loc><priority>0.8</priority></url>
 
   <url><loc>https://retro-ui.basecase.site/pages/home</loc><priority>0.7</priority></url>
+  <url><loc>https://retro-ui.basecase.site/pages/landing-pages</loc><priority>0.8</priority></url>
   <url><loc>https://retro-ui.basecase.site/pages/about</loc><priority>0.7</priority></url>
   <url><loc>https://retro-ui.basecase.site/pages/service</loc><priority>0.7</priority></url>
   <url><loc>https://retro-ui.basecase.site/pages/contact</loc><priority>0.7</priority></url>
