@@ -11,6 +11,7 @@ import {
 import { SITE_META } from "../lib/constants";
 import { useDocumentMeta } from "../hooks";
 import { Dots } from "../components/showcase/parts";
+import { track } from "../lib/analytics";
 
 const formatGlyphName = (name) =>
   name
@@ -89,6 +90,7 @@ export default function Icons() {
     navigator.clipboard
       .writeText(code)
       .then(() => {
+        track("copy_icon", { icon: icon.id, format });
         setCopiedId(icon.id);
         window.setTimeout(
           () => setCopiedId((currentId) => (currentId === icon.id ? null : currentId)),

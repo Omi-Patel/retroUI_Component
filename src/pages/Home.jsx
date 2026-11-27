@@ -13,7 +13,8 @@ import {
   Sparkles,
   Star,
 } from "lucide-react";
-import { useCopyToClipboard, useDocumentMeta, useGitHubStars } from "../hooks";
+import { useCopyToClipboard, useDocumentMeta, useGitHubStars, useScrollDepth } from "../hooks";
+import { track } from "../lib/analytics";
 import { SITE_META, SOCIAL_LINKS } from "../lib/constants";
 import { COMPONENT_REGISTRY, PAGE_REGISTRY } from "../lib/registries";
 
@@ -76,6 +77,7 @@ export default function Home() {
   const { stars } = useGitHubStars({ fallback: 9 });
   const starsLabel = stars.toLocaleString();
   const [copied, copy] = useCopyToClipboard();
+  useScrollDepth("home");
 
   useDocumentMeta({
     title: `${SITE_META.name} | ${SITE_META.tagline}`,
@@ -128,10 +130,10 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/components" className="site-button-primary">
+              <Link to="/components" className="site-button-primary" data-umami-event="cta_click" data-umami-event-cta="hero_explore">
                 Explore components <ArrowRight className="h-3.5 w-3.5" />
               </Link>
-              <Link to="/getting-started" className="site-button-secondary">
+              <Link to="/getting-started" className="site-button-secondary" data-umami-event="cta_click" data-umami-event-cta="hero_setup">
                 Read the setup guide
               </Link>
             </div>
@@ -196,7 +198,7 @@ export default function Home() {
 
               <div className="flex items-center justify-between border-t px-5 py-3" style={{ borderColor: "var(--border)", background: "var(--surface-2)" }}>
                 <span className="mono text-[10px]" style={{ color: "var(--muted)" }}>copy → paste → adapt</span>
-                <Link to="/components" className="text-[11px] font-bold" style={{ color: "var(--accent)" }}>View all {COMPONENT_REGISTRY.length} categories</Link>
+                <Link to="/components" data-umami-event="cta_click" data-umami-event-cta="view_all_categories" className="text-[11px] font-bold" style={{ color: "var(--accent)" }}>View all {COMPONENT_REGISTRY.length} categories</Link>
               </div>
             </div>
           </div>
@@ -255,14 +257,14 @@ export default function Home() {
               title={<>Start with the familiar.<br /><span className="display-italic" style={{ color: "var(--muted)" }}>Finish somewhere distinctive.</span></>}
               description="The everyday interface pieces, treated with more care and a little less sameness."
             />
-            <Link to="/components" className="site-button-secondary shrink-0">
+            <Link to="/components" className="site-button-secondary shrink-0" data-umami-event="cta_click" data-umami-event-cta="catalog_browse">
               See the complete library <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {CATEGORIES.map((category, index) => (
-              <Link key={category.path} to={`/components/${category.path}`} className="catalog-card group p-5">
+              <Link key={category.path} to={`/components/${category.path}`} className="catalog-card group p-5" data-umami-event="cta_click" data-umami-event-cta={`category_${category.path}`}>
                 <div className="flex items-center justify-between">
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "var(--surface-2)", color: "var(--fg)" }}>
                     <category.Icon className="h-4 w-4" />
@@ -313,7 +315,9 @@ export default function Home() {
               </div>
               <button
                 type="button"
-                onClick={() => copy(WORKFLOW_CODE)}
+                onClick={async () => {
+                  if (await copy(WORKFLOW_CODE)) track("copy_snippet", { label: "home_workflow_example" });
+                }}
                 className="inline-flex items-center gap-1.5 text-[10px] font-semibold"
                 style={{ color: copied ? "var(--ok)" : "var(--muted)" }}
               >
@@ -339,7 +343,7 @@ export default function Home() {
                 </h2>
               </div>
               <div className="flex flex-wrap gap-3">
-                <Link to="/components" className="site-button-primary">Browse components <ArrowRight className="h-3.5 w-3.5" /></Link>
+                <Link to="/components" className="site-button-primary" data-umami-event="cta_click" data-umami-event-cta="footer_browse">Browse components <ArrowRight className="h-3.5 w-3.5" /></Link>
                 <a
                   href={SOCIAL_LINKS.github}
                   target="_blank"

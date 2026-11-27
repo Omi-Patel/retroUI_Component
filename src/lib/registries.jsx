@@ -123,6 +123,7 @@ export const COMPONENT_REGISTRY = [
  */
 export const PAGE_REGISTRY = [
   { name: "Home Page", path: "home", Icon: Home, count: 3, category: "Landing", desc: "Marketing & landing page templates." },
+  { name: "Landing Pages", path: "landing-pages", Icon: Sparkles, count: 3, category: "Landing", desc: "Premium vintage landing pages for travel, audio, and creative brands." },
   { name: "About Page", path: "about", Icon: Info, count: 3, category: "Content", desc: "Company and project information." },
   { name: "Service Page", path: "service", Icon: Briefcase, count: 2, category: "Content", desc: "Services and feature showcases." },
   { name: "Contact Page", path: "contact", Icon: Mail, count: 4, category: "Contact", desc: "Contact forms and information." },

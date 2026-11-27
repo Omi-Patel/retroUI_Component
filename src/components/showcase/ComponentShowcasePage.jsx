@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import {
   Eye,
   Code,
@@ -15,6 +16,7 @@ import { SITE_META } from "../../lib/constants";
 import { getComponentStatus } from "../../lib/componentStatus";
 import { formatComponentName } from "../../lib/utils";
 import { COMPONENT_REGISTRY } from "../../lib/registries";
+import { track } from "../../lib/analytics";
 import { DevicePreviewDialog } from "./DevicePreviewDialog";
 import { ShowcaseHeader, VariantChips, InfoCard } from "./parts";
 
@@ -31,7 +33,19 @@ export const ComponentShowcasePage = ({
   folder,
   slug,
 }) => {
-  const [active, setActive] = useState(components[0]?.name || "");
+  // The active variant lives in the URL (?v=Name) so variants are linkable and
+  // show up as distinct URLs in analytics.
+  const search = useSearch({ strict: false });
+  const navigate = useNavigate();
+  const active = components.some((c) => c.name === search.v)
+    ? search.v
+    : components[0]?.name || "";
+  const setActive = (name) =>
+    navigate({
+      search: (prev) => ({ ...prev, v: name }),
+      replace: true,
+      resetScroll: false,
+    });
   const [tab, setTab] = useState("preview");
   const [fullscreen, setFullscreen] = useState(false);
   const [copied, copy] = useCopyToClipboard();
@@ -45,7 +59,6 @@ export const ComponentShowcasePage = ({
   });
 
   useEffect(() => {
-    setActive(components[0]?.name || "");
     setTab("preview");
   }, [components]);
 
@@ -57,6 +70,8 @@ export const ComponentShowcasePage = ({
   const activeComp = components.find((c) => c.name === active) || components[0];
   if (!activeComp) return null;
   const ActiveComponent = activeComp.component;
+  const category = slug || folder.toLowerCase();
+  const evt = { category, variant: activeComp.name };
   // Full-width categories (navbars, footers, …) render edge-to-edge in block
   // flow — centering them in a flex container would shrink-wrap them to their
   // content width, which is not how they lay out in a real page.
@@ -76,7 +91,11 @@ export const ComponentShowcasePage = ({
         items={components}
         getKey={(v) => v.name}
         isActive={(v) => v.name === active}
-        onSelect={(v) => setActive(v.name)}
+        onSelect={(v) => {
+          if (v.name === active) return;
+          setActive(v.name);
+          track("variant_view", { category, variant: v.name });
+        }}
         renderLabel={(v) => formatComponentName(v.name)}
         renderTrailing={(v) => {
           const status = getComponentStatus(v.name);
@@ -123,7 +142,11 @@ export const ComponentShowcasePage = ({
             ].map(({ key, label, Icon: TabIcon }) => (
               <button
                 key={key}
-                onClick={() => setTab(key)}
+                onClick={() => {
+                  if (key === tab) return;
+                  setTab(key);
+                  if (key === "code") track("code_tab", evt);
+                }}
                 className="inline-flex items-center gap-1.5 px-3 h-7 rounded text-[12px] font-medium transition-colors capitalize"
                 style={{
                   background: tab === key ? "var(--bg)" : "transparent",
@@ -141,7 +164,10 @@ export const ComponentShowcasePage = ({
           </div>
           <div className="flex shrink-0 items-center gap-1.5">
             <button
-              onClick={() => setFullscreen(true)}
+              onClick={() => {
+                setFullscreen(true);
+                track("fullscreen_open", evt);
+              }}
               title="Preview at device sizes"
               className="inline-flex items-center gap-1.5 px-2.5 h-7 rounded-md text-[12px] font-medium transition-colors hover:bg-[var(--surface-2)]"
               style={{
@@ -154,7 +180,9 @@ export const ComponentShowcasePage = ({
               <span className="hidden sm:inline">Fullscreen</span>
             </button>
             <button
-              onClick={() => copy(activeComp.code)}
+              onClick={async () => {
+                if (await copy(activeComp.code)) track("copy_code", evt);
+              }}
               className="inline-flex items-center gap-1.5 px-2.5 h-7 rounded-md text-[12px] font-medium transition-colors"
               style={{
                 background: "var(--surface-2)",

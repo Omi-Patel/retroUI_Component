@@ -9,6 +9,7 @@
  */
 export const pageLoaders = {
   home: () => import('./home').then((m) => m.default),
+  'landing-pages': () => import('./landing-pages').then((m) => m.default),
   about: () => import('./about').then((m) => m.default),
   service: () => import('./service').then((m) => m.default),
   contact: () => import('./contact').then((m) => m.default),

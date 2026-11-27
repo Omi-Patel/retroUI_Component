@@ -30,6 +30,20 @@ function PageWireframe({ type }) {
         <rect x="106" y="78" width="42" height="22" rx="2" fill={colors.fill} />
       </g>
     ),
+    "landing-pages": (
+      <g>
+        <rect x="8" y="8" width="144" height="6" fill={colors.fill} />
+        <rect x="10" y="22" width="140" height="58" rx="2" fill={colors.accent} opacity="0.88" />
+        <rect x="20" y="34" width="52" height="7" fill={colors.bg} />
+        <rect x="20" y="47" width="62" height="3" fill={colors.line} />
+        <rect x="20" y="55" width="46" height="3" fill={colors.line} />
+        <rect x="20" y="65" width="24" height="8" rx="1" fill={colors.bg} />
+        <circle cx="124" cy="36" r="10" fill={colors.bg} opacity="0.8" />
+        <rect x="10" y="88" width="42" height="20" rx="2" fill={colors.fill} />
+        <rect x="59" y="88" width="42" height="20" rx="2" fill={colors.fill} />
+        <rect x="108" y="88" width="42" height="20" rx="2" fill={colors.fill} />
+      </g>
+    ),
     about: (
       <g>
         <rect x="8" y="8" width="144" height="6" fill={colors.fill} />
