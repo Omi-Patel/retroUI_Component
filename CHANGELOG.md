@@ -11,6 +11,13 @@ changelog viewers, etc.) that consume it directly.
 
 ## [Unreleased]
 
+### Added
+- Component variants are now linkable: the selected variant is kept in the URL
+  (`/components/buttons?v=GlitchButton`).
+- Cookieless, anonymous usage analytics (Umami) for copies, variant views, code
+  tab opens, fullscreen previews, theme switches, CTA and outbound clicks, and
+  home-page scroll depth. Disclosed on the Privacy Policy page.
+
 ## [1.0.0] - 2026-08-13
 
 The first stable RetroUI release — a polished, production-ready component

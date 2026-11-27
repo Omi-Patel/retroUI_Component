@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
+import { track } from "../../lib/analytics";
 
 const ThemeToggle = ({ compact = false }) => {
   const [theme, setTheme] = useState(
@@ -18,7 +19,10 @@ const ThemeToggle = ({ compact = false }) => {
 
   return (
     <button
-      onClick={() => setTheme(next)}
+      onClick={() => {
+        setTheme(next);
+        track("theme_toggle", { to: next });
+      }}
       aria-label={`Switch to ${next} mode`}
       className={`inline-flex items-center justify-center rounded-lg transition-colors hover:bg-[var(--surface-2)] ${size}`}
       style={{ color: "var(--fg)" }}

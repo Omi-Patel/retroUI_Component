@@ -14,6 +14,7 @@ import {
 import { SectionHeading } from "./Home";
 import { SITE_META } from "../lib/constants";
 import { useDocumentMeta, useCopyToClipboard } from "../hooks";
+import { track } from "../lib/analytics";
 
 /* ---------- Copyable snippets ---------- */
 
@@ -114,7 +115,9 @@ function CodeBlock({ label, language, code }) {
           </span>
         </div>
         <button
-          onClick={() => copy(code)}
+          onClick={async () => {
+            if (await copy(code)) track("copy_snippet", { label });
+          }}
           className="inline-flex items-center gap-1.5 text-[11px] font-medium opacity-60 hover:opacity-100 transition-opacity shrink-0"
           style={{ color: copied ? "var(--ok)" : "var(--fg)" }}
           aria-label={`Copy ${label} to clipboard`}

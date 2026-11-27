@@ -10,6 +10,10 @@ const SECTIONS = [
     "RetroUI does not collect personal information. For open-source contributions, we may store provided names and email addresses.",
   ],
   [
+    "Anonymous usage analytics",
+    "We use Vercel Analytics and Umami to count page views and anonymous interactions — for example which component variants are viewed or copied, theme switches, and clicks on links. These tools set no cookies, do not track you across sites, and store no personal data. The numbers tell us which components are useful so we can build more of them.",
+  ],
+  [
     "2. Information Usage",
     "Collected information is used solely for improving RetroUI and communicating with contributors. We do not sell or transfer your information.",
   ],

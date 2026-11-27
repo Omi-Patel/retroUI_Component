@@ -10,6 +10,7 @@ import {
   Maximize2,
 } from "lucide-react";
 import { useCopyToClipboard, useDocumentMeta } from "../../hooks";
+import { track } from "../../lib/analytics";
 import { SITE_META } from "../../lib/constants";
 import { PAGE_REGISTRY } from "../../lib/registries";
 import { DevicePreviewDialog } from "./DevicePreviewDialog";
@@ -177,9 +178,10 @@ export const PageShowcasePage = ({ slug, title, description, variants }) => {
         <InfoCard title="Get template" Icon={Download}>
           <div className="space-y-2">
             <button
-              onClick={() =>
-                externalLink ? copy(externalLink) : copy(window.location.href)
-              }
+              onClick={async () => {
+                if (await copy(externalLink || window.location.href))
+                  track("copy_link", { template: slug });
+              }}
               className="inline-flex items-center justify-center gap-2 w-full h-8 px-3 rounded-md text-[12.5px] font-medium transition-opacity hover:opacity-90"
               style={{ background: "var(--accent)", color: "var(--accent-fg)" }}
             >
